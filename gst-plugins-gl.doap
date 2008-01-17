@@ -1,0 +1,54 @@
+<Project
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns="http://usefulinc.com/ns/doap#"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:admin="http://webns.net/mvcb/">
+
+ <name>GStreamer OpenGL Plug-ins</name>
+ <shortname>gst-plugins-gl</shortname>
+ <homepage rdf:resource="http://gstreamer.freedesktop.org/modules/gst-plugins-gl.html" />
+ <created>2008-01-17</created>
+ <shortdesc xml:lang="en">
+a collection of elements based on OpenGL
+ </shortdesc>
+ <description xml:lang="en">
+GStreamer OpenGL Plug-ins is a collection of GStreamer plug-ins and
+elements that use OpenGL for processing and display of video.  It also
+contains helper libraries and base classes useful for writing elements
+that use OpenGL.
+</description>
+ <category></category>
+ <bug-database rdf:resource="http://bugzilla.gnome.org/enter_bug.cgi?product=GStreamer&amp;component=gst-plugins-gl" />
+ <screenshots></screenshots>
+ <mailing-list rdf:resource="http://lists.sourceforge.net/lists/listinfo/gstreamer-devel/" />
+ <programming-language>C</programming-language>
+ <license rdf:resource="http://usefulinc.com/doap/licenses/lgpl"/>
+ <download-page rdf:resource="http://gstreamer.freedesktop.org/download/" />
+
+ <repository>
+   <CVSRepository>
+     <anon-root>:pserver:anonymous@cvs.freedesktop.org:/cvs/gstreamer</anon-root>
+     <module>gst-plugins-gl</module>
+     <browse rdf:resource="http://webcvs.freedesktop.org/gstreamer/gst-plugins-gl/" />
+   </CVSRepository>
+ </repository> 
+
+ <release>
+  <Version>
+   <revision>0.10.0</revision>
+   <branch>0.10</branch>
+   <name>'Taint no sin</name>
+   <created>2008-01-17</created>
+   <file-release rdf:resource="http://gstreamer.freedesktop.org/src/gst-plugins-gl/gst-plugins-gl-0.10.0.tar.bz2" />
+   <file-release rdf:resource="http://gstreamer.freedesktop.org/src/gst-plugins-gl/gst-plugins-gl-0.10.0.tar.gz" />
+  </Version>
+ </release>
+
+ <maintainer>
+  <foaf:Person>
+     <foaf:name>David Schleef</foaf:name>
+  </foaf:Person>
+ </maintainer>
+
+</Project>
