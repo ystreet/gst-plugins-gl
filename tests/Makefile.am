@@ -1,0 +1,1 @@
+SUBDIRS = check icles examples

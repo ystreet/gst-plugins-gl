@@ -293,11 +293,11 @@ AC_SUBST(GST_OPTION_CFLAGS)
 dnl our libraries need to be versioned correctly
 AC_SUBST(GST_LT_LDFLAGS)
 
-dnl GST_PLUGINS_BASE_CFLAGS
+dnl GST_PLUGINS_GL_CFLAGS
 dnl prefer internal headers to already installed ones
 dnl also add builddir include for enumtypes and marshal
-GST_PLUGINS_BASE_CFLAGS="-I\$(top_srcdir)/gst-libs -I\$(top_builddir)/gst-libs"
-AC_SUBST(GST_PLUGINS_BASE_CFLAGS)
+GST_PLUGINS_GL_CFLAGS="-I\$(top_srcdir)/gst-libs -I\$(top_builddir)/gst-libs"
+AC_SUBST(GST_PLUGINS_GL_CFLAGS)
 
 dnl FIXME: do we want to rename to GST_ALL_* ?
 dnl add GST_OPTION_CFLAGS, but overridable
