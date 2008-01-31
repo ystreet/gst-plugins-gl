@@ -1,5 +1,12 @@
 2008-01-31  David Schleef  <ds@schleef.org>
 
+	* gst/gl/.cvsignore: ingore some files
+	* gst-libs/gst/Makefile.am: distcheck fixes
+	* gst/gl/Makefile.am: distcheck fixes
+	* win32/common/config.h: -good has this in CVS, so we will too.
+
+2008-01-31  David Schleef  <ds@schleef.org>
+
 	* configure.ac:
 	  Readd pre-pkgconfig OpenGL detection, since pkgconfig requires
 	  Mesa from git master.
