@@ -213,8 +213,13 @@ save_LIBS="$LIBS"
 CPPFLAGS="$CPPFLAGS $X_CFLAGS"
 LIBS="$LIBS $X_LIBS"
 AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
-  AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,,
-	  GL/gl.h, HAVE_OPENGL="yes", HAVE_OPENGL="no")
+  AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h, [
+      HAVE_OPENGL="yes"
+      GL_LIBS="-lGL"
+  ], [
+      HAVE_OPENGL="no"
+  ])
+  AC_SUBST(GL_LIBS)
 ])
 CPPFLAGS="$save_CPPFLAGS"
 LIBS="$save_LIBS"

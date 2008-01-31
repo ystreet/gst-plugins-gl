@@ -1,3 +1,9 @@
+2008-01-31  Tim-Philipp Müller  <tim at centricular dot net>
+
+	* configure.ac:
+	  When using the non-pkg-config check, set and export GL_LIBS
+	  correctly.
+
 2008-01-31  David Schleef  <ds@schleef.org>
 
 	* gst/gl/.cvsignore: ingore some files
