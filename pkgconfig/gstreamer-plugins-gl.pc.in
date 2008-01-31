@@ -6,9 +6,8 @@ pluginsdir=@libdir@/gstreamer-@GST_MAJORMINOR@
 
 Name: GStreamer OpenGL Plugins Libraries
 Description: Streaming media framework, OpenGL plugins libraries
-Requires: gstreamer-@GST_MAJORMINOR@ 
+Requires: gstreamer-@GST_MAJORMINOR@ gstreamer-base-@GST_MAJORMINOR@
 Version: @VERSION@
-Libs: -L${libdir}
+Libs: -L${libdir} -lgstgl-@GST_MAJORMINOR@
 Cflags: -I${includedir}
 
-libraries=gl

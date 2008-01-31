@@ -1,3 +1,22 @@
+2008-01-31  David Schleef  <ds@schleef.org>
+
+	* configure.ac:
+	  Readd pre-pkgconfig OpenGL detection, since pkgconfig requires
+	  Mesa from git master.
+	* gst/gl/glimagesink.c:
+	* gst/gl/gstopengl.c:
+	  Move debug category initialization to element.
+	* gst-libs/gst/gl/Makefile.am:
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst-libs/gst/gl/gstglfilter.h:
+	* gst/gl/gstglfilter.c:
+	* gst/gl/gstglfilter.h:
+	  Move glfilter to library.
+	* pkgconfig/gstreamer-plugins-gl.pc.in:
+	  Add gstreamer-base-0.10 as a requirement.
+	* po/en.po:
+	  Update.
+
 2008-01-18  Tim-Philipp Müller  <tim at centricular dot net>
 
 	* configure.ac:

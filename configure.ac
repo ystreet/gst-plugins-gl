@@ -207,17 +207,29 @@ AM_CONDITIONAL(HAVE_GTK, test "x$HAVE_GTK" = "xyes")
 
 dnl OpenGL is required
 translit(dnm, m, l) AM_CONDITIONAL(USE_OPENGL, true)
+AG_GST_CHECK_X
+save_CPPFLAGS="$CPPFLAGS"
+save_LIBS="$LIBS"
+CPPFLAGS="$CPPFLAGS $X_CFLAGS"
+LIBS="$LIBS $X_LIBS"
 AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
-  PKG_CHECK_MODULES(GL, gl >= 7.1.0, [
-    HAVE_GL="yes"
-    AC_SUBST(GL_CFLAGS)
-    AC_SUBST(GL_LIBS)
-  ],[
-    HAVE_GL=no
-    AC_MSG_RESULT(no)
-  ])
+  AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,,
+	  GL/gl.h, HAVE_OPENGL="yes", HAVE_OPENGL="no")
 ])
+CPPFLAGS="$save_CPPFLAGS"
+LIBS="$save_LIBS"
 
+dnl Eventually use pkgconfig check
+#AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
+#  PKG_CHECK_MODULES(GL, gl >= 7.1.0, [
+#    HAVE_GL="yes"
+#    AC_SUBST(GL_CFLAGS)
+#    AC_SUBST(GL_LIBS)
+#  ],[
+#    HAVE_GL=no
+#    AC_MSG_RESULT(no)
+#  ])
+#])
 
 dnl *** set variables based on configure arguments ***
 
@@ -266,8 +278,6 @@ dnl *** finalize CFLAGS, LDFLAGS, LIBS
 dnl Overview:
 dnl GST_OPTION_CFLAGS:  common flags for profiling, debugging, errors, ...
 dnl GST_*:              flags shared by built objects to link against GStreamer
-dnl GST_PLUGINS_BASE_CFLAGS: to link internally against the plugins base libs
-dnl                          (compare to other modules) or for i18n
 dnl GST_ALL_LDFLAGS:    linker flags shared by all
 dnl GST_LIB_LDFLAGS:    additional linker flags for all libaries
 dnl GST_LT_LDFLAGS:     library versioning of our libraries
