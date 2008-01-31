@@ -1,3 +1,17 @@
+2008-01-31  David Schleef  <ds@schleef.org>
+
+	* configure.ac:
+	* pkgconfig/Makefile.am:
+	* pkgconfig/gstreamer-gl-uninstalled.pc.in:
+	* pkgconfig/gstreamer-gl.pc.in:
+	* pkgconfig/gstreamer-plugins-gl-uninstalled.pc.in:
+	* pkgconfig/gstreamer-plugins-gl.pc.in:
+	  Rename pkgconfig files.  And install them.
+	* tests/check/Makefile.am:
+	* tests/check/generic/states.c:
+	* tests/check/pipelines/simple-launch-lines.c:
+	  Add some tests copied from -good.
+
 2008-01-31  Tim-Philipp Müller  <tim at centricular dot net>
 
 	* gst-libs/gst/gl/Makefile.am:

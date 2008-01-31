@@ -354,8 +354,8 @@ gst-libs/gst/gl/Makefile
 tools/Makefile
 win32/common/config.h
 pkgconfig/Makefile
-pkgconfig/gstreamer-plugins-gl.pc
-pkgconfig/gstreamer-plugins-gl-uninstalled.pc
+pkgconfig/gstreamer-gl.pc
+pkgconfig/gstreamer-gl-uninstalled.pc
 tests/Makefile
 tests/check/Makefile
 tests/examples/Makefile
