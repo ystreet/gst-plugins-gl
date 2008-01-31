@@ -1,5 +1,15 @@
 2008-01-31  Tim-Philipp Müller  <tim at centricular dot net>
 
+	* gst-libs/gst/gl/Makefile.am:
+	  The library needs to link against libgstvideo-0.10.
+
+	* gst/gl/Makefile.am:
+	  The plugin does not (I think) need to link against GL or libgstvideo,
+	  since our new gstreamer GL library already does that, but it does
+	  need to link against our brand-new libgstgl-0.10.
+	
+2008-01-31  Tim-Philipp Müller  <tim at centricular dot net>
+
 	* configure.ac:
 	  When using the non-pkg-config check, set and export GL_LIBS
 	  correctly.
