@@ -1,3 +1,15 @@
+2008-02-23  Tim-Philipp Müller  <tim at centricular dot net>
+
+	* gst-libs/gst/gl/gstglbuffer.c:
+	  (gst_gl_buffer_format_from_video_format):
+	  Fix compiler warning if there are video format
+	  enums gstglbuffer doesn't know about yet.
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  (gst_gl_display_upload_texture_rectangle),
+	  (gst_gl_display_draw_texture):
+	  Fix printf format for 64-bit integers.
+
 2008-01-31  David Schleef  <ds@schleef.org>
 
 	* configure.ac:
