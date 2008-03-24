@@ -1,14 +1,8 @@
 DISTCHECK_CONFIGURE_FLAGS=--enable-gtk-doc
 
-if BUILD_EXTERNAL
-SUBDIRS_EXT = ext
-else
-SUBDIRS_EXT =
-endif
-
 SUBDIRS = 			\
 	gst-libs 		\
-	gst sys $(SUBDIRS_EXT) 	\
+	gst sys ext	 	\
 	tools 			\
 	tests 			\
 	docs			\

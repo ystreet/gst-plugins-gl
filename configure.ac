@@ -84,18 +84,6 @@ AG_GST_ARG_WITH_PKG_CONFIG_PATH
 AG_GST_ARG_WITH_PACKAGE_NAME
 AG_GST_ARG_WITH_PACKAGE_ORIGIN
 
-dnl these are all the gst plug-ins, compilable without additional libs
-GST_PLUGINS_ALL="\
-	gl \
-	"
-AC_SUBST(GST_PLUGINS_ALL)
-
-GST_PLUGINS_SELECTED=""
-AG_GST_ARG_WITH_PLUGINS
-AC_SUBST(GST_PLUGINS_SELECTED)
-
-AG_GST_ARG_ENABLE_EXTERNAL
-
 dnl *** checks for platform ***
 
 dnl * hardware/architecture *
@@ -254,6 +242,10 @@ AG_GST_SET_LEVEL_DEFAULT($GST_CVS)
 
 dnl used in examples
 AG_GST_DEFAULT_ELEMENTS
+
+dnl *** plugins to includes ***
+
+AG_GST_CHECK_PLUGIN(gl)
 
 dnl *** sys plug-ins ***
 
