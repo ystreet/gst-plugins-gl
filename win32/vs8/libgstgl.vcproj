@@ -183,10 +183,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\gst\gl\gstgl.c"
-				>
-			</File>
-			<File
 				RelativePath="..\..\gst-libs\gst\gl\gstglbuffer.c"
 				>
 			</File>
@@ -206,39 +202,39 @@
 				RelativePath="..\..\gst\gl\gstglvideomaker.c"
 				>
 			</File>
+			<File
+				RelativePath="..\..\gst\gl\gstopengl.c"
+				>
+			</File>
 			<Filter
 				Name="gstfreeglut"
 				>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\src\freeglut_callbacks.c"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_callbacks.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\src\freeglut_display.c"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_display.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\src\freeglut_init.c"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_init.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\src\freeglut_internal.h"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_main.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\src\freeglut_main.c"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_state.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\src\freeglut_state.c"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_structure.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\src\freeglut_structure.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\src\freeglut_window.c"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_window.c"
 					>
 				</File>
 			</Filter>
@@ -276,15 +272,19 @@
 				Name="gstfreeglut"
 				>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\GL\freeglut.h"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_ext.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\GL\freeglut_ext.h"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_internal.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\GL\freeglut_std.h"
+					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_std.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\freeglut\gstfreeglut.h"
 					>
 				</File>
 			</Filter>

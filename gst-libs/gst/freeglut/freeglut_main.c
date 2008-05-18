@@ -564,18 +564,18 @@ void FGAPIENTRY glutMainLoopEvent( void )
             switch( event.xvisibility.state )
             {
             case VisibilityUnobscured:
-                INVOKE_WCB( *window, WindowStatus, ( GLUT_FULLY_RETAINED ) );
+                //INVOKE_WCB( *window, WindowStatus, ( GLUT_FULLY_RETAINED ) );
                 window->State.Visible = GL_TRUE;
                 break;
 
             case VisibilityPartiallyObscured:
-                INVOKE_WCB( *window, WindowStatus,
-                            ( GLUT_PARTIALLY_RETAINED ) );
+                //INVOKE_WCB( *window, WindowStatus,
+                //            ( GLUT_PARTIALLY_RETAINED ) );
                 window->State.Visible = GL_TRUE;
                 break;
 
             case VisibilityFullyObscured:
-                INVOKE_WCB( *window, WindowStatus, ( GLUT_FULLY_COVERED ) );
+                //INVOKE_WCB( *window, WindowStatus, ( GLUT_FULLY_COVERED ) );
                 window->State.Visible = GL_FALSE;
                 break;
 

@@ -80,13 +80,4 @@ void FGAPIENTRY glutCloseFunc( void (* callback)( void ) )
     SET_CALLBACK( Destroy );
 }
 
-/*
- * Sets the window status callback for the current window
- */
-void FGAPIENTRY glutWindowStatusFunc( void (* callback)( int ) )
-{
-    FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutWindowStatusFunc" );
-    SET_CALLBACK( WindowStatus );
-}
-
 /*** END OF FILE ***/
