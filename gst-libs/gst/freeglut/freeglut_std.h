@@ -92,6 +92,9 @@
 #define  GLUT_NOT_VISIBLE                   0x0000
 #define  GLUT_VISIBLE                       0x0001
 #define  GLUT_HIDDEN                        0x0000
+#define  GLUT_FULLY_RETAINED                0x0001
+#define  GLUT_PARTIALLY_RETAINED            0x0002
+#define  GLUT_FULLY_COVERED                 0x0003
 
 /*
  * Initialization functions, see fglut_init.c

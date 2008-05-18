@@ -25,7 +25,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <GL/freeglut.h>
+#include "gstfreeglut.h"
 #include "freeglut_internal.h"
 
 /* -- INTERFACE FUNCTIONS -------------------------------------------------- */
@@ -78,6 +78,15 @@ void FGAPIENTRY glutCloseFunc( void (* callback)( void ) )
 {
     FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutCloseFunc" );
     SET_CALLBACK( Destroy );
+}
+
+/*
+ * Sets the window status callback for the current window
+ */
+void FGAPIENTRY glutWindowStatusFunc( void (* callback)( int ) )
+{
+    FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutWindowStatusFunc" );
+    SET_CALLBACK( WindowStatus );
 }
 
 /*** END OF FILE ***/

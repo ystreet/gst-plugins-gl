@@ -25,7 +25,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <GL/freeglut.h>
+#include "gstfreeglut.h"
 #include "freeglut_internal.h"
 
 #if TARGET_HOST_WINCE

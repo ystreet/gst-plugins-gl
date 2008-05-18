@@ -12,10 +12,10 @@ libgstgl_@GST_MAJORMINOR@_la_SOURCES = \
 
 libgstgl_@GST_MAJORMINOR@includedir = $(includedir)/gstreamer-@GST_MAJORMINOR@/gst/gl
 libgstgl_@GST_MAJORMINOR@include_HEADERS = \
-	freeglut_internal.h \
-	freeglut.h \
+	gstfreeglut.h \
 	freeglut_ext.h \
-	freeglut_std.h
+	freeglut_std.h \
+	freeglut_internal.h
 
 libgstgl_@GST_MAJORMINOR@_la_LIBADD = \
 	$(GST_PLUGINS_BASE_LIBS) -lgstvideo-$(GST_MAJORMINOR) \
