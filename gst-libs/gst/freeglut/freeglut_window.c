@@ -262,7 +262,7 @@ void fgOpenWindow( SFG_Window* window, const char* title,
     XSizeHints sizeHints;
     XWMHints wmHints;
     unsigned long mask;
-    unsigned int current_DisplayMode = fgState.DisplayMode ;
+    //unsigned int current_DisplayMode = fgState.DisplayMode ;
 
     window->Window.VisualInfo = fgChooseVisual( );
 
@@ -318,8 +318,7 @@ void fgOpenWindow( SFG_Window* window, const char* title,
 
     window->Window.Handle = XCreateWindow(
         fgDisplay.Display,
-        window->Parent == NULL ? fgDisplay.RootWindow :
-        window->Parent->Window.Handle,
+        fgDisplay.RootWindow,
         x, y, w, h, 0,
         window->Window.VisualInfo->depth, InputOutput,
         window->Window.VisualInfo->visual, mask,
@@ -525,6 +524,8 @@ void fgOpenWindow( SFG_Window* window, const char* title,
 
 void fgOnCreateWindow (SFG_Window *window)
 {
+
+#if TARGET_HOST_WIN32 || TARGET_HOST_WINCE
     window->Window.Device = GetDC( window->Window.Handle );
     
 #if !TARGET_HOST_WINCE
@@ -565,6 +566,7 @@ void fgOnCreateWindow (SFG_Window *window)
     }
 
 #endif /* TARGET_HOST_WINCE */
+#endif
 }
 
 /*
@@ -694,13 +696,10 @@ void FGAPIENTRY glutHideWindow( void )
 
 #if TARGET_HOST_UNIX_X11
 
-    if( fgStructure.CurrentWindow->Parent == NULL )
-        XWithdrawWindow( fgDisplay.Display,
-                         fgStructure.CurrentWindow->Window.Handle,
-                         fgDisplay.Screen );
-    else
-        XUnmapWindow( fgDisplay.Display,
-                      fgStructure.CurrentWindow->Window.Handle );
+    XWithdrawWindow( fgDisplay.Display,
+                     fgStructure.CurrentWindow->Window.Handle,
+                     fgDisplay.Screen );
+
     XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE

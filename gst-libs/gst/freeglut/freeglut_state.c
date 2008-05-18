@@ -36,7 +36,7 @@
 /*
  * Queries the GL context about some attributes
  */
-static int fghGetConfig( int attribute )
+/*static int fghGetConfig( int attribute )
 {
   int returnValue = 0;
 
@@ -45,7 +45,7 @@ static int fghGetConfig( int attribute )
                     attribute, &returnValue );
 
   return returnValue;
-}
+}*/
 #endif
 
 /* -- INTERFACE FUNCTIONS -------------------------------------------------- */

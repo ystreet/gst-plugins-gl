@@ -57,6 +57,11 @@ struct GXKeyList gxKeyList;
 
 #endif
 
+#if TARGET_HOST_UNIX_X11
+#include <sys/time.h> 
+#include <unistd.h>
+#endif
+
 /*
  * Try to get the maximum value allowed for ints, falling back to the minimum
  * guaranteed by ISO C99 if there is no suitable header.
@@ -81,7 +86,7 @@ struct GXKeyList gxKeyList;
  */
 static void fghReshapeWindow ( SFG_Window *window, int width, int height )
 {
-    SFG_Window *current_window = fgStructure.CurrentWindow;
+    //SFG_Window *current_window = fgStructure.CurrentWindow;
 
     freeglut_return_if_fail( window != NULL );
 
@@ -487,7 +492,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
                 if( ( width != window->State.OldWidth ) ||
                     ( height != window->State.OldHeight ) )
                 {
-                    SFG_Window *current_window = fgStructure.CurrentWindow;
+                    //SFG_Window *current_window = fgStructure.CurrentWindow;
 
                     window->State.OldWidth = width;
                     window->State.OldHeight = height;
@@ -551,8 +556,8 @@ void FGAPIENTRY glutMainLoopEvent( void )
             /*
              * XXX INVOKE_WCB() does this check for us.
              */
-            if( ! FETCH_WCB( *window, WindowStatus ) )
-                break;
+            //if( ! FETCH_WCB( *window, WindowStatus ) )
+            //    break;
             fgSetWindow( window );
 
             /*
