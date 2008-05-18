@@ -343,6 +343,7 @@ sys/Makefile
 ext/Makefile
 gst-libs/Makefile
 gst-libs/gst/Makefile
+gst-libs/gst/freeglut/Makefile
 gst-libs/gst/gl/Makefile
 tools/Makefile
 win32/common/config.h
