@@ -163,4 +163,3 @@ FGAPI void    FGAPIENTRY glutDisplayFunc( void (* callback)( void ) );
 /*** END OF FILE ***/
 
 #endif /* __FREEGLUT_STD_H__ */
-

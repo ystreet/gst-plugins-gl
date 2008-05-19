@@ -153,10 +153,13 @@ void fgCloseWindows( )
  */
 void fgDestroyWindow( SFG_Window* window )
 {
+    SFG_Window *activeWindow = fgStructure.CurrentWindow;
+    
     FREEGLUT_INTERNAL_ERROR_EXIT ( window, "Window destroy function called with null window",
                                    "fgDestroyWindow" );
 
     INVOKE_WCB( *window, Destroy, ( ) );
+    fgSetWindow( activeWindow );
     
     fgListRemove( &fgStructure.Windows, &window->Node );
 

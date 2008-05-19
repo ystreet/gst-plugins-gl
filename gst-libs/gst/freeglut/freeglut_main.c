@@ -785,9 +785,7 @@ LRESULT CALLBACK fgWindowProc( HWND hWnd, UINT uMsg, WPARAM wParam,
         break;
 
     case WM_CLOSE:
-        fgDestroyWindow ( window );
-        if ( fgState.ActionOnWindowClose != GLUT_ACTION_CONTINUE_EXECUTION )
-            PostQuitMessage(0);
+        INVOKE_WCB( *window, Destroy, ( ) );
         break;
 
     case WM_DESTROY:
