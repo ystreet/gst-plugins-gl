@@ -46,4 +46,8 @@ This file lists supporting libraries for which gst-plugins-base contains
 plugins, as well as their minimum version.  You can find the corresponding
 plugins in ext/(library)
 
-
+Package:	glew
+Version:	>= 1.5.0
+Recommended:	1.5.latest
+URL:		http://glew.sourceforge.net/
+DebianPackage:	libglew1.5-dev
