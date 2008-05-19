@@ -1,4 +1,22 @@
-/*
+/* 
+ * GStreamer
+ * Copyright (C) 2008 Julien Isorce <julien.isorce@gmail.com>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ *
  * freeglut_main.c
  *
  * The windows message processing methods.
@@ -86,10 +104,7 @@ struct GXKeyList gxKeyList;
  */
 static void fghReshapeWindow ( SFG_Window *window, int width, int height )
 {
-    //SFG_Window *current_window = fgStructure.CurrentWindow;
-
     freeglut_return_if_fail( window != NULL );
-
 
 #if TARGET_HOST_UNIX_X11
 
@@ -492,7 +507,6 @@ void FGAPIENTRY glutMainLoopEvent( void )
                 if( ( width != window->State.OldWidth ) ||
                     ( height != window->State.OldHeight ) )
                 {
-                    //SFG_Window *current_window = fgStructure.CurrentWindow;
 
                     window->State.OldWidth = width;
                     window->State.OldHeight = height;
@@ -556,8 +570,6 @@ void FGAPIENTRY glutMainLoopEvent( void )
             /*
              * XXX INVOKE_WCB() does this check for us.
              */
-            //if( ! FETCH_WCB( *window, WindowStatus ) )
-            //    break;
             fgSetWindow( window );
 
             /*
@@ -568,19 +580,15 @@ void FGAPIENTRY glutMainLoopEvent( void )
              */
             switch( event.xvisibility.state )
             {
-            case VisibilityUnobscured:
-                //INVOKE_WCB( *window, WindowStatus, ( GLUT_FULLY_RETAINED ) );
+            case VisibilityUnobscured:           
                 window->State.Visible = GL_TRUE;
                 break;
 
             case VisibilityPartiallyObscured:
-                //INVOKE_WCB( *window, WindowStatus,
-                //            ( GLUT_PARTIALLY_RETAINED ) );
                 window->State.Visible = GL_TRUE;
                 break;
 
             case VisibilityFullyObscured:
-                //INVOKE_WCB( *window, WindowStatus, ( GLUT_FULLY_COVERED ) );
                 window->State.Visible = GL_FALSE;
                 break;
 

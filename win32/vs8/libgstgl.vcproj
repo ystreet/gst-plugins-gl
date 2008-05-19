@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../common;../../../gstreamer/include;../../../glib/include;&quot;..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\libiconv\include;&quot;..\..\gst-libs\gst\freeglut&quot;;&quot;../../gst-libs\gst\gl&quot;;../../gst/gl"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -120,7 +120,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../common;../../../gstreamer/include;../../../glib/include;&quot;..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\libiconv\include;&quot;..\..\gst-libs\gst\freeglut&quot;;&quot;../../gst-libs\gst\gl&quot;;../../gst/gl"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
