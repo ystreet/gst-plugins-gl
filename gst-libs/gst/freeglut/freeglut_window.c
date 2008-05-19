@@ -612,6 +612,10 @@ void fgCloseWindow( SFG_Window* window )
 
 /* -- INTERFACE FUNCTIONS -------------------------------------------------- */
 
+#if TARGET_HOST_UNIX_X11
+typedef unsigned long long UINT64;
+#endif
+
 /*
  * Creates a new top-level freeglut window
  */
