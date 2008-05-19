@@ -627,7 +627,7 @@ int FGAPIENTRY glutCreateWindow( const char* title, unsigned long winId )
 
     return fgCreateWindow( title, fgState.Position.X, fgState.Position.Y,
                            fgState.Size.X, fgState.Size.Y, 
-                           (SFG_WindowHandleType)(unsigned __int64)winId)->ID;
+                           (SFG_WindowHandleType)(__int64)winId)->ID;
 }
 
 
