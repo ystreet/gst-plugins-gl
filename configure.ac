@@ -155,11 +155,11 @@ then
 fi
 
 dnl glew is required
-PKG_CHECK_MODULES(GLEW, libglew1.5 >= 1.5.0, HAVE_GLEW=yes, HAVE_GLEW=no)
-if test "x$HAVE_GLEW" != "xyes"
-then
-  AC_ERROR([libglew1.5.0 or later is required])
-fi
+#PKG_CHECK_MODULES(GLEW, libglew1.5 >= 1.5.0, HAVE_GLEW=yes, HAVE_GLEW=no)
+#if test "x$HAVE_GLEW" != "xyes"
+#then
+#  AC_ERROR([libglew1.5.0 or later is required])
+#fi
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
