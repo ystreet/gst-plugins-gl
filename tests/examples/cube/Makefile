@@ -28,14 +28,15 @@ LIBS+=-lglib-2.0 -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 \
 else
 # Put Linux-specific stuff here
 REXE=$(EXE)
+LDFLAGS+=/usr/include/gstreamer-0.10
 LIBS+=-lgstreamer-0.10 -lglib-2.0 -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lGLU -lGL -lGLEW
 endif
 
 
 .PHONY : all
-all: $(EXE)
+all: $(REXE)
 
-$(EXE): $(OBJ)
+$(REXE): $(OBJ)
 	 $(CPP) $(OBJ) $(LDFLAGS) $(LIBS) -o $@
 
 .PHONY : clean
