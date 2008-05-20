@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\libiconv\include;..\..\..\glib\include;..\..\..\gstreamer\include"
+				AdditionalIncludeDirectories="&quot;..\..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\..\libiconv\include;..\..\..\..\glib\include;..\..\..\..\gstreamer\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="libgstreamer-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib opengl32.lib glu32.lib glew32.lib glew32s.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\glib\lib;..\..\..\gstreamer\lib"
+				AdditionalLibraryDirectories="..\..\..\..\glib\lib;..\..\..\..\gstreamer\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -118,7 +118,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\libiconv\include;..\..\..\glib\include;..\..\..\gstreamer\include"
+				AdditionalIncludeDirectories="&quot;..\..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\..\libiconv\include;..\..\..\..\glib\include;..\..\..\..\gstreamer\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -139,7 +139,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="libgstreamer-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib opengl32.lib glu32.lib glew32.lib glew32s.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\glib\lib;..\..\..\gstreamer\lib"
+				AdditionalLibraryDirectories="..\..\..\..\glib\lib;..\..\..\..\gstreamer\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
