@@ -1,4 +1,4 @@
-#include <gl/glew.h>
+#include <GL/glew.h>
 #include <gst/gst.h>
 #include <gst/video/video.h>
 

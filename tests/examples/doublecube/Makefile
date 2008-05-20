@@ -1,6 +1,6 @@
 SRC=main.cpp
 OBJ=$(SRC:.cpp=.o)
-EXE=cube
+EXE=doublecube
 
 CPP=g++
 CPPFLAGS=-Wall -Werror -O3 -march=i686 -msse2 -mfpmath=sse
