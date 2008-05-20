@@ -31,6 +31,7 @@ INCLUDEPATH += GeneratedFiles \
     /usr/lib/glib-2.0/include \
     /usr/include/libxml2
 LIBS += -lgstreamer-0.10 \
+    -lgstinterfaces-0.10 \
 	-lglib-2.0 \
 	-lgmodule-2.0 \
 	-lgobject-2.0 \

@@ -1,8 +1,9 @@
 #include "gstthread.h"
 
-GstThread::GstThread(const WId winId, QObject *parent): 
-    m_pipeline(winId),
-    QThread(parent)
+GstThread::GstThread(const WId winId, QObject *parent):
+    QThread(parent),
+    m_pipeline(winId)
+    
 {
 }
 
