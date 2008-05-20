@@ -28,7 +28,10 @@ LIBS+=-lglib-2.0 -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 \
 else
 # Put Linux-specific stuff here
 REXE=$(EXE)
-LDFLAGS+=/usr/include/gstreamer-0.10
+CPPFLAGS+=-I/usr/include/gstreamer-0.10 \
+          -I/usr/include/glib-2.0 \
+          -I/usr/lib/glib-2.0/include \
+          -I/usr/include/libxml2
 LIBS+=-lgstreamer-0.10 -lglib-2.0 -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lGLU -lGL -lGLEW
 endif
 
