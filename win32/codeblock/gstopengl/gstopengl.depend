@@ -1,0 +1,869 @@
+# depslib dependency file v1.0
+1211274293 source:d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_callbacks.c
+	"gstfreeglut.h"
+	"freeglut_internal.h"
+
+1211459603 d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\gstfreeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1211459603 d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1211274293 d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_ext.h
+
+1211274293 d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_internal.h
+	<windows.h>
+	<windowsx.h>
+	<mmsystem.h>
+	<TCHAR.H>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<stdlib.h>
+	<sys/types.h>
+	<unistd.h>
+	<sys/time.h>
+	<time.h>
+	<sys/time.h>
+	<time.h>
+	<GL/glx.h>
+	<X11/Xlib.h>
+	<X11/Xatom.h>
+	<X11/keysym.h>
+	<X11/extensions/xf86vmode.h>
+
+1211274293 source:d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_display.c
+	"gstfreeglut.h"
+	"freeglut_internal.h"
+
+1211274293 source:d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_init.c
+	"gstfreeglut.h"
+	"freeglut_internal.h"
+
+1211274293 source:d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_main.c
+	"gstfreeglut.h"
+	"freeglut_internal.h"
+	<errno.h>
+	<stdarg.h>
+	<gx.h>
+	<sys/time.h>
+	<unistd.h>
+	<limits.h>
+
+1211274293 source:d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_state.c
+	"gstfreeglut.h"
+	"freeglut_internal.h"
+
+1211274293 source:d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_structure.c
+	"gstfreeglut.h"
+	"freeglut_internal.h"
+
+1211274293 source:d:\wobow\gst-plugins-gl\gst-libs\gst\freeglut\freeglut_window.c
+	"gstfreeglut.h"
+	"freeglut_internal.h"
+	<aygshell.h>
+
+1211274293 source:d:\wobow\gst-plugins-gl\gst-libs\gst\gl\gstglbuffer.c
+	"config.h"
+	"gstglbuffer.h"
+
+1211274293 d:\wobow\gst-plugins-gl\gst-libs\gst\gl\gstglbuffer.h
+	<gst/gst.h>
+	<gst/video/video.h>
+	"gstgldisplay.h"
+
+1196086560 d:\wobow\gstreamer\include\gst\gst.h
+	<glib.h>
+	<gst/glib-compat.h>
+	<gst/gstenumtypes.h>
+	<gst/gstversion.h>
+	<gst/gstbin.h>
+	<gst/gstbuffer.h>
+	<gst/gstcaps.h>
+	<gst/gstchildproxy.h>
+	<gst/gstclock.h>
+	<gst/gstdebugutils.h>
+	<gst/gstelement.h>
+	<gst/gsterror.h>
+	<gst/gstevent.h>
+	<gst/gstghostpad.h>
+	<gst/gstindex.h>
+	<gst/gstindexfactory.h>
+	<gst/gstinfo.h>
+	<gst/gstinterface.h>
+	<gst/gstiterator.h>
+	<gst/gstmarshal.h>
+	<gst/gstmessage.h>
+	<gst/gstminiobject.h>
+	<gst/gstobject.h>
+	<gst/gstpad.h>
+	<gst/gstparamspecs.h>
+	<gst/gstpipeline.h>
+	<gst/gstplugin.h>
+	<gst/gstquery.h>
+	<gst/gstregistry.h>
+	<gst/gstsegment.h>
+	<gst/gststructure.h>
+	<gst/gstsystemclock.h>
+	<gst/gsttaglist.h>
+	<gst/gsttagsetter.h>
+	<gst/gsttask.h>
+	<gst/gsttrace.h>
+	<gst/gsttypefind.h>
+	<gst/gsttypefindfactory.h>
+	<gst/gsturi.h>
+	<gst/gstutils.h>
+	<gst/gstvalue.h>
+	<gst/gstxml.h>
+	<gst/gstparse.h>
+	<gst/gstcompat.h>
+
+1202823376 d:\wobow\glib\include\glib.h
+	<glib/galloca.h>
+	<glib/garray.h>
+	<glib/gasyncqueue.h>
+	<glib/gatomic.h>
+	<glib/gbacktrace.h>
+	<glib/gbase64.h>
+	<glib/gbookmarkfile.h>
+	<glib/gcache.h>
+	<glib/gcompletion.h>
+	<glib/gconvert.h>
+	<glib/gdataset.h>
+	<glib/gdate.h>
+	<glib/gdir.h>
+	<glib/gerror.h>
+	<glib/gfileutils.h>
+	<glib/ghash.h>
+	<glib/ghook.h>
+	<glib/giochannel.h>
+	<glib/gkeyfile.h>
+	<glib/glist.h>
+	<glib/gmacros.h>
+	<glib/gmain.h>
+	<glib/gmappedfile.h>
+	<glib/gmarkup.h>
+	<glib/gmem.h>
+	<glib/gmessages.h>
+	<glib/gnode.h>
+	<glib/goption.h>
+	<glib/gpattern.h>
+	<glib/gprimes.h>
+	<glib/gqsort.h>
+	<glib/gquark.h>
+	<glib/gqueue.h>
+	<glib/grand.h>
+	<glib/grel.h>
+	<glib/gregex.h>
+	<glib/gscanner.h>
+	<glib/gsequence.h>
+	<glib/gshell.h>
+	<glib/gslist.h>
+	<glib/gspawn.h>
+	<glib/gstrfuncs.h>
+	<glib/gstring.h>
+	<glib/gthread.h>
+	<glib/gthreadpool.h>
+	<glib/gtimer.h>
+	<glib/gtree.h>
+	<glib/gtypes.h>
+	<glib/gunicode.h>
+	<glib/gutils.h>
+	<glib/gwin32.h>
+
+1202823375 d:\wobow\glib\include\glib\galloca.h
+	<glib/gtypes.h>
+	<alloca.h>
+	<malloc.h>
+
+1202823375 d:\wobow\glib\include\glib\gtypes.h
+	<glibconfig.h>
+
+1202823376 d:\wobow\glib\include\glibconfig.h
+	<glib/gmacros.h>
+	<limits.h>
+	<float.h>
+
+1202823375 d:\wobow\glib\include\glib\gmacros.h
+	<stddef.h>
+
+1202823375 d:\wobow\glib\include\glib\garray.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gasyncqueue.h
+	<glib/gthread.h>
+
+1202823375 d:\wobow\glib\include\glib\gthread.h
+	<glib/gerror.h>
+	<glib/gtypes.h>
+	<glib/gutils.h>
+	<glib/gatomic.h>
+
+1202823375 d:\wobow\glib\include\glib\gerror.h
+	<glib/gquark.h>
+
+1202823375 d:\wobow\glib\include\glib\gquark.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gutils.h
+	<glib/gtypes.h>
+	<stdarg.h>
+
+1202823375 d:\wobow\glib\include\glib\gatomic.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gbacktrace.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gbase64.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gbookmarkfile.h
+	<glib/gerror.h>
+	<time.h>
+
+1202823375 d:\wobow\glib\include\glib\gcache.h
+	<glib/glist.h>
+
+1202823375 d:\wobow\glib\include\glib\glist.h
+	<glib/gmem.h>
+
+1202823375 d:\wobow\glib\include\glib\gmem.h
+	<glib/gslice.h>
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gslice.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gcompletion.h
+	<glib/glist.h>
+
+1202823375 d:\wobow\glib\include\glib\gconvert.h
+	<glib/gerror.h>
+
+1202823375 d:\wobow\glib\include\glib\gdataset.h
+	<glib/gquark.h>
+
+1202823375 d:\wobow\glib\include\glib\gdate.h
+	<time.h>
+	<glib/gtypes.h>
+	<glib/gquark.h>
+
+1202823375 d:\wobow\glib\include\glib\gdir.h
+	<glib/gerror.h>
+
+1202823375 d:\wobow\glib\include\glib\gfileutils.h
+	<glib/gerror.h>
+
+1202823375 d:\wobow\glib\include\glib\ghash.h
+	<glib/gtypes.h>
+	<glib/glist.h>
+
+1202823375 d:\wobow\glib\include\glib\ghook.h
+	<glib/gmem.h>
+
+1202823375 d:\wobow\glib\include\glib\giochannel.h
+	<glib/gconvert.h>
+	<glib/gmain.h>
+	<glib/gstring.h>
+
+1202823375 d:\wobow\glib\include\glib\gmain.h
+	<glib/gslist.h>
+	<glib/gthread.h>
+
+1202823375 d:\wobow\glib\include\glib\gslist.h
+	<glib/gmem.h>
+
+1202823375 d:\wobow\glib\include\glib\gstring.h
+	<glib/gtypes.h>
+	<glib/gunicode.h>
+	<glib/gutils.h>
+
+1202823375 d:\wobow\glib\include\glib\gunicode.h
+	<glib/gerror.h>
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gkeyfile.h
+	<glib/gerror.h>
+
+1202823375 d:\wobow\glib\include\glib\gmappedfile.h
+	<glib/gerror.h>
+
+1202823375 d:\wobow\glib\include\glib\gmarkup.h
+	<stdarg.h>
+	<glib/gerror.h>
+
+1202823375 d:\wobow\glib\include\glib\gmessages.h
+	<stdarg.h>
+	<glib/gtypes.h>
+	<glib/gmacros.h>
+
+1202823375 d:\wobow\glib\include\glib\gnode.h
+	<glib/gmem.h>
+
+1202823375 d:\wobow\glib\include\glib\goption.h
+	<glib/gerror.h>
+	<glib/gquark.h>
+
+1202823375 d:\wobow\glib\include\glib\gpattern.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gprimes.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gqsort.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gqueue.h
+	<glib/glist.h>
+
+1202823375 d:\wobow\glib\include\glib\grand.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\grel.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gregex.h
+	<glib/gerror.h>
+	<glib/gstring.h>
+
+1202823375 d:\wobow\glib\include\glib\gscanner.h
+	<glib/gdataset.h>
+	<glib/ghash.h>
+
+1202823375 d:\wobow\glib\include\glib\gsequence.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gshell.h
+	<glib/gerror.h>
+
+1202823375 d:\wobow\glib\include\glib\gspawn.h
+	<glib/gerror.h>
+
+1202823375 d:\wobow\glib\include\glib\gstrfuncs.h
+	<stdarg.h>
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gthreadpool.h
+	<glib/gthread.h>
+
+1202823375 d:\wobow\glib\include\glib\gtimer.h
+	<glib/gtypes.h>
+
+1202823375 d:\wobow\glib\include\glib\gtree.h
+	<glib/gnode.h>
+
+1202823375 d:\wobow\glib\include\glib\gwin32.h
+	<glib/gtypes.h>
+
+1150186824 d:\wobow\gstreamer\include\gst\glib-compat.h
+
+1194394630 d:\wobow\gstreamer\include\gst\gstenumtypes.h
+	<glib-object.h>
+
+1202823376 d:\wobow\glib\include\glib-object.h
+	<gobject/gboxed.h>
+	<gobject/genums.h>
+	<gobject/gobject.h>
+	<gobject/gparam.h>
+	<gobject/gparamspecs.h>
+	<gobject/gsignal.h>
+	<gobject/gsourceclosure.h>
+	<gobject/gtype.h>
+	<gobject/gtypemodule.h>
+	<gobject/gtypeplugin.h>
+	<gobject/gvalue.h>
+	<gobject/gvaluearray.h>
+	<gobject/gvaluetypes.h>
+
+1202823376 d:\wobow\glib\include\gobject\gboxed.h
+	<gobject/gtype.h>
+
+1202823376 d:\wobow\glib\include\gobject\gtype.h
+	<glib.h>
+
+1202823376 d:\wobow\glib\include\gobject\genums.h
+	<gobject/gtype.h>
+
+1202823376 d:\wobow\glib\include\gobject\gobject.h
+	<gobject/gtype.h>
+	<gobject/gvalue.h>
+	<gobject/gparam.h>
+	<gobject/gclosure.h>
+	<gobject/gsignal.h>
+
+1202823376 d:\wobow\glib\include\gobject\gvalue.h
+	<gobject/gtype.h>
+
+1202823376 d:\wobow\glib\include\gobject\gparam.h
+	<gobject/gvalue.h>
+
+1202823376 d:\wobow\glib\include\gobject\gclosure.h
+	<gobject/gtype.h>
+
+1202823376 d:\wobow\glib\include\gobject\gsignal.h
+	<gobject/gclosure.h>
+	<gobject/gvalue.h>
+	<gobject/gparam.h>
+	<gobject/gmarshal.h>
+
+1202823376 d:\wobow\glib\include\gobject\gmarshal.h
+
+1202823376 d:\wobow\glib\include\gobject\gparamspecs.h
+	<gobject/gvalue.h>
+	<gobject/genums.h>
+	<gobject/gboxed.h>
+	<gobject/gobject.h>
+
+1202823376 d:\wobow\glib\include\gobject\gsourceclosure.h
+	<gobject/gclosure.h>
+
+1202823376 d:\wobow\glib\include\gobject\gtypemodule.h
+	<gobject/gobject.h>
+	<gobject/genums.h>
+
+1202823376 d:\wobow\glib\include\gobject\gtypeplugin.h
+	<gobject/gtype.h>
+
+1202823376 d:\wobow\glib\include\gobject\gvaluearray.h
+	<gobject/gvalue.h>
+
+1202823376 d:\wobow\glib\include\gobject\gvaluetypes.h
+	<gobject/gvalue.h>
+
+1191876308 d:\wobow\gstreamer\include\gst\gstversion.h
+
+1190274154 d:\wobow\gstreamer\include\gst\gstbin.h
+	<gst/gstelement.h>
+	<gst/gstiterator.h>
+	<gst/gstbus.h>
+
+1186055478 d:\wobow\gstreamer\include\gst\gstelement.h
+	<gst/gstconfig.h>
+	<gst/gstobject.h>
+	<gst/gstpad.h>
+	<gst/gstbus.h>
+	<gst/gstclock.h>
+	<gst/gstelementfactory.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+	<gst/gstindex.h>
+	<gst/gstindexfactory.h>
+	<gst/gstiterator.h>
+	<gst/gstmessage.h>
+	<gst/gsttaglist.h>
+
+1162047800 d:\wobow\gstreamer\include\gst\gstconfig.h
+	<libxml/parser.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\parser.h
+	<stdarg.h>
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/dict.h>
+	<libxml/hash.h>
+	<libxml/valid.h>
+	<libxml/entities.h>
+	<libxml/xmlerror.h>
+	<libxml/xmlstring.h>
+	<libxml/encoding.h>
+	<libxml/xmlIO.h>
+	<libxml/globals.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xmlversion.h
+	<libxml/xmlexports.h>
+	<ansidecl.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xmlexports.h
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\tree.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/xmlstring.h>
+	<libxml/xmlregexp.h>
+	<libxml/xmlmemory.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xmlstring.h
+	<stdarg.h>
+	<libxml/xmlversion.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xmlregexp.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/dict.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\dict.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xmlmemory.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/threads.h>
+	<libxml/globals.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\threads.h
+	<libxml/xmlversion.h>
+	<libxml/globals.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\globals.h
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xmlerror.h>
+	<libxml/SAX.h>
+	<libxml/SAX2.h>
+	<libxml/xmlmemory.h>
+	<libxml/threads.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xmlerror.h
+	<libxml/parser.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\sax.h
+	<stdio.h>
+	<stdlib.h>
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xlink.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xlink.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\sax2.h
+	<stdio.h>
+	<stdlib.h>
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xlink.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\hash.h
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/dict.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\valid.h
+	<libxml/xmlversion.h>
+	<libxml/xmlerror.h>
+	<libxml/tree.h>
+	<libxml/list.h>
+	<libxml/xmlautomata.h>
+	<libxml/xmlregexp.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\list.h
+	<libxml/xmlversion.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xmlautomata.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/xmlregexp.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\entities.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\encoding.h
+	<libxml/xmlversion.h>
+	<iconv.h>
+	<libxml/tree.h>
+
+1202823241 d:\wobow\libiconv\include\iconv.h
+	"iconv.h"
+	<stddef.h>
+	<errno.h>
+
+1202823342 d:\wobow\libxml2-2.6.30+.win32\include\libxml\xmlio.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/globals.h>
+	<libxml/tree.h>
+	<libxml/parser.h>
+	<libxml/encoding.h>
+
+1190634396 d:\wobow\gstreamer\include\gst\gstobject.h
+	<gst/gstconfig.h>
+	<glib-object.h>
+
+1189526150 d:\wobow\gstreamer\include\gst\gstpad.h
+	<gst/gstconfig.h>
+	<gst/gstobject.h>
+	<gst/gstbuffer.h>
+	<gst/gstcaps.h>
+	<gst/gstevent.h>
+	<gst/gstquery.h>
+	<gst/gsttask.h>
+	<gst/gstpadtemplate.h>
+
+1194032136 d:\wobow\gstreamer\include\gst\gstbuffer.h
+	<gst/gstminiobject.h>
+	<gst/gstclock.h>
+	<gst/gstcaps.h>
+
+1150103504 d:\wobow\gstreamer\include\gst\gstminiobject.h
+	<gst/gstconfig.h>
+	<glib-object.h>
+
+1199884942 d:\wobow\gstreamer\include\gst\gstclock.h
+	<gst/gstobject.h>
+
+1158769046 d:\wobow\gstreamer\include\gst\gstcaps.h
+	<gst/gstconfig.h>
+	<gst/gststructure.h>
+	<gst/glib-compat.h>
+
+1186936860 d:\wobow\gstreamer\include\gst\gststructure.h
+	<gst/gstconfig.h>
+	<glib-object.h>
+	<gst/gstclock.h>
+	<gst/glib-compat.h>
+
+1194032138 d:\wobow\gstreamer\include\gst\gstevent.h
+	<gst/gstminiobject.h>
+	<gst/gstformat.h>
+	<gst/gstobject.h>
+	<gst/gstclock.h>
+	<gst/gststructure.h>
+	<gst/gsttaglist.h>
+
+1194032138 d:\wobow\gstreamer\include\gst\gstformat.h
+	<glib.h>
+	<gst/gstiterator.h>
+
+1152177664 d:\wobow\gstreamer\include\gst\gstiterator.h
+	<glib-object.h>
+	<gst/gstconfig.h>
+
+1194032138 d:\wobow\gstreamer\include\gst\gsttaglist.h
+	<gst/gststructure.h>
+	<gst/glib-compat.h>
+
+1194032138 d:\wobow\gstreamer\include\gst\gstquery.h
+	<glib.h>
+	<gst/gstiterator.h>
+	<gst/gstminiobject.h>
+	<gst/gststructure.h>
+	<gst/gstformat.h>
+
+1152177664 d:\wobow\gstreamer\include\gst\gsttask.h
+	<gst/gstobject.h>
+
+1190208516 d:\wobow\gstreamer\include\gst\gstpadtemplate.h
+	<gst/gstconfig.h>
+	<gst/gstobject.h>
+	<gst/gstbuffer.h>
+	<gst/gstcaps.h>
+	<gst/gstevent.h>
+	<gst/gstquery.h>
+	<gst/gsttask.h>
+
+1192566614 d:\wobow\gstreamer\include\gst\gstbus.h
+	<gst/gstmessage.h>
+	<gst/gstclock.h>
+
+1194032138 d:\wobow\gstreamer\include\gst\gstmessage.h
+	<gst/gstminiobject.h>
+	<gst/gstobject.h>
+	<gst/gstelement.h>
+	<gst/gsttaglist.h>
+	<gst/gststructure.h>
+
+1197505198 d:\wobow\gstreamer\include\gst\gstelementfactory.h
+	<gst/gstconfig.h>
+	<gst/gstelement.h>
+	<gst/gstobject.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+	<gst/gstiterator.h>
+
+1200612730 d:\wobow\gstreamer\include\gst\gstplugin.h
+	<gst/gstconfig.h>
+	<time.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<gmodule.h>
+	<gst/gstobject.h>
+	<gst/gstmacros.h>
+
+1202823376 d:\wobow\glib\include\gmodule.h
+	<glib.h>
+
+1129390222 d:\wobow\gstreamer\include\gst\gstmacros.h
+
+1192296010 d:\wobow\gstreamer\include\gst\gstpluginfeature.h
+	<glib-object.h>
+	<gst/gstobject.h>
+
+1144519516 d:\wobow\gstreamer\include\gst\gstindex.h
+	<gst/gstobject.h>
+	<gst/gstformat.h>
+	<gst/gstpluginfeature.h>
+
+1129390222 d:\wobow\gstreamer\include\gst\gstindexfactory.h
+	<gst/gstobject.h>
+	<gst/gstformat.h>
+	<gst/gstpluginfeature.h>
+
+1171544708 d:\wobow\gstreamer\include\gst\gstchildproxy.h
+	<glib-object.h>
+	<gst/gst.h>
+
+1195750742 d:\wobow\gstreamer\include\gst\gstdebugutils.h
+	<glib.h>
+	<glib-object.h>
+	<gst/gstconfig.h>
+	<gst/gstbin.h>
+
+1176382790 d:\wobow\gstreamer\include\gst\gsterror.h
+	<glib.h>
+	<glib-object.h>
+	<errno.h>
+
+1157021952 d:\wobow\gstreamer\include\gst\gstghostpad.h
+	<gst/gstpad.h>
+
+1197505200 d:\wobow\gstreamer\include\gst\gstinfo.h
+	<glib.h>
+	<glib-object.h>
+	<gst/gstconfig.h>
+
+1147256816 d:\wobow\gstreamer\include\gst\gstinterface.h
+	<gst/gstelement.h>
+
+1201962270 d:\wobow\gstreamer\include\gst\gstmarshal.h
+	"gst/gstconfig.h"
+	<glib-object.h>
+
+1185368424 d:\wobow\gstreamer\include\gst\gstparamspecs.h
+	<gst/gstvalue.h>
+
+1197471854 d:\wobow\gstreamer\include\gst\gstvalue.h
+	<gst/gstconfig.h>
+	<gst/gstcaps.h>
+	<gst/gststructure.h>
+
+1172684624 d:\wobow\gstreamer\include\gst\gstpipeline.h
+	<gst/gstbin.h>
+
+1186756826 d:\wobow\gstreamer\include\gst\gstregistry.h
+	<stdio.h>
+	<gst/gstconfig.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+
+1160411610 d:\wobow\gstreamer\include\gst\gstsegment.h
+	<gst/gstevent.h>
+	<gst/gstformat.h>
+
+1130523264 d:\wobow\gstreamer\include\gst\gstsystemclock.h
+	<gst/gstclock.h>
+
+1149186134 d:\wobow\gstreamer\include\gst\gsttagsetter.h
+	<gst/gst.h>
+
+1153215752 d:\wobow\gstreamer\include\gst\gsttrace.h
+	<glib.h>
+
+1147962300 d:\wobow\gstreamer\include\gst\gsttypefind.h
+	<gst/gstcaps.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+
+1133312180 d:\wobow\gstreamer\include\gst\gsttypefindfactory.h
+	<gst/gstcaps.h>
+	<gst/gstplugin.h>
+	<gst/gstpluginfeature.h>
+	<gst/gsttypefind.h>
+
+1193329146 d:\wobow\gstreamer\include\gst\gsturi.h
+	<glib.h>
+	<gst/gstelement.h>
+	<gst/gstpluginfeature.h>
+
+1197408750 d:\wobow\gstreamer\include\gst\gstutils.h
+	<glib.h>
+	<gst/gstbin.h>
+
+1194029006 d:\wobow\gstreamer\include\gst\gstxml.h
+	<gst/gstconfig.h>
+	<gst/gstelement.h>
+
+1178728328 d:\wobow\gstreamer\include\gst\gstparse.h
+	<gst/gstelement.h>
+
+1125389868 d:\wobow\gstreamer\include\gst\gstcompat.h
+
+1198304340 d:\wobow\gstreamer\include\gst\video\video.h
+	<gst/gst.h>
+
+1211467741 d:\wobow\gst-plugins-gl\gst-libs\gst\gl\gstgldisplay.h
+	<GL/glew.h>
+	<gstfreeglut.h>
+	<gst/gst.h>
+	<gst/video/video.h>
+
+1211459663 d:\wobow\glew\include\gl\glew.h
+	<stddef.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1211465853 source:d:\wobow\gst-plugins-gl\gst-libs\gst\gl\gstgldisplay.c
+	"config.h"
+	"gstgldisplay.h"
+	<gst/gst.h>
+
+1211274294 source:d:\wobow\gst-plugins-gl\gst\gl\gstglgraphicmaker.c
+	"config.h"
+	"gstglgraphicmaker.h"
+
+1211274294 d:\wobow\gst-plugins-gl\gst\gl\gstglgraphicmaker.h
+	<gst/gst.h>
+	<gst/base/gstbasetransform.h>
+	<gst/video/video.h>
+	"gstglbuffer.h"
+
+1197654758 d:\wobow\gstreamer\include\gst\base\gstbasetransform.h
+	<gst/gst.h>
+
+1211459603 source:d:\wobow\gst-plugins-gl\gst\gl\gstglimagesink.c
+	"config.h"
+	<gst/interfaces/xoverlay.h>
+	"gstglimagesink.h"
+
+1167913854 d:\wobow\gstreamer\include\gst\interfaces\xoverlay.h
+	<gst/gst.h>
+
+1211459603 d:\wobow\gst-plugins-gl\gst\gl\gstglimagesink.h
+	<gst/gst.h>
+	<gst/video/gstvideosink.h>
+	<gst/video/video.h>
+	"gstglbuffer.h"
+
+1166183544 d:\wobow\gstreamer\include\gst\video\gstvideosink.h
+	<gst/gst.h>
+	<gst/base/gstbasesink.h>
+
+1193772614 d:\wobow\gstreamer\include\gst\base\gstbasesink.h
+	<gst/gst.h>
+
+1211459603 source:d:\wobow\gst-plugins-gl\gst\gl\gstglvideomaker.c
+	"config.h"
+	"gstglvideomaker.h"
+
+1211459603 d:\wobow\gst-plugins-gl\gst\gl\gstglvideomaker.h
+	<gst/gst.h>
+	<gst/base/gstbasetransform.h>
+	<gst/video/video.h>
+	"gstglbuffer.h"
+
+1211274294 d:\wobow\gst-plugins-gl\win32\common\config.h
+
+1211274294 source:d:\wobow\gst-plugins-gl\gst\gl\gstopengl.c
+	"config.h"
+	"gstglgraphicmaker.h"
+	"gstglvideomaker.h"
+	"gstglimagesink.h"
+
