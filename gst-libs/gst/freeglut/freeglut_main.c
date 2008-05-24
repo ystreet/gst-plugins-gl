@@ -205,6 +205,7 @@ static void fghcbDisplayWindow( SFG_Window *window,
 
 #if TARGET_HOST_UNIX_X11
         fghRedrawWindow ( window ) ;
+        //TODO same things as the following section have to be done
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
         if (window->Window.isInternal)
             RedrawWindow(
@@ -449,10 +450,6 @@ void FGAPIENTRY glutMainLoopEvent( void )
     if( window == NULL )                         \
         break;
 
-#define GETMOUSE(a)                              \
-    window->State.MouseX = event.a.x;            \
-    window->State.MouseY = event.a.y;
-
     FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutMainLoopEvent" );
 
     while( XPending( fgDisplay.Display ) )
@@ -523,11 +520,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
             break;
 
         case DestroyNotify:
-            /*
-             * This is sent to confirm the XDestroyWindow call.
-             *
-             * XXX WHY is this commented out?  Should we re-enable it?
-             */
+            INVOKE_WCB( *window, Destroy, ( ) );
             /* fgAddToWindowDestroyList ( window ); */
             break;
 

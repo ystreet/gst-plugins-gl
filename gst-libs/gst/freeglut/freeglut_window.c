@@ -333,14 +333,32 @@ void fgOpenWindow( SFG_Window* window, const char* title,
 
     mask = CWBackPixmap | CWBorderPixel | CWColormap | CWEventMask;
 
-    window->Window.Handle = XCreateWindow(
-        fgDisplay.Display,
-        fgDisplay.RootWindow,
-        x, y, w, h, 0,
-        window->Window.VisualInfo->depth, InputOutput,
-        window->Window.VisualInfo->visual, mask,
-        &winAttr
-    );
+    
+    if (!window->Window.Handle)
+    {
+        window->Window.isInternal = TRUE;
+        window->Window.Handle = XCreateWindow(
+            fgDisplay.Display,
+            fgDisplay.RootWindow,
+            x, y, w, h, 0,
+            window->Window.VisualInfo->depth, InputOutput,
+            window->Window.VisualInfo->visual, mask,
+            &winAttr
+        );
+    else
+    {
+        window->Window.isInternal = FALSE;
+        window->State.OldWidth = w;
+        window->State.OldHeight = h;
+        if( FETCH_WCB( *window, Reshape ) )
+            INVOKE_WCB( *window, Reshape, ( w, h ) );
+        else
+        {
+            fgSetWindow( window );
+            glViewport( 0, 0, w, h );
+        }
+        glutPostRedisplay( );
+    }
 
     /*
      * The GLX context creation, possibly trying the direct context rendering
