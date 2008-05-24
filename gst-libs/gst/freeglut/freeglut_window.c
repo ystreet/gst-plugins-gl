@@ -345,6 +345,8 @@ void fgOpenWindow( SFG_Window* window, const char* title,
             window->Window.VisualInfo->visual, mask,
             &winAttr
         );
+
+    }
     else
     {
         window->Window.isInternal = FALSE;
