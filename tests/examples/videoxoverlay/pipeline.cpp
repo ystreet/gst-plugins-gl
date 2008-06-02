@@ -28,9 +28,9 @@ void Pipeline::create()
     gst_init (NULL, NULL);
 
     m_loop = g_main_loop_new (NULL, FALSE);
-    GstElement* pipeline = gst_pipeline_new ("pipeline");
+    m_pipeline = gst_pipeline_new ("pipeline");
 
-    GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
+    GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (m_pipeline));
     gst_bus_add_watch (bus, (GstBusFunc) bus_call, this);
     gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, this);
     gst_object_unref (bus);
@@ -47,7 +47,7 @@ void Pipeline::create()
 
     g_object_set(G_OBJECT(videosrc), "location", "../doublecube/data/lost.avi", NULL);
 
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, avidemux, ffdec_mpeg4, m_glimagesink, NULL);
+    gst_bin_add_many (GST_BIN (m_pipeline), videosrc, avidemux, ffdec_mpeg4, m_glimagesink, NULL);
     if (!gst_element_link(ffdec_mpeg4, m_glimagesink)) 
     {
         qDebug ("Failed to link ffdec_mpeg4 to glimagesink!");
@@ -58,7 +58,7 @@ void Pipeline::create()
 
     g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
 
-    GstStateChangeReturn ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
+    GstStateChangeReturn ret = gst_element_set_state (m_pipeline, GST_STATE_PLAYING);
     if (ret == GST_STATE_CHANGE_FAILURE) 
     {
         qDebug ("Failed to start up pipeline!");
