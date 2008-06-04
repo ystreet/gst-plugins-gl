@@ -16,7 +16,10 @@ int main(int argc, char *argv[])
     GstThread gt(w.winId());
     QObject::connect(&gt, SIGNAL(finished()), &w, SLOT(close()));
     QObject::connect(&w, SIGNAL(exposeRequested()), &gt, SLOT(expose()));
-    gt.start();
 
+    QTimer::singleShot(1000, &gt, SLOT(start()));
+    //or
+    //gt.start(); //works fine on win32 but not on linux
+    
     return a.exec();
 }

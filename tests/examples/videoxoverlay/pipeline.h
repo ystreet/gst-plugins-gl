@@ -4,7 +4,7 @@
 #include <QtGui>
 #include <gst/gst.h>
 
-class Pipeline : QObject
+class Pipeline : public QObject
 {
     Q_OBJECT
 
