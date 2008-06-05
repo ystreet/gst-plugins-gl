@@ -15,7 +15,7 @@ public:
     ~GstThread();
 
 public slots:
-    void expose();
+    void exposeRequested();
     
 protected:
     void run();

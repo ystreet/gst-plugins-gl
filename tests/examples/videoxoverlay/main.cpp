@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     GstThread gt(w.winId());
     QObject::connect(&gt, SIGNAL(finished()), &w, SLOT(close()));
-    QObject::connect(&w, SIGNAL(exposeRequested()), &gt, SLOT(expose()));
+    QObject::connect(&w, SIGNAL(exposeRequested()), &gt, SLOT(exposeRequested()));
 
     QTimer::singleShot(1000, &gt, SLOT(start()));
     //or

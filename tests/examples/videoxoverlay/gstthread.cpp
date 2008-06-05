@@ -11,9 +11,9 @@ GstThread::~GstThread()
 {
 }
 
-void GstThread::expose()
+void GstThread::exposeRequested()
 {
-    m_pipeline.expose();
+    m_pipeline.exposeRequested();
 }
 
 void GstThread::run()

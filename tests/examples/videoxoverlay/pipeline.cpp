@@ -4,6 +4,7 @@
 Pipeline::Pipeline(const WId id):
     m_winId(id),
     m_loop(NULL),
+    m_bus(NULL),
     m_pipeline(NULL),
     m_glimagesink(NULL)
 {
@@ -30,10 +31,10 @@ void Pipeline::create()
     m_loop = g_main_loop_new (NULL, FALSE);
     m_pipeline = gst_pipeline_new ("pipeline");
 
-    GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (m_pipeline));
-    gst_bus_add_watch (bus, (GstBusFunc) bus_call, this);
-    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, this);
-    gst_object_unref (bus);
+    m_bus = gst_pipeline_get_bus (GST_PIPELINE (m_pipeline));
+    gst_bus_add_watch (m_bus, (GstBusFunc) bus_call, this);
+    gst_bus_set_sync_handler (m_bus, (GstBusSyncHandler) create_window, this);
+    gst_object_unref (m_bus);
 
     GstElement* videosrc = gst_element_factory_make ("filesrc", "filesrc0");
     GstElement* avidemux = gst_element_factory_make ("avidemux", "avidemux0");
@@ -64,7 +65,7 @@ void Pipeline::create()
         qDebug ("Failed to start up pipeline!");
 
         /* check if there is an error message with details on the bus */
-        GstMessage* msg = gst_bus_poll (bus, GST_MESSAGE_ERROR, 0);
+        GstMessage* msg = gst_bus_poll (m_bus, GST_MESSAGE_ERROR, 0);
         if (msg) 
         {
             GError *err = NULL;
@@ -84,10 +85,16 @@ void Pipeline::stop() const
 }
 
 //redraw the current frame in the drawable
-void Pipeline::expose()
+void Pipeline::doExpose() const
 {
     if (m_pipeline && m_glimagesink)
         gst_x_overlay_expose (GST_X_OVERLAY (m_glimagesink));
+}
+
+//post message to g_main_loop in order to call expose
+void Pipeline::exposeRequested()
+{
+    gst_bus_post (m_bus, gst_message_new_custom (GST_MESSAGE_ANY, GST_OBJECT (m_pipeline), NULL));
 }
 
 
@@ -100,6 +107,9 @@ gboolean Pipeline::bus_call (GstBus *bus, GstMessage *msg, const Pipeline* p)
 {
     switch (GST_MESSAGE_TYPE (msg)) 
     {
+        case GST_MESSAGE_ANY:
+            p->doExpose();
+            break;
         case GST_MESSAGE_EOS:
             qDebug ("End-of-stream");
             p->stop();
