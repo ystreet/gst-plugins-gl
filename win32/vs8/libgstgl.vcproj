@@ -182,30 +182,6 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath="..\..\gst-libs\gst\gl\gstglbuffer.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst-libs\gst\gl\gstgldisplay.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst\gl\gstglgraphicmaker.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst\gl\gstglimagesink.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst\gl\gstglvideomaker.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst\gl\gstopengl.c"
-				>
-			</File>
 			<Filter
 				Name="gstfreeglut"
 				>
@@ -238,36 +214,52 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="gstgl"
+				>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglbuffer.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstgldisplay.c"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="gstglelements"
+				>
+				<File
+					RelativePath="..\..\gst\gl\gstglfilter.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglfiltercube.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglgraphicmaker.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglimagesink.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglvideomaker.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstopengl.c"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\common\config.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst-libs\gst\gl\gstglbuffer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst-libs\gst\gl\gstgldisplay.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst\gl\gstglgraphicmaker.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst\gl\gstglimagesink.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\gst\gl\gstglvideomaker.h"
-				>
-			</File>
 			<Filter
 				Name="gstfreeglut"
 				>
@@ -285,6 +277,46 @@
 				</File>
 				<File
 					RelativePath="..\..\gst-libs\gst\freeglut\gstfreeglut.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="gstgl"
+				>
+				<File
+					RelativePath="..\common\config.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglbuffer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstgldisplay.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="gstglelements"
+				>
+				<File
+					RelativePath="..\..\gst\gl\gstglfilter.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglfiltercube.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglgraphicmaker.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglimagesink.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglvideomaker.h"
 					>
 				</File>
 			</Filter>
