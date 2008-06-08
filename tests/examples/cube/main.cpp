@@ -136,7 +136,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *glgraphicmaker, *glimagesink; 
+    GstElement *pipeline, *videosrc, *glgraphicmaker, *glfilterapp, *glimagesink; 
 
     GMainLoop *loop;
     GstBus *bus;
@@ -157,10 +157,11 @@ gint main (gint argc, gchar *argv[])
     /* create elements */
     videosrc = gst_element_factory_make ("videotestsrc", "videotestsrc0");
     glgraphicmaker  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
-    if (!videosrc || !glgraphicmaker || !glimagesink) 
+    if (!videosrc || !glgraphicmaker || !glfilterapp || !glimagesink) 
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -175,13 +176,13 @@ gint main (gint argc, gchar *argv[])
 
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "glcontext-width", 300, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "glcontext-height", 200, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "client-draw-callback", drawCallback, NULL);  
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 800, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 600, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);  
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glgraphicmaker, glimagesink, NULL);
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, glgraphicmaker, glfilterapp, glimagesink, NULL);
     
     /* link elements */
     gboolean link_ok = gst_element_link_filtered(videosrc, glgraphicmaker, caps) ;
@@ -191,7 +192,7 @@ gint main (gint argc, gchar *argv[])
         g_warning("Failed to link videosrc to glgraphicmaker0!\n") ;
         return -1 ;
     }
-    if (!gst_element_link_many(glgraphicmaker, glimagesink, NULL)) 
+    if (!gst_element_link_many(glgraphicmaker, glfilterapp, glimagesink, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;

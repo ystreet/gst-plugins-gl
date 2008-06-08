@@ -40,21 +40,22 @@ void Pipeline::create()
     GstElement* avidemux = gst_element_factory_make ("avidemux", "avidemux0");
     GstElement* ffdec_mpeg4 = gst_element_factory_make ("ffdec_mpeg4", "ffdec_mpeg40");
     GstElement* glgraphicmaker  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    GstElement* glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     m_glimagesink  = gst_element_factory_make ("glimagesink", "sink0");
-    if (!videosrc || !avidemux || !ffdec_mpeg4 || !glgraphicmaker || !m_glimagesink ) 
+    if (!videosrc || !avidemux || !ffdec_mpeg4 || !glgraphicmaker || !glfilterapp || !m_glimagesink ) 
     {
         qDebug ("one element could not be found");
         return;
     }
 
     g_object_set(G_OBJECT(videosrc), "location", "../doublecube/data/lost.avi", NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "glcontext-width", 800, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "glcontext-height", 600, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "client-draw-callback", drawCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 800, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 600, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
 
-    gst_bin_add_many (GST_BIN (m_pipeline), videosrc, avidemux, ffdec_mpeg4, glgraphicmaker, m_glimagesink, NULL);
-    if (!gst_element_link_many(ffdec_mpeg4, glgraphicmaker, m_glimagesink, NULL)) 
+    gst_bin_add_many (GST_BIN (m_pipeline), videosrc, avidemux, ffdec_mpeg4, glgraphicmaker, glfilterapp, m_glimagesink, NULL);
+    if (!gst_element_link_many(ffdec_mpeg4, glgraphicmaker, glfilterapp, m_glimagesink, NULL)) 
     {
         qDebug ("Failed to link one or more elements!");
         return;

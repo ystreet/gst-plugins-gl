@@ -141,7 +141,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *glgraphicmaker, *glvideomaker, *ffenc_mpeg4, *avimux, *filesink;
+    GstElement *pipeline, *videosrc, *glgraphicmaker, *glfilterapp, *glvideomaker, *ffenc_mpeg4, *avimux, *filesink;
     GMainLoop *loop;
     GstBus *bus;
 
@@ -161,13 +161,14 @@ gint main (gint argc, gchar *argv[])
     /* create elements */
     videosrc = gst_element_factory_make ("videotestsrc", "videotestsrc0");
     glgraphicmaker  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    glfilterapp = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     glvideomaker  = gst_element_factory_make ("glvideomaker", "glvideomaker0");
     ffenc_mpeg4  = gst_element_factory_make ("ffenc_mpeg4", "ffenc_mpeg40");
     avimux  = gst_element_factory_make ("avimux", "avimux0");
     filesink  = gst_element_factory_make ("filesink", "filesink0");
 
 
-    if (!videosrc || !glgraphicmaker || !glvideomaker || !ffenc_mpeg4 || !avimux || !filesink) 
+    if (!videosrc || !glgraphicmaker || !glfilterapp || !glvideomaker || !ffenc_mpeg4 || !avimux || !filesink) 
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -183,14 +184,14 @@ gint main (gint argc, gchar *argv[])
 
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "glcontext-width", 640, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "glcontext-height", 480, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "client-draw-callback", drawCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 640, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 480, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
     g_object_set(G_OBJECT(filesink), "location", "record.avi", NULL);
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glgraphicmaker, glvideomaker, 
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, glgraphicmaker, glfilterapp, glvideomaker, 
         ffenc_mpeg4, avimux, filesink, NULL);
     
     /* link elements */
@@ -201,7 +202,7 @@ gint main (gint argc, gchar *argv[])
         g_warning("Failed to link videosrc to glgraphicmaker0!\n") ;
         return -1 ;
     }
-    if (!gst_element_link_many(glgraphicmaker, glvideomaker, ffenc_mpeg4, avimux, filesink, NULL)) 
+    if (!gst_element_link_many(glgraphicmaker, glfilterapp, glvideomaker, ffenc_mpeg4, avimux, filesink, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;

@@ -169,7 +169,7 @@ gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
     GstElement *pipeline, *videosrc, *avidemux, *ffdec_mpeg4, *identity, *colorspace, *tee;
-    GstElement *queue0, *glgraphicmaker0, *glimagesink0; 
+    GstElement *queue0, *glgraphicmaker0, *glfilterapp0, *glimagesink0; 
     GstElement *queue1, *glimagesink1;
 
     GMainLoop *loop;
@@ -199,6 +199,7 @@ gint main (gint argc, gchar *argv[])
 
     queue0 = gst_element_factory_make ("queue", "queue0");
     glgraphicmaker0  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    glfilterapp0  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     glimagesink0  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
     queue1 = gst_element_factory_make ("queue", "queue1");
@@ -206,7 +207,7 @@ gint main (gint argc, gchar *argv[])
 
 
     if (!videosrc || !avidemux || !ffdec_mpeg4 || !identity || !textoverlay || !colorspace || !tee ||
-        !queue0 || !glgraphicmaker0 || !glimagesink0 ||
+        !queue0 || !glgraphicmaker0 || !glfilterapp0 || !glimagesink0 ||
         !queue1 || !glimagesink1) 
     {
         g_print ("one element could not be found \n");
@@ -217,17 +218,17 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(videosrc), "location", "data/lost.avi", NULL);
     g_signal_connect(identity, "handoff", G_CALLBACK(identityCallback), NULL) ;
     g_object_set(G_OBJECT(textoverlay), "font_desc", "Ahafoni CLM Bold 30", NULL);
-    g_object_set(G_OBJECT(glgraphicmaker0), "glcontext-width", 300, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker0), "glcontext-height", 200, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker0), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker0), "client-draw-callback", drawCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp0), "glcontext-width", 300, NULL);
+    g_object_set(G_OBJECT(glfilterapp0), "glcontext-height", 200, NULL);
+    g_object_set(G_OBJECT(glfilterapp0), "client-reshape-callback", reshapeCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp0), "client-draw-callback", drawCallback, NULL);
 
 
 	GstCaps *caps = gst_caps_new_simple("video/x-raw-rgb", NULL) ;
     
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, avidemux, ffdec_mpeg4, identity, textoverlay, colorspace, tee, 
-                                          queue0, glgraphicmaker0, glimagesink0, 
+                                          queue0, glgraphicmaker0, glfilterapp0, glimagesink0, 
                                           queue1, glimagesink1, NULL);
     
 
@@ -247,7 +248,7 @@ gint main (gint argc, gchar *argv[])
         g_warning("Failed to link colorspace to tee!\n") ;
         return -1 ;
     }
-	if (!gst_element_link_many(tee, queue0, glgraphicmaker0, glimagesink0, NULL)) 
+	if (!gst_element_link_many(tee, queue0, glgraphicmaker0, glfilterapp0, glimagesink0, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;

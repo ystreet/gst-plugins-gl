@@ -234,6 +234,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst\gl\gstglfilterapp.c"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglfiltercube.c"
 					>
 				</File>
@@ -301,6 +305,10 @@
 				>
 				<File
 					RelativePath="..\..\gst\gl\gstglfilter.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglfilterapp.h"
 					>
 				</File>
 				<File

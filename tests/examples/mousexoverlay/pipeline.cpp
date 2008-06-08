@@ -41,32 +41,33 @@ void Pipeline::create()
     GstElement* ffdec_mpeg4 = gst_element_factory_make ("ffdec_mpeg4", "ffdec_mpeg40");
 	GstElement* queue = gst_element_factory_make ("queue", "queue0");
     GstElement* glgraphicmaker  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    GstElement* glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     m_glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
     if (!videosrc || !avidemux || !ffdec_mpeg4 || !queue ||
-        !glgraphicmaker || !m_glimagesink)
+        !glgraphicmaker || !glfilterapp || !m_glimagesink)
     {
         qDebug ("one element could not be found \n");
     }
 
     //configure elements
     g_object_set(G_OBJECT(videosrc), "location", "../doublecube/data/lost.avi", NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "glcontext-width", 800, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "glcontext-height", 600, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glgraphicmaker), "client-draw-callback", drawCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 800, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 600, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
     
     //add elements
     gst_bin_add_many (GST_BIN (m_pipeline), videosrc, avidemux, ffdec_mpeg4, queue, 
-                                          glgraphicmaker, m_glimagesink, NULL);
+                                          glgraphicmaker, glfilterapp, m_glimagesink, NULL);
 
     //link elements
 	gst_element_link_pads (videosrc, "src", avidemux, "sink");
 
     g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
 
-    if (!gst_element_link_many(ffdec_mpeg4, queue, glgraphicmaker, m_glimagesink, NULL)) 
+    if (!gst_element_link_many(ffdec_mpeg4, queue, glgraphicmaker, glfilterapp, m_glimagesink, NULL)) 
     {
         qDebug ("Failed to link one or more elements!\n");
     }
