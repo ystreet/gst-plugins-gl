@@ -184,8 +184,8 @@ gint main (gint argc, gchar *argv[])
 
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 640, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 480, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 320, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 240, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
     g_object_set(G_OBJECT(filesink), "location", "record.avi", NULL);
