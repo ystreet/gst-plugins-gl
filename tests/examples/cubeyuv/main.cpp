@@ -207,12 +207,15 @@ gint main (gint argc, gchar *argv[])
         return -1;
     }
 
+    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-gl",
+                                           "width", G_TYPE_INT, 640,
+                                           "height", G_TYPE_INT, 480,
+                                           NULL) ;
+
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "location", "../doublecube/data/lost.avi", NULL);
     g_signal_connect(identity, "handoff", G_CALLBACK(identityCallback), NULL) ;
     g_object_set(G_OBJECT(textoverlay), "font_desc", "Ahafoni CLM Bold 30", NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 640, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 480, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
     
@@ -225,10 +228,17 @@ gint main (gint argc, gchar *argv[])
 
     g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
 
-    if (!gst_element_link_many(ffdec_mpeg4, queue, identity, textoverlay, glgraphicmaker, glfilterapp, glimagesink, NULL)) 
+    if (!gst_element_link_many(ffdec_mpeg4, queue, identity, textoverlay, glgraphicmaker, glfilterapp, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;
+    }
+    gboolean link_ok = gst_element_link_filtered(glfilterapp, glimagesink, outcaps) ;
+    gst_caps_unref(outcaps) ;
+    if(!link_ok)
+    {
+        g_warning("Failed to link glfilterapp to glimagesink!\n") ;
+        return -1 ;
     }
     
     /* run */

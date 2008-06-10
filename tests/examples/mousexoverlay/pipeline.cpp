@@ -51,10 +51,13 @@ void Pipeline::create()
         qDebug ("one element could not be found \n");
     }
 
+    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-gl",
+                                           "width", G_TYPE_INT, 800,
+                                           "height", G_TYPE_INT, 600,
+                                           NULL) ;
+
     //configure elements
     g_object_set(G_OBJECT(videosrc), "location", "../doublecube/data/lost.avi", NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 800, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 600, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
     
@@ -67,9 +70,16 @@ void Pipeline::create()
 
     g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
 
-    if (!gst_element_link_many(ffdec_mpeg4, queue, glgraphicmaker, glfilterapp, m_glimagesink, NULL)) 
+    if (!gst_element_link_many(ffdec_mpeg4, queue, glgraphicmaker, glfilterapp, NULL)) 
     {
         qDebug ("Failed to link one or more elements!\n");
+    }
+    gboolean link_ok = gst_element_link_filtered(glfilterapp, m_glimagesink, outcaps) ;
+    gst_caps_unref(outcaps) ;
+    if(!link_ok)
+    {
+        qDebug("Failed to link glfilterapp to glimagesink!\n") ;
+        return;
     }
     
     //run

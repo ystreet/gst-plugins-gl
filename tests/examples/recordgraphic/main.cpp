@@ -138,6 +138,9 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 //equivalent command line: 
 //gst-launch-0.10 videotestsrc num_buffers=400 ! glgraphicmaker ! glvideomaker ! 
 //ffenc_mpeg4 ! avimux ! filesink location="record.avi"
+// or
+//gst-launch-0.10 videotestsrc num_buffers=400 ! glgraphicmaker !  video/x-raw-gl, width=320, height=240 ! glfiltercube ! video/x-raw-gl, width=720, height=576 ! 
+//glvideomaker ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
@@ -182,10 +185,14 @@ gint main (gint argc, gchar *argv[])
                                         "framerate", GST_TYPE_FRACTION, 25, 1,
                                         NULL) ;
 
+    /* change video source caps */
+    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-yuv",
+                                           "width", G_TYPE_INT, 640,
+                                           "height", G_TYPE_INT, 480,
+                                           NULL) ;
+
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 320, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 240, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
     g_object_set(G_OBJECT(filesink), "location", "record.avi", NULL);
@@ -202,7 +209,19 @@ gint main (gint argc, gchar *argv[])
         g_warning("Failed to link videosrc to glgraphicmaker0!\n") ;
         return -1 ;
     }
-    if (!gst_element_link_many(glgraphicmaker, glfilterapp, glvideomaker, ffenc_mpeg4, avimux, filesink, NULL)) 
+    if (!gst_element_link_many(glgraphicmaker, glfilterapp, glvideomaker, NULL)) 
+    {
+        g_print ("Failed to link one or more elements!\n");
+        return -1;
+    }
+    link_ok = gst_element_link_filtered(glvideomaker, ffenc_mpeg4, outcaps) ;
+    gst_caps_unref(outcaps) ;
+    if(!link_ok)
+    {
+        g_warning("Failed to link glvideomaker to ffenc_mpeg4!\n") ;
+        return -1 ;
+    }
+    if (!gst_element_link_many(ffenc_mpeg4, avimux, filesink, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;

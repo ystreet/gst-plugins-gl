@@ -214,12 +214,15 @@ gint main (gint argc, gchar *argv[])
         return -1;
     }
 
+    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-gl",
+                                           "width", G_TYPE_INT, 300,
+                                           "height", G_TYPE_INT, 200,
+                                           NULL) ;
+
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "location", "data/lost.avi", NULL);
     g_signal_connect(identity, "handoff", G_CALLBACK(identityCallback), NULL) ;
     g_object_set(G_OBJECT(textoverlay), "font_desc", "Ahafoni CLM Bold 30", NULL);
-    g_object_set(G_OBJECT(glfilterapp0), "glcontext-width", 300, NULL);
-    g_object_set(G_OBJECT(glfilterapp0), "glcontext-height", 200, NULL);
     g_object_set(G_OBJECT(glfilterapp0), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glfilterapp0), "client-draw-callback", drawCallback, NULL);
 
@@ -248,10 +251,17 @@ gint main (gint argc, gchar *argv[])
         g_warning("Failed to link colorspace to tee!\n") ;
         return -1 ;
     }
-	if (!gst_element_link_many(tee, queue0, glgraphicmaker0, glfilterapp0, glimagesink0, NULL)) 
+	if (!gst_element_link_many(tee, queue0, glgraphicmaker0, glfilterapp0, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;
+    }
+    link_ok = gst_element_link_filtered(glfilterapp0, glimagesink0, outcaps) ;
+    gst_caps_unref(outcaps) ;
+    if(!link_ok)
+    {
+        g_warning("Failed to link glfilterapp to glimagesink!\n") ;
+        return -1 ;
     }
     if (!gst_element_link_many(tee, queue1, glimagesink1, NULL)) 
     {

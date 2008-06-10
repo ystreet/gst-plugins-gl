@@ -132,7 +132,8 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 }
 
 
-
+//gst-launch-0.10 videotestsrc num_buffers=400 ! video/x-raw-rgb, width=320, height=240 ! 
+//glgraphicmaker ! glfiltercube ! video/x-raw-gl, width=800, height=600 ! glimagesink
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
@@ -174,10 +175,14 @@ gint main (gint argc, gchar *argv[])
                                         "framerate", GST_TYPE_FRACTION, 25, 1,
                                         NULL) ;
 
+
+    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-gl",
+                                        "width", G_TYPE_INT, 800,
+                                        "height", G_TYPE_INT, 600,
+                                        NULL) ;
+
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-width", 800, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "glcontext-height", 600, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);  
     
@@ -192,10 +197,17 @@ gint main (gint argc, gchar *argv[])
         g_warning("Failed to link videosrc to glgraphicmaker0!\n") ;
         return -1 ;
     }
-    if (!gst_element_link_many(glgraphicmaker, glfilterapp, glimagesink, NULL)) 
+    if (!gst_element_link(glgraphicmaker, glfilterapp)) 
     {
-        g_print ("Failed to link one or more elements!\n");
+        g_print ("Failed to link glgraphicmaker to glfilterapp!\n");
         return -1;
+    }
+    link_ok = gst_element_link_filtered(glfilterapp, glimagesink, outcaps) ;
+    gst_caps_unref(outcaps) ;
+    if(!link_ok)
+    {
+        g_warning("Failed to link glfilterapp to glimagesink!\n") ;
+        return -1 ;
     }
 
     
