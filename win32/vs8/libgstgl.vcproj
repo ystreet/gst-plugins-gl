@@ -230,6 +230,10 @@
 				Name="gstglelements"
 				>
 				<File
+					RelativePath="..\..\gst\gl\gstglcolorscale.c"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglfilter.c"
 					>
 				</File>
@@ -303,6 +307,10 @@
 			<Filter
 				Name="gstglelements"
 				>
+				<File
+					RelativePath="..\..\gst\gl\gstglcolorscale.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglfilter.h"
 					>
