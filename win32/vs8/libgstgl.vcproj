@@ -218,11 +218,19 @@
 				Name="gstgl"
 				>
 				<File
+					RelativePath="..\..\gst-libs\gst\gl\gltestsrc.c"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstglbuffer.c"
 					>
 				</File>
 				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstgldisplay.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglfilter.c"
 					>
 				</File>
 			</Filter>
@@ -231,10 +239,6 @@
 				>
 				<File
 					RelativePath="..\..\gst\gl\gstglcolorscale.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst\gl\gstglfilter.c"
 					>
 				</File>
 				<File
@@ -251,6 +255,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglimagesink.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstgltestsrc.c"
 					>
 				</File>
 				<File
@@ -296,11 +304,19 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst-libs\gst\gl\gltestsrc.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstglbuffer.h"
 					>
 				</File>
 				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstgldisplay.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglfilter.h"
 					>
 				</File>
 			</Filter>
@@ -309,10 +325,6 @@
 				>
 				<File
 					RelativePath="..\..\gst\gl\gstglcolorscale.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst\gl\gstglfilter.h"
 					>
 				</File>
 				<File
@@ -329,6 +341,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglimagesink.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstgltestsrc.h"
 					>
 				</File>
 				<File
