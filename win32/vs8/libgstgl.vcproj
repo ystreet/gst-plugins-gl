@@ -242,15 +242,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst\gl\gstgldownload.c"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglfilterapp.c"
 					>
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglfiltercube.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst\gl\gstglgraphicmaker.c"
 					>
 				</File>
 				<File
@@ -262,7 +262,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst\gl\gstglvideomaker.c"
+					RelativePath="..\..\gst\gl\gstglupload.c"
 					>
 				</File>
 				<File
@@ -328,15 +328,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst\gl\gstgldownload.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglfilterapp.h"
 					>
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglfiltercube.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst\gl\gstglgraphicmaker.h"
 					>
 				</File>
 				<File
@@ -348,7 +348,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst\gl\gstglvideomaker.h"
+					RelativePath="..\..\gst\gl\gstglupload.h"
 					>
 				</File>
 			</Filter>

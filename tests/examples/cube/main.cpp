@@ -137,7 +137,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *glgraphicmaker, *glfilterapp, *glimagesink; 
+    GstElement *pipeline, *videosrc, *glupload, *glfilterapp, *glimagesink; 
 
     GMainLoop *loop;
     GstBus *bus;
@@ -157,12 +157,12 @@ gint main (gint argc, gchar *argv[])
 
     /* create elements */
     videosrc = gst_element_factory_make ("videotestsrc", "videotestsrc0");
-    glgraphicmaker  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    glupload  = gst_element_factory_make ("glupload", "glupload0");
     glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
-    if (!videosrc || !glgraphicmaker || !glfilterapp || !glimagesink) 
+    if (!videosrc || !glupload || !glfilterapp || !glimagesink) 
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -187,17 +187,17 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);  
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glgraphicmaker, glfilterapp, glimagesink, NULL);
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glfilterapp, glimagesink, NULL);
     
     /* link elements */
-    gboolean link_ok = gst_element_link_filtered(videosrc, glgraphicmaker, caps) ;
+    gboolean link_ok = gst_element_link_filtered(videosrc, glupload, caps) ;
     gst_caps_unref(caps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link videosrc to glgraphicmaker0!\n") ;
+        g_warning("Failed to link videosrc to glupload!\n") ;
         return -1 ;
     }
-    if (!gst_element_link(glgraphicmaker, glfilterapp)) 
+    if (!gst_element_link(glupload, glfilterapp)) 
     {
         g_print ("Failed to link glgraphicmaker to glfilterapp!\n");
         return -1;

@@ -40,13 +40,13 @@ void Pipeline::create()
     GstElement* avidemux = gst_element_factory_make ("avidemux", "avidemux0");
     GstElement* ffdec_mpeg4 = gst_element_factory_make ("ffdec_mpeg4", "ffdec_mpeg40");
 	GstElement* queue = gst_element_factory_make ("queue", "queue0");
-    GstElement* glgraphicmaker  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    GstElement* glupload  = gst_element_factory_make ("glupload", "glupload0");
     GstElement* glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     m_glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
     if (!videosrc || !avidemux || !ffdec_mpeg4 || !queue ||
-        !glgraphicmaker || !glfilterapp || !m_glimagesink)
+        !glupload || !glfilterapp || !m_glimagesink)
     {
         qDebug ("one element could not be found \n");
     }
@@ -63,14 +63,14 @@ void Pipeline::create()
     
     //add elements
     gst_bin_add_many (GST_BIN (m_pipeline), videosrc, avidemux, ffdec_mpeg4, queue, 
-                                          glgraphicmaker, glfilterapp, m_glimagesink, NULL);
+                                          glupload, glfilterapp, m_glimagesink, NULL);
 
     //link elements
 	gst_element_link_pads (videosrc, "src", avidemux, "sink");
 
     g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
 
-    if (!gst_element_link_many(ffdec_mpeg4, queue, glgraphicmaker, glfilterapp, NULL)) 
+    if (!gst_element_link_many(ffdec_mpeg4, queue, glupload, glfilterapp, NULL)) 
     {
         qDebug ("Failed to link one or more elements!\n");
     }

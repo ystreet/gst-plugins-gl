@@ -144,7 +144,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *glgraphicmaker, *glfilterapp, *glvideomaker, *ffenc_mpeg4, *avimux, *filesink;
+    GstElement *pipeline, *videosrc, *glupload, *glfilterapp, *gldownload, *ffenc_mpeg4, *avimux, *filesink;
     GMainLoop *loop;
     GstBus *bus;
 
@@ -163,15 +163,15 @@ gint main (gint argc, gchar *argv[])
 
     /* create elements */
     videosrc = gst_element_factory_make ("videotestsrc", "videotestsrc0");
-    glgraphicmaker  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    glupload  = gst_element_factory_make ("glupload", "glupload0");
     glfilterapp = gst_element_factory_make ("glfilterapp", "glfilterapp0");
-    glvideomaker  = gst_element_factory_make ("glvideomaker", "glvideomaker0");
+    gldownload  = gst_element_factory_make ("gldownload", "gldownload0");
     ffenc_mpeg4  = gst_element_factory_make ("ffenc_mpeg4", "ffenc_mpeg40");
     avimux  = gst_element_factory_make ("avimux", "avimux0");
     filesink  = gst_element_factory_make ("filesink", "filesink0");
 
 
-    if (!videosrc || !glgraphicmaker || !glfilterapp || !glvideomaker || !ffenc_mpeg4 || !avimux || !filesink) 
+    if (!videosrc || !glupload || !glfilterapp || !gldownload || !ffenc_mpeg4 || !avimux || !filesink) 
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -198,23 +198,23 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(filesink), "location", "record.avi", NULL);
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glgraphicmaker, glfilterapp, glvideomaker, 
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glfilterapp, gldownload, 
         ffenc_mpeg4, avimux, filesink, NULL);
     
     /* link elements */
-    gboolean link_ok = gst_element_link_filtered(videosrc, glgraphicmaker, caps) ;
+    gboolean link_ok = gst_element_link_filtered(videosrc, glupload, caps) ;
     gst_caps_unref(caps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link videosrc to glgraphicmaker0!\n") ;
+        g_warning("Failed to link videosrc to glupload!\n") ;
         return -1 ;
     }
-    if (!gst_element_link_many(glgraphicmaker, glfilterapp, glvideomaker, NULL)) 
+    if (!gst_element_link_many(glupload, glfilterapp, gldownload, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;
     }
-    link_ok = gst_element_link_filtered(glvideomaker, ffenc_mpeg4, outcaps) ;
+    link_ok = gst_element_link_filtered(gldownload, ffenc_mpeg4, outcaps) ;
     gst_caps_unref(outcaps) ;
     if(!link_ok)
     {

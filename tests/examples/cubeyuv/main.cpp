@@ -170,7 +170,7 @@ gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
     GstElement *pipeline, *videosrc, *avidemux, *ffdec_mpeg4, *queue, *identity;
-    GstElement *glgraphicmaker, *glfilterapp, *glimagesink; 
+    GstElement *glupload, *glfilterapp, *glimagesink; 
 
     GMainLoop *loop;
     GstBus *bus;
@@ -195,13 +195,13 @@ gint main (gint argc, gchar *argv[])
 	queue = gst_element_factory_make ("queue", "queue0");
     identity  = gst_element_factory_make ("identity", "identity0");
     textoverlay = gst_element_factory_make ("textoverlay", "textoverlay0");
-    glgraphicmaker  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    glupload  = gst_element_factory_make ("glupload", "glupload0");
     glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
     if (!videosrc || !avidemux || !ffdec_mpeg4 || !queue || !identity || !textoverlay ||
-        !glgraphicmaker || !glfilterapp || !glimagesink)
+        !glupload || !glfilterapp || !glimagesink)
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -221,14 +221,14 @@ gint main (gint argc, gchar *argv[])
     
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, avidemux, ffdec_mpeg4, queue, identity, textoverlay, 
-                                          glgraphicmaker, glfilterapp, glimagesink, NULL);
+                                          glupload, glfilterapp, glimagesink, NULL);
 
     /* link elements */
 	gst_element_link_pads (videosrc, "src", avidemux, "sink");
 
     g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
 
-    if (!gst_element_link_many(ffdec_mpeg4, queue, identity, textoverlay, glgraphicmaker, glfilterapp, NULL)) 
+    if (!gst_element_link_many(ffdec_mpeg4, queue, identity, textoverlay, glupload, glfilterapp, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;

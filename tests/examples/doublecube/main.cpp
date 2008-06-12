@@ -169,7 +169,7 @@ gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
     GstElement *pipeline, *videosrc, *avidemux, *ffdec_mpeg4, *identity, *colorspace, *tee;
-    GstElement *queue0, *glgraphicmaker0, *glfilterapp0, *glimagesink0; 
+    GstElement *queue0, *glupload0, *glfilterapp0, *glimagesink0; 
     GstElement *queue1, *glimagesink1;
 
     GMainLoop *loop;
@@ -198,7 +198,7 @@ gint main (gint argc, gchar *argv[])
     tee = gst_element_factory_make ("tee", "tee0");
 
     queue0 = gst_element_factory_make ("queue", "queue0");
-    glgraphicmaker0  = gst_element_factory_make ("glgraphicmaker", "glgraphicmaker0");
+    glupload0  = gst_element_factory_make ("glupload", "glupload0");
     glfilterapp0  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     glimagesink0  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
@@ -207,7 +207,7 @@ gint main (gint argc, gchar *argv[])
 
 
     if (!videosrc || !avidemux || !ffdec_mpeg4 || !identity || !textoverlay || !colorspace || !tee ||
-        !queue0 || !glgraphicmaker0 || !glfilterapp0 || !glimagesink0 ||
+        !queue0 || !glupload0 || !glfilterapp0 || !glimagesink0 ||
         !queue1 || !glimagesink1) 
     {
         g_print ("one element could not be found \n");
@@ -231,7 +231,7 @@ gint main (gint argc, gchar *argv[])
     
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, avidemux, ffdec_mpeg4, identity, textoverlay, colorspace, tee, 
-                                          queue0, glgraphicmaker0, glfilterapp0, glimagesink0, 
+                                          queue0, glupload0, glfilterapp0, glimagesink0, 
                                           queue1, glimagesink1, NULL);
     
 
@@ -251,7 +251,7 @@ gint main (gint argc, gchar *argv[])
         g_warning("Failed to link colorspace to tee!\n") ;
         return -1 ;
     }
-	if (!gst_element_link_many(tee, queue0, glgraphicmaker0, glfilterapp0, NULL)) 
+	if (!gst_element_link_many(tee, queue0, glupload0, glfilterapp0, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;
