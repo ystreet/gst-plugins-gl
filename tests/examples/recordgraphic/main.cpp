@@ -136,11 +136,11 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 
 
 //equivalent command line: 
-//gst-launch-0.10 videotestsrc num_buffers=400 ! glgraphicmaker ! glvideomaker ! 
+//gst-launch-0.10 videotestsrc num_buffers=400 ! glupload ! gldownload ! 
 //ffenc_mpeg4 ! avimux ! filesink location="record.avi"
 // or
-//gst-launch-0.10 videotestsrc num_buffers=400 ! glgraphicmaker !  video/x-raw-gl, width=320, height=240 ! glfiltercube ! video/x-raw-gl, width=720, height=576 ! 
-//glvideomaker ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
+//gst-launch-0.10 videotestsrc num_buffers=400 ! glupload !  video/x-raw-gl, width=320, height=240 ! glfiltercube ! video/x-raw-gl, width=720, height=576 ! 
+//gldownload ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
