@@ -11,6 +11,8 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
+				<Option parameters="videotestsrc ! glimagesink" />
+				<Option host_application="gst-launch-0.10" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
@@ -45,17 +47,17 @@
 			<Add directory="../../.." />
 		</Compiler>
 		<Linker>
-			<Add library="/usr/lib/libglib-2.0.a" />
-			<Add library="/usr/lib/libgmodule-2.0.a" />
-			<Add library="/usr/lib/libgobject-2.0.a" />
-			<Add library="/usr/lib/libgthread-2.0.a" />
-			<Add library="/usr/lib/libgstreamer-0.10.a" />
-			<Add library="/usr/lib/libgstbase-0.10.a" />
-			<Add library="/usr/lib/libgstvideo-0.10.so" />
-			<Add library="/usr/lib/libgstinterfaces-0.10.so" />
-			<Add library="/usr/lib/libGLEW.a" />
-			<Add library="/usr/lib/libGLU.a" />
-			<Add library="/usr/lib/libGL.so" />
+			<Add library="glib-2.0" />
+			<Add library="gmodule-2.0" />
+			<Add library="gobject-2.0" />
+			<Add library="gthread-2.0" />
+			<Add library="gstreamer-0.10" />
+			<Add library="gstbase-0.10" />
+			<Add library="gstvideo-0.10" />
+			<Add library="gstinterfaces-0.10" />
+			<Add library="GLEW" />
+			<Add library="GLU" />
+			<Add library="GL" />
 		</Linker>
 		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_callbacks.c">
 			<Option compilerVar="CC" />
@@ -90,18 +92,46 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst-libs/gst/gl/gstgldisplay.h" />
-		<Unit filename="../../../gst/gl/gstglgraphicmaker.c">
+		<Unit filename="../../../gst-libs/gst/gl/gstglfilter.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../../../gst/gl/gstglgraphicmaker.h" />
+		<Unit filename="../../../gst-libs/gst/gl/gstglfilter.h" />
+		<Unit filename="../../../gst/gl/gltestsrc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gltestsrc.h" />
+		<Unit filename="../../../gst/gl/gstglcolorscale.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglcolorscale.h" />
+		<Unit filename="../../../gst/gl/gstgldownload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstgldownload.h" />
+		<Unit filename="../../../gst/gl/gstglfilterapp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglfilterapp.h" />
+		<Unit filename="../../../gst/gl/gstglfiltercube.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglfiltercube.h" />
+		<Unit filename="../../../gst/gl/gstglfilteredge.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglfilteredge.h" />
 		<Unit filename="../../../gst/gl/gstglimagesink.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglimagesink.h" />
-		<Unit filename="../../../gst/gl/gstglvideomaker.c">
+		<Unit filename="../../../gst/gl/gstgltestsrc.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../../../gst/gl/gstglvideomaker.h" />
+		<Unit filename="../../../gst/gl/gstgltestsrc.h" />
+		<Unit filename="../../../gst/gl/gstglupload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglupload.h" />
 		<Unit filename="../../../gst/gl/gstopengl.c">
 			<Option compilerVar="CC" />
 		</Unit>
