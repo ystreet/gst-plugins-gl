@@ -543,22 +543,6 @@ void FGAPIENTRY glutMainLoopEvent( void )
             }
             break;
 
-        case MapNotify:
-        case UnmapNotify:
-            /*
-             * If we never do anything with this, can we just not ask to
-             * get these messages?
-             */
-            break;
-
-        case MappingNotify:
-            /*
-             * Have the client's keyboard knowledge updated (xlib.ps,
-             * page 206, says that's a good thing to do)
-             */
-            XRefreshKeyboardMapping( (XMappingEvent *) &event );
-            break;
-
         case VisibilityNotify:
         {
             GETWINDOW( xvisibility );
@@ -596,7 +580,6 @@ void FGAPIENTRY glutMainLoopEvent( void )
         break;
 
         default:
-            fgWarning ("Unknown X event type: %d", event.type);
             break;
         }
     }
