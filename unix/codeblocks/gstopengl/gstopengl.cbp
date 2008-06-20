@@ -16,6 +16,7 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-Wall" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -36,6 +37,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-g" />
 			<Add option="-DHAVE_CONFIG_H" />
 			<Add directory="/usr/lib/glib-2.0/include" />
 			<Add directory="/usr/include/glib-2.0" />

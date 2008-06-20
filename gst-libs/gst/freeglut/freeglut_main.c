@@ -1,4 +1,4 @@
-/* 
+/*
  * GStreamer
  * Copyright (C) 2008 Julien Isorce <julien.isorce@gmail.com>
  *
@@ -76,7 +76,7 @@ struct GXKeyList gxKeyList;
 #endif
 
 #if TARGET_HOST_UNIX_X11
-#include <sys/time.h> 
+#include <sys/time.h>
 #include <unistd.h>
 #endif
 
@@ -234,7 +234,7 @@ static void fghcbDisplayWindow( SFG_Window *window,
                     INVOKE_WCB( *window, Reshape, ( window->State.Width, window->State.Height ) );
                 glViewport( 0, 0, window->State.Width, window->State.Height );
             }
-         
+
             window->State.NeedToResize = GL_FALSE;
             window->State.Visible = GL_TRUE;
             BeginPaint( window->Window.Handle, &ps );
@@ -441,7 +441,7 @@ static void fghSleepForEvents( void )
 void FGAPIENTRY glutMainLoopEvent( void )
 {
 #if TARGET_HOST_UNIX_X11
-    SFG_Window* window;
+    SFG_Window* window=NULL;
     XEvent event;
 
     /* This code was repeated constantly, so here it goes into a definition: */
@@ -573,7 +573,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
              */
             switch( event.xvisibility.state )
             {
-            case VisibilityUnobscured:           
+            case VisibilityUnobscured:
                 window->State.Visible = GL_TRUE;
                 break;
 
@@ -620,7 +620,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
 
             return;
         }
-            
+
         TranslateMessage( &stMsg );
         DispatchMessage( &stMsg );
     }
@@ -675,7 +675,7 @@ void FGAPIENTRY glutMainLoop( void )
     while( fgState.ExecState == GLUT_EXEC_STATE_RUNNING )
     {
         SFG_Window *window;
-        
+
         glutMainLoopEvent( );
 
         window = ( SFG_Window * )fgStructure.Windows.First;
