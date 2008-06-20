@@ -464,7 +464,9 @@ void FGAPIENTRY glutMainLoopEvent( void )
             {
                 GETWINDOW( xclient );
 
-                fgDestroyWindow ( window );
+                INVOKE_WCB( *window, Destroy, ( ) );
+
+                //fgDestroyWindow ( window );
 
                 if( fgState.ActionOnWindowClose == GLUT_ACTION_EXIT )
                 {
@@ -521,7 +523,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
 
         case DestroyNotify:
             //fgAddToWindowDestroyList ( window );
-	     INVOKE_WCB( *window, Destroy, ( ) );
+            INVOKE_WCB( *window, Destroy, ( ) );
             break;
 
         case Expose:
