@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option parameters="videotestsrc ! glimagesink" />
+				<Option parameters="videotestsrc num_buffers=200 ! glimagesink" />
 				<Option host_application="gst-launch-0.10" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
@@ -142,6 +142,9 @@
 			<envvars />
 			<lib_finder disable_auto="1" />
 			<debugger />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
+			</wxsmith>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
