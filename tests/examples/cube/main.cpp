@@ -128,7 +128,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
     zrot+=0.4f;
 
     //return TRUE causes a postRedisplay
-    return TRUE;
+    return FALSE;
 }
 
 
