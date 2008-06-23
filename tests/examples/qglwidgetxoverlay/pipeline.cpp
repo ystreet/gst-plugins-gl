@@ -40,9 +40,8 @@ void Pipeline::create()
     GstElement* avidemux = gst_element_factory_make ("avidemux", "avidemux0");
     GstElement* ffdec_mpeg4 = gst_element_factory_make ("ffdec_mpeg4", "ffdec_mpeg40");
     GstElement* glupload  = gst_element_factory_make ("glupload", "glupload0");
-    GstElement* glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     m_glimagesink  = gst_element_factory_make ("glimagesink", "sink0");
-    if (!videosrc || !avidemux || !ffdec_mpeg4 || !glupload || !glfilterapp || !m_glimagesink ) 
+    if (!videosrc || !avidemux || !ffdec_mpeg4 || !glupload || !m_glimagesink ) 
     {
         qDebug ("one element could not be found");
         return;
@@ -54,20 +53,20 @@ void Pipeline::create()
                                            NULL) ;
 
     g_object_set(G_OBJECT(videosrc), "location", "../doublecube/data/lost.avi", NULL);
-    g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
+    g_object_set(G_OBJECT(m_glimagesink), "client-reshape-callback", reshapeCallback, NULL);
+    g_object_set(G_OBJECT(m_glimagesink), "client-draw-callback", drawCallback, NULL);
 
-    gst_bin_add_many (GST_BIN (m_pipeline), videosrc, avidemux, ffdec_mpeg4, glupload, glfilterapp, m_glimagesink, NULL);
-    if (!gst_element_link_many(ffdec_mpeg4, glupload, glfilterapp, NULL)) 
+    gst_bin_add_many (GST_BIN (m_pipeline), videosrc, avidemux, ffdec_mpeg4, glupload, m_glimagesink, NULL);
+    if (!gst_element_link(ffdec_mpeg4, glupload)) 
     {
         qDebug ("Failed to link one or more elements!");
         return;
     }
-    gboolean link_ok = gst_element_link_filtered(glfilterapp, m_glimagesink, outcaps) ;
+    gboolean link_ok = gst_element_link_filtered(glupload, m_glimagesink, outcaps) ;
     gst_caps_unref(outcaps) ;
     if(!link_ok)
     {
-        qDebug("Failed to link glfilterapp to glimagesink!\n") ;
+        qDebug("Failed to link glupload to glimagesink!\n") ;
         return;
     }
 

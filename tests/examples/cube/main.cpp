@@ -128,7 +128,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
     zrot+=0.4f;
 
     //return TRUE causes a postRedisplay
-    return FALSE;
+    return TRUE;
 }
 
 
@@ -137,7 +137,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *glupload, *glfilterapp, *glimagesink; 
+    GstElement *pipeline, *videosrc, *glupload, *glimagesink; 
 
     GMainLoop *loop;
     GstBus *bus;
@@ -158,11 +158,10 @@ gint main (gint argc, gchar *argv[])
     /* create elements */
     videosrc = gst_element_factory_make ("videotestsrc", "videotestsrc0");
     glupload  = gst_element_factory_make ("glupload", "glupload0");
-    glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
-    if (!videosrc || !glupload || !glfilterapp || !glimagesink) 
+    if (!videosrc || !glupload || !glimagesink) 
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -183,11 +182,11 @@ gint main (gint argc, gchar *argv[])
 
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);  
+    g_object_set(G_OBJECT(glimagesink), "client-reshape-callback", reshapeCallback, NULL);
+    g_object_set(G_OBJECT(glimagesink), "client-draw-callback", drawCallback, NULL);  
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glfilterapp, glimagesink, NULL);
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glimagesink, NULL);
     
     /* link elements */
     gboolean link_ok = gst_element_link_filtered(videosrc, glupload, caps) ;
@@ -197,16 +196,11 @@ gint main (gint argc, gchar *argv[])
         g_warning("Failed to link videosrc to glupload!\n") ;
         return -1 ;
     }
-    if (!gst_element_link(glupload, glfilterapp)) 
-    {
-        g_print ("Failed to link glgraphicmaker to glfilterapp!\n");
-        return -1;
-    }
-    link_ok = gst_element_link_filtered(glfilterapp, glimagesink, outcaps) ;
+    link_ok = gst_element_link_filtered(glupload, glimagesink, outcaps) ;
     gst_caps_unref(outcaps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link glfilterapp to glimagesink!\n") ;
+        g_warning("Failed to link glupload to glimagesink!\n") ;
         return -1 ;
     }
 

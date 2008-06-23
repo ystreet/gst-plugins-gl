@@ -53,7 +53,7 @@ void reshapeCallback (GLuint width, GLuint height)
 
 
 //client draw callback
-gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
+gboolean drawCallback (GLuint width, GLuint height, GLuint texture, GLhandleARB shader)
 {
     static GLfloat	xrot = 0;
     static GLfloat	yrot = 0;				

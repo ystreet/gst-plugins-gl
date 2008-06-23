@@ -170,7 +170,7 @@ gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
     GstElement *pipeline, *videosrc, *avidemux, *ffdec_mpeg4, *queue, *identity;
-    GstElement *glupload, *glfilterapp, *glimagesink; 
+    GstElement *glupload, *glimagesink; 
 
     GMainLoop *loop;
     GstBus *bus;
@@ -196,12 +196,11 @@ gint main (gint argc, gchar *argv[])
     identity  = gst_element_factory_make ("identity", "identity0");
     textoverlay = gst_element_factory_make ("textoverlay", "textoverlay0");
     glupload  = gst_element_factory_make ("glupload", "glupload0");
-    glfilterapp  = gst_element_factory_make ("glfilterapp", "glfilterapp0");
     glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
     if (!videosrc || !avidemux || !ffdec_mpeg4 || !queue || !identity || !textoverlay ||
-        !glupload || !glfilterapp || !glimagesink)
+        !glupload || !glimagesink)
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -216,28 +215,28 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(videosrc), "location", "../doublecube/data/lost.avi", NULL);
     g_signal_connect(identity, "handoff", G_CALLBACK(identityCallback), NULL) ;
     g_object_set(G_OBJECT(textoverlay), "font_desc", "Ahafoni CLM Bold 30", NULL);
-    g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
+    g_object_set(G_OBJECT(glimagesink), "client-reshape-callback", reshapeCallback, NULL);
+    g_object_set(G_OBJECT(glimagesink), "client-draw-callback", drawCallback, NULL);
     
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, avidemux, ffdec_mpeg4, queue, identity, textoverlay, 
-                                          glupload, glfilterapp, glimagesink, NULL);
+                                          glupload, glimagesink, NULL);
 
     /* link elements */
 	gst_element_link_pads (videosrc, "src", avidemux, "sink");
 
     g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
 
-    if (!gst_element_link_many(ffdec_mpeg4, queue, identity, textoverlay, glupload, glfilterapp, NULL)) 
+    if (!gst_element_link_many(ffdec_mpeg4, queue, identity, textoverlay, glupload, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;
     }
-    gboolean link_ok = gst_element_link_filtered(glfilterapp, glimagesink, outcaps) ;
+    gboolean link_ok = gst_element_link_filtered(glupload, glimagesink, outcaps) ;
     gst_caps_unref(outcaps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link glfilterapp to glimagesink!\n") ;
+        g_warning("Failed to link glupload to glimagesink!\n") ;
         return -1 ;
     }
     
