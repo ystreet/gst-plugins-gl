@@ -54,7 +54,8 @@ gint main (gint argc, gchar *argv[])
     gst_init (&argc, &argv);
 
     GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_widget_set_size_request (window, 320, 240);
+    gtk_widget_set_size_request (window, 640, 480);
+    gtk_window_set_title (GTK_WINDOW (window), "glimagesink implement the gstxoverlay interface");
 
     GstElement* pipeline = gst_pipeline_new ("pipeline");
 
