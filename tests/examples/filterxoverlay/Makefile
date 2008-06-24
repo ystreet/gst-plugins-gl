@@ -32,8 +32,13 @@ REXE=$(EXE)
 CPPFLAGS+=-I/usr/include/gstreamer-0.10 \
           -I/usr/include/glib-2.0 \
           -I/usr/lib/glib-2.0/include \
-          -I/usr/include/libxml2
-LIBS+=-lgstreamer-0.10 -lglib-2.0 -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0
+          -I/usr/include/libxml2 \
+          -I/usr/include/gtk-2.0 \
+          -I/usr/lib/gtk-2.0/include \
+          -I/usr/include/cairo \
+          -I/usr/include/pango-1.0 \
+          -I/usr/include/atk-1.0
+LIBS+=-lgstinterfaces-0.10 -lglib-2.0 -lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lgtk-x11-2.0 -lgdk-x11-2.0
 endif
 
 

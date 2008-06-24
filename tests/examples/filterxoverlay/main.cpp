@@ -20,8 +20,13 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, GtkWidge
 
     g_print ("setting xwindow id\n");
 
-    gst_x_overlay_set_xwindow_id (GST_X_OVERLAY (GST_MESSAGE_SRC (message)), 
+#ifdef WIN32
+    gst_x_overlay_set_xwindow_id (GST_X_OVERLAY (GST_MESSAGE_SRC (message)),
         reinterpret_cast<gulong>GDK_WINDOW_HWND(widget->window));
+#else
+    gst_x_overlay_set_xwindow_id (GST_X_OVERLAY (GST_MESSAGE_SRC (message)),
+        GDK_WINDOW_XWINDOW(widget->window));
+#endif
 
     gst_message_unref (message);
 
@@ -35,7 +40,7 @@ static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* 
      return FALSE;
 }
 
-static void destroy_cb(GstElement* pipeline) 
+static void destroy_cb(GstElement* pipeline)
 {
      gst_element_set_state(pipeline, GST_STATE_NULL);
      gst_object_unref(pipeline);
@@ -52,7 +57,7 @@ gint main (gint argc, gchar *argv[])
     gtk_widget_set_size_request (window, 320, 240);
 
     GstElement* pipeline = gst_pipeline_new ("pipeline");
-    
+
     g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(destroy_cb), pipeline);
     g_signal_connect(G_OBJECT(window), "destroy-event", G_CALLBACK(destroy_cb), pipeline);
 
@@ -63,7 +68,7 @@ gint main (gint argc, gchar *argv[])
 
     gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glfilter, videosink, NULL);
 
-    if (!gst_element_link_many (videosrc, glupload, glfilter, videosink, NULL)) 
+    if (!gst_element_link_many (videosrc, glupload, glfilter, videosink, NULL))
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;
@@ -80,11 +85,11 @@ gint main (gint argc, gchar *argv[])
     g_signal_connect(screen, "expose-event", G_CALLBACK(expose_cb), videosink);
 
     GstStateChangeReturn ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
-    if (ret == GST_STATE_CHANGE_FAILURE) 
+    if (ret == GST_STATE_CHANGE_FAILURE)
     {
         g_print ("Failed to start up pipeline!\n");
         return -1;
-    }     
+    }
 
     //From GTK+ doc: "The application is then entirely responsible for drawing the widget background"
     //It seems to be not working, the background is still drawn when resizing the window ...
