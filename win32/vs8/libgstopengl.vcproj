@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="libgstgl"
+	Name="libgstopengl"
 	ProjectGUID="{F4E2D883-31DB-48B7-BEE9-0D9FDBBC805F}"
 	RootNamespace="libgstgl"
 	Keyword="Win32Proj"
@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy Debug\libgstgl.dll ..\..\..\gstreamer\bin\lib\gstreamer-0.10"
+				CommandLine="copy /Y Debug\libgstopengl.dll ..\..\..\gstreamer\bin\lib\gstreamer-0.10"
 			/>
 		</Configuration>
 		<Configuration
@@ -170,7 +170,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy Release\libgstgl.dll ..\..\..\gstreamer\bin\lib\gstreamer-0.10"
+				CommandLine="copy /Y Release\libgstopengl.dll ..\..\..\gstreamer\bin\lib\gstreamer-0.10"
 			/>
 		</Configuration>
 	</Configurations>
