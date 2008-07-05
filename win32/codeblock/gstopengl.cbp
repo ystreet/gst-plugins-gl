@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="gstopengl" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="Debug\libgstopengl.dll" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj\Debug\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="Release\libgstopengl.dll" prefix_auto="1" extension_auto="0" />
+				<Option object_output="obj\Release\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-O3" />
+			<Add option="-Wall" />
+			<Add option="-DWIN32" />
+			<Add option="-DHAVE_CONFIG_H" />
+			<Add directory="..\..\..\gstreamer\include" />
+			<Add directory="..\..\..\libiconv\include" />
+			<Add directory="..\..\..\glib\include" />
+			<Add directory="..\..\..\libxml2-2.6.30+.win32\include" />
+			<Add directory="..\..\..\glew\include" />
+			<Add directory="..\..\gst-libs\gst\freeglut" />
+			<Add directory="..\..\gst-libs\gst\gl" />
+			<Add directory="..\common" />
+		</Compiler>
+		<Linker>
+			<Add library="glib-2.0" />
+			<Add library="gobject-2.0" />
+			<Add library="gmodule-2.0" />
+			<Add library="gthread-2.0" />
+			<Add library="gstreamer-0.10" />
+			<Add library="gstbase-0.10" />
+			<Add library="gstvideo-0.10" />
+			<Add library="gstinterfaces-0.10" />
+			<Add library="glew32" />
+			<Add library="glu32" />
+			<Add library="opengl32" />
+			<Add library="gdi32" />
+			<Add library="winmm" />
+			<Add directory="..\..\..\glib\lib" />
+			<Add directory="..\..\..\gstreamer\bin\bin" />
+			<Add directory="..\..\..\glew\bin" />
+		</Linker>
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_callbacks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_display.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_ext.h" />
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_internal.h" />
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_state.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_std.h" />
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_structure.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_window.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\freeglut\gstfreeglut.h" />
+		<Unit filename="..\..\gst-libs\gst\gettext.h" />
+		<Unit filename="..\..\gst-libs\gst\gl\gstglbuffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\gl\gstglbuffer.h" />
+		<Unit filename="..\..\gst-libs\gst\gl\gstgldisplay.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\gl\gstgldisplay.h" />
+		<Unit filename="..\..\gst-libs\gst\gl\gstglfilter.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\gl\gstglfilter.h" />
+		<Unit filename="..\..\gst-libs\gst\gst-i18n-plugin.h" />
+		<Unit filename="..\..\gst\gl\gltestsrc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gltestsrc.h" />
+		<Unit filename="..\..\gst\gl\gstglcolorscale.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglcolorscale.h" />
+		<Unit filename="..\..\gst\gl\gstgldownload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstgldownload.h" />
+		<Unit filename="..\..\gst\gl\gstglfilterapp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglfilterapp.h" />
+		<Unit filename="..\..\gst\gl\gstglfiltercube.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglfiltercube.h" />
+		<Unit filename="..\..\gst\gl\gstglfilteredge.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglfilteredge.h" />
+		<Unit filename="..\..\gst\gl\gstglimagesink.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglimagesink.h" />
+		<Unit filename="..\..\gst\gl\gstgltestsrc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstgltestsrc.h" />
+		<Unit filename="..\..\gst\gl\gstglupload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglupload.h" />
+		<Unit filename="..\..\gst\gl\gstopengl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
