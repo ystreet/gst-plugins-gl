@@ -54,6 +54,13 @@ gint main (gint argc, gchar *argv[])
     gtk_widget_set_size_request (window, 640, 480);
     gtk_window_set_title (GTK_WINDOW (window), "glimagesink implement the gstxoverlay interface");
 
+    GdkGeometry geometry;
+    geometry.min_width = 1;
+    geometry.min_height = 1;
+    geometry.max_width = -1;
+    geometry.max_height = -1;
+    gtk_window_set_geometry_hints (GTK_WINDOW (window), window, &geometry, GDK_HINT_MIN_SIZE);
+
     GstElement* pipeline = gst_pipeline_new ("pipeline");
 
     g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(destroy_cb), pipeline);
@@ -94,15 +101,10 @@ gint main (gint argc, gchar *argv[])
         return -1;
     }
 
-    //From GTK+ doc: "The application is then entirely responsible for drawing the widget background"
-    //It seems to be not working, the background is still drawn when resizing/obscured the window ...
-    gtk_widget_set_app_paintable (window, TRUE);
-
-    //From GDK+ doc: "May also be used to set a background of "None" on window,
-    //by setting a background pixmap of NULL
-    //It seems to be not working, the background is still drawn when resizing/obscured the window ...
-    GdkScreen* screen = gtk_widget_get_screen (window);
-    gdk_window_set_back_pixmap (gdk_screen_get_root_window (screen), NULL, TRUE);
+    gtk_widget_realize(area);
+    gdk_window_set_back_pixmap(area->window, NULL, FALSE);
+    gtk_widget_set_app_paintable(area,TRUE); 
+    gtk_widget_set_double_buffered(area, FALSE);
 
     gtk_widget_show_all (window);
 
