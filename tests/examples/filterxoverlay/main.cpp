@@ -40,11 +40,8 @@ static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* 
      return FALSE;
 }
 
-static void destroy_cb(GstElement* pipeline)
+static void destroy_cb(GtkWidget* widget, GdkEvent* event, GstElement* pipeline)
 {
-     gst_element_set_state(pipeline, GST_STATE_NULL);
-     gst_object_unref(pipeline);
-
      gtk_main_quit();
 }
 
@@ -60,30 +57,35 @@ gint main (gint argc, gchar *argv[])
     GstElement* pipeline = gst_pipeline_new ("pipeline");
 
     g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(destroy_cb), pipeline);
-    g_signal_connect(G_OBJECT(window), "destroy-event", G_CALLBACK(destroy_cb), pipeline);
 
     GstElement* videosrc  = gst_element_factory_make ("videotestsrc", "videotestsrc");
-    GstElement* glupload = gst_element_factory_make ("glupload", "glupload");
-    GstElement* glfilter = gst_element_factory_make ("glfiltercube", "glfiltercube");
     GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
 
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glfilter, videosink, NULL);
+    GstCaps *caps = gst_caps_new_simple("video/x-raw-yuv",
+                                        "width", G_TYPE_INT, 640,
+                                        "height", G_TYPE_INT, 480,
+                                        "framerate", GST_TYPE_FRACTION, 25, 1,
+                                        "format", GST_TYPE_FOURCC, GST_MAKE_FOURCC ('A', 'Y', 'U', 'V'),
+                                        NULL) ;
 
-    if (!gst_element_link_many (videosrc, glupload, glfilter, videosink, NULL))
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, videosink, NULL);
+
+    gboolean link_ok = gst_element_link_filtered(videosrc, videosink, caps) ;
+    gst_caps_unref(caps) ;
+    if(!link_ok)
     {
-        g_print ("Failed to link one or more elements!\n");
+        g_warning("Failed to link videosrc to videosink!\n") ;
         return -1;
     }
 
-    GtkWidget* screen = gtk_drawing_area_new();
-
-    gtk_container_add (GTK_CONTAINER(window), screen);
+    GtkWidget* area = gtk_drawing_area_new();
+    gtk_container_add (GTK_CONTAINER (window), area);
 
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
-    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, screen);
+    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area);
     gst_object_unref (bus);
 
-    g_signal_connect(screen, "expose-event", G_CALLBACK(expose_cb), videosink);
+    g_signal_connect(area, "expose-event", G_CALLBACK(expose_cb), videosink);
 
     GstStateChangeReturn ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
     if (ret == GST_STATE_CHANGE_FAILURE)
@@ -93,13 +95,21 @@ gint main (gint argc, gchar *argv[])
     }
 
     //From GTK+ doc: "The application is then entirely responsible for drawing the widget background"
-    //It seems to be not working, the background is still drawn when resizing the window ...
+    //It seems to be not working, the background is still drawn when resizing/obscured the window ...
     gtk_widget_set_app_paintable (window, TRUE);
-    gtk_widget_set_app_paintable (screen, TRUE);
+
+    //From GDK+ doc: "May also be used to set a background of "None" on window, 
+    //by setting a background pixmap of NULL
+    //It seems to be not working, the background is still drawn when resizing/obscured the window ...
+    GdkScreen* screen = gtk_widget_get_screen (window);
+    gdk_window_set_back_pixmap (gdk_screen_get_root_window (screen), NULL, TRUE);
 
     gtk_widget_show_all (window);
 
     gtk_main();
+
+    gst_element_set_state(pipeline, GST_STATE_NULL);
+    gst_object_unref(pipeline);
 
     return 0;
 }
