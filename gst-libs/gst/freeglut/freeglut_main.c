@@ -204,8 +204,33 @@ static void fghcbDisplayWindow( SFG_Window *window,
         window->State.Redisplay = GL_FALSE;
 
 #if TARGET_HOST_UNIX_X11
+        if(!window->Window.isInternal)
+        {
+            XWindowAttributes attr;
+            int width,height;
+            XGetWindowAttributes (fgDisplay.Display, window->Window.Handle, &attr);
+
+            width=attr.width;
+            height=attr.height;
+
+            if( ( width != window->State.OldWidth ) ||
+                ( height != window->State.OldHeight ) )
+            {
+
+                window->State.OldWidth = width;
+                window->State.OldHeight = height;
+                if( FETCH_WCB( *window, Reshape ) )
+                    INVOKE_WCB( *window, Reshape, ( width, height ) );
+                else
+                {
+                    fgSetWindow( window );
+                    glViewport( 0, 0, width, height );
+                }
+                glutPostRedisplay( );
+            }
+        }
         fghRedrawWindow ( window ) ;
-        //TODO same things as the following section have to be done
+
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
         if (window->Window.isInternal)
             RedrawWindow(

@@ -1,4 +1,4 @@
-/* 
+/*
  * GStreamer
  * Copyright (C) 2008 Julien Isorce <julien.isorce@gmail.com>
  *
@@ -333,7 +333,7 @@ void fgOpenWindow( SFG_Window* window, const char* title,
 
     mask = CWBackPixmap | CWBorderPixel | CWColormap | CWEventMask;
 
-    
+
     if (!window->Window.Handle)
     {
         window->Window.isInternal = TRUE;
@@ -352,14 +352,6 @@ void fgOpenWindow( SFG_Window* window, const char* title,
         window->Window.isInternal = FALSE;
         window->State.OldWidth = w;
         window->State.OldHeight = h;
-        if( FETCH_WCB( *window, Reshape ) )
-            INVOKE_WCB( *window, Reshape, ( w, h ) );
-        else
-        {
-            fgSetWindow( window );
-            glViewport( 0, 0, w, h );
-        }
-        glutPostRedisplay( );
     }
 
     /*
@@ -529,8 +521,8 @@ void fgOpenWindow( SFG_Window* window, const char* title,
             fgDisplay.Instance,
             (LPVOID) window
         );
-    } 
-    else 
+    }
+    else
     {
         window->Window.isInternal = FALSE;
         fgOnCreateWindow (window);
@@ -564,7 +556,7 @@ void fgOnCreateWindow (SFG_Window *window)
 
 #if TARGET_HOST_WIN32 || TARGET_HOST_WINCE
     window->Window.Device = GetDC( window->Window.Handle );
-    
+
 #if !TARGET_HOST_WINCE
     fgSetupPixelFormat( window, GL_FALSE, PFD_MAIN_PLANE );
 #endif
@@ -650,7 +642,7 @@ int FGAPIENTRY glutCreateWindow( const char* title, unsigned long winId )
     FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutCreateWindow" );
 
     return fgCreateWindow( title, fgState.Position.X, fgState.Position.Y,
-                           fgState.Size.X, fgState.Size.Y, 
+                           fgState.Size.X, fgState.Size.Y,
                            (SFG_WindowHandleType)(UINT64)winId)->ID;
 }
 
