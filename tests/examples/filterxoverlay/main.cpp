@@ -98,7 +98,7 @@ gint main (gint argc, gchar *argv[])
     //It seems to be not working, the background is still drawn when resizing/obscured the window ...
     gtk_widget_set_app_paintable (window, TRUE);
 
-    //From GDK+ doc: "May also be used to set a background of "None" on window, 
+    //From GDK+ doc: "May also be used to set a background of "None" on window,
     //by setting a background pixmap of NULL
     //It seems to be not working, the background is still drawn when resizing/obscured the window ...
     GdkScreen* screen = gtk_widget_get_screen (window);
@@ -108,7 +108,6 @@ gint main (gint argc, gchar *argv[])
 
     gtk_main();
 
-    gst_element_set_state(pipeline, GST_STATE_NULL);
     gst_object_unref(pipeline);
 
     return 0;

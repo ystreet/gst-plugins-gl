@@ -3,7 +3,7 @@ OBJ=$(SRC:.cpp=.o)
 EXE=filterxoverlay
 
 CPP=g++
-CPPFLAGS=-Wall -Werror -O3 -march=i686 -msse2 -mfpmath=sse
+CPPFLAGS=-Wall -Werror
 LDFLAGS=
 LIBS=-lgstreamer-0.10
 RM=rm
