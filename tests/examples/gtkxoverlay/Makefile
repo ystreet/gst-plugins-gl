@@ -1,6 +1,6 @@
 SRC=main.cpp
 OBJ=$(SRC:.cpp=.o)
-EXE=filterxoverlay
+EXE=gtkxoverlay
 
 CPP=g++
 CPPFLAGS=-Wall -Werror

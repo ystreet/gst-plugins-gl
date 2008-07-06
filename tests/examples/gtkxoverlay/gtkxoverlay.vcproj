@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="filterxoverlay"
+	Name="gtkxoverlay"
 	ProjectGUID="{F9CC027E-CC9F-4B34-AA8F-58852EC32CD0}"
 	RootNamespace="filterxoverlay"
 	Keyword="Win32Proj"
