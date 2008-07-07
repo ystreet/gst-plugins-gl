@@ -37,15 +37,17 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, GtkWidge
 
 static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* videosink)
 {
-     gst_x_overlay_expose (GST_X_OVERLAY (videosink));
-
-     return FALSE;
+    gst_x_overlay_expose (GST_X_OVERLAY (videosink));
+    return FALSE;
 }
 
 
 static void destroy_cb(GtkWidget* widget, GdkEvent* event, GstElement* pipeline)
 {
-     gtk_main_quit();
+    gst_element_set_state (pipeline, GST_STATE_NULL);
+    gst_object_unref(pipeline);
+
+    gtk_main_quit();
 }
 
 
@@ -53,7 +55,6 @@ static void button_state_null_cb(GtkWidget* widget, GstElement* pipeline)
 {
     gst_element_set_state (pipeline, GST_STATE_NULL);
     g_print ("GST_STATE_NULL\n");
-    //gtk_main_quit();
 }
 
 
@@ -161,7 +162,7 @@ gint main (gint argc, gchar *argv[])
     GstElement* videosrc  = gst_element_factory_make ("videotestsrc", "videotestsrc");
     GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
 
-    GstCaps *caps = gst_caps_new_simple("video/x-raw-yuv",
+    GstCaps *caps = gst_caps_new_simple("video/x-raw-rgb",
                                         "width", G_TYPE_INT, 640,
                                         "height", G_TYPE_INT, 480,
                                         "framerate", GST_TYPE_FRACTION, 25, 1,
@@ -205,8 +206,6 @@ gint main (gint argc, gchar *argv[])
     gtk_widget_show_all (window);
 
     gtk_main();
-
-    gst_object_unref(pipeline);
 
     return 0;
 }
