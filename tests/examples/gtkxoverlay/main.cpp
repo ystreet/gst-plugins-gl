@@ -162,7 +162,7 @@ gint main (gint argc, gchar *argv[])
     GstElement* videosrc  = gst_element_factory_make ("videotestsrc", "videotestsrc");
     GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
 
-    GstCaps *caps = gst_caps_new_simple("video/x-raw-rgb",
+    GstCaps *caps = gst_caps_new_simple("video/x-raw-yuv",
                                         "width", G_TYPE_INT, 640,
                                         "height", G_TYPE_INT, 480,
                                         "framerate", GST_TYPE_FRACTION, 25, 1,
