@@ -54,6 +54,13 @@
  */
 SFG_Display fgDisplay;
 
+/* Assume that we do not have to close the Display
+ * when the root window is external.
+ * Exernal means that the gstxoverlay is used.
+ */
+GLboolean haveOneExternalWindow;
+
+
 /*
  * The settings for the current freeglut session
  */
@@ -88,6 +95,7 @@ SFG_State fgState = { { -1, -1, GL_FALSE },  /* Position */
  */
 static void fghInitialize( const char* displayName )
 {
+
 #if TARGET_HOST_UNIX_X11
     fgDisplay.Display = XOpenDisplay( displayName );
 
@@ -197,12 +205,13 @@ static void fghInitialize( const char* displayName )
 #endif
 
     fgState.Initialised = GL_TRUE;
+    haveOneExternalWindow = GL_FALSE;
 }
 
 /*
  * Perform the freeglut deinitialization...
  */
-void fgDeinitialize( GLboolean isInternal )
+void fgDeinitialize( void )
 {
     SFG_Timer *timer;
 
@@ -274,7 +283,7 @@ void fgDeinitialize( GLboolean isInternal )
      * Close the display connection, destroying all windows we have
      * created so far
      */
-     if(isInternal)
+     if(!haveOneExternalWindow)
         XCloseDisplay( fgDisplay.Display );
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
@@ -285,6 +294,7 @@ void fgDeinitialize( GLboolean isInternal )
 #endif
 
     fgState.Initialised = GL_FALSE;
+    haveOneExternalWindow = GL_FALSE;
 }
 
 

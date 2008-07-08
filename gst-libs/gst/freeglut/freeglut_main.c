@@ -360,7 +360,7 @@ void fgError( const char *fmt, ... )
     va_end( ap );
 
     if ( fgState.Initialised )
-        fgDeinitialize (TRUE);
+        fgDeinitialize ();
 
     exit( 1 );
 }
@@ -495,7 +495,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
 
                 if( fgState.ActionOnWindowClose == GLUT_ACTION_EXIT )
                 {
-                    fgDeinitialize(window->Window.isInternal);
+                    fgDeinitialize();
                     exit( 0 );
                 }
                 else if( fgState.ActionOnWindowClose == GLUT_ACTION_GLUTMAINLOOP_RETURNS )
@@ -622,7 +622,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
         {
             if( fgState.ActionOnWindowClose == GLUT_ACTION_EXIT )
             {
-                fgDeinitialize( );
+                fgDeinitialize();
                 exit( 0 );
             }
             else if( fgState.ActionOnWindowClose == GLUT_ACTION_GLUTMAINLOOP_RETURNS )
@@ -677,7 +677,7 @@ void FGAPIENTRY glutMainLoop( void )
     fgState.ExecState = GLUT_EXEC_STATE_RUNNING ;
     while( fgState.ExecState == GLUT_EXEC_STATE_RUNNING )
     {
-        SFG_Window *window;
+        SFG_Window *window = ( SFG_Window * )fgStructure.Windows.First;
 
         if(window->Window.isInternal)
             glutMainLoopEvent( );
@@ -687,8 +687,6 @@ void FGAPIENTRY glutMainLoop( void )
         fghDisplayAll( );
 
         fgCloseWindows( );
-
-        window = ( SFG_Window * )fgStructure.Windows.First;
 
         if( ! window )
             fgState.ExecState = GLUT_EXEC_STATE_STOP;
@@ -709,7 +707,7 @@ void FGAPIENTRY glutMainLoop( void )
      * Save the "ActionOnWindowClose" because "fgDeinitialize" resets it.
      */
     action = fgState.ActionOnWindowClose;
-    fgDeinitialize(window->Window.isInternal);
+    fgDeinitialize();
     if( action == GLUT_ACTION_EXIT )
         exit( 0 );
 }

@@ -349,6 +349,7 @@ void fgOpenWindow( SFG_Window* window, const char* title,
     }
     else
     {
+        haveOneExternalWindow = TRUE;
         window->Window.isInternal = FALSE;
         window->State.OldWidth = w;
         window->State.OldHeight = h;
@@ -524,6 +525,7 @@ void fgOpenWindow( SFG_Window* window, const char* title,
     }
     else
     {
+        haveOneExternalWindow = TRUE;
         window->Window.isInternal = FALSE;
         fgOnCreateWindow (window);
     }
@@ -620,7 +622,8 @@ void fgCloseWindow( SFG_Window* window )
 
     wglDeleteContext( window->Window.Context );
 
-    DestroyWindow( window->Window.Handle );
+    if(window->Window.isInternal)
+        DestroyWindow( window->Window.Handle );
 #endif
 }
 

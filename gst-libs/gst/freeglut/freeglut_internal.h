@@ -490,6 +490,9 @@ typedef void (* FGCBenumerator  )( SFG_Window *, SFG_Enumerator * );
 /* Freeglut display related stuff (initialized once per session) */
 extern SFG_Display fgDisplay;
 
+/* see freeglut_init.c */
+extern GLboolean haveOneExternalWindow;
+
 /* Freeglut internal structure */
 extern SFG_Structure fgStructure;
 
@@ -550,7 +553,7 @@ extern SFG_State fgState;
  * The deinitialize function gets called on glutMainLoop() end. It should clean up
  * everything inside of the freeglut
  */
-void fgDeinitialize( GLboolean isInternal );
+void fgDeinitialize( void );
 
 /*
  * Those two functions are used to create/destroy the freeglut internal
