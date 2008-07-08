@@ -1,4 +1,4 @@
-/* 
+/*
  * GStreamer
  * Copyright (C) 2008 Julien Isorce <julien.isorce@gmail.com>
  *
@@ -550,7 +550,7 @@ extern SFG_State fgState;
  * The deinitialize function gets called on glutMainLoop() end. It should clean up
  * everything inside of the freeglut
  */
-void fgDeinitialize( void );
+void fgDeinitialize( GLboolean isInternal );
 
 /*
  * Those two functions are used to create/destroy the freeglut internal

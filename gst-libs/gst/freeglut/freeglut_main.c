@@ -360,7 +360,7 @@ void fgError( const char *fmt, ... )
     va_end( ap );
 
     if ( fgState.Initialised )
-        fgDeinitialize ();
+        fgDeinitialize (TRUE);
 
     exit( 1 );
 }
@@ -495,7 +495,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
 
                 if( fgState.ActionOnWindowClose == GLUT_ACTION_EXIT )
                 {
-                    fgDeinitialize( );
+                    fgDeinitialize(window->Window.isInternal);
                     exit( 0 );
                 }
                 else if( fgState.ActionOnWindowClose == GLUT_ACTION_GLUTMAINLOOP_RETURNS )
@@ -636,11 +636,6 @@ void FGAPIENTRY glutMainLoopEvent( void )
     }
 #endif
 
-    if( fgState.Timers.First )
-        fghCheckTimers( );
-    fghDisplayAll( );
-
-    fgCloseWindows( );
 }
 
 /*
@@ -651,9 +646,7 @@ void FGAPIENTRY glutMainLoop( void )
 {
     int action;
 
-#if TARGET_HOST_WIN32 || TARGET_HOST_WINCE
     SFG_Window *window = (SFG_Window *)fgStructure.Windows.First ;
-#endif
 
     FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutMainLoop" );
 
@@ -686,7 +679,14 @@ void FGAPIENTRY glutMainLoop( void )
     {
         SFG_Window *window;
 
-        glutMainLoopEvent( );
+        if(window->Window.isInternal)
+            glutMainLoopEvent( );
+
+        if( fgState.Timers.First )
+            fghCheckTimers( );
+        fghDisplayAll( );
+
+        fgCloseWindows( );
 
         window = ( SFG_Window * )fgStructure.Windows.First;
 
@@ -696,7 +696,9 @@ void FGAPIENTRY glutMainLoop( void )
         {
             if( fgState.IdleCallback )
                 fgState.IdleCallback( );
-            fghSleepForEvents( );
+
+            if(window->Window.isInternal)
+                fghSleepForEvents( );
         }
     }
 
@@ -707,7 +709,7 @@ void FGAPIENTRY glutMainLoop( void )
      * Save the "ActionOnWindowClose" because "fgDeinitialize" resets it.
      */
     action = fgState.ActionOnWindowClose;
-    fgDeinitialize( );
+    fgDeinitialize(window->Window.isInternal);
     if( action == GLUT_ACTION_EXIT )
         exit( 0 );
 }

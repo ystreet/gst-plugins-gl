@@ -1,4 +1,4 @@
-/* 
+/*
  * GStreamer
  * Copyright (C) 2008 Julien Isorce <julien.isorce@gmail.com>
  *
@@ -202,7 +202,7 @@ static void fghInitialize( const char* displayName )
 /*
  * Perform the freeglut deinitialization...
  */
-void fgDeinitialize( void )
+void fgDeinitialize( GLboolean isInternal )
 {
     SFG_Timer *timer;
 
@@ -274,7 +274,8 @@ void fgDeinitialize( void )
      * Close the display connection, destroying all windows we have
      * created so far
      */
-    XCloseDisplay( fgDisplay.Display );
+     if(isInternal)
+        XCloseDisplay( fgDisplay.Display );
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 

@@ -606,8 +606,11 @@ void fgCloseWindow( SFG_Window* window )
 #if TARGET_HOST_UNIX_X11
 
     glXDestroyContext( fgDisplay.Display, window->Window.Context );
-    XDestroyWindow( fgDisplay.Display, window->Window.Handle );
-    XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
+    if(window->Window.isInternal)
+    {
+        XDestroyWindow( fgDisplay.Display, window->Window.Handle );
+        XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
+    }
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 
