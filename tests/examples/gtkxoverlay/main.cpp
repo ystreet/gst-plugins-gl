@@ -35,6 +35,17 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, GtkWidge
 }
 
 
+static void end_stream_cb(GstBus* bus, GstMessage* message, GstElement* pipeline)
+{
+    g_print("End of stream\n");
+
+    gst_element_set_state (pipeline, GST_STATE_NULL);
+    gst_object_unref(pipeline);
+
+    gtk_main_quit();
+}
+
+
 static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* videosink)
 {
     gst_x_overlay_expose (GST_X_OVERLAY (videosink));
@@ -44,6 +55,8 @@ static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* 
 
 static void destroy_cb(GtkWidget* widget, GdkEvent* event, GstElement* pipeline)
 {
+    g_print("Close\n");
+
     gst_element_set_state (pipeline, GST_STATE_NULL);
     gst_object_unref(pipeline);
 
@@ -120,35 +133,35 @@ gint main (gint argc, gchar *argv[])
 
     //control state null
     GtkWidget* button_state_null = gtk_button_new_with_label ("GST_STATE_NULL");
-    g_signal_connect (G_OBJECT (button_state_null), "clicked", 
+    g_signal_connect (G_OBJECT (button_state_null), "clicked",
         G_CALLBACK (button_state_null_cb), pipeline);
     gtk_table_attach_defaults (GTK_TABLE (table), button_state_null, 0, 1, 0, 1);
     gtk_widget_show (button_state_null);
 
     //control state ready
     GtkWidget* button_state_ready = gtk_button_new_with_label ("GST_STATE_READY");
-    g_signal_connect (G_OBJECT (button_state_ready), "clicked", 
+    g_signal_connect (G_OBJECT (button_state_ready), "clicked",
         G_CALLBACK (button_state_ready_cb), pipeline);
     gtk_table_attach_defaults (GTK_TABLE (table), button_state_ready, 0, 1, 1, 2);
     gtk_widget_show (button_state_ready);
 
     //control state paused
     GtkWidget* button_state_paused = gtk_button_new_with_label ("GST_STATE_PAUSED");
-    g_signal_connect (G_OBJECT (button_state_paused), "clicked", 
+    g_signal_connect (G_OBJECT (button_state_paused), "clicked",
         G_CALLBACK (button_state_paused_cb), pipeline);
     gtk_table_attach_defaults (GTK_TABLE (table), button_state_paused, 0, 1, 2, 3);
     gtk_widget_show (button_state_paused);
 
     //control state playing
     GtkWidget* button_state_playing = gtk_button_new_with_label ("GST_STATE_PLAYING");
-    g_signal_connect (G_OBJECT (button_state_playing), "clicked", 
+    g_signal_connect (G_OBJECT (button_state_playing), "clicked",
         G_CALLBACK (button_state_playing_cb), pipeline);
     gtk_table_attach_defaults (GTK_TABLE (table), button_state_playing, 0, 1, 3, 4);
     gtk_widget_show (button_state_playing);
 
     //change framerate
     GtkWidget* slider_fps = gtk_vscale_new_with_range (1, 30, 2);
-    g_signal_connect (G_OBJECT (slider_fps), "format-value", 
+    g_signal_connect (G_OBJECT (slider_fps), "format-value",
         G_CALLBACK (slider_fps_cb), pipeline);
     gtk_table_attach_defaults (GTK_TABLE (table), slider_fps, 1, 2, 0, 4);
     gtk_widget_show (slider_fps);
@@ -186,13 +199,19 @@ gint main (gint argc, gchar *argv[])
     //avoid flickering when resizing or obscuring the main window
     gtk_widget_realize(area);
     gdk_window_set_back_pixmap(area->window, NULL, FALSE);
-    gtk_widget_set_app_paintable(area,TRUE); 
+    gtk_widget_set_app_paintable(area,TRUE);
     gtk_widget_set_double_buffered(area, FALSE);
 
     //set window id on this event
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
     gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area);
     gst_object_unref (bus);
+    g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), pipeline);
+    g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), pipeline);
+    g_signal_connect(bus, "message::eos", G_CALLBACK(end_stream_cb), pipeline);
+
+    //needed when being in GST_STATE_READY, GST_STATE_PAUSED
+    //or resizing/obscuring the window
     g_signal_connect(area, "expose-event", G_CALLBACK(expose_cb), videosink);
 
     //start

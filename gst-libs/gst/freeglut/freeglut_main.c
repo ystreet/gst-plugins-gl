@@ -213,12 +213,12 @@ static void fghcbDisplayWindow( SFG_Window *window,
             width=attr.width;
             height=attr.height;
 
-            if( ( width != window->State.OldWidth ) ||
-                ( height != window->State.OldHeight ) )
+            if( ( width != window->State.Width ) ||
+                ( height != window->State.Height ) )
             {
 
-                window->State.OldWidth = width;
-                window->State.OldHeight = height;
+                window->State.Width = width;
+                window->State.Height = height;
                 if( FETCH_WCB( *window, Reshape ) )
                     INVOKE_WCB( *window, Reshape, ( width, height ) );
                 else
