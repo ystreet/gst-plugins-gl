@@ -593,6 +593,7 @@ void        fgCloseWindow( SFG_Window* window );
 void        fgAddToWindowDestroyList ( SFG_Window* window );
 void        fgCloseWindows ();
 void        fgDestroyWindow( SFG_Window* window );
+void        fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId );
 
 /*
  * Helper function to enumerate through all registered windows

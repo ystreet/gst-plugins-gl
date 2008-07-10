@@ -476,7 +476,7 @@ void fgOpenWindow( SFG_Window* window, const char* title,
         h = CW_USEDEFAULT;
     }
 
-    flags = WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VISIBLE;
+    flags = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
 
 #if !TARGET_HOST_WINCE
     flags |= WS_OVERLAPPEDWINDOW;
@@ -533,8 +533,6 @@ void fgOpenWindow( SFG_Window* window, const char* title,
 
     if( !( window->Window.Handle ) )
         fgError( "Failed to create a window (%s)!", title );
-
-    ShowWindow( window->Window.Handle, SW_SHOW );
 
     UpdateWindow( window->Window.Handle );
     ShowCursor( TRUE );  /* XXX Old comments say "hide cursor"! */
@@ -624,6 +622,43 @@ void fgCloseWindow( SFG_Window* window )
 
     if(window->Window.isInternal)
         DestroyWindow( window->Window.Handle );
+#endif
+}
+
+
+void fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId )
+{
+    SFG_WindowContextType new_context;
+
+#if TARGET_HOST_UNIX_X11
+    
+    printf ("not implementing yet\n");
+
+#elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
+
+    HDC device = GetDC( winId );
+    new_context = wglCreateContext( device );
+    
+    if (!wglCopyContext (window->Window.Context, new_context, GL_ALL_ATTRIB_BITS))
+        fgWarning( "fgChangeWindow(): wglCopyContext failed" );
+
+    if( fgStructure.CurrentWindow == window )
+        wglMakeCurrent( NULL, NULL );
+
+    wglDeleteContext( window->Window.Context );
+    
+    if(window->Window.isInternal)
+        DestroyWindow( window->Window.Handle );
+
+    window->Window.Handle = winId;
+    window->Window.Device = device;
+    window->Window.Context = new_context;
+
+    //fgSetWindow (window);
+
+    wglMakeCurrent(window->Window.Device, window->Window.Context);
+    fgStructure.CurrentWindow = window;
+
 #endif
 }
 
@@ -802,5 +837,13 @@ void FGAPIENTRY glutReshapeWindow( int width, int height )
     fgStructure.CurrentWindow->State.Width  = width ;
     fgStructure.CurrentWindow->State.Height = height;
 }
+
+void FGAPIENTRY glutChangeWindow( unsigned long winId )
+{
+    FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutChangeWindow" );
+    
+    fgChangeWindow ( fgStructure.CurrentWindow, (SFG_WindowHandleType)(UINT64)winId);
+}
+
 
 /*** END OF FILE ***/

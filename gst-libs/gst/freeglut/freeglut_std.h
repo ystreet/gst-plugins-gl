@@ -138,6 +138,7 @@ FGAPI void    FGAPIENTRY glutSetWindowTitle( const char* title );
 FGAPI void    FGAPIENTRY glutReshapeWindow( int width, int height );
 FGAPI void    FGAPIENTRY glutShowWindow( void );
 FGAPI void    FGAPIENTRY glutHideWindow( void );
+FGAPI void    FGAPIENTRY glutChangeWindow( unsigned long winId );
 
 /*
  * Display-connected functions, see freeglut_display.c
