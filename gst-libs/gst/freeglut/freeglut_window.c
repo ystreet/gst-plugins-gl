@@ -637,10 +637,19 @@ void fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId )
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 
     HDC device = GetDC( winId );
+
+    //fgSetupPixelFormat( window, GL_FALSE, PFD_MAIN_PLANE );
+
     new_context = wglCreateContext( device );
     
     if (!wglCopyContext (window->Window.Context, new_context, GL_ALL_ATTRIB_BITS))
         fgWarning( "fgChangeWindow(): wglCopyContext failed" );
+
+    window->State.NeedToResize = GL_TRUE;
+    window->State.Width  = fgState.Size.X;
+    window->State.Height = fgState.Size.Y;
+
+    ReleaseDC( winId, device );
 
     if( fgStructure.CurrentWindow == window )
         wglMakeCurrent( NULL, NULL );
@@ -654,10 +663,10 @@ void fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId )
     window->Window.Device = device;
     window->Window.Context = new_context;
 
-    //fgSetWindow (window);
+    fgSetWindow (window);
 
-    wglMakeCurrent(window->Window.Device, window->Window.Context);
-    fgStructure.CurrentWindow = window;
+    //wglMakeCurrent(window->Window.Device, window->Window.Context);
+    //fgStructure.CurrentWindow = window;
 
 #endif
 }
