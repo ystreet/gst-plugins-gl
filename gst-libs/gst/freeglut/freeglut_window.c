@@ -622,7 +622,24 @@ void fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId )
 {
 #if TARGET_HOST_UNIX_X11
 
-    printf ("not implementing yet\n");
+    if(window->Window.isInternal)
+    {
+        XDestroyWindow( fgDisplay.Display, window->Window.Handle );
+        XFlush( fgDisplay.Display );
+    }
+
+    haveOneExternalWindow = TRUE;
+    window->Window.isInternal = FALSE;
+
+    window->Window.Handle = winId;
+
+    glXMakeCurrent(
+            fgDisplay.Display,
+            window->Window.Handle,
+            window->Window.Context
+    );
+
+    fgStructure.CurrentWindow = window;
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 
