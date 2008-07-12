@@ -387,12 +387,6 @@ void fgOpenWindow( SFG_Window* window, const char* title,
     }
 #endif
 
-    /*
-     * XXX Assume the new window is visible by default
-     * XXX Is this a  safe assumption?
-     */
-    window->State.Visible = GL_TRUE;
-
     sizeHints.flags = 0;
     if ( fgState.Position.Use )
         sizeHints.flags |= USPosition;
@@ -438,8 +432,6 @@ void fgOpenWindow( SFG_Window* window, const char* title,
         window->Window.Handle,
         window->Window.Context
     );
-
-    XMapWindow( fgDisplay.Display, window->Window.Handle );
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 
@@ -629,7 +621,7 @@ void fgCloseWindow( SFG_Window* window )
 void fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId )
 {
 #if TARGET_HOST_UNIX_X11
-    
+
     printf ("not implementing yet\n");
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
@@ -647,7 +639,7 @@ void fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId )
     window->Window.Handle = winId;
     window->Window.Device = GetDC( window->Window.Handle );
     fgSetupPixelFormat( window, GL_FALSE, PFD_MAIN_PLANE );
-    
+
     if (!wglMakeCurrent(window->Window.Device, window->Window.Context))
         fgWarning( "wglMakeCurrent failed" );
 
@@ -847,7 +839,7 @@ void FGAPIENTRY glutReshapeWindow( int width, int height )
 void FGAPIENTRY glutChangeWindow( unsigned long winId )
 {
     FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutChangeWindow" );
-    
+
     fgChangeWindow ( fgStructure.CurrentWindow, (SFG_WindowHandleType)(UINT64)winId);
 }
 
