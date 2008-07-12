@@ -12,6 +12,9 @@ public:
     ~QRenderer();
     void paintEvent(QPaintEvent* event);
 
+public slots:
+    void resizeRequested(int width, int height);
+
 signals:
     void exposeRequested();
 };

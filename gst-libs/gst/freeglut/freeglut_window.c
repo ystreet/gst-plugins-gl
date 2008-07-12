@@ -628,45 +628,42 @@ void fgCloseWindow( SFG_Window* window )
 
 void fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId )
 {
-    SFG_WindowContextType new_context;
-
 #if TARGET_HOST_UNIX_X11
     
     printf ("not implementing yet\n");
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 
-    HDC device = GetDC( winId );
 
-    //fgSetupPixelFormat( window, GL_FALSE, PFD_MAIN_PLANE );
+    if( fgStructure.CurrentWindow == window )
+        wglMakeCurrent( NULL, window->Window.Context );
 
-    new_context = wglCreateContext( device );
+    if(window->Window.isInternal)
+        DestroyWindow( window->Window.Handle );
+
+    haveOneExternalWindow = TRUE;
+    window->Window.isInternal = FALSE;
+
+    window->Window.Handle = winId;
+    window->Window.Device = GetDC( window->Window.Handle );
+    fgSetupPixelFormat( window, GL_FALSE, PFD_MAIN_PLANE );
     
-    if (!wglCopyContext (window->Window.Context, new_context, GL_ALL_ATTRIB_BITS))
-        fgWarning( "fgChangeWindow(): wglCopyContext failed" );
+    if (!wglMakeCurrent(window->Window.Device, window->Window.Context))
+        fgWarning( "wglMakeCurrent failed" );
 
     window->State.NeedToResize = GL_TRUE;
     window->State.Width  = fgState.Size.X;
     window->State.Height = fgState.Size.Y;
 
-    ReleaseDC( winId, device );
+    ReleaseDC( window->Window.Handle, window->Window.Device );
 
-    if( fgStructure.CurrentWindow == window )
-        wglMakeCurrent( NULL, NULL );
+    fgStructure.CurrentWindow = window;
 
-    wglDeleteContext( window->Window.Context );
-    
-    if(window->Window.isInternal)
-        DestroyWindow( window->Window.Handle );
-
-    window->Window.Handle = winId;
-    window->Window.Device = device;
-    window->Window.Context = new_context;
-
-    fgSetWindow (window);
-
-    //wglMakeCurrent(window->Window.Device, window->Window.Context);
-    //fgStructure.CurrentWindow = window;
+    if ( ! window->Window.DoubleBuffered )
+    {
+        glDrawBuffer ( GL_FRONT );
+        glReadBuffer ( GL_FRONT );
+    }
 
 #endif
 }

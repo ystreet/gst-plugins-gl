@@ -59,6 +59,10 @@ void Pipeline::create()
 
     g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
 
+    GstPad* pad = gst_element_get_static_pad (ffdec_mpeg4, "src");
+    g_signal_connect(pad, "notify::caps", G_CALLBACK(cb_video_size), this);
+    gst_object_unref (pad);
+
     GstStateChangeReturn ret = gst_element_set_state (m_pipeline, GST_STATE_PLAYING);
     if (ret == GST_STATE_CHANGE_FAILURE) 
     {
@@ -95,6 +99,12 @@ void Pipeline::doExpose() const
 void Pipeline::exposeRequested()
 {
     gst_bus_post (m_bus, gst_message_new_custom (GST_MESSAGE_ANY, GST_OBJECT (m_pipeline), NULL));
+}
+
+//post message to the Qt main loop in order to resize the renderer
+void Pipeline::resize(int width, int height)
+{
+    emit resizeRequested(width, height);
 }
 
 
@@ -138,7 +148,21 @@ gboolean Pipeline::bus_call (GstBus *bus, GstMessage *msg, const Pipeline* p)
 
 void Pipeline::cb_new_pad (GstElement* avidemux, GstPad* pad, GstElement* ffdec_mpeg4)
 {
-  gst_element_link_pads (avidemux, "video_00", ffdec_mpeg4, "sink"); 
+    gst_element_link_pads (avidemux, "video_00", ffdec_mpeg4, "sink"); 
+
+}
+
+void Pipeline::cb_video_size (GstPad* pad, GParamSpec* pspec, Pipeline* p)
+{
+    GstCaps* caps = gst_pad_get_negotiated_caps(pad);
+    qDebug ("negotiated caps : %s", gst_caps_to_string(caps)) ;
+    const GstStructure* str = gst_caps_get_structure (caps, 0);
+    gint width = 0;
+    gint height = 0;
+    if (gst_structure_get_int (str, "width", &width)  && 
+        gst_structure_get_int (str, "height", &height) ) 
+    p->resize(width, height);
+    gst_caps_unref(caps) ;
 }
 
 GstBusSyncReply Pipeline::create_window (GstBus* bus, GstMessage* message, const Pipeline* p)

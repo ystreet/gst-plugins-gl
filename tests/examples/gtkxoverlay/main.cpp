@@ -179,7 +179,7 @@ gint main (gint argc, gchar *argv[])
                                         "width", G_TYPE_INT, 640,
                                         "height", G_TYPE_INT, 480,
                                         "framerate", GST_TYPE_FRACTION, 25, 1,
-                                        "format", GST_TYPE_FOURCC, GST_MAKE_FOURCC ('A', 'Y', 'U', 'V'),
+                                        "format", GST_TYPE_FOURCC, GST_MAKE_FOURCC ('Y', 'U', 'Y', '2'),
                                         NULL) ;
 
     gst_bin_add_many (GST_BIN (pipeline), videosrc, videosink, NULL);

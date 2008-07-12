@@ -14,6 +14,10 @@ public:
     ~Pipeline();
     void start();
     void exposeRequested();
+    void resize(int width, int height);
+
+signals:
+    void resizeRequested(int width, int height);
 
 private:
     const WId m_winId; 
@@ -29,6 +33,7 @@ private:
 
     static gboolean bus_call (GstBus *bus, GstMessage *msg, const Pipeline* p);
     static void cb_new_pad (GstElement* avidemux, GstPad* pad, GstElement* ffdec_mpeg4);
+    static void cb_video_size (GstPad* pad, GParamSpec* pspec, Pipeline* p);
     static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, const Pipeline* pipeline);
 
 };

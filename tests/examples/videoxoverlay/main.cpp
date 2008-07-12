@@ -9,11 +9,9 @@ int main(int argc, char *argv[])
 
     QRenderer w;
     w.setWindowTitle("glimagesink implements the gstxoverlay interface");
-    w.move(20, 10);
-    w.resize(640, 480);
-    w.show();
 
     GstThread gt(w.winId());
+    QObject::connect(&gt, SIGNAL(resizeRequested(int, int)), &w, SLOT(resizeRequested(int, int)));
     QObject::connect(&gt, SIGNAL(finished()), &w, SLOT(close()));
     QObject::connect(&w, SIGNAL(exposeRequested()), &gt, SLOT(exposeRequested()));
 

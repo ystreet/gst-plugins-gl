@@ -16,6 +16,10 @@ public:
 
 public slots:
     void exposeRequested();
+    void resize(int width, int height);
+
+signals:
+    void resizeRequested(int width, int height);
     
 protected:
     void run();
