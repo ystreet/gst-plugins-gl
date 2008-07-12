@@ -646,6 +646,10 @@ void FGAPIENTRY glutMainLoop( void )
 {
     int action;
 
+#if TARGET_HOST_WIN32 || TARGET_HOST_WINCE
+    SFG_Window *window = (SFG_Window *)fgStructure.Windows.First ;
+#endif
+
     FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutMainLoop" );
 
 #if TARGET_HOST_WIN32 || TARGET_HOST_WINCE
@@ -658,7 +662,6 @@ void FGAPIENTRY glutMainLoop( void )
      * message.  Then we would put the visibility callback code in the
      * "case WM_ACTIVATE" block below.         - John Fay -- 10/24/02
      */
-    SFG_Window *window = (SFG_Window *)fgStructure.Windows.First ;
 
     while( window )
     {
