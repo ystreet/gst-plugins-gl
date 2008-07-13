@@ -2,9 +2,8 @@
 
 GstThread::GstThread(const WId winId, QObject *parent):
     QThread(parent),
-    m_pipeline(winId)   
+    m_winId(winId)
 {
-    connect(&m_pipeline, SIGNAL(resizeRequested(int, int)), this, SLOT(resize(int, int)));
 }
 
 GstThread::~GstThread()
@@ -13,7 +12,7 @@ GstThread::~GstThread()
 
 void GstThread::exposeRequested()
 {
-    m_pipeline.exposeRequested();
+    m_pipeline->exposeRequested();
 }
 
 void GstThread::resize(int width, int height)
@@ -21,7 +20,19 @@ void GstThread::resize(int width, int height)
     emit resizeRequested(width, height);
 }
 
+void GstThread::stop()
+{
+    m_pipeline->stop();
+}
+
 void GstThread::run()
 {
-    m_pipeline.start();
+    m_pipeline = new Pipeline(m_winId);
+    connect(m_pipeline, SIGNAL(resizeRequested(int, int)), this, SLOT(resize(int, int)));
+    m_pipeline->start();
+
+    //works like the gmainloop on linux (GstEvent are handled)
+    //exec();
+
+    m_pipeline->unconfigure();
 }

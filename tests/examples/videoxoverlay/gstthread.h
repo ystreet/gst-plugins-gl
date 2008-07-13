@@ -17,6 +17,7 @@ public:
 public slots:
     void exposeRequested();
     void resize(int width, int height);
+    void stop();
 
 signals:
     void resizeRequested(int width, int height);
@@ -25,7 +26,8 @@ protected:
     void run();
 
 private:
-    Pipeline m_pipeline;
+    const WId m_winId;
+    Pipeline* m_pipeline;
 
 };
 
