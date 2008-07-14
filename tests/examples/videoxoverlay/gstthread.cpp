@@ -29,10 +29,15 @@ void GstThread::run()
 {
     m_pipeline = new Pipeline(m_winId);
     connect(m_pipeline, SIGNAL(resizeRequested(int, int)), this, SLOT(resize(int, int)));
-    m_pipeline->start();
+    m_pipeline->start(); //it runs the gmainloop on win32
 
+    
+#ifndef WIN32
     //works like the gmainloop on linux (GstEvent are handled)
-    //exec();
+    connect(m_pipeline, SIGNAL(stopRequested()), this, SLOT(quit()));
+    exec();
+#endif
+    
 
     m_pipeline->unconfigure();
 }

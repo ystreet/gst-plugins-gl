@@ -3,7 +3,7 @@
 
 #include <QtGui>
 #include <gst/gst.h>
-//#include <qeventdispatcher_glib_p.h>
+//#include <QtCore/private/qeventdispatcher_glib_p.h>
 
 class Pipeline : public QObject
 {
@@ -20,6 +20,7 @@ public:
 
 signals:
     void resizeRequested(int width, int height);
+    void stopRequested();
 
 private:
     const WId m_winId;

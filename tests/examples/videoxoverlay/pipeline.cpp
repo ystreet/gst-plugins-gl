@@ -19,10 +19,11 @@ void Pipeline::create()
 {
     gst_init (NULL, NULL);
 
-    //m_loop = g_main_loop_new (NULL, FALSE);
+#ifdef WIN32
+    m_loop = g_main_loop_new (NULL, FALSE);
+#endif
     m_pipeline = gst_pipeline_new ("pipeline");
 
-    m_loop = g_main_loop_new(NULL, FALSE);
     m_bus = gst_pipeline_get_bus (GST_PIPELINE (m_pipeline));
     gst_bus_add_watch (m_bus, (GstBusFunc) bus_call, this);
     gst_bus_set_sync_handler (m_bus, (GstBusSyncHandler) create_window, this);
@@ -76,13 +77,19 @@ void Pipeline::start()
         return;
     }
 
+#ifdef WIN32
     g_main_loop_run(m_loop);    
+#endif
 }
 
 //we don't want a thread safe stop in this example
 void Pipeline::stop()
 {
+#ifdef WIN32
     g_main_loop_quit(m_loop);
+#else
+    emit stopRequested();
+#endif
 }
 
 
