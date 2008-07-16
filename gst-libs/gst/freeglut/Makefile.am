@@ -1,6 +1,9 @@
 
 lib_LTLIBRARIES = libgstfreeglut-@GST_MAJORMINOR@.la
 
+libgstfreeglut_@GST_MAJORMINOR@_la_CFLAGS = $(GL_CFLAGS) $(X_CFLAGS)
+libgstfreeglut_@GST_MAJORMINOR@_la_LIBADD = $(GL_LIBS) $(X_LIBS)
+
 libgstfreeglut_@GST_MAJORMINOR@_la_SOURCES = \
 	freeglut_callbacks.c \
 	freeglut_display.c \
