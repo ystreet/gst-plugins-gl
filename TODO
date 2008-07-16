@@ -1,0 +1,42 @@
+//not arranged
+
+- make fargiolas stuffs work on this repository.
+
+- use GstGLShader in the GLSL colorspace conversion.
+
+- add GLEW check in configure.ac
+
+- take a decision about the tests/examples/doublecube/data/lost.avi file (move ? remove ? replace ?)
+
+- make an example named "filterxoverlay" similar to gtkxoverlay one. But use a more complex pipeline
+  involving several glfilters. In order to test switching bettween gst states on it.
+
+- put the pipelines listed in tests/pipelines to an automated test that attempts to reach some states.
+
+- make two elements named "gltee" (attach as much texture (to its fbo) as tee src pads) and "glqueue".
+  In order to have something like that:
+  videotestsrc ! glupload ! glfilterA ! gltee name=t \
+  t. ! glqueue ! glfilterB ! glimagesink \
+  t. ! glqueue ! glfilterC ! glimagesink
+  Assuming glfilterA is GPU consumming and so do not need to duplicate it.
+
+- rewrite the freeglut part that I minimized. Although I removed 90% of the orignal code,
+  it should be rewrite with the GLib API. To have a better design and handle X/WIN32 with interfaces
+  instead of having a lot of "define WIN32" scopes.
+  And make it thread safe in order to have one glthread per GstGLDisplay, instead of having a global glthread.
+  (the tests/examples/doublecube test shows the limitation of having only one (global) glthread).
+
+- make colorspace conversion through ColorMatrix when GLSL (and mesa YCbCr) is not available and when imaging extension
+  is available.
+
+- make a test to estimate how much is a colorspace conversion. I mean compare an output frame
+  to reference frame and estimate the differences. (usefull to compare several implementations)
+
+- write a cmake build or an other well known opensource and multiplatform builder.
+  
+- test colorspace conversion with Apple YCbCr extension.
+
+- test the plugin on MAC.
+
+- test the plugin on WIN CE and some other embedded operating system.
+
