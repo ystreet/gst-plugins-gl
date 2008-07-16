@@ -13,7 +13,7 @@ then
   then
     TAG="-r `tail -c +2 CVS/Tag`"
   fi
-  cvs co $TAG common
+  cvs -d :pserver:anoncvs@anoncvs.freedesktop.org:/cvs/gstreamer co $TAG common
 fi
 
 # source helper functions
