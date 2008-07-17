@@ -106,6 +106,7 @@ void Pipeline::doExpose() const
 }
 
 //post message to g_main_loop in order to call expose
+//in the gt thread
 void Pipeline::exposeRequested()
 {
     g_idle_add(cb_expose, this);
@@ -163,9 +164,18 @@ void Pipeline::cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, Gs
         g_object_unref (glpad);
         return;
     }
-    
-    if(!gst_pad_link (pad, glpad))
-        qDebug ("Failed to link decodebin to glimagesink");
+
+    GstCaps* caps = gst_pad_get_caps (glpad);
+    GstStructure* str = gst_caps_get_structure (caps, 0);
+    if (!g_strrstr (gst_structure_get_name (str), "video")) 
+    {
+        gst_caps_unref (caps);
+        gst_object_unref (glpad);
+        return;
+    }
+    gst_caps_unref (caps);
+
+    gst_pad_link (pad, glpad);
 }
 
 void Pipeline::cb_video_size (GstPad* pad, GParamSpec* pspec, Pipeline* p)

@@ -1,5 +1,10 @@
 2008-07-17  Julien Isorce  <julien.isorce@gmail.com>
 
+	* tests/examples/mousexoverlay: Browse files to load
+	  a local video.
+
+2008-07-17  Julien Isorce  <julien.isorce@gmail.com>
+
 	* tests/examples/videoxoverlay: Browse files to load
 	  a local video.
 
