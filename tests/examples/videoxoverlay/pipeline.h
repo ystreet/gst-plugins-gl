@@ -10,7 +10,7 @@ class Pipeline : public QObject
     Q_OBJECT
 
 public:
-    Pipeline(const WId windId = 0);
+    Pipeline(const WId windId, const QString videoLocation);
     ~Pipeline();
     void start();
     void exposeRequested();
@@ -24,6 +24,7 @@ signals:
 
 private:
     const WId m_winId;
+    const QString m_videoLocation;
     GMainLoop* m_loop;
     GstBus* m_bus;
     GstElement* m_pipeline;
@@ -34,7 +35,7 @@ private:
     void doExpose () const;
 
     static gboolean bus_call (GstBus *bus, GstMessage *msg, Pipeline* p);
-    static void cb_new_pad (GstElement* avidemux, GstPad* pad, GstElement* ffdec_mpeg4);
+    static void cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, GstElement* glimagesink);
     static void cb_video_size (GstPad* pad, GParamSpec* pspec, Pipeline* p);
     static gboolean cb_expose (gpointer data);
     static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, const Pipeline* pipeline);

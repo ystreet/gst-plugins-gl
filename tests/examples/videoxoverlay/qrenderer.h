@@ -9,7 +9,7 @@ class QRenderer : public QWidget
     Q_OBJECT
 
 public:
-    QRenderer(QWidget *parent = 0, Qt::WFlags flags = 0);
+    QRenderer(const QString videoLocation, QWidget *parent = 0, Qt::WFlags flags = 0);
     ~QRenderer();
     void paintEvent(QPaintEvent* event);
     void closeEvent (QCloseEvent* event);
