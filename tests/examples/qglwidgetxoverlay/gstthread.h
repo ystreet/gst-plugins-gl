@@ -11,17 +11,24 @@ class GstThread : public QThread
     Q_OBJECT
 
 public:
-    GstThread(const WId winId = 0, QObject *parent = 0);
+    GstThread(const WId winId, const QString videoLocation, QObject *parent = 0);
     ~GstThread();
 
 public slots:
-    void expose();
+    void exposeRequested();
+    void show();
+    void stop();
+
+signals:
+    void showRequested();
     
 protected:
     void run();
 
 private:
-    Pipeline m_pipeline;
+    const WId m_winId;
+    const QString m_videoLocation;
+    Pipeline* m_pipeline;
 
 };
 

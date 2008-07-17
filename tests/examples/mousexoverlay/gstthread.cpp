@@ -34,7 +34,7 @@ void GstThread::stop()
 void GstThread::run()
 {
     m_pipeline = new Pipeline(m_winId, m_videoLocation);
-    connect(m_pipeline, SIGNAL(showRequested()), this, SLOT(show()));//, Qt::DirectConnection);
+    connect(m_pipeline, SIGNAL(showRequested()), this, SLOT(show()));
     m_pipeline->start(); //it runs the gmainloop on win32
 
 #ifndef WIN32

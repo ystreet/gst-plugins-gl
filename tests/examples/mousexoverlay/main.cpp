@@ -1,6 +1,5 @@
 #include <QtGui/QApplication>
 #include "qrenderer.h"
-#include "gstthread.h"
 
 int main(int argc, char *argv[])
 {
