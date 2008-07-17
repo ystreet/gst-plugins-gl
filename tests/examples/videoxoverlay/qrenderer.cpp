@@ -1,8 +1,8 @@
 #include "qrenderer.h"
 
-QRenderer::QRenderer(QWidget *parent, Qt::WFlags flags)
+QRenderer::QRenderer(const QString videoLocation, QWidget *parent, Qt::WFlags flags)
     : QWidget(parent, flags),
-      m_gt(winId())
+      m_gt(winId(), videoLocation)
 {
     setAttribute(Qt::WA_NoSystemBackground);
     setVisible(false);

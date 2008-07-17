@@ -1,8 +1,9 @@
 #include "gstthread.h"
 
-GstThread::GstThread(const WId winId, QObject *parent):
+GstThread::GstThread(const WId winId, const QString videoLocation, QObject *parent):
     QThread(parent),
-    m_winId(winId)
+    m_winId(winId),
+    m_videoLocation(videoLocation)
 {
 }
 
@@ -27,7 +28,7 @@ void GstThread::stop()
 
 void GstThread::run()
 {
-    m_pipeline = new Pipeline(m_winId);
+    m_pipeline = new Pipeline(m_winId, m_videoLocation);
     connect(m_pipeline, SIGNAL(resizeRequested(int, int)), this, SLOT(resize(int, int)));
     m_pipeline->start(); //it runs the gmainloop on win32
 

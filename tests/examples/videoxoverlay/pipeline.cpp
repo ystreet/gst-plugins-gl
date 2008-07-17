@@ -1,8 +1,9 @@
 #include <gst/interfaces/xoverlay.h>
 #include "pipeline.h"
 
-Pipeline::Pipeline(const WId id):
+Pipeline::Pipeline(const WId id, const QString videoLocation):
     m_winId(id),
+    m_videoLocation(videoLocation),
     m_loop(NULL),
     m_bus(NULL),
     m_pipeline(NULL),
@@ -17,6 +18,8 @@ Pipeline::~Pipeline()
 
 void Pipeline::create()
 {
+    qDebug("Loading video: %s", m_videoLocation.toAscii().data());
+
     gst_init (NULL, NULL);
 
 #ifdef WIN32
@@ -30,29 +33,25 @@ void Pipeline::create()
     gst_object_unref (m_bus);
 
     GstElement* videosrc = gst_element_factory_make ("filesrc", "filesrc0");
-    GstElement* avidemux = gst_element_factory_make ("avidemux", "avidemux0");
-    GstElement* ffdec_mpeg4 = gst_element_factory_make ("ffdec_mpeg4", "ffdec_mpeg40");
+    GstElement* decodebin = gst_element_factory_make ("decodebin", "decodebin0");
     m_glimagesink  = gst_element_factory_make ("glimagesink", "sink0");
-    if (!videosrc || !avidemux || !ffdec_mpeg4 || !m_glimagesink )
+    
+    if (!videosrc || !decodebin || !m_glimagesink )
     {
         qDebug ("one element could not be found");
         return;
     }
 
-    g_object_set(G_OBJECT(videosrc), "location", "../doublecube/data/lost.avi", NULL);
+    g_object_set(G_OBJECT(videosrc), "num-buffers", 800, NULL);
+    g_object_set(G_OBJECT(videosrc), "location", m_videoLocation.toAscii().data(), NULL);
 
-    gst_bin_add_many (GST_BIN (m_pipeline), videosrc, avidemux, ffdec_mpeg4, m_glimagesink, NULL);
-    if (!gst_element_link(ffdec_mpeg4, m_glimagesink))
-    {
-        qDebug ("Failed to link ffdec_mpeg4 to glimagesink!");
-        return;
-    }
+    gst_bin_add_many (GST_BIN (m_pipeline), videosrc, decodebin, m_glimagesink, NULL);
 
-    gst_element_link_pads (videosrc, "src", avidemux, "sink");
+    gst_element_link_pads (videosrc, "src", decodebin, "sink");
 
-    g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
+    g_signal_connect (decodebin, "new-decoded-pad", G_CALLBACK (cb_new_pad), m_glimagesink);
 
-    GstPad* pad = gst_element_get_static_pad (ffdec_mpeg4, "src");
+    GstPad* pad = gst_element_get_static_pad (m_glimagesink, "sink");
     g_signal_connect(pad, "notify::caps", G_CALLBACK(cb_video_size), this);
     gst_object_unref (pad);
 }
@@ -154,9 +153,19 @@ gboolean Pipeline::bus_call (GstBus *bus, GstMessage *msg, Pipeline* p)
     return TRUE;
 }
 
-void Pipeline::cb_new_pad (GstElement* avidemux, GstPad* pad, GstElement* ffdec_mpeg4)
+void Pipeline::cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, GstElement* glimagesink)
 {
-    gst_element_link_pads (avidemux, "video_00", ffdec_mpeg4, "sink");
+    GstPad* glpad = gst_element_get_pad (glimagesink, "sink");
+    
+    //only link once 
+    if (GST_PAD_IS_LINKED (glpad)) 
+    {
+        g_object_unref (glpad);
+        return;
+    }
+    
+    if(!gst_pad_link (pad, glpad))
+        qDebug ("Failed to link decodebin to glimagesink");
 }
 
 void Pipeline::cb_video_size (GstPad* pad, GParamSpec* pspec, Pipeline* p)

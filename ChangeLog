@@ -1,3 +1,8 @@
+2008-07-17  Julien Isorce  <julien.isorce@gmail.com>
+
+	* tests/examples/videoxoverlay: Browse files to load
+	  a local video.
+
 2008-07-11  David Schleef  <ds@schleef.org>
 
 	* configure.ac: Add AG_GST_ARG_WITH_PLUGINS
@@ -51,7 +56,7 @@
 	  The plugin does not (I think) need to link against GL or libgstvideo,
 	  since our new gstreamer GL library already does that, but it does
 	  need to link against our brand-new libgstgl-0.10.
-	
+
 2008-01-31  Tim-Philipp Müller  <tim at centricular dot net>
 
 	* configure.ac:
