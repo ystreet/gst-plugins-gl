@@ -39,3 +39,6 @@ gst-launch-0.10 gltestsrc ! glfiltercube ! gldownload ! ximagesink
 gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glimagesink t. ! queue ! glimagesink 
 gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glupload ! glfiltercube ! glimagesink
 gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glupload ! glfiltercube ! glimagesink t. ! queue ! glcolorscale ! glimagesink
+
+gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! glfilterlaplacian ! glimagesink
+gst-launch-0.10 videotestsrc ! glupload ! glfilterlaplacian ! glfiltercube ! glimagesink

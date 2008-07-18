@@ -1,3 +1,42 @@
+2008-07-18  Julien Isorce  <julien.isorce@gmail.com>
+
+	* TODO:
+	add task 4 and 5
+
+	* gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstgldisplay.h
+	Fix check function about OpenGL >= 1.4
+	and Glew >= 1.4
+	(version in [1.0, 1.4[ was not detected
+
+	* gst-libs/gst/gl/gstglfilter.h
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglshader.h:
+	* gst/gl/gstgltestsrc.h
+	* gst/gl/gstopengl.c
+	* gst/gl/gstglfilterlaplacian.h
+	I just make sure to save them to LF but
+	git is still writting its wrong message.
+	Let me know if I have commited in CRLF
+	by mistake.
+
+	* gst/gl/gstglfilterlaplacian.c
+	Fix convolution_fragment_source to make
+	it compile on ATI. (size array must be explicit in
+	the declaration)
+
+	* tests/examples/qglwidgetxoverlay/qglrenderer.cpp
+	* tests/examples/qglwidgetxoverlay/qglrenderer.h
+	Forgot to push them in my previous push
+
+	* tests/pipelines
+	Add two funny example pipelines that use
+	the gstglfilterlaplacian
+
+	* win32/vs8/libgstopengl.vcproj
+	Add gstglshader.h, .c, and gstglfilterlaplacian.h, .c
+	to the project.
+
 2008-07-18  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst-libs/gst/gl/Makefile.am:
@@ -11,7 +50,7 @@
 	Import gstglshader stuff from cvs branch.
 	Add a demo laplacian filter to demonstrate how gstglshader can be
 	easily integrated with minimum effort. Note that at the moment it does
-	everything in the filter callback, I didn't use the InitFBO callback
+	everything in the filter callback, I didn't use the onInitFBO callback
 	to keep it simple.
 
 2008-07-18  Julien Isorce  <julien.isorce@gmail.com>

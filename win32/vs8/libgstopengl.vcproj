@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y Debug\libgstopengl.dll ..\..\..\gstreamer\bin\lib\gstreamer-0.10"
+				CommandLine="copy /Y Debug\libgstopengl.dll H:\svn\gstreamer\bin\lib\gstreamer-0.10"
 			/>
 		</Configuration>
 		<Configuration
@@ -170,7 +170,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y Release\libgstopengl.dll ..\..\..\gstreamer\bin\lib\gstreamer-0.10"
+				CommandLine="copy /Y Release\libgstopengl.dll H:\svn\gstreamer\bin\lib\gstreamer-0.10"
 			/>
 		</Configuration>
 	</Configurations>
@@ -233,6 +233,10 @@
 					RelativePath="..\..\gst-libs\gst\gl\gstglfilter.c"
 					>
 				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglshader.c"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="gstglelements"
@@ -255,6 +259,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglfilteredge.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglfilterlaplacian.c"
 					>
 				</File>
 				<File
@@ -323,6 +331,10 @@
 					RelativePath="..\..\gst-libs\gst\gl\gstglfilter.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglshader.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="gstglelements"
@@ -345,6 +357,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglfilteredge.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglfilterlaplacian.h"
 					>
 				</File>
 				<File
