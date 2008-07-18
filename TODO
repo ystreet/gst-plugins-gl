@@ -1,4 +1,7 @@
 //not arranged
+- 0: agree over a common coding style (I'd suggest gobject/gstreamer plus gnome
+  coding guidelines) as pointed here:
+http://gstreamer.freedesktop.org/data/doc/gstreamer/head/faq/html/chapter-developing.html
 
 - 1: make fargiolas stuffs work on this repository.
 
