@@ -6,7 +6,7 @@
 
 - 3: add GLEW check in configure.ac
 
-- 4: make the plugin (any pipeline) properly shutdown when Shader compilation failed (instead of g_assert)
+- 4: make the plugin (any pipeline) properly shutdown when Shader compilation failed
      (using "return GST_FLOW_UNEXPECTED")
 
 - 5: make the plugin (any pipeline) properly shutdown when one of the "check requirements" failed.
