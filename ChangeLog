@@ -1,3 +1,19 @@
+2008-07-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/Makefile.am:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglshader.h:
+	* gst/gl/gstglfilterlaplacian.c:
+	* gst/gl/gstglfilterlaplacian.h:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstopengl.c:
+
+	Import gstglshader stuff from cvs branch.
+	Add a demo laplacian filter to demonstrate how gstglshader can be
+	easily integrated with minimum effort. Note that at the moment it does
+	everything in the filter callback, I didn't use the InitFBO callback
+	to keep it simple.
+
 2008-07-18  Julien Isorce  <julien.isorce@gmail.com>
 
 	* tests/examples/qglwidgetxoverlay: Browse files to load
