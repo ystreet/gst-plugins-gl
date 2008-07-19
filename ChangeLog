@@ -1,3 +1,16 @@
+2008-07-19  Julien Isorce  <julien.isorce@gmail.com>
+
+	* TODO:
+	Fisnish task 2, add task 16
+
+	* gst-libs/gst/gl/gstgldisplay.c
+    * gst-libs/gst/gl/gstgldisplay.h
+    * gst/gl/gstglfilteredge.c
+    * gst/gl/gstglfilteredge.h
+    * gst/gl/gstglfilterlaplacian.c
+    * gst/gl/gstglfilterlaplacian.h
+	Use GstGLShader in the GLSL colorspace conversion
+
 2008-07-18  Julien Isorce  <julien.isorce@gmail.com>
 
 	* TODO:
