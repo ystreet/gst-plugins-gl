@@ -11,7 +11,7 @@ Required tools:
 An extra set of tools is required if you wish to build GStreamer out of
 CVS (using autogen.sh):
 
-autoconf 2.52 or better 
+autoconf 2.52 or better
 automake 1.5
 gettext 0.11.5
 libtool v1.4 or better
@@ -38,16 +38,16 @@ Recommended:	0.3.latest
 URL:		http://liboil.freedesktop.org/
 DebianPackage:	liboil0.3-dev
 
+Package:	glew
+Version:	>= 1.4.0
+Recommended:	1.5.latest
+URL:		http://glew.sourceforge.net/
+DebianPackage:	libglew1.5-dev
+
 
 Optional libraries:
 ===================
 
-This file lists supporting libraries for which gst-plugins-base contains
+This file lists supporting libraries for which gst-plugins-gl contains
 plugins, as well as their minimum version.  You can find the corresponding
 plugins in ext/(library)
-
-Package:	glew
-Version:	>= 1.5.0
-Recommended:	1.5.latest
-URL:		http://glew.sourceforge.net/
-DebianPackage:	libglew1.5-dev

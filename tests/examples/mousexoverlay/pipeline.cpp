@@ -264,7 +264,7 @@ void Pipeline::cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, Pi
         return;
     }
     
-    GstCaps* caps = gst_pad_get_caps (glpad);
+    GstCaps* caps = gst_pad_get_caps (pad);
     GstStructure* str = gst_caps_get_structure (caps, 0);
     if (!g_strrstr (gst_structure_get_name (str), "video")) 
     {
@@ -274,7 +274,9 @@ void Pipeline::cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, Pi
     }
     gst_caps_unref (caps);
 
-    gst_pad_link (pad, glpad);
+    GstPadLinkReturn ret = gst_pad_link (pad, glpad);
+    if (ret != GST_PAD_LINK_OK) 
+        g_warning ("Failed to link with decodebin!\n");
 
     p->show();
 }

@@ -5,7 +5,7 @@
      http://gstreamer.freedesktop.org/data/doc/gstreamer/head/faq/html/chapter-developing.html
      cap: I am ok, but I am not using emacs, so I let you run the re-indent script
 
-- 1: make fargiolas stuffs work on this repository.
+- 1: make Filippo's GstGLEffects work on this repository.
 
 (DONE) - 2: use GstGLShader in the GLSL colorspace conversion.
 
@@ -34,7 +34,9 @@
      it should be rewrite with the GLib API. To have a better design and handle X/WIN32 with interfaces
      instead of having a lot of "define WIN32" scopes.
      And make it thread safe in order to have one glthread per GstGLDisplay, instead of having a global glthread.
-     (the tests/examples/doublecube test shows the limitation of having only one (global) glthread).
+     The tests/examples/doublecube test shows the limitation of having only one (global) glthread.
+     (I am not really sure about this last remark since I made a modification in this example. Now the video speed is
+     very clean, even after moving/resizing the window).
 
 - 10: make colorspace conversion through ColorMatrix when GLSL (and mesa YCbCr) is not available and when imaging extension
       is available.

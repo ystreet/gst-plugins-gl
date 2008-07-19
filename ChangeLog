@@ -1,5 +1,27 @@
 2008-07-19  Julien Isorce  <julien.isorce@gmail.com>
 
+	* REQUIREMENTS
+	Glew 1.4
+
+    * TODO
+    Add a note to the task 9
+
+    * tests/examples/Makefile.am
+    * tests/examples/readme.txt
+    Update
+
+    * tests/examples/cubeyuv/main.cpp
+    * tests/examples/doublecube/main.cpp
+    The video location is given in the command line arguments.
+    Use decodebin instead of a fixed decoder and demuxer.
+
+    * tests/examples/mousexoverlay/pipeline.cpp
+    * tests/examples/videoxoverlay/pipeline.cpp
+    * tests/examples/qglwidgetxoverlay/pipeline.cpp
+    A check was wrong in the cb_new_back function.
+
+2008-07-19  Julien Isorce  <julien.isorce@gmail.com>
+
 	* TODO:
 	Fisnish task 2, add task 16
 

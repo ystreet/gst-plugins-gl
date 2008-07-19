@@ -41,10 +41,9 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
     return TRUE;
 }
 
-GstElement *textoverlay ;
 
 //display video framerate
-static void identityCallback (GstElement *src, GstBuffer  *buffer, GstPad *pad, gpointer user_data)
+static void identityCallback (GstElement *src, GstBuffer  *buffer, GstElement* textoverlay)
 {
   static GstClockTime last_timestamp = 0;
   static gint nbFrames = 0 ;
@@ -55,7 +54,7 @@ static void identityCallback (GstElement *src, GstBuffer  *buffer, GstPad *pad, 
   {
     std::ostringstream oss ;
     oss << "video framerate = " << nbFrames ;
-    std::string s(oss.str()) ;
+    std::string s(oss.str()) ;    
     g_object_set(G_OBJECT(textoverlay), "text", s.c_str(), NULL);
     last_timestamp = GST_BUFFER_TIMESTAMP(buffer) ;
     nbFrames = 0 ; 
@@ -89,7 +88,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
     
     if ((current_time.tv_sec - last_sec) >= 1)
     {
-        std::cout << "GRPHIC FPS = " << nbFrames << std::endl;
+        std::cout << "GRAPHIC FPS of the scene which contains the cube) = " << nbFrames << std::endl;
         nbFrames = 0;
         last_sec = current_time.tv_sec;
     }
@@ -147,129 +146,150 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 	      glTexCoord2f((gfloat)width, (gfloat)height); glVertex3f(-1.0f,  1.0f, -1.0f);
     glEnd();
 
-    xrot+=0.3f;
-    yrot+=0.2f;
-    zrot+=0.4f;
+    xrot+=0.03f;
+    yrot+=0.02f;
+    zrot+=0.04f;
 
     //return TRUE causes a postRedisplay
-    return FALSE;
+    //so you have to return FALSE to synchronise to have a graphic FPS
+    //equals to the input video frame rate
+
+    //Usually, we will not always return TRUE (or FALSE)
+    //For example, if you want a fixed graphic FPS equals to 60
+    //then you have to use the timeclock to return TRUE or FALSE
+    //in order to increase or decrease the FPS in real time
+    //to reach the 60.
+
+    return TRUE;
 }
 
 
-static void
-cb_new_pad (GstElement *avidemux, GstPad *pad, gpointer data)
+static void cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, GstElement* identity)
 {
-  GstElement *ffdec_mpeg4 = (GstElement*)data;
-  
-  gst_element_link_pads (avidemux, "video_00", ffdec_mpeg4, "sink"); 
+    GstPad* identity_pad = gst_element_get_pad (identity, "sink");
+    
+    //only link once 
+    if (GST_PAD_IS_LINKED (identity_pad)) 
+    {
+        g_object_unref (identity_pad);
+        return;
+    }
+
+    GstCaps* caps = gst_pad_get_caps (pad);
+    GstStructure* str = gst_caps_get_structure (caps, 0);
+    if (!g_strrstr (gst_structure_get_name (str), "video")) 
+    {
+        gst_caps_unref (caps);
+        gst_object_unref (identity_pad);
+        return;
+    }
+    gst_caps_unref (caps);
+
+    GstPadLinkReturn ret = gst_pad_link (pad, identity_pad);
+    if (ret != GST_PAD_LINK_OK) 
+        g_warning ("Failed to link with decodebin!\n");   
 }
 
 
 gint main (gint argc, gchar *argv[])
 {
-    GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *avidemux, *ffdec_mpeg4, *identity, *colorspace, *tee;
-    GstElement *queue0, *glupload0, *glimagesink0; 
-    GstElement *queue1, *glimagesink1;
 
-    GMainLoop *loop;
-    GstBus *bus;
+    if (argc != 2)
+    {
+        g_warning ("usage: doublecube.exe videolocation\n");
+        return -1;
+    }
+    
+    std::string video_location(argv[1]);
 
     /* initialization */
     gst_init (&argc, &argv);
-    loop = g_main_loop_new (NULL, FALSE);
+    GMainLoop* loop = g_main_loop_new (NULL, FALSE);
 
     /* create elements */
-    pipeline = gst_pipeline_new ("pipeline");
+    GstElement* pipeline = gst_pipeline_new ("pipeline");
 
     /* watch for messages on the pipeline's bus (note that this will only
      * work like this when a GLib main loop is running) */
-    bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
+    GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
     gst_bus_add_watch (bus, bus_call, loop);
     gst_object_unref (bus);
 
     /* create elements */
-    videosrc = gst_element_factory_make ("filesrc", "filesrc0");
-    avidemux = gst_element_factory_make ("avidemux", "avidemux0");
-    ffdec_mpeg4 = gst_element_factory_make ("ffdec_mpeg4", "ffdec_mpeg40");
-    identity  = gst_element_factory_make ("identity", "identity0");
-    textoverlay = gst_element_factory_make ("textoverlay", "textoverlay0");
-    colorspace = gst_element_factory_make ("ffmpegcolorspace", "ffmpegcolorspace0");
-    tee = gst_element_factory_make ("tee", "tee0");
+    GstElement* videosrc = gst_element_factory_make ("filesrc", "filesrc0");
+    GstElement* decodebin = gst_element_factory_make ("decodebin", "decodebin0");
+    GstElement* identity  = gst_element_factory_make ("identity", "identity0");
+    GstElement* ffmpegcolorspace = gst_element_factory_make ("ffmpegcolorspace", "ffmpegcolorspace0");
+    GstElement* textoverlay = gst_element_factory_make ("textoverlay", "textoverlay0"); //textoverlay required I420
+    GstElement* tee = gst_element_factory_make ("tee", "tee0");
 
-    queue0 = gst_element_factory_make ("queue", "queue0");
-    glupload0  = gst_element_factory_make ("glupload", "glupload0");
-    glimagesink0  = gst_element_factory_make ("glimagesink", "glimagesink0");
+    GstElement* queue0 = gst_element_factory_make ("queue", "queue0");
+    GstElement* glupload0  = gst_element_factory_make ("glupload", "glupload0");
+    GstElement* glimagesink0  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
-    queue1 = gst_element_factory_make ("queue", "queue1");
-    glimagesink1  = gst_element_factory_make ("glimagesink", "glimagesink1");
+    GstElement* queue1 = gst_element_factory_make ("queue", "queue1");
+    GstElement* glimagesink1  = gst_element_factory_make ("glimagesink", "glimagesink1");
 
 
-    if (!videosrc || !avidemux || !ffdec_mpeg4 || !identity || !textoverlay || !colorspace || !tee ||
+    if (!videosrc || !decodebin || !identity || !ffmpegcolorspace || !textoverlay || !tee ||
         !queue0 || !glupload0 || !glimagesink0 ||
         !queue1 || !glimagesink1) 
     {
-        g_print ("one element could not be found \n");
+        g_warning ("one element could not be found \n");
         return -1;
     }
 
-    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-gl",
-                                           "width", G_TYPE_INT, 300,
-                                           "height", G_TYPE_INT, 200,
-                                           NULL) ;
+    GstCaps* cubecaps = gst_caps_new_simple("video/x-raw-gl",
+                                            "width", G_TYPE_INT, 600,
+                                            "height", G_TYPE_INT, 400,
+                                            NULL) ;
 
     /* configure elements */
-    g_object_set(G_OBJECT(videosrc), "location", "data/lost.avi", NULL);
-    g_signal_connect(identity, "handoff", G_CALLBACK(identityCallback), NULL) ;
+    g_object_set(G_OBJECT(videosrc), "num-buffers", 800, NULL);
+    g_object_set(G_OBJECT(videosrc), "location", video_location.c_str(), NULL);
+    g_signal_connect(identity, "handoff", G_CALLBACK(identityCallback), textoverlay) ;
     g_object_set(G_OBJECT(textoverlay), "font_desc", "Ahafoni CLM Bold 30", NULL);
     g_object_set(G_OBJECT(glimagesink0), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glimagesink0), "client-draw-callback", drawCallback, NULL);
-
-
-	GstCaps *caps = gst_caps_new_simple("video/x-raw-rgb", NULL) ;
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, avidemux, ffdec_mpeg4, identity, textoverlay, colorspace, tee, 
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, decodebin, identity, ffmpegcolorspace, textoverlay, tee, 
                                           queue0, glupload0, glimagesink0, 
                                           queue1, glimagesink1, NULL);
     
 
-    gst_element_link_pads (videosrc, "src", avidemux, "sink");
+    gst_element_link_pads (videosrc, "src", decodebin, "sink");
 
-    g_signal_connect (avidemux, "pad-added", G_CALLBACK (cb_new_pad), ffdec_mpeg4);
+    g_signal_connect (decodebin, "new-decoded-pad", G_CALLBACK (cb_new_pad), identity);
 
-    if (!gst_element_link_many(ffdec_mpeg4, identity, textoverlay, colorspace, NULL)) 
+    if (!gst_element_link_many(identity, ffmpegcolorspace, textoverlay, tee, NULL)) 
     {
-        g_print ("Failed to link one or more elements!\n");
+        g_warning ("Failed to link one or more elements bettween identity and tee!\n");
         return -1;
     }
-	gboolean link_ok = gst_element_link_filtered(colorspace, tee, caps) ;
-    gst_caps_unref(caps) ;
-    if(!link_ok)
-    {
-        g_warning("Failed to link colorspace to tee!\n") ;
-        return -1 ;
-    }
+
 	if (!gst_element_link_many(tee, queue0, glupload0, NULL)) 
     {
-        g_print ("Failed to link one or more elements!\n");
+        g_warning ("Failed to link one or more elements bettween tee and glupload!\n");
         return -1;
     }
-    link_ok = gst_element_link_filtered(glupload0, glimagesink0, outcaps) ;
-    gst_caps_unref(outcaps) ;
+
+    gboolean link_ok = gst_element_link_filtered(glupload0, glimagesink0, cubecaps) ;
+    gst_caps_unref(cubecaps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link glupload0 to glimagesink!\n") ;
+        g_warning("Failed to link glupload0 to glimagesink0!\n") ;
         return -1 ;
     }
+
     if (!gst_element_link_many(tee, queue1, glimagesink1, NULL)) 
     {
-        g_print ("Failed to link one or more elements!\n");
+        g_warning ("Failed to link one or more elements bettween tee and glimagesink1!\n");
         return -1;
     }
     
     /* run */
-    ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
+    GstStateChangeReturn ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
     if (ret == GST_STATE_CHANGE_FAILURE) 
     {
         g_print ("Failed to start up pipeline!\n");
