@@ -1,3 +1,16 @@
+2008-07-20  Julien Isorce  <julien.isorce@gmail.com>
+
+    * TODO
+    * gst-libs/gst/gl/gstgldisplay.c
+    * gst-libs/gst/gl/gstgldisplay.h
+    * gst-libs/gst/gl/gstglfilter.c
+    * gst/gl/gstglcolorscale.c
+    * gst/gl/gstgldownload.c
+    * gst/gl/gstglimagesink.c
+    * gst/gl/gstgltestsrc.c
+    * gst/gl/gstglupload.c
+    Finish todo task 5
+
 2008-07-19  Julien Isorce  <julien.isorce@gmail.com>
 
 	* REQUIREMENTS

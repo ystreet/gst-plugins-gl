@@ -14,9 +14,9 @@
 - 4: make the plugin (any pipeline) properly shutdown when Shader compilation failed.
      (using "return GST_FLOW_UNEXPECTED")
 
-- 5: make the plugin (any pipeline) properly shutdown when one of the "check requirements" failed.
-     (for example when FBO extension is not available)
-     For now it properly shutdown only when using the glimagesink
+(DONE) - 5: make the plugin (any pipeline) properly shutdown when one of the "check requirements" failed.
+            (for example when FBO extension is not available)
+            For now it properly shutdown only when using the glimagesink
 
 - 6: make an example named "filterxoverlay" similar to gtkxoverlay one. But use a more complex pipeline
      involving several glfilters. In order to test switching bettween gst states on it.
