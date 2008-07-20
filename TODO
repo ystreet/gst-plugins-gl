@@ -11,8 +11,8 @@
 
 - 3: add GLEW check in configure.ac
 
-- 4: make the plugin (any pipeline) properly shutdown when Shader compilation failed.
-     (using "return GST_FLOW_UNEXPECTED")
+(DONE) - 4: make the plugin (any pipeline) properly shutdown when Shader compilation failed.
+            (using "return GST_FLOW_UNEXPECTED")
 
 (DONE) - 5: make the plugin (any pipeline) properly shutdown when one of the "check requirements" failed.
             (for example when FBO extension is not available)
