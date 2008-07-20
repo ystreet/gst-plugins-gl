@@ -1,5 +1,5 @@
 
-SUBDIRS = cube cubeyuv doublecube
+SUBDIRS = cube cubeyuv doublecube gtkxoverlay
 
 #SUBDIRS = cube cubeyuv doublecube gtkxoverlay \
 #	mousexoverlay qglwidgetxoverlay \
