@@ -1,7 +1,5 @@
 
 SUBDIRS = cube cubeyuv doublecube gtkxoverlay
 
-#SUBDIRS = cube cubeyuv doublecube gtkxoverlay \
-#	mousexoverlay qglwidgetxoverlay \
-#	recordgraphic videoxoverlay
-
+#Will be replaced by:
+#SUBDIRS = generic gtk qt wx

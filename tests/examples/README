@@ -1,0 +1,7 @@
+--- Description of the examples ---
+
+- generic: the video is loaded from the command line.
+
+- gui: use the xoverlay interface through an user interface,
+       and using cross-platform framework (gtk, qt or wx).
+       the video is loaded from the gui.

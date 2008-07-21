@@ -1,5 +1,25 @@
 2008-07-21  Julien Isorce  <julien.isorce@gmail.com>
 
+    * tests/examples/Makefile.am
+    * tests/examples/README
+    * tests/examples/cubeyuv/main.cpp
+    * tests/examples/doublecube/main.cpp
+    * tests/examples/generic/Makefile.am
+    * tests/examples/generic/README
+    * tests/examples/gtk/Makefile.am
+    * tests/examples/gtk/README
+    * tests/examples/gtk/filterxoverlay/Makefile.am
+    * tests/examples/gtk/filterxoverlay/filterxoverlay.vcproj
+    * tests/examples/gtk/filterxoverlay/main.cpp
+    * tests/examples/gtk/gtk.sln
+    * tests/examples/qt/Makefile.am
+    * tests/examples/qt/README
+    * tests/examples/readme.txt
+    * tests/examples/wx/Makefile.am
+    Prepare to arrange/classify the examples
+
+2008-07-21  Julien Isorce  <julien.isorce@gmail.com>
+
     * TODO
     * gst-libs/gst/gl/gstgldisplay.c
     Finish todo task 4

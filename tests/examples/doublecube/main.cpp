@@ -219,7 +219,6 @@ gint main (gint argc, gchar *argv[])
     GstElement* videosrc = gst_element_factory_make ("filesrc", "filesrc0");
     GstElement* decodebin = gst_element_factory_make ("decodebin", "decodebin0");
     GstElement* identity  = gst_element_factory_make ("identity", "identity0");
-    GstElement* ffmpegcolorspace = gst_element_factory_make ("ffmpegcolorspace", "ffmpegcolorspace0");
     GstElement* textoverlay = gst_element_factory_make ("textoverlay", "textoverlay0"); //textoverlay required I420
     GstElement* tee = gst_element_factory_make ("tee", "tee0");
 
@@ -231,7 +230,7 @@ gint main (gint argc, gchar *argv[])
     GstElement* glimagesink1  = gst_element_factory_make ("glimagesink", "glimagesink1");
 
 
-    if (!videosrc || !decodebin || !identity || !ffmpegcolorspace || !textoverlay || !tee ||
+    if (!videosrc || !decodebin || !identity || !textoverlay || !tee ||
         !queue0 || !glupload0 || !glimagesink0 ||
         !queue1 || !glimagesink1) 
     {
@@ -253,7 +252,7 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(glimagesink0), "client-draw-callback", drawCallback, NULL);
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, decodebin, identity, ffmpegcolorspace, textoverlay, tee, 
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, decodebin, identity, textoverlay, tee, 
                                           queue0, glupload0, glimagesink0, 
                                           queue1, glimagesink1, NULL);
     
@@ -262,15 +261,15 @@ gint main (gint argc, gchar *argv[])
 
     g_signal_connect (decodebin, "new-decoded-pad", G_CALLBACK (cb_new_pad), identity);
 
-    if (!gst_element_link_many(identity, ffmpegcolorspace, textoverlay, tee, NULL)) 
+    if (!gst_element_link_pads(identity, "src", textoverlay, "video_sink")) 
     {
-        g_warning ("Failed to link one or more elements bettween identity and tee!\n");
+        g_print ("Failed to link identity to textoverlay!\n");
         return -1;
     }
-
-	if (!gst_element_link_many(tee, queue0, glupload0, NULL)) 
+    
+    if (!gst_element_link_many(textoverlay, tee, queue0, glupload0, NULL)) 
     {
-        g_warning ("Failed to link one or more elements bettween tee and glupload!\n");
+        g_warning ("Failed to link one or more elements bettween textoverlay and glupload0!\n");
         return -1;
     }
 
