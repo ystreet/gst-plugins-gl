@@ -1,2 +1,2 @@
 
-#SUBDIRS = cube cubeyuv doublecube
+SUBDIRS = cube cubeyuv doublecube #recordgraphic
