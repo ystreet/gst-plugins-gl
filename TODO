@@ -5,7 +5,8 @@
      http://gstreamer.freedesktop.org/data/doc/gstreamer/head/faq/html/chapter-developing.html
      cap: I am ok, but I am not using emacs, so I let you run the re-indent script
 
-- 1: make Filippo's GstGLEffects work on this repository.
+- 1: make Filippo's GstGLEffects work on this repository. 
+     (ALMOST because glfilterblur works and it's an example of "multiple step rendering" filter)
 
 (DONE) - 2: use GstGLShader in the GLSL colorspace conversion.
 

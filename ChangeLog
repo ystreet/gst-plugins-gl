@@ -1,4 +1,21 @@
 2008-07-31  Julien Isorce  <julien.isorce@gmail.com>
+    
+    * gst/gl/gstglfilterblur.h
+    * gst/gl/gstglfilterblur.c
+    * gst/gl/gstopengl.c
+    Make the glfilterblur works on the master branch.
+
+    * gst/gl/gstglfilterlaplacian.c
+    Up a comment
+
+    * gst/gl/Makefile.am
+    * unix/codeblocks/gstopengl/gstopengl.cbp
+    Add filterblur to build
+
+    * TODO
+    Task 1 almost done (see the comment)
+
+2008-07-31  Julien Isorce  <julien.isorce@gmail.com>
     * tests/examples/qt/*
     Fix  warnings under linux
     and add some build instructions
