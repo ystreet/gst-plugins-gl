@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
         ".", "Format (*.avi *.mkv *.ogg *.asf *.mov)");
 
     if (videolcoation.isEmpty())
-        return a.exit();
+        return -1;
 
     QRenderer w(videolcoation);
     w.setWindowTitle("glimagesink implements the gstxoverlay interface");

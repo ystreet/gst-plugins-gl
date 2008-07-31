@@ -26,7 +26,8 @@ unix {
 DEFINES += UNIX
 INCLUDEPATH += GeneratedFiles \
     GeneratedFiles/Debug \
-	/usr/include/gstreamer-0.10 \
+    /usr/include/gstreamer-0.10 \
+    /usr/local/include/gstreamer-0.10 \
     /usr/include/glib-2.0 \
     /usr/lib/glib-2.0/include \
     /usr/include/libxml2
