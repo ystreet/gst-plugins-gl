@@ -1,3 +1,8 @@
+2008-07-31  Julien Isorce  <julien.isorce@gmail.com>
+    * tests/examples/qt/*
+    Fix  warnings under linux
+    and add some build instructions
+
 2008-07-22  Julien Isorce  <julien.isorce@gmail.com>
     Finish to arrange the examples
 
