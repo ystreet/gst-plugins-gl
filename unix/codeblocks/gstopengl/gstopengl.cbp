@@ -43,6 +43,7 @@
 			<Add directory="/usr/include/glib-2.0" />
 			<Add directory="/usr/include/libxml2" />
 			<Add directory="/usr/include/gstreamer-0.10" />
+			<Add directory="/usr/local/include/gstreamer-0.10" />
 			<Add directory="../../../gst-libs/gst/freeglut" />
 			<Add directory="../../../gst-libs/gst/gl" />
 			<Add directory="../../../gst/gl" />
@@ -98,6 +99,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst-libs/gst/gl/gstglfilter.h" />
+		<Unit filename="../../../gst-libs/gst/gl/gstglshader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst-libs/gst/gl/gstglshader.h" />
 		<Unit filename="../../../gst/gl/gltestsrc.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -122,6 +127,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglfilteredge.h" />
+		<Unit filename="../../../gst/gl/gstglfilterlaplacian.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglfilterlaplacian.h" />
 		<Unit filename="../../../gst/gl/gstglimagesink.c">
 			<Option compilerVar="CC" />
 		</Unit>
