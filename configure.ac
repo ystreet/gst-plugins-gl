@@ -361,10 +361,15 @@ pkgconfig/gstreamer-gl-uninstalled.pc
 tests/Makefile
 tests/check/Makefile
 tests/examples/Makefile
+tests/examples/generic/Makefile
 tests/examples/generic/cube/Makefile
 tests/examples/generic/cubeyuv/Makefile
 tests/examples/generic/doublecube/Makefile
+tests/examples/gtk/Makefile
 tests/examples/gtk/gtkxoverlay/Makefile
+tests/examples/gtk/filterxoverlay/Makefile
+tests/examples/qt/Makefile
+tests/examples/wx/Makefile
 tests/icles/Makefile
 docs/Makefile
 docs/libs/Makefile
