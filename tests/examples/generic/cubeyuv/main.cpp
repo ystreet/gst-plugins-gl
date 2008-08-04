@@ -167,7 +167,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 
 static void cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, GstElement* identity)
 {
-    GstPad* identity_pad = gst_element_get_pad (identity, "sink");
+    GstPad* identity_pad = gst_element_get_static_pad (identity, "sink");
     
     //only link once 
     if (GST_PAD_IS_LINKED (identity_pad)) 
