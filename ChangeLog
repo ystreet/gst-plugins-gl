@@ -1,4 +1,11 @@
 2008-08-04  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	Fix GL_STACK_OVERFLOW caused by PopMatrix called right before the
+	correspondent glMatrixMode.
+
+2008-08-04  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst-libs/gst/gl/gstgldisplay.h:
 	Don't call glTexImage so much times for each frame in the upload
