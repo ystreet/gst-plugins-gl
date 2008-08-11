@@ -126,10 +126,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglfiltercube.h" />
-		<Unit filename="../../../gst/gl/gstglfilteredge.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst/gl/gstglfilteredge.h" />
 		<Unit filename="../../../gst/gl/gstglfilterlaplacian.c">
 			<Option compilerVar="CC" />
 		</Unit>
