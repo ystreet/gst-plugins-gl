@@ -1,5 +1,11 @@
 2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/gstglfilterblur.c:
+	  remove gstglfilterblur.h, it's easier to have everything in the
+	  same file
+
+2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst-libs/gst/gl/gstgldisplay.h:
 	* gst-libs/gst/gl/gstglfilter.c:
