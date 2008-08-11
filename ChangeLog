@@ -1,3 +1,8 @@
+2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  remove an unneeded (really?) glTexImage
+
 2008-08-11  Julien Isorce  <julien.isorce@gmail.com>
     
     * gst-libs/gst/gl/gstglbuffer.c
