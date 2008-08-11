@@ -1,3 +1,14 @@
+2008-08-11  Julien Isorce  <julien.isorce@gmail.com>
+    
+    * gst-libs/gst/gl/gstglbuffer.c
+    * gst-libs/gst/gl/gstgldisplay.c
+    * gst-libs/gst/gl/gstgldisplay.h
+    * gst/gl/gstglfilterblur.c
+      The GData texture pool is now splitted in several GQueue (one per framesize).
+      So glTexImage2D(w,h,NULL) is called only one time (memory allocation).
+      So I could remove the glTexImage2D(w,h,NULL) call in 
+      the gst_gl_display_thread_use_fbo func.
+
 2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c:
