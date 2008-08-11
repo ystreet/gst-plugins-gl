@@ -1,3 +1,11 @@
+2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst/gl/gstglfilterblur.c:
+	  Add a generic action to be able to execute arbitrary gl code
+	  within the gl thread with less pain
+
 2008-08-10  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c:
