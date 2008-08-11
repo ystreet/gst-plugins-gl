@@ -1,5 +1,11 @@
 2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  Fix rgb issue. Current program should always be set to 0 when a
+	  new texture is attached to a fbo.
+
+2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/gstglfilterblur.c:
 	  remove gstglfilterblur.h, it's easier to have everything in the
 	  same file
