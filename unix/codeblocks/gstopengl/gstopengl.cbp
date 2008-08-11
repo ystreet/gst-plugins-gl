@@ -122,7 +122,6 @@
 		<Unit filename="../../../gst/gl/gstglfilterblur.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../../../gst/gl/gstglfilterblur.h" />
 		<Unit filename="../../../gst/gl/gstglfiltercube.c">
 			<Option compilerVar="CC" />
 		</Unit>
