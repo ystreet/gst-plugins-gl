@@ -1,6 +1,14 @@
 2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst/gl/gstglfilterblur.c:
+	  Try to genereate textures within gstglfilterblur to see if the
+	  new thread_use_fbo works both with textures from the pool and
+	  custom ones.
+
+2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
 	  remove an unneeded (really?) glTexImage
 
 2008-08-11  Julien Isorce  <julien.isorce@gmail.com>
