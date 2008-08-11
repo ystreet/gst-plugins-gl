@@ -1,2 +1,0 @@
-- gstglfilterblur doesn't work with rgb, why?
-- there is some flickering/glitch with video streams, there is something like an orizonthal black line due to screen refresh.

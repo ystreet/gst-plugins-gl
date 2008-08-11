@@ -1,5 +1,11 @@
 2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* BUGS:
+	  remove fixed bugs: rgb is fixed, flickering seems to belong to my
+	  webcams or v4l*src since it happens with ximagesink too
+
+2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst/gl/gstglfilterblur.c:
 	  Try to genereate textures within gstglfilterblur to see if the
