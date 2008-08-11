@@ -2,6 +2,17 @@
 
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst-libs/gst/gl/gstglfilter.h:
+	* gst/gl/gstglfilterblur.c:
+	  Add init and reset callbacks in GstGLFilter to run arbitrary gl
+	  code at start and stop. Useful to init and cleanup custom gl
+	  resources.
+
+2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
 	* gst/gl/gstglfilterblur.c:
 	  Add a generic action to be able to execute arbitrary gl code
 	  within the gl thread with less pain
