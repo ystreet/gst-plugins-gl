@@ -1,3 +1,10 @@
+2008-08-12  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/gstgleffects.c:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstopengl.c:
+	  added gstgleffects element, doesn't work yet, just a skeleton.
+
 2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* BUGS:
