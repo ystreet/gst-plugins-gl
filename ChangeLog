@@ -1,6 +1,17 @@
 2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
     
     * gst-libs/gst/gl/gstgldisplay.c
+    * gst-libs/gst/gl/gstgldisplay.h
+    * gst/gl/gstglcolorscale.c
+    * gst/gl/gstglimagesink.c
+    * gst/gl/gstglupload.c
+    * tests/pipelines
+    Move gst_gl_display_thread_do_upload_make from 
+    gst_gl_display_thread_do_upload to gst_gl_display_thread_init_upload
+
+2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
+    
+    * gst-libs/gst/gl/gstgldisplay.c
     * gst-libs/gst/freeglut/freeglut_main.c
     * gst/gl/BUGS
     Fix a crash that could happen when closing a window on linux
