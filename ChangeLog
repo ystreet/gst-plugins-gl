@@ -1,3 +1,11 @@
+2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
+    
+    * gst-libs/gst/gl/gstgldisplay.c
+    * gst-libs/gst/freeglut/freeglut_main.c
+    * gst/gl/BUGS
+    Fix a crash that could happen when closing a window on linux
+    when using at least two gl context.
+
 2008-08-12  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/gstgleffects.c:

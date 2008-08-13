@@ -548,7 +548,7 @@ void FGAPIENTRY glutMainLoopEvent( void )
 
         case DestroyNotify:
             //fgAddToWindowDestroyList ( window );
-            INVOKE_WCB( *window, Destroy, ( ) );
+            //INVOKE_WCB( *window, Destroy, ( ) );
             break;
 
         case Expose:
