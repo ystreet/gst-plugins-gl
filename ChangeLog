@@ -1,3 +1,13 @@
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/effects/gstgleffectsqueeze.c:
+	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffects.h:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstgleffects.c:
+	  import squeeze effect from cvs
+
 2008-08-13  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/effects/gstgleffectidentity.c:
