@@ -115,6 +115,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstgldownload.h" />
+		<Unit filename="../../../gst/gl/gstgleffects.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst/gl/gstglfilterapp.c">
 			<Option compilerVar="CC" />
 		</Unit>

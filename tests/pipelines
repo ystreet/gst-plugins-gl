@@ -4,6 +4,7 @@ gst-launch-0.10 videotestsrc ! glimagesink
 gst-launch-0.10 videotestsrc num_buffers = 200 ! glimagesink
 gst-launch-0.10 videotestsrc ! "video/x-raw-yuv, format=(fourcc)I420, width=201, height=103" ! glimagesink
 gst-launch-0.10 videotestsrc ! "video/x-raw-rgb, width=640, height=480" ! glimagesink
+gst-launch-0.10 videotestsrc ! "video/x-raw-yuv, format=(fourcc)YV12" ! glimagesink
 
 gst-launch-0.10 gltestsrc ! glimagesink
 gst-launch-0.10 gltestsrc ! "video/x-raw-gl, width=720, height=576" ! glimagesink
@@ -30,15 +31,19 @@ gst-launch-0.10 gltestsrc ! gldownload ! glcolorscale ! glimagesink
 
 gst-launch-0.10 videotestsrc ! glupload ! gldownload ! ximagesink
 gst-launch-0.10 videotestsrc ! glupload ! gldownload ! glimagesink
-gst-launch-0.10 videotestsrc ! glupload ! gldownload ! video/x-raw-yuv, format=(fourcc)UYVY ! glimagesink
-gst-launch-0.10 videotestsrc ! glupload ! gldownload ! video/x-raw-yuv, format=(fourcc)AYUV ! glimagesink
-gst-launch-0.10 videotestsrc num_buffers=200 ! glupload ! gldownload ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
+gst-launch-0.10 videotestsrc ! glupload ! gldownload ! "video/x-raw-yuv, format=(fourcc)UYVY" ! glimagesink
+gst-launch-0.10 videotestsrc ! glupload ! gldownload ! "video/x-raw-yuv, format=(fourcc)AYUV" ! glimagesink
+
 gst-launch-0.10 videotestsrc num_buffers=200 ! glupload !  video/x-raw-gl, width=720, height=576 ! glfiltercube ! video/x-raw-gl, width=320, height=240 ! gldownload ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
 gst-launch-0.10 gltestsrc ! glfiltercube ! gldownload ! ximagesink
+gst-launch-0.10 videotestsrc ! glupload ! gldownload ! glupload ! gldownload ! glupload ! ximagesink
+gst-launch-0.10 videotestsrc ! glupload ! gldownload ! glupload ! gldownload ! glupload ! gldownload ! glupload ! ximagesink
 
-gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glimagesink t. ! queue ! glimagesink 
+gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glimagesink t. ! queue ! glimagesink
 gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glupload ! glfiltercube ! glimagesink
 gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glupload ! glfiltercube ! glimagesink t. ! queue ! glcolorscale ! glimagesink
 
 gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! glfilterlaplacian ! glimagesink
 gst-launch-0.10 videotestsrc ! glupload ! glfilterlaplacian ! glfiltercube ! glimagesink
+
+gst-launch-0.10 videotestsrc ! glupload ! glfilterblur ! glimagesink
