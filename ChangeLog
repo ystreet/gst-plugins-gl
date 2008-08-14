@@ -1,6 +1,14 @@
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/effects/gstgleffectglow.c:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	  rename blend_fragment_source to sum_fragment_source and add
+	  uniform blending parameters
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/effects/gstgleffectglow.c:
 	* gst/gl/gstgleffects.h:
 	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffectssources.c:
