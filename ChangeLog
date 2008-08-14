@@ -1,5 +1,18 @@
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/effects/gstgleffectrgbtocurve.c:
+	* gst/gl/effects/gstgleffectscurves.h:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstgleffects.h:
+	  add rgb_to_luma_fragment source and correspondent effect. use the
+	  latter for a cross processing effect.
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/effects/gstgleffectlumatocurve.c:
 	* gst/gl/effects/gstgleffectscurves.h:
 	* gst/gl/Makefile.am:
