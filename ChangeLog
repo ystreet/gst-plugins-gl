@@ -1,6 +1,11 @@
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/effects/gstgleffectscurves.h:
+	  cleanup curves header
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/effects/gstgleffectscurves.h:
 	  better cross processing curve
 
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
