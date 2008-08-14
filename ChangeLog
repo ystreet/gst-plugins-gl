@@ -1,5 +1,15 @@
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/effects/gstgleffectstretch.c:
+	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffects.h:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstgleffects.c:
+	  import stretch effect from cvs
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/effects/gstgleffectsqueeze.c:
 	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffects.h:
