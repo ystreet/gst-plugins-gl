@@ -48,3 +48,5 @@ gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! glfilterlaplacian ! gli
 gst-launch-0.10 videotestsrc ! glupload ! glfilterlaplacian ! glfiltercube ! glimagesink
 
 gst-launch-0.10 videotestsrc ! glupload ! glfilterblur ! glimagesink
+
+gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! gleffects effect=3 ! glimagesink
