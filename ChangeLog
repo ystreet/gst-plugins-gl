@@ -1,5 +1,22 @@
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* tests/examples/gtk/fxtest/fxtest.c:
+	* BUGS:
+	* ChangeLog:
+	  Add support for command line parsing to fxtest (try fxtest
+	  videotestsrc ! desired caps ! identity). Report a new issue on
+	  BUGS.
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* tests/examples/gtk/fxtest/fxtest.c:
+	* BUGS:
+	  Add support for command line parsing to fxtest (try "fxtest
+	  videotestsrc ! desired caps ! identity"). Report a new issue on
+	  BUGS.
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* tests/examples/gtk/fxtest/Makefile.am:
 	* tests/examples/gtk/fxtest/fxtest.c:
 	* configure.ac:
