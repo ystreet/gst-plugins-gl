@@ -104,13 +104,29 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst-libs/gst/gl/gstglshader.h" />
+		<Unit filename="../../../gst/gl/effects/gstgleffectbulge.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/effects/gstgleffectfisheye.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst/gl/effects/gstgleffectglow.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/effects/gstgleffectidentity.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="../../../gst/gl/effects/gstgleffectlumatocurve.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst/gl/effects/gstgleffectmirror.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/effects/gstgleffectrgbtocurve.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/effects/gstgleffectscurves.h" />
+		<Unit filename="../../../gst/gl/effects/gstgleffectsquare.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/effects/gstgleffectsqueeze.c">
@@ -121,6 +137,12 @@
 		</Unit>
 		<Unit filename="../../../gst/gl/effects/gstgleffectssources.h" />
 		<Unit filename="../../../gst/gl/effects/gstgleffectstretch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/effects/gstgleffecttunnel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/effects/gstgleffecttwirl.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gltestsrc.c">
