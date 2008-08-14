@@ -1,5 +1,19 @@
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* tests/examples/gtk/fxtest/Makefile.am:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	* configure.ac:
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst-libs/gst/gl/gstglfilter.h:
+	* gst/gl/effects/gstgleffectrgbtocurve.c:
+	* gst/gl/gstgleffects.c:
+	* tests/examples/gtk/Makefile.am:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	  import fxtest (little gtk app to easily test effects) from cvs
+	  branch, fixed rgbtocurve.
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/effects/gstgleffectbulge.c:
 	* gst/gl/effects/gstgleffectfisheye.c:
 	* gst/gl/effects/gstgleffectsdistortion.c:

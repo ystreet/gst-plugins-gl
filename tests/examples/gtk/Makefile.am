@@ -1,2 +1,2 @@
 
-SUBDIRS = gtkxoverlay filterxoverlay
+SUBDIRS = gtkxoverlay filterxoverlay fxtest
