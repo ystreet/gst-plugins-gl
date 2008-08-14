@@ -1,5 +1,16 @@
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/effects/gstgleffectglow.c:
+	* gst/gl/gstgleffects.h:
+	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstgleffects.c:
+	  import glow effect (maybe the most tricky, 4 rendering steps) from
+	  cvs branch
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/effects/gstgleffectstretch.c:
 	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffects.h:
