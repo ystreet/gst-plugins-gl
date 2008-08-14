@@ -1,5 +1,21 @@
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/effects/gstgleffectbulge.c:
+	* gst/gl/effects/gstgleffectfisheye.c:
+	* gst/gl/effects/gstgleffectsdistortion.c:
+	* gst/gl/effects/gstgleffectsquare.c:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/effects/gstgleffecttunnel.c:
+	* gst/gl/effects/gstgleffecttwirl.c:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstgleffects.h:
+	  import remaining distortion effects from cvs branch (fisheye,
+	  twirl, bulge, tunnel, square)
+
+2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/effects/gstgleffectscurves.h:
 	  cleanup curves header
 
