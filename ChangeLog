@@ -1,5 +1,10 @@
 2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* tests/examples/gtk/fxtest/fxtest.c:
+	  minor cleanup in fxtest
+
+2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/effects/gstgleffectbulge.c:
 	* gst/gl/effects/gstgleffectfisheye.c:
 	* gst/gl/effects/gstgleffectmirror.c:
