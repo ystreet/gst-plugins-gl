@@ -1,5 +1,17 @@
 2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/effects/gstgleffectbulge.c:
+	* gst/gl/effects/gstgleffectfisheye.c:
+	* gst/gl/effects/gstgleffectmirror.c:
+	* gst/gl/effects/gstgleffectsquare.c:
+	* gst/gl/effects/gstgleffectsqueeze.c:
+	* gst/gl/effects/gstgleffectstretch.c:
+	* gst/gl/effects/gstgleffecttunnel.c:
+	* gst/gl/effects/gstgleffecttwirl.c:
+	  distortion effect cleanup
+
+2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* BUGS:
 	* tests/examples/gtk/fxtest/fxtest.c:
 	  improve fxtest command line option handling, default to
