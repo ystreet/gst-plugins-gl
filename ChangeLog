@@ -1,3 +1,15 @@
+2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/effects/gstgleffectsin.c:
+	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstgleffects.h:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	  add sin effect (desaturate everything but red shades). still
+	  needs some tuning.
+
 2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/gstgleffects.c:
