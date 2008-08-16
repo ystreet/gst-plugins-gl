@@ -1,5 +1,11 @@
 2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/gstgleffects.c:
+	  fix gleffects memory issue (init resources on start and reset
+	  them on stop)
+
+2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/effects/gstgleffectsin.c:
 	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffectssources.c:
