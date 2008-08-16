@@ -1,5 +1,12 @@
 2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* BUGS:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	  improve fxtest command line option handling, default to
+	  videotestsrc if no source bin description is given
+
+2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/gstgleffects.c:
 	  fix gleffects memory issue (init resources on start and reset
 	  them on stop)
