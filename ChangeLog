@@ -1,5 +1,10 @@
 2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/effects/gstgleffectscurves.h:
+	  add a better sepia toning curve
+
+2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* AUTHORS:
 	  add me to AUTHORS file
 
