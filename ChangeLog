@@ -1,3 +1,10 @@
+2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/gstgltestsrc.c:
+	* po/en.po:
+	  add a translatable string to testsrc to get rid of po dir errors
+	  after distclean and git clean
+
 2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* tests/examples/gtk/fxtest/fxtest.c:

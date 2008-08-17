@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gst-plugins-gl 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-17 15:29-0800\n"
+"POT-Creation-Date: 2008-08-17 09:23+0200\n"
 "PO-Revision-Date: 2004-04-26 10:41-0400\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: English <en@li.org>\n"
@@ -12,6 +12,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gst/gl/gstgltestsrc.c:591
+#: gst/gl/gstgltestsrc.c:609
 msgid "format wasn't negotiated before get function"
 msgstr ""
