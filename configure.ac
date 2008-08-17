@@ -199,6 +199,27 @@ AC_SUBST(GTK_CFLAGS)
 AC_SUBST(HAVE_GTK)
 AM_CONDITIONAL(HAVE_GTK, test "x$HAVE_GTK" = "xyes")
 
+dnl clutter is optional and used in examples
+HAVE_CLUTTER=NO
+PKG_CHECK_MODULES(CLUTTER, clutter-0.8 >= 0.8.0, HAVE_CLUTTER=yes, HAVE_CLUTTER=no)
+AC_SUBST(CLUTTER_LIBS)
+AC_SUBST(CLUTTER_CFLAGS)
+AC_SUBST(HAVE_CLUTTER)
+AM_CONDITIONAL(HAVE_CLUTTER, test "x$HAVE_CLUTTER" = "xyes")
+HAVE_CLUTTER_GLX=NO
+PKG_CHECK_MODULES(CLUTTER_GLX, clutter-glx-0.8 >= 0.8.0, HAVE_CLUTTER_GLX=yes, HAVE_CLUTTER_GLX=no)
+AC_SUBST(CLUTTER_GLX_LIBS)
+AC_SUBST(CLUTTER_GLX_CFLAGS)
+AC_SUBST(HAVE_CLUTTER_GLX)
+AM_CONDITIONAL(HAVE_CLUTTER_GLX, test "x$HAVE_CLUTTER_GLX" = "xyes")
+HAVE_CLUTTER_X11=NO
+PKG_CHECK_MODULES(CLUTTER_X11, clutter-x11-0.8 >= 0.8.0, HAVE_CLUTTER_X11=yes, HAVE_CLUTTER_X11=no)
+AC_SUBST(CLUTTER_X11_LIBS)
+AC_SUBST(CLUTTER_X11_CFLAGS)
+AC_SUBST(HAVE_CLUTTER_X11)
+AM_CONDITIONAL(HAVE_CLUTTER_X11, test "x$HAVE_CLUTTER_X11" = "xyes")
+
+
 dnl OpenGL is required
 translit(dnm, m, l) AM_CONDITIONAL(USE_OPENGL, true)
 AG_GST_CHECK_X
@@ -362,6 +383,7 @@ tests/examples/generic/Makefile
 tests/examples/generic/cube/Makefile
 tests/examples/generic/cubeyuv/Makefile
 tests/examples/generic/doublecube/Makefile
+tests/examples/clutter/Makefile
 tests/examples/gtk/Makefile
 tests/examples/gtk/gtkxoverlay/Makefile
 tests/examples/gtk/filterxoverlay/Makefile

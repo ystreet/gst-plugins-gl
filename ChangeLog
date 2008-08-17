@@ -1,5 +1,11 @@
 2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* configure.ac:
+	* tests/examples/Makefile.am:
+	  add clutter macros on configure.ac
+
+2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/effects/gstgleffectscurves.h:
 	  add a better sepia toning curve
 
