@@ -1,5 +1,14 @@
 2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* tests/examples/clutter/Makefile.am:
+	* tests/examples/clutter/clutteractor.c:
+	  Add an example to use Texture From Pixmap to do some kind of
+	  x_overlay on a clutteractor. A better way would be to directly
+	  share gl handles between clutter and gstgl but still I cannot
+	  find a way to do it.
+
+2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* configure.ac:
 	* tests/examples/Makefile.am:
 	  add clutter macros on configure.ac
