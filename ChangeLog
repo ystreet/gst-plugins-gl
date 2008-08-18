@@ -2,6 +2,12 @@
 
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/gstgldifferencematte.c:
+	  another typo, restore old twirl fragment source
+
+2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/gstgldifferencematte.c:
 	  fix typos
 
 2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
