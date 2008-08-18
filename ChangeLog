@@ -1,4 +1,10 @@
-2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
+2008-08-18  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst/gl/gstglimagesink.c
+    Force to call GstBaseSink[glimagesink]->stop() when going 
+    from GST_STATE_PAUSED to GST_STATE_READY.
+
+2008-08-18  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst/gl/effects/gstgleffectbulge.c
     * gst/gl/effects/gstgleffectfisheye.c
