@@ -1,5 +1,15 @@
 2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* tests/examples/clutter/Makefile.am:
+	* tests/examples/clutter/clutteractor.c:
+	* tests/examples/clutter/clutteractortee.c:
+	  add clutteractortee example, a nice example about how clutter
+	  could be used to create a live preview widget for gleffects. It
+	  uses texture from pixmap, still needs some work regarding clean
+	  exit and expose event management.
+
+2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* configure.ac:
 	* gst/gl/effects/gstgleffectssources.c:
 	  Add a couple of macros to autotools to compile with uintrepid
