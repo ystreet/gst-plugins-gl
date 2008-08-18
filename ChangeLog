@@ -1,5 +1,14 @@
 2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/gstglpixbufoverlay.c:
+	* configure.ac:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstopengl.c:
+	  add first draft of a pixbuf overlay element. add macros to
+	  optionally build the latter if gdk-pixbuf is found
+
+2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* tests/examples/clutter/clutteractortee.c:
 	  remove expose event handling, it's map-unmap that is not behaving
 	  correctly, any idea?
