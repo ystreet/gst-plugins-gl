@@ -1,5 +1,13 @@
 2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstgldifferencematte.c:
+	  complete differencematte filter.. I did it quickly, probably
+	  still needs some work
+
+2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst/gl/gstgldifferencematte.c:
 	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffectssources.c:
