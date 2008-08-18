@@ -1,3 +1,20 @@
+2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst/gl/effects/gstgleffectbulge.c
+    * gst/gl/effects/gstgleffectfisheye.c
+    * gst/gl/effects/gstgleffectglow.c
+    * gst/gl/effects/gstgleffectmirror.c
+    * gst/gl/effects/gstgleffectsquare.c
+    * gst/gl/effects/gstgleffectsqueeze.c
+    * gst/gl/effects/gstgleffectstretch.c
+    * gst/gl/effects/gstgleffecttunnel.c
+    * gst/gl/effects/gstgleffecttwirl.c
+    * gst/gl/gstgleffects.c
+    * gst/gl/gstglfilterblur.c
+    * gst/gl/gstglpixbufoverlay.c
+    * win32/vs8/libgstopengl.vcproj
+    Update vs8 build. And fix warnings that comes from vc8.
+
 2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* win32/common/config.h:
@@ -278,18 +295,18 @@
 	  effect and reorganized the source tree.
 
 2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
-    
+
     * gst-libs/gst/gl/gstgldisplay.c
     * gst-libs/gst/gl/gstgldisplay.h
     * gst/gl/gstglcolorscale.c
     * gst/gl/gstglimagesink.c
     * gst/gl/gstglupload.c
     * tests/pipelines
-    Move gst_gl_display_thread_do_upload_make from 
+    Move gst_gl_display_thread_do_upload_make from
     gst_gl_display_thread_do_upload to gst_gl_display_thread_init_upload
 
 2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
-    
+
     * gst-libs/gst/gl/gstgldisplay.c
     * gst-libs/gst/freeglut/freeglut_main.c
     * gst/gl/BUGS
@@ -323,14 +340,14 @@
 	  remove an unneeded (really?) glTexImage
 
 2008-08-11  Julien Isorce  <julien.isorce@gmail.com>
-    
+
     * gst-libs/gst/gl/gstglbuffer.c
     * gst-libs/gst/gl/gstgldisplay.c
     * gst-libs/gst/gl/gstgldisplay.h
     * gst/gl/gstglfilterblur.c
       The GData texture pool is now splitted in several GQueue (one per framesize).
       So glTexImage2D(w,h,NULL) is called only one time (memory allocation).
-      So I could remove the glTexImage2D(w,h,NULL) call in 
+      So I could remove the glTexImage2D(w,h,NULL) call in
       the gst_gl_display_thread_use_fbo func.
 
 2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
@@ -388,7 +405,7 @@
 	fix the framerate issue with gstglfilterblur.
 
 2008-07-31  Julien Isorce  <julien.isorce@gmail.com>
-    
+
     * gst/gl/gstglfilterblur.h
     * gst/gl/gstglfilterblur.c
     * gst/gl/gstopengl.c
