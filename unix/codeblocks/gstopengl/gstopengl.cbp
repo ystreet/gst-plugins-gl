@@ -126,6 +126,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/effects/gstgleffectscurves.h" />
+		<Unit filename="../../../gst/gl/effects/gstgleffectsin.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst/gl/effects/gstgleffectsquare.c">
 			<Option compilerVar="CC" />
 		</Unit>
