@@ -1,3 +1,14 @@
+2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstglpixbufoverlay.c:
+	* gst/gl/gstopengl.c:
+	  little cleanup. add first draft of gstgldifferencematte. still
+	  doesn't work
+
 2008-08-18  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst/gl/gstglimagesink.c
