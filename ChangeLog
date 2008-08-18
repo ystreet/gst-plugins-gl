@@ -1,6 +1,12 @@
 2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* tests/examples/clutter/clutteractortee.c:
+	  remove expose event handling, it's map-unmap that is not behaving
+	  correctly, any idea?
+
+2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* tests/examples/clutter/clutteractortee.c:
 	  add expose event handling to clutteractortee
 
 2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
