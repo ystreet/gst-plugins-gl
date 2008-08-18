@@ -1,5 +1,10 @@
 2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* tests/examples/clutter/clutteractortee.c:
+	  add expose event handling to clutteractortee
+
+2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* tests/examples/clutter/Makefile.am:
 	* tests/examples/clutter/clutteractor.c:
 	* tests/examples/clutter/clutteractortee.c:
