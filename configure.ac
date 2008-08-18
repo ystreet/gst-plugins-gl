@@ -20,6 +20,9 @@ AS_VERSION
 dnl check if this is a release version
 AS_NANO(GST_CVS="no", GST_CVS="yes")
 
+dnl libtoolize complains about wrong macros
+AC_CONFIG_MACRO_DIR([m4])
+
 dnl can autoconf find the source ?
 AC_CONFIG_SRCDIR([gst-libs/gst/gl/gstgldisplay.c])
 
@@ -102,6 +105,7 @@ dnl *** checks for programs ***
 
 dnl find a compiler
 AC_PROG_CC
+AC_PROG_CXX
 
 dnl check if the compiler supports '-c' and '-o' options
 AM_PROG_CC_C_O

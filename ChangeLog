@@ -1,3 +1,11 @@
+2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* configure.ac:
+	* gst/gl/effects/gstgleffectssources.c:
+	  Add a couple of macros to autotools to compile with uintrepid
+	  automake. Remove array constructor so we don't have to depend on
+	  glsl #version 120.
+
 2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* tests/examples/clutter/Makefile.am:
