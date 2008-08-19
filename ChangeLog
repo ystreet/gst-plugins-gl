@@ -1,5 +1,11 @@
 2008-08-19  Julien Isorce  <julien.isorce@gmail.com>
 
+    * gst-libs/gst/gl/gstgldisplay.c
+    get ride of a bug on ATI related to I420_YV12 to rgb 
+    colorspace conversion through GLSL
+
+2008-08-19  Julien Isorce  <julien.isorce@gmail.com>
+
     * gst/gl/gstgleffects.c
     * unix/codeblocks/gstopengl/gstopengl.cbp
     Shaders which are in the shaderstable are now released
