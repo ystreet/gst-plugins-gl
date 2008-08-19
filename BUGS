@@ -1,10 +1,6 @@
 --
-glupload doesn't behave correctly when forcing a transition
-PLAYING->READY->PLAYING. Display should be finalized on READY but it isn't (too
-high ref count?) 
-
-To reproduce it try fxtest and press READY and then PLAY. Look at messages in
-stdout, a new context is created while the other one is still alive. 
-
-Probably the issue is not limited to upload, check all resource allocation.
+	using a glupload on X causes a crash when switching 
+	bettween NULL and PLAYING state at least 3 times.
+	So maybe it comes from the glx use, especially reinitializing
+	the glx context.
 --
