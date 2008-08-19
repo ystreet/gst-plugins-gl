@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../common;../../../gstreamer/include;../../../glib/include;&quot;..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\libiconv\include;&quot;..\..\gst-libs\gst\freeglut&quot;;&quot;../../gst-libs\gst\gl&quot;;../../gst/gl;../../gst/gl/effects;&quot;../../../gtk+/include&quot;"
+				AdditionalIncludeDirectories="../common;../../../gstreamer/include;../../../glib/include;&quot;..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\libiconv\include;&quot;..\..\gst-libs\gst\freeglut&quot;;&quot;../../gst-libs\gst\gl&quot;;../../gst/gl;../../gst/gl/effects;&quot;../../../gtk+/include&quot;;&quot;../../gst-libs&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y Debug\libgstopengl.dll ..\..\..\gstreamer\bin\lib\gstreamer-0.10"
+				CommandLine="copy /Y Debug\libgstopengl.dll H:\svn\gstreamer\bin\lib\gstreamer-0.10"
 			/>
 		</Configuration>
 		<Configuration
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../common;../../../gstreamer/include;../../../glib/include;&quot;..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\libiconv\include;&quot;..\..\gst-libs\gst\freeglut&quot;;&quot;../../gst-libs\gst\gl&quot;;../../gst/gl;../../gst/gl/effects;&quot;../../../gtk+/include&quot;"
+				AdditionalIncludeDirectories="../common;../../../gstreamer/include;../../../glib/include;&quot;..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\libiconv\include;&quot;..\..\gst-libs\gst\freeglut&quot;;&quot;../../gst-libs\gst\gl&quot;;../../gst/gl;../../gst/gl/effects;&quot;../../../gtk+/include&quot;;&quot;../../gst-libs&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -170,7 +170,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y Release\libgstopengl.dll ..\..\..\gstreamer\bin\lib\gstreamer-0.10"
+				CommandLine="copy /Y Release\libgstopengl.dll H:\svn\gstreamer\bin\lib\gstreamer-0.10"
 			/>
 		</Configuration>
 	</Configurations>
@@ -243,6 +243,10 @@
 				>
 				<File
 					RelativePath="..\..\gst\gl\gstglcolorscale.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstgldifferencematte.c"
 					>
 				</File>
 				<File

@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "filterxoverlay", "filterxov
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtkxoverlay", "gtkxoverlay\gtkxoverlay.vcproj", "{E83070C2-58E4-48AE-AEB3-A4580EDE1212}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fxtest", "fxtest\fxtest.vcproj", "{59075FDD-68CD-4F1A-948B-46D142800798}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{E83070C2-58E4-48AE-AEB3-A4580EDE1212}.Debug|Win32.Build.0 = Debug|Win32
 		{E83070C2-58E4-48AE-AEB3-A4580EDE1212}.Release|Win32.ActiveCfg = Release|Win32
 		{E83070C2-58E4-48AE-AEB3-A4580EDE1212}.Release|Win32.Build.0 = Release|Win32
+		{59075FDD-68CD-4F1A-948B-46D142800798}.Debug|Win32.ActiveCfg = Debug|Win32
+		{59075FDD-68CD-4F1A-948B-46D142800798}.Debug|Win32.Build.0 = Debug|Win32
+		{59075FDD-68CD-4F1A-948B-46D142800798}.Release|Win32.ActiveCfg = Release|Win32
+		{59075FDD-68CD-4F1A-948B-46D142800798}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
