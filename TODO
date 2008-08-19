@@ -5,8 +5,7 @@
      http://gstreamer.freedesktop.org/data/doc/gstreamer/head/faq/html/chapter-developing.html
      cap: I am ok, but I am not using emacs, so I let you run the re-indent script
 
-- 1: make Filippo's GstGLEffects work on this repository. 
-     (ALMOST because glfilterblur works and it's an example of "multiple step rendering" filter)
+(DONE) - 1: make Filippo's GstGLEffects work on this repository. 
 
 (DONE) - 2: use GstGLShader in the GLSL colorspace conversion.
 
@@ -19,7 +18,7 @@
             (for example when FBO extension is not available)
             For now it properly shutdown only when using the glimagesink
 
-- 6: make an example named "filterxoverlay" similar to gtkxoverlay one. But use a more complex pipeline
+(DONE) - 6: make an example named "filterxoverlay" similar to gtkxoverlay one. But use a more complex pipeline
      involving several glfilters. In order to test switching bettween gst states on it.
 
 - 7: put the pipelines listed in tests/pipelines to an automated test that attempts to reach some states.
@@ -56,3 +55,4 @@
 - 16: If it exists a tool that can automatically convert fragment_shader code to fragment_program code
       then we would be able to do some basic stuffs as colorspace conversion even if GLSL is not available.
       (And so have some more cool stuffs work on Intel card for example)
+      cg can convert GLSL code to ARB_fp/ARB_vp.

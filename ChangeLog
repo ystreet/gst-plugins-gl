@@ -1,3 +1,14 @@
+2008-08-19  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst/gl/gstgleffects.c
+    * unix/codeblocks/gstopengl/gstopengl.cbp
+    Shaders which are in the shaderstable are now released
+    in the glthread
+
+    * TODO
+    End task 1, Filippo makes his gleffects work on master branch.
+    End task 6.
+
 2008-08-19  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/gstgldifferencematte.c:
@@ -47,7 +58,7 @@
 2008-08-18  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst/gl/gstglimagesink.c
-    Force to call GstBaseSink[glimagesink]->stop() when going 
+    Force to call GstBaseSink[glimagesink]->stop() when going
     from GST_STATE_PAUSED to GST_STATE_READY.
 
 2008-08-18  Julien Isorce  <julien.isorce@gmail.com>

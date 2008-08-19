@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option parameters='videotestsrc num_buffers=200 ! &quot;video/x-raw-yuv, format=(fourcc)YV12&quot; ! glimagesink' />
+				<Option parameters="videotestsrc ! glupload ! gleffects effect=3 ! glimagesink" />
 				<Option host_application="gst-launch-0.10" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
@@ -49,9 +49,12 @@
 			<Add directory="../../../gst/gl" />
 			<Add directory="../../.." />
 			<Add directory="../../../gst/gl/effects" />
+			<Add directory="/usr/include/gtk-2.0" />
+			<Add directory="../../../gst-libs" />
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
+			<Add library="gdk_pixbuf-2.0" />
 			<Add library="gmodule-2.0" />
 			<Add library="gobject-2.0" />
 			<Add library="gthread-2.0" />
@@ -88,6 +91,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst-libs/gst/freeglut/gstfreeglut.h" />
+		<Unit filename="../../../gst-libs/gst/gettext.h" />
 		<Unit filename="../../../gst-libs/gst/gl/gstglbuffer.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -104,6 +108,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst-libs/gst/gl/gstglshader.h" />
+		<Unit filename="../../../gst-libs/gst/gst-i18n-plugin.h" />
 		<Unit filename="../../../gst/gl/effects/gstgleffectbulge.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -156,6 +161,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglcolorscale.h" />
+		<Unit filename="../../../gst/gl/gstgldifferencematte.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst/gl/gstgldownload.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -183,6 +191,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglimagesink.h" />
+		<Unit filename="../../../gst/gl/gstglpixbufoverlay.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst/gl/gstgltestsrc.c">
 			<Option compilerVar="CC" />
 		</Unit>
