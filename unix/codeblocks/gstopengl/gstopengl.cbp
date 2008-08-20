@@ -11,8 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option parameters="videotestsrc ! glupload ! gleffects effect=3 ! glimagesink" />
-				<Option host_application="gst-launch-0.10" />
+				<Option host_application="/home/julien/dev/wobow/gst-plugins-gl/tests/examples/gtk/filternoxoverlay/filternoxoverlay" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>

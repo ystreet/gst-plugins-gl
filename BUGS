@@ -3,4 +3,6 @@
 	bettween NULL and PLAYING state at least 3 times.
 	So maybe it comes from the glx use, especially reinitializing
 	the glx context.
+
+    Clicking on the cross is not working for the filter_NO_xoverlay example.
 --

@@ -1,3 +1,19 @@
+2008-08-20  Julien Isorce  <julien.isorce@gmail.com>
+                                                                                                                 
+    * gst-libs/gst/gl/gstgldisplay.c                                                                                                                                                                                        
+    * unix/codeblocks/gstopengl/gstopengl.cbp
+    Get ride of a bug on ATI related to YV12 to rgb 
+    colorspace conversion through GLSL
+    
+    * BUGS                                                                                                                                                                                                                                     
+    * configure.ac
+    * tests/examples/gtk/Makefile.am                                                                                           
+    * tests/examples/gtk/README
+    * tests/examples/gtk/filternoxoverlay/main.cpp
+    * tests/examples/gtk/filternoxoverlay/Makefile.am
+    Add an examples that no uses the xoverlayinterfaces
+    but we can switch bettween the gst states.
+
 2008-08-20  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/gstglpixbufoverlay.c:
