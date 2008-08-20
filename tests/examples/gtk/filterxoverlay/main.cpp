@@ -214,10 +214,11 @@ gint main (gint argc, gchar *argv[])
     //set window id on this event
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
     gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area);
-    gst_object_unref (bus);
+    gst_bus_add_signal_watch (bus);
     g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), pipeline);
     g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), pipeline);
     g_signal_connect(bus, "message::eos", G_CALLBACK(end_stream_cb), pipeline);
+    gst_object_unref (bus);
 
     //needed when being in GST_STATE_READY, GST_STATE_PAUSED
     //or resizing/obscuring the window

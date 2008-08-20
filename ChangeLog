@@ -1,5 +1,15 @@
 2008-08-20  Julien Isorce  <julien.isorce@gmail.com>
                                                                                                                  
+    * BUGS
+    * tests/examples/gtk/filternoxoverlay/main.cpp
+    * tests/examples/gtk/filterxoverlay/main.cpp  
+    * tests/examples/gtk/gtkxoverlay/main.cpp
+    Correctly uses signal watches on gst bus,
+    which resolved the bug about clicking on the cross
+    in the filter_NO_xoverlay example.
+
+2008-08-20  Julien Isorce  <julien.isorce@gmail.com>
+                                                                                                                 
     * gst-libs/gst/gl/gstgldisplay.c                                                                                                                                                                                        
     * unix/codeblocks/gstopengl/gstopengl.cbp
     Get ride of a bug on ATI related to YV12 to rgb 
