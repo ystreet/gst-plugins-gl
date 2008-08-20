@@ -1,5 +1,10 @@
 2008-08-20  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/gstglpixbufoverlay.c:
+	  use fixed opengl pipeline for glpixbufoverlay (any drawback?)
+
+2008-08-20  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst-libs/gst/gl/gstgldisplay.c:
 	  fix a signedness warning
 
