@@ -1,3 +1,8 @@
+2008-08-20  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  fix a signedness warning
+
 2008-08-19  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstgldisplay.c
