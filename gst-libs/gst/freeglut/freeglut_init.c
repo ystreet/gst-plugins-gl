@@ -214,6 +214,7 @@ static void fghInitialize( const char* displayName )
 void fgDeinitialize( void )
 {
     SFG_Timer *timer;
+    //XEvent event;
 
     if( !fgState.Initialised )
     {
@@ -279,12 +280,19 @@ void fgDeinitialize( void )
      */
     XSetCloseDownMode( fgDisplay.Display, DestroyAll );
 
+
+    //we should check if there is any pending X message
+    /*while( XPending( fgDisplay.Display ) )
+    {
+        XNextEvent( fgDisplay.Display, &event );
+    }*/
+
     /*
      * Close the display connection, destroying all windows we have
      * created so far
      */
-     if(!haveOneExternalWindow)
-        XCloseDisplay( fgDisplay.Display );
+     /*if(!haveOneExternalWindow)
+        XCloseDisplay( fgDisplay.Display );*/
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 

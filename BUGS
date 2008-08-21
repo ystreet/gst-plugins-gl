@@ -1,6 +1,3 @@
 --
-	using a glupload on X causes a crash when switching 
-	bettween NULL and PLAYING state at least 3 times.
-	So maybe it comes from the glx use, especially reinitializing
-	the glx context.
+
 --

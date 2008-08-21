@@ -110,7 +110,7 @@ static void fghReshapeWindow ( SFG_Window *window, int width, int height )
 
     XResizeWindow( fgDisplay.Display, window->Window.Handle,
                    width, height );
-    XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
+    //XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
 
 #elif TARGET_HOST_WIN32
     {
@@ -435,7 +435,7 @@ static void fghSleepForEvents( void )
      * need to allow that we may have an empty socket but non-
      * empty event queue.
      */
-    if( ! XPending( fgDisplay.Display ) )
+    /*if( ! XPending( fgDisplay.Display ) )
     {
         fd_set fdset;
         int err;
@@ -451,7 +451,7 @@ static void fghSleepForEvents( void )
 
         if( ( -1 == err ) && ( errno != EINTR ) )
             fgWarning ( "freeglut select() error: %d", errno );
-    }
+    }*/
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
     MsgWaitForMultipleObjects( 0, NULL, FALSE, msec, QS_ALLEVENTS );
 #endif
@@ -489,17 +489,13 @@ void FGAPIENTRY glutMainLoopEvent( void )
             {
                 GETWINDOW( xclient );
 
-                INVOKE_WCB( *window, Destroy, ( ) );
-
                 //fgDestroyWindow ( window );
 
-                if( fgState.ActionOnWindowClose == GLUT_ACTION_EXIT )
-                {
-                    fgDeinitialize();
-                    exit( 0 );
-                }
-                else if( fgState.ActionOnWindowClose == GLUT_ACTION_GLUTMAINLOOP_RETURNS )
-                    fgState.ExecState = GLUT_EXEC_STATE_STOP;
+                INVOKE_WCB( *window, Destroy, ( ) );
+
+                //fgAddToWindowDestroyList ( window );
+
+                //fgDestroyWindow ( window );
 
                 return;
             }
@@ -644,8 +640,6 @@ void FGAPIENTRY glutMainLoopEvent( void )
  */
 void FGAPIENTRY glutMainLoop( void )
 {
-    int action;
-
 #if TARGET_HOST_WIN32 || TARGET_HOST_WINCE
     SFG_Window *window = (SFG_Window *)fgStructure.Windows.First ;
 #endif
@@ -706,13 +700,8 @@ void FGAPIENTRY glutMainLoop( void )
     /*
      * When this loop terminates, destroy the display, state and structure
      * of a freeglut session, so that another glutInit() call can happen
-     *
-     * Save the "ActionOnWindowClose" because "fgDeinitialize" resets it.
      */
-    action = fgState.ActionOnWindowClose;
     fgDeinitialize();
-    if( action == GLUT_ACTION_EXIT )
-        exit( 0 );
 }
 
 /*

@@ -1,5 +1,15 @@
 2008-08-21  Julien Isorce  <julien.isorce@gmail.com>
                                                                                                                  
+    * BUGS
+    * gst-libs/gst/freeglut/freeglut_init.c
+    * gst-libs/gst/freeglut/freeglut_main.c
+    * gst-libs/gst/freeglut/freeglut_window.c
+    Fix a bug about going NULL<->PLAYING state multiple times.
+    The solution is not clean. I think the best way is to start
+    the TODO task 9.
+
+2008-08-21  Julien Isorce  <julien.isorce@gmail.com>
+                                                                                                                 
     * gst-libs/gst/gl/gstgldisplay.c
     * gst-libs/gst/gl/gstgldisplay.h
     Use a GHash table instead of a GData for the texture pool 

@@ -597,11 +597,23 @@ void fgCloseWindow( SFG_Window* window )
 {
 #if TARGET_HOST_UNIX_X11
 
-    glXDestroyContext( fgDisplay.Display, window->Window.Context );
+    /*glXMakeCurrent(
+            fgDisplay.Display,
+            None,
+            NULL
+    );*/
+
+    //glXDestroyContext( fgDisplay.Display, window->Window.Context );
+
+    //XUnmapWindow( fgDisplay.Display, window->Window.Handle );
+    /*XWithdrawWindow( fgDisplay.Display,
+                     window->Window.Handle,
+                     fgDisplay.Screen );*/
+
     if(window->Window.isInternal)
     {
         XDestroyWindow( fgDisplay.Display, window->Window.Handle );
-        XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
+        //XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
     }
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
@@ -622,10 +634,16 @@ void fgChangeWindow( SFG_Window* window, SFG_WindowHandleType winId )
 {
 #if TARGET_HOST_UNIX_X11
 
+    glXMakeCurrent(
+            fgDisplay.Display,
+            None,
+            NULL
+    );
+
     if(window->Window.isInternal)
     {
         XDestroyWindow( fgDisplay.Display, window->Window.Handle );
-        XFlush( fgDisplay.Display );
+        //XFlush( fgDisplay.Display );
     }
 
     haveOneExternalWindow = TRUE;
@@ -763,7 +781,8 @@ void FGAPIENTRY glutShowWindow( void )
 #if TARGET_HOST_UNIX_X11
 
     XMapWindow( fgDisplay.Display, fgStructure.CurrentWindow->Window.Handle );
-    XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
+    //XSync (fgDisplay.Display, TRUE);
+    //XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 
@@ -788,8 +807,11 @@ void FGAPIENTRY glutHideWindow( void )
     XWithdrawWindow( fgDisplay.Display,
                      fgStructure.CurrentWindow->Window.Handle,
                      fgDisplay.Screen );
+    //XSync (fgDisplay.Display, TRUE);
 
-    XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
+    //XUnmapWindow( fgDisplay.Display, fgStructure.CurrentWindow->Window.Handle );
+
+    //XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
 
 #elif TARGET_HOST_WIN32 || TARGET_HOST_WINCE
 
@@ -823,7 +845,7 @@ void FGAPIENTRY glutSetWindowTitle( const char* title )
         &text
     );
 
-    XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
+    //XFlush( fgDisplay.Display ); /* XXX Shouldn't need this */
 
 #elif TARGET_HOST_WIN32
 
