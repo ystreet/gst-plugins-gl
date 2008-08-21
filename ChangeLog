@@ -1,3 +1,9 @@
+2008-08-21  Julien Isorce  <julien.isorce@gmail.com>
+                                                                                                                 
+    * gst-libs/gst/gl/gstgldisplay.c
+    * gst-libs/gst/gl/gstgldisplay.h
+    Use a GHash table instead of a GData for the texture pool 
+
 2008-08-20  Julien Isorce  <julien.isorce@gmail.com>
                                                                                                                  
     * BUGS
