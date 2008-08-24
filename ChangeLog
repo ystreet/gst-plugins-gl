@@ -1,3 +1,16 @@
+2008-08-24  Julien Isorce  <julien.isorce@gmail.com>
+                                                                                                                 
+    * gst/gl/BUGS
+    * gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstgldisplay.h
+	* gst/gl/gstgldownload.c
+	* gst/gl/gstglimagesink.c
+	* gst/gl/gstglupload.c
+    Do not use frame buffer object when "input video is RGB"
+    or when "GLSL is not available and YCbCr is available".
+    So frame buffer object is not a plugin requirement anymore.
+    So I decreased the OpengGL version from 1.4 to 1.2 (maybe less?)
+
 2008-08-21  Julien Isorce  <julien.isorce@gmail.com>
                                                                                                                  
     * BUGS
