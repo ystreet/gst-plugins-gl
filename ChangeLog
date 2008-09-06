@@ -6,6 +6,8 @@
     * gst-libs/gst/gl/gstglshader.c
     * gst-libs/gst/gl/gstglshader.h
     * gst/gl/Makefile.am
+    * gst/gl/gstglbumper.c
+    * gst/gl/gstglbumper.h
     * gst/gl/gstglfilterblur.c
     * gst/gl/gstglfilterlaplacian.c
     * gst/gl/gstglpixbufoverlay.c
