@@ -242,6 +242,10 @@
 				Name="gstglelements"
 				>
 				<File
+					RelativePath="..\..\gst\gl\gstglbumper.c"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglcolorscale.c"
 					>
 				</File>
@@ -411,6 +415,10 @@
 			<Filter
 				Name="gstglelements"
 				>
+				<File
+					RelativePath="..\..\gst\gl\gstglbumper.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglcolorscale.h"
 					>

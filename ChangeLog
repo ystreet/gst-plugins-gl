@@ -1,3 +1,22 @@
+2008-09-07  Julien Isorce  <julien.isorce@gmail.com>
+                                                                                                                 
+    * TODO
+    * gst-libs/gst/gl/gstgldisplay.c
+    * gst-libs/gst/gl/gstgldisplay.h
+    * gst-libs/gst/gl/gstglshader.c
+    * gst-libs/gst/gl/gstglshader.h
+    * gst/gl/Makefile.am
+    * gst/gl/gstglfilterblur.c
+    * gst/gl/gstglfilterlaplacian.c
+    * gst/gl/gstglpixbufoverlay.c
+    * gst/gl/gstopengl.c
+    * tests/pipelines
+    * win32/vs8/libgstopengl.vcproj
+    Add glbumper: this gl filter is an example of bump mapping.
+    You can pass a normal map through the glbumper location property.
+    The glbumper expoxes how to use both vertex and fragment shader.
+    Add support for attributes in gstglshader.
+
 2008-08-25  Julien Isorce  <julien.isorce@gmail.com>
                                                                                                                  
     * gst-libs/gst/gl/gstgldisplay.c

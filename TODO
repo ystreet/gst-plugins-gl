@@ -37,6 +37,7 @@
      The tests/examples/doublecube test shows the limitation of having only one (global) glthread.
      (I am not really sure about this last remark since I made a modification in this example. Now the video speed is
      very clean, even after moving/resizing the window).
+     Maybe we just should use the lib GtkGL if there is a way to give a winId.
 
 - 10: make colorspace conversion through ColorMatrix when GLSL (and mesa YCbCr) is not available and when imaging extension
       is available.

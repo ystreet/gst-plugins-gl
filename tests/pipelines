@@ -50,3 +50,5 @@ gst-launch-0.10 videotestsrc ! glupload ! glfilterlaplacian ! glfiltercube ! gli
 gst-launch-0.10 videotestsrc ! glupload ! glfilterblur ! glimagesink
 
 gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! gleffects effect=3 ! glimagesink
+
+gst-launch-0.10 videotestsrc ! glupload ! glbumper location=normalmap.bmp ! glimagesink
