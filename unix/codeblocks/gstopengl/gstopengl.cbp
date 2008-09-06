@@ -156,6 +156,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gltestsrc.h" />
+		<Unit filename="../../../gst/gl/gstglbumper.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglbumper.h" />
 		<Unit filename="../../../gst/gl/gstglcolorscale.c">
 			<Option compilerVar="CC" />
 		</Unit>
