@@ -16,6 +16,10 @@
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
+				<ExtraCommands>
+					<Add after="copy /Y Debug\libgstopengl.dll H:\svn\gstreamer\bin\lib\gstreamer-0.10" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 			<Target title="Release">
 				<Option output="Release\libgstopengl.dll" prefix_auto="1" extension_auto="0" />
@@ -30,6 +34,10 @@
 				<Linker>
 					<Add option="-s" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="copy /Y Release\libgstopengl.dll H:\svn\gstreamer\bin\lib\gstreamer-0.10" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Compiler>
@@ -37,14 +45,21 @@
 			<Add option="-Wall" />
 			<Add option="-DWIN32" />
 			<Add option="-DHAVE_CONFIG_H" />
-			<Add directory="..\..\..\gstreamer\include" />
-			<Add directory="..\..\..\libiconv\include" />
-			<Add directory="..\..\..\glib\include" />
-			<Add directory="..\..\..\libxml2-2.6.30+.win32\include" />
-			<Add directory="..\..\..\glew\include" />
+			<Add option="-DHAVE_GDKPIXBUF" />
+			<Add directory="H:\svn\gstreamer\include" />
+			<Add directory="H:\svn\libiconv\include" />
+			<Add directory="H:\svn\glib\include" />
+			<Add directory="H:\svn\libxml2-2.6.30+.win32\include" />
+			<Add directory="H:\svn\glew\include" />
 			<Add directory="..\..\gst-libs\gst\freeglut" />
-			<Add directory="..\..\gst-libs\gst\gl" />
+			<Add directory="..\..\gst\gl" />
 			<Add directory="..\common" />
+			<Add directory="..\..\gst\gl\effects" />
+			<Add directory="..\..\gst-libs\gst\gl" />
+			<Add directory="H:\svn\atk\include" />
+			<Add directory="H:\svn\cairo\include" />
+			<Add directory="H:\svn\gtk+\include" />
+			<Add directory="..\..\gst-libs" />
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
@@ -55,14 +70,18 @@
 			<Add library="gstbase-0.10" />
 			<Add library="gstvideo-0.10" />
 			<Add library="gstinterfaces-0.10" />
+			<Add library="gdk_pixbuf-2.0" />
+			<Add library="gdk-win32-2.0" />
+			<Add library="gtk-win32-2.0" />
 			<Add library="glew32" />
 			<Add library="glu32" />
 			<Add library="opengl32" />
 			<Add library="gdi32" />
 			<Add library="winmm" />
-			<Add directory="..\..\..\glib\lib" />
-			<Add directory="..\..\..\gstreamer\bin\bin" />
-			<Add directory="..\..\..\glew\bin" />
+			<Add directory="H:\svn\glib\lib" />
+			<Add directory="H:\svn\gstreamer\bin\bin" />
+			<Add directory="H:\svn\glew\bin" />
+			<Add directory="H:\svn\gtk+\lib" />
 		</Linker>
 		<Unit filename="..\..\gst-libs\gst\freeglut\freeglut_callbacks.c">
 			<Option compilerVar="CC" />
@@ -102,35 +121,100 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst-libs\gst\gl\gstglfilter.h" />
+		<Unit filename="..\..\gst-libs\gst\gl\gstglshader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\gl\gstglshader.h" />
 		<Unit filename="..\..\gst-libs\gst\gst-i18n-plugin.h" />
+		<Unit filename="..\..\gst\gl\effects\gstgleffectbulge.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectfisheye.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectglow.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectidentity.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectlumatocurve.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectmirror.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectrgbtocurve.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectscurves.h" />
+		<Unit filename="..\..\gst\gl\effects\gstgleffectsin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectsquare.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectsqueeze.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectssources.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectssources.h" />
+		<Unit filename="..\..\gst\gl\effects\gstgleffectstretch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffecttunnel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffecttwirl.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="..\..\gst\gl\gltestsrc.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gltestsrc.h" />
+		<Unit filename="..\..\gst\gl\gstglbumper.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglbumper.h" />
 		<Unit filename="..\..\gst\gl\gstglcolorscale.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglcolorscale.h" />
+		<Unit filename="..\..\gst\gl\gstgldifferencematte.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="..\..\gst\gl\gstgldownload.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstgldownload.h" />
+		<Unit filename="..\..\gst\gl\gstgleffects.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstgleffects.h" />
 		<Unit filename="..\..\gst\gl\gstglfilterapp.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglfilterapp.h" />
+		<Unit filename="..\..\gst\gl\gstglfilterblur.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="..\..\gst\gl\gstglfiltercube.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglfiltercube.h" />
-		<Unit filename="..\..\gst\gl\gstglfilteredge.c">
+		<Unit filename="..\..\gst\gl\gstglfilterlaplacian.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="..\..\gst\gl\gstglfilteredge.h" />
+		<Unit filename="..\..\gst\gl\gstglfilterlaplacian.h" />
 		<Unit filename="..\..\gst\gl\gstglimagesink.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglimagesink.h" />
+		<Unit filename="..\..\gst\gl\gstglpixbufoverlay.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="..\..\gst\gl\gstgltestsrc.c">
 			<Option compilerVar="CC" />
 		</Unit>
