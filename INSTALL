@@ -7,6 +7,91 @@ Software Foundation, Inc.
 This file is free documentation; the Free Software Foundation gives
 unlimited permission to copy, distribute and modify it.
 
+Cross-platform Installation
+==========================
+
+Using CMake http://www.cmake.org
+
+--------
+* WIN32:
+--------
+
+-mingw32:
+cd gst-plugins-gl
+cd ..
+mkdir mingw32
+cd mingw32
+cmake -G "MinGW Makefiles" ..\gst-plugins-gl
+mingw32-make
+result is gst\gl\libgstopengl.dll 
+
+-vs8:
+cd gst-plugins-gl
+cd ..
+mkdir vs8
+cd vs8
+cmake -G "Visual Studio 8 2005" ..\gst-plugins-gl 
+Open GST-PLUGINS-GL.sln and press F7 to build the project
+result is gst\gl\debug\gstopengl.dll (or in release if you selected it)
+
+-CodeBlocks:
+cd gst-plugins-gl
+cd ..
+mkdir codeblocks
+cd codeblocks
+cmake -G "CodeBlocks - MinGW Makefiles" ..\gst-plugins-gl
+Open GST-PLUGINS-GL.cbp and press Ctrl-F9 to build the project
+result in gst\gl\libgstopengl.dll
+
+-Others:
+Type "cmake --help" to have a look of possible builds
+(Visual Studio 9 2008
+Eclipse CDT4 - MinGW Makefiles
+etc...)
+
+-On win32 I usually write a file named glcmake.bat
+in the same dir as gst-plugins-gl is.
+BUT IT IS NOT AN OBLIGATION
+This file contains:
+
+rem ########################################################################
+set GLIB2_DIR=H:\svn\glib
+set GTK2_DIR=H:\svn\gtk+
+set ATK_DIR=H:\svn\atk
+set CAIRO_DIR=H:\svn\cairo
+set LIBXML2_DIR=H:\svn\libxml2-2.6.30+.win32
+set LIBICONV_DIR=H:\svn\libiconv
+set GSTREAMER_DIR=H:\svn\gstreamer
+set GLEW_DIR=H:\svn\glew
+
+rem cd mingw32
+rem del *ache* && cmake -G "MinGW Makefiles" ..\gst-plugins-gl
+
+rem cd vs8
+rem del *ache* && cmake -G "Visual Studio 8 2005" ..\gst-plugins-gl
+
+cd codeblocks
+del *ache* && cmake -G "CodeBlocks - MinGW Makefiles" ..\gst-plugins-gl
+
+cmd
+rem ########################################################################
+
+In this way you have to set manually the env variables
+
+
+-------
+* UNIX:
+-------
+
+For now just use ./autogen.sh then make
+because I have not correctly configured yet the cmake build on 
+unix (cmake -G "Unix Makefiles")
+result in gst-plugins-gl/gst/gl/.libs/libgstopengl.so
+Or you can use gst-plugins-gl/unix/codeblocks/gstopengl/gstopengl.cbp
+But this unix codeblocks build will be replaced when 
+the cmake build will work on unix because cmake can generate it
+through cmake -G "CodeBlocks - Unix Makefiles"
+
 Basic Installation
 ==================
 

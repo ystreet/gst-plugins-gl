@@ -1,3 +1,36 @@
+2008-09-11  Julien Isorce  <julien.isorce@gmail.com>
+
+    * .gitignore
+    * AUTHORS
+    * CMakeLists.txt
+    * INSTALL
+    * TODO
+    * cmake/modules/FindATK.cmake
+    * cmake/modules/FindCairo.cmake
+    * cmake/modules/FindGTK2.cmake
+    * cmake/modules/FindGlew.cmake
+    * cmake/modules/FindGlib2.cmake
+    * cmake/modules/FindGstreamer.cmake
+    * cmake/modules/FindLibIconv.cmake
+    * cmake/modules/FindLibXml2.cmake
+    * gst-libs/CMakeLists.txt
+    * gst-libs/gst/CMakeLists.txt
+    * gst-libs/gst/freeglut/CMakeLists.txt
+    * gst-libs/gst/gl/CMakeLists.txt
+    * gst/CMakeLists.txt
+    * gst/gl/CMakeLists.txt
+    * win32/common/config.h
+    Add cmake build http://www.cmake.org.
+    See CMake install instructions in the INSTALL file.
+    (I have not correctly configured yet the cmake build for unix, BE patient)
+    
+    * AUTHORS
+    * BUGS
+    * ChangeLog
+    * TODO
+    * configure.ac
+    CRLF to LF
+
 2008-09-07  Julien Isorce  <julien.isorce@gmail.com>
                                                                                                                  
     * TODO

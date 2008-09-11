@@ -5,11 +5,11 @@
      http://gstreamer.freedesktop.org/data/doc/gstreamer/head/faq/html/chapter-developing.html
      cap: I am ok, but I am not using emacs, so I let you run the re-indent script
 
-(DONE) - 1: make Filippo's GstGLEffects work on this repository. 
+(DONE) - 1: make Filippo's GstGLEffects work on this repository.
 
 (DONE) - 2: use GstGLShader in the GLSL colorspace conversion.
 
-- 3: add GLEW check in configure.ac
+(DONE) - 3: add GLEW check in configure.ac
 
 (DONE) - 4: make the plugin (any pipeline) properly shutdown when Shader compilation failed.
             (using "return GST_FLOW_UNEXPECTED")
@@ -57,3 +57,6 @@
       then we would be able to do some basic stuffs as colorspace conversion even if GLSL is not available.
       (And so have some more cool stuffs work on Intel card for example)
       cg can convert GLSL code to ARB_fp/ARB_vp.
+
+- 17: add a generic way to check that a given extension is available. (and set isAlive to false..)
+     (for examples gleffects does not check you have shaders available so it can cause segfault.)
