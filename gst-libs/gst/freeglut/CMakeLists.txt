@@ -10,5 +10,14 @@ add_library (gstfreeglut STATIC
   freeglut_structure.c
   freeglut_window.c)
 
+  #FIXME: get ride of this condition
+if (WIN32)
+target_link_libraries(gstfreeglut
+  general ${OPENGL_LIBRARIES}
+  gdi32
+  winmm)
+else (WIN32)
 target_link_libraries(gstfreeglut
   general ${OPENGL_LIBRARIES})
+endif (WIN32)
+  
