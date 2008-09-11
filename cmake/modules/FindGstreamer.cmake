@@ -3,12 +3,12 @@ FILE(TO_CMAKE_PATH "${GSTREAMER_DIR}" TRY2_DIR)
 FILE(GLOB GSTREAMER_DIR ${TRY1_DIR} ${TRY2_DIR})
 
 FIND_PATH(GSTREAMER_gst_INCLUDE_DIR gst/gst.h
-                                    PATHS ${GSTREAMER_DIR}/include /usr/local/include /usr/include
+                                    PATHS ${GSTREAMER_DIR}/include /usr/local/include/gstreamer-0.10 /usr/include/gstreamer-0.10
                                     ENV INCLUDE DOC "Directory containing gst/gst.h include file")
-                           
+
 FIND_PATH(GSTREAMER_gstconfig_INCLUDE_DIR gst/gstconfig.h
-                                          PATHS ${GSTREAMER_DIR}/include ${GSTREAMER_DIR}/lib/include /usr/local/include /usr/include
-                                          ENV INCLUDE DOC "Directory containing gst/gstconfig.h include file")                           
+                                          PATHS ${GSTREAMER_DIR}/include ${GSTREAMER_DIR}/lib/include /usr/local/include/gstreamer-0.10 /usr/include/gstreamer-0.10 /usr/local/lib/include/gstreamer-0.10 /usr/lib/include/gstreamer-0.10
+                                          ENV INCLUDE DOC "Directory containing gst/gstconfig.h include file")
 
 FIND_LIBRARY(GSTREAMER_gstaudio_LIBRARY NAMES gstaudio-0.10 libgstaudio-0.10
                                         PATHS ${GSTREAMER_DIR}/bin ${GSTREAMER_DIR}/win32/bin ${GSTREAMER_DIR}/bin/bin ${GSTREAMER_DIR}/lib ${GSTREAMER_DIR}/win32/lib /usr/local/lib /usr/lib
@@ -21,7 +21,7 @@ FIND_LIBRARY(GSTREAMER_gstbase_LIBRARY NAMES gstbase-0.10 libgstbase-0.10
                                        ENV LIB
                                        DOC "gstbase library to link with"
                                        NO_SYSTEM_ENVIRONMENT_PATH)
-                                    
+
 FIND_LIBRARY(GLIB_gstcdda_LIBRARY NAMES gstcdda-0.10 libgstcdda-0.10
                                   PATHS ${GSTREAMER_DIR}/bin ${GSTREAMER_DIR}/win32/bin ${GSTREAMER_DIR}/bin/bin ${GSTREAMER_DIR}/lib ${GSTREAMER_DIR}/win32/lib /usr/local/lib /usr/lib
                                   ENV LIB
@@ -107,7 +107,7 @@ FIND_LIBRARY(GSTREAMER_gstvideo_LIBRARY NAMES gstvideo-0.10 libgstvideo-0.10
                                         NO_SYSTEM_ENVIRONMENT_PATH)
 
 
-IF (GSTREAMER_gst_INCLUDE_DIR AND GSTREAMER_gstconfig_INCLUDE_DIR AND 
+IF (GSTREAMER_gst_INCLUDE_DIR AND GSTREAMER_gstconfig_INCLUDE_DIR AND
     GSTREAMER_gstaudio_LIBRARY AND GSTREAMER_gstbase_LIBRARY AND GLIB_gstcdda_LIBRARY AND GSTREAMER_gstcontroller_LIBRARY AND
     GSTREAMER_gstdataprotocol_LIBRARY AND GSTREAMER_gstinterfaces_LIBRARY AND GSTREAMER_gstnet_LIBRARY AND
     GSTREAMER_gstnetbuffer_LIBRARY AND GSTREAMER_gstpbutils_LIBRARY AND GSTREAMER_gstreamer_LIBRARY AND
@@ -115,14 +115,14 @@ IF (GSTREAMER_gst_INCLUDE_DIR AND GSTREAMER_gstconfig_INCLUDE_DIR AND
     GSTREAMER_gsttag_LIBRARY AND GSTREAMER_gstvideo_LIBRARY)
   SET(GSTREAMER_INCLUDE_DIR ${GSTREAMER_gst_INCLUDE_DIR} ${GSTREAMER_gstconfig_INCLUDE_DIR})
   list(REMOVE_DUPLICATES GSTREAMER_INCLUDE_DIR)
-  SET(GSTREAMER_LIBRARIES ${GSTREAMER_gstaudio_LIBRARY} ${GSTREAMER_gstbase_LIBRARY} ${GLIB_gstcdda_LIBRARY} 
+  SET(GSTREAMER_LIBRARIES ${GSTREAMER_gstaudio_LIBRARY} ${GSTREAMER_gstbase_LIBRARY} ${GLIB_gstcdda_LIBRARY}
                           ${GSTREAMER_gstcontroller_LIBRARY} ${GSTREAMER_gstdataprotocol_LIBRARY} ${GSTREAMER_gstinterfaces_LIBRARY}
                           ${GSTREAMER_gstnet_LIBRARY} ${GSTREAMER_gstnetbuffer_LIBRARY} ${GSTREAMER_gstpbutils_LIBRARY}
                           ${GSTREAMER_gstreamer_LIBRARY} ${GSTREAMER_gstriff_LIBRARY} ${GSTREAMER_gstrtp_LIBRARY}
                           ${GSTREAMER_gstrtsp_LIBRARY} ${GSTREAMER_gstsdp_LIBRARY} ${GSTREAMER_gsttag_LIBRARY} ${GSTREAMER_gstvideo_LIBRARY})
   list(REMOVE_DUPLICATES GSTREAMER_LIBRARIES)
   SET(GSTREAMER_FOUND TRUE)
-ENDIF (GSTREAMER_gst_INCLUDE_DIR AND GSTREAMER_gstconfig_INCLUDE_DIR AND 
+ENDIF (GSTREAMER_gst_INCLUDE_DIR AND GSTREAMER_gstconfig_INCLUDE_DIR AND
        GSTREAMER_gstaudio_LIBRARY AND GSTREAMER_gstbase_LIBRARY AND GLIB_gstcdda_LIBRARY AND GSTREAMER_gstcontroller_LIBRARY AND
        GSTREAMER_gstdataprotocol_LIBRARY AND GSTREAMER_gstinterfaces_LIBRARY AND GSTREAMER_gstnet_LIBRARY AND
        GSTREAMER_gstnetbuffer_LIBRARY AND GSTREAMER_gstpbutils_LIBRARY AND GSTREAMER_gstreamer_LIBRARY AND

@@ -27,7 +27,7 @@
 #define GST_LICENSE "LGPL"
 
 /* package name in plugins */
-#define GST_PACKAGE_NAME "GStreamer OpengGL Plug-ins GIT/prerelease"
+#define GST_PACKAGE_NAME "GStreamer OpengGL Plug-ins CVS/prerelease"
 
 /* package origin */
 #define GST_PACKAGE_ORIGIN "Unknown package origin"

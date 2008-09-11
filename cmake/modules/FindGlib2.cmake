@@ -3,18 +3,18 @@ FILE(TO_CMAKE_PATH "${GLIB2_DIR}" TRY2_DIR)
 FILE(GLOB GLIB2_DIR ${TRY1_DIR} ${TRY2_DIR})
 
 FIND_PATH(GLIB_glib_2_INCLUDE_DIR glib.h
-                                  PATHS ${GLIB2_DIR}/include /usr/local/include /usr/include
+                                  PATHS ${GLIB2_DIR}/include /usr/local/include/glib-2.0 /usr/include/glib-2.0
                                   ENV INCLUDE DOC "Directory containing glib.h include file")
-                           
+
 FIND_PATH(GLIB_glibconfig_2_INCLUDE_DIR glibconfig.h
-                                        PATHS ${GLIB2_DIR}/include ${GLIB2_DIR}/lib/include /usr/local/include /usr/include
-                                        ENV INCLUDE DOC "Directory containing glibconfig.h include file")                           
+                                        PATHS ${GLIB2_DIR}/include ${GLIB2_DIR}/lib/include /usr/local/include/glib-2.0 /usr/include/glib-2.0 /usr/lib/glib-2.0/include /usr/local/lib/glib-2.0/include
+                                        ENV INCLUDE DOC "Directory containing glibconfig.h include file")
 
 FIND_LIBRARY(GLIB_glib_2_LIBRARY NAMES glib-2.0
                                  PATHS ${GLIB2_DIR}/bin ${GLIB2_DIR}/win32/bin ${GLIB2_DIR}/lib ${GLIB2_DIR}/win32/lib /usr/local/lib /usr/lib
                                  ENV LIB
                                  DOC "glib library to link with"
-                                 NO_SYSTEM_ENVIRONMENT_PATH)    
+                                 NO_SYSTEM_ENVIRONMENT_PATH)
 
 FIND_LIBRARY(GLIB_gmodule_2_LIBRARY NAMES gmodule-2.0
                                     PATHS ${GLIB2_DIR}/bin ${GLIB2_DIR}/win32/bin ${GLIB2_DIR}/lib ${GLIB2_DIR}/win32/lib /usr/local/lib /usr/lib
@@ -32,7 +32,7 @@ FIND_LIBRARY(GLIB_gthread_2_LIBRARY NAMES gthread-2.0
                                     PATHS ${GLIB2_DIR}/bin ${GLIB2_DIR}/win32/bin ${GLIB2_DIR}/lib ${GLIB2_DIR}/win32/lib /usr/local/lib /usr/lib
                                     ENV LIB
                                     DOC "gthread library to link with"
-                                    NO_SYSTEM_ENVIRONMENT_PATH)                                                                
+                                    NO_SYSTEM_ENVIRONMENT_PATH)
 
 IF (GLIB_glib_2_INCLUDE_DIR AND GLIB_glibconfig_2_INCLUDE_DIR AND GLIB_glib_2_LIBRARY AND GLIB_gmodule_2_LIBRARY AND GLIB_gobject_2_LIBRARY AND GLIB_gthread_2_LIBRARY)
   SET(GLIB2_INCLUDE_DIR ${GLIB_glib_2_INCLUDE_DIR} ${GLIB_glibconfig_2_INCLUDE_DIR})

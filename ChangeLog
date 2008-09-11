@@ -1,3 +1,19 @@
+2008-09-12  Julien Isorce  <julien.isorce@gmail.com>
+
+    * CMakeLists.txt
+    * cmake/modules/FindATK.cmake
+    * cmake/modules/FindCairo.cmake
+    * cmake/modules/FindGTK2.cmake
+    * cmake/modules/FindGlew.cmake
+    * cmake/modules/FindGlib2.cmake
+    * cmake/modules/FindGstreamer.cmake
+    * cmake/modules/FindLibXml2.cmake
+    * cmake/modules/FindOpenGL.cmake.off
+    * gst-libs/gst/freeglut/CMakeLists.txt
+    * gst-libs/gst/gl/CMakeLists.txt
+    * gst/gl/Makefile.am
+    The CMake build now works on my kubuntu-kde4.1.1
+
 2008-09-11  Julien Isorce  <julien.isorce@gmail.com>
 
     * .gitignore
@@ -23,7 +39,7 @@
     Add cmake build http://www.cmake.org.
     See CMake install instructions in the INSTALL file.
     (I have not correctly configured yet the cmake build for unix, BE patient)
-    
+
     * AUTHORS
     * BUGS
     * ChangeLog
@@ -32,7 +48,7 @@
     CRLF to LF
 
 2008-09-07  Julien Isorce  <julien.isorce@gmail.com>
-                                                                                                                 
+
     * TODO
     * gst-libs/gst/gl/gstgldisplay.c
     * gst-libs/gst/gl/gstgldisplay.h
@@ -53,13 +69,13 @@
     Add support for attributes in gstglshader.
 
 2008-08-25  Julien Isorce  <julien.isorce@gmail.com>
-                                                                                                                 
+
     * gst-libs/gst/gl/gstgldisplay.c
     Fix upload AYUV and YV12 (a regression in last commits).
     Fix download YV12 (same convidtion as upload YV12).
-   
+
 2008-08-24  Julien Isorce  <julien.isorce@gmail.com>
-                                                                                                                 
+
     * gst/gl/BUGS
     * gst-libs/gst/gl/gstgldisplay.c
 	* gst-libs/gst/gl/gstgldisplay.h
@@ -72,7 +88,7 @@
     So I decreased the OpengGL version from 1.4 to 1.2 (maybe less?)
 
 2008-08-21  Julien Isorce  <julien.isorce@gmail.com>
-                                                                                                                 
+
     * BUGS
     * gst-libs/gst/freeglut/freeglut_init.c
     * gst-libs/gst/freeglut/freeglut_main.c
@@ -82,31 +98,31 @@
     the TODO task 9.
 
 2008-08-21  Julien Isorce  <julien.isorce@gmail.com>
-                                                                                                                 
+
     * gst-libs/gst/gl/gstgldisplay.c
     * gst-libs/gst/gl/gstgldisplay.h
-    Use a GHash table instead of a GData for the texture pool 
+    Use a GHash table instead of a GData for the texture pool
 
 2008-08-20  Julien Isorce  <julien.isorce@gmail.com>
-                                                                                                                 
+
     * BUGS
     * tests/examples/gtk/filternoxoverlay/main.cpp
-    * tests/examples/gtk/filterxoverlay/main.cpp  
+    * tests/examples/gtk/filterxoverlay/main.cpp
     * tests/examples/gtk/gtkxoverlay/main.cpp
     Correctly uses signal watches on gst bus,
     which resolved the bug about clicking on the cross
     in the filter_NO_xoverlay example.
 
 2008-08-20  Julien Isorce  <julien.isorce@gmail.com>
-                                                                                                                 
-    * gst-libs/gst/gl/gstgldisplay.c                                                                                                                                                                                        
+
+    * gst-libs/gst/gl/gstgldisplay.c
     * unix/codeblocks/gstopengl/gstopengl.cbp
-    Get ride of a bug on ATI related to YV12 to rgb 
+    Get ride of a bug on ATI related to YV12 to rgb
     colorspace conversion through GLSL
-    
-    * BUGS                                                                                                                                                                                                                                     
+
+    * BUGS
     * configure.ac
-    * tests/examples/gtk/Makefile.am                                                                                           
+    * tests/examples/gtk/Makefile.am
     * tests/examples/gtk/README
     * tests/examples/gtk/filternoxoverlay/main.cpp
     * tests/examples/gtk/filternoxoverlay/Makefile.am
@@ -132,7 +148,7 @@
 2008-08-19  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstgldisplay.c
-    get ride of a bug on ATI related to I420_YV12 to rgb 
+    get ride of a bug on ATI related to I420_YV12 to rgb
     colorspace conversion through GLSL
 
 2008-08-19  Julien Isorce  <julien.isorce@gmail.com>
