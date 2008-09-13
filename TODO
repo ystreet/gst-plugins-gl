@@ -55,11 +55,11 @@
 - 11: make a test to estimate how much is a colorspace conversion. I mean compare an output frame
       to reference frame and estimate the differences. (usefull to compare several implementations)
 
-- 12: write a cmake build or an other well known opensource and multiplatform builder.
+(ALMOST DONE) - 12: write a cmake build or an other well known opensource and multiplatform builder.
 
 - 13: test colorspace conversion with Apple YCbCr extension.
 
-- 14: test the plugin on MAC.
+- 14: test again the plugin on MAC.
 
 - 15: test the plugin on WIN CE and some other embedded operating system.
 
@@ -73,6 +73,10 @@
      (whereas using "gst_gl_display_gen_shader", the check is done)
 
 - 18: use a custom debug category in GstGLShader instead of g_debug etc..
+	  fargiolas: GstGLShader is a generic object not a gst_object, when I wrote it I 
+	  asked at gstreamer developers which debugging system was better suited and 
+	  gst_debug was not the proper choice. Maybe we can disable them is by setting 
+	  a print handler (g_set_print_handler) and enabling them with some environment variable.
 
 - 19: update authors from the CVS repository
 

@@ -1,6 +1,14 @@
 2008-09-13  Julien Isorce  <julien.isorce@gmail.com>
 
     * TODO
+    * gst-libs/gst/gl/gstgldisplay.c
+    * tests/pipelines
+    Use a better key for the pool of textures.
+    Up TODO task 18.
+    
+2008-09-13  Julien Isorce  <julien.isorce@gmail.com>
+
+    * TODO
     Up TODO tasks 0 and 9.
     Add TODO task 17, 18, 19 and 20.
     
