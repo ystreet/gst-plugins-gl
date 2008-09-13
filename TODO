@@ -4,6 +4,8 @@
      coding guidelines) as pointed here:
      http://gstreamer.freedesktop.org/data/doc/gstreamer/head/faq/html/chapter-developing.html
      cap: I am ok, but I am not using emacs, so I let you run the re-indent script
+     cap: Can someone RE execute a re-indent script ? thx because it seems the first execution failed
+     (for example gst-libs/gst/gl/gstgldisplay.c seems to be NOT indented)
 
 (DONE) - 1: make Filippo's GstGLEffects work on this repository.
 
@@ -38,6 +40,14 @@
      (I am not really sure about this last remark since I made a modification in this example. Now the video speed is
      very clean, even after moving/resizing the window).
      Maybe we just should use the lib GtkGL if there is a way to give a winId.
+     Filippo:
+     I don't know too much about it but afaik it's almost unmaintained (the
+	 wiki says it has new maintainers but the last release is from 2006) and
+	 it's a library to embed opengl into a gtk app or use it to draw
+	 opengl-based widgets. I don't see how it could fit our needs, we just
+	 need a cross platform wrapper library around those glx/wgl functions.
+	 Anyway, I don't know, I could be wrong.
+	 Cap: ok I agree with that.
 
 - 10: make colorspace conversion through ColorMatrix when GLSL (and mesa YCbCr) is not available and when imaging extension
       is available.
@@ -60,3 +70,11 @@
 
 - 17: add a generic way to check that a given extension is available. (and set isAlive to false..)
      (for examples gleffects does not check you have shaders available so it can cause segfault.)
+     (whereas using "gst_gl_display_gen_shader", the check is done)
+
+- 18: use a custom debug category in GstGLShader instead of g_debug etc..
+
+- 19: update authors from the CVS repository
+
+- 20: update AG_GST_CHECK_PLUGIN(gl) in configure.ac in order to correctly list 
+	  the gl elements that would be built

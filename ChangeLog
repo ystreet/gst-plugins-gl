@@ -1,3 +1,24 @@
+2008-09-13  Julien Isorce  <julien.isorce@gmail.com>
+
+    * TODO
+    Up TODO tasks 0 and 9.
+    Add TODO task 17, 18, 19 and 20.
+    
+    * gst-libs/gst/gl/gstgldisplay.c
+    * gst/gl/gstglimagesink.c
+    Use debug category instead of g_print.
+    I put GST_CAT_XXX because it does not work without CAT,
+    Indeed, it seems that the GST_CAT_DEFAULT is not set correctly when
+    using GST_INFO (...) for example. Someone knows why ?
+    
+    * gst/gl/gstgltestsrc.c
+    * gst/gl/gstgltestsrc.h
+    Re-up authors.
+    
+    * gst/gl/gstglupload.c
+    * win32/common/config.h
+    Replace CVS by GIT
+
 2008-09-12  Julien Isorce  <julien.isorce@gmail.com>
 
     * CMakeLists.txt
