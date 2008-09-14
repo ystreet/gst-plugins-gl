@@ -196,7 +196,7 @@ gint main (gint argc, gchar *argv[])
 {
     if (argc != 2)
     {
-        g_warning ("usage: doublecube.exe videolocation\n");
+        g_warning ("usage: cubeyuv.exe videolocation\n");
         return -1;
     }
     

@@ -1,5 +1,23 @@
 2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
 
+    * gst-libs/gst/gl/gstgldisplay.c
+    * tests/pipelines
+    * tests/examples/generic/cubeyuv/main.cpp
+    Fix a regression:
+    For example this pipeline does not need a FBO:
+    gst-launch-0.10 videotestsrc ! "video/x-raw-rgb, width=w, height=h" ! \
+	  glupload ! "video/x-raw-gl, width=w, height=h" ! glimagesink
+    because the w and h are the same.
+    But this pipeline needs a FBO:
+    gst-launch-0.10 videotestsrc ! "video/x-raw-rgb, width=320, height=240" ! \
+      glupload ! "video/x-raw-gl, width=800, height=600" ! glimagesink
+    because we need to redraw the texture through a FBO in order to create
+    a new one with the correct size.
+    (The regression was to always not use a FBO when the video source
+    is rgb whereas we can need it)
+
+2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
+
     * TODO
     * gst-libs/gst/gl/gstgldisplay.c
     * gst/gl/gstgleffects.c
