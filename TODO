@@ -68,7 +68,7 @@
       (And so have some more cool stuffs work on Intel card for example)
       cg can convert GLSL code to ARB_fp/ARB_vp.
 
-- 17: add a generic way to check that a given extension is available. (and set isAlive to false..)
+(DONE) - 17: add a generic way to check that a given extension is available. (and set isAlive to false..)
      (for examples gleffects does not check you have shaders available so it can cause segfault.)
      (whereas using "gst_gl_display_gen_shader", the check is done)
 
