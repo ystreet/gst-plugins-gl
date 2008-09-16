@@ -1,4 +1,13 @@
 2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
+	
+	* TODO
+	Add TODO task 21.
+	* gst-libs/gst/gl/gstgldisplay.c
+	Fix a regression: MESA YCbCr colorspace conversion
+	(was not working since I removed the need of FBO
+	in some cases)
+
+2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstgldisplay.c
     * tests/pipelines

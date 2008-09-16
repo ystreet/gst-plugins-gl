@@ -82,3 +82,8 @@
 
 - 20: update AG_GST_CHECK_PLUGIN(gl) in configure.ac in order to correctly list 
 	  the gl elements that would be built
+	  
+- 21: cap: I got "Validation failed - samplers of different types are bound to the same texture image unit".
+	  when doing gst-launch-0.10 --gst-debug=gldisplay:3 videotestsrc ! glupload ! gleffects effect=9 ! glimagesink.
+	  (on my ATI RADEON X800 GTO) (same for effects 10, 11, 12, 13)
+	  Sometime it can causes to not use the effect then screen is white.
