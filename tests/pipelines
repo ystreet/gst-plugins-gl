@@ -41,8 +41,7 @@ gst-launch-0.10 videotestsrc ! glupload ! gldownload ! "video/x-raw-yuv, format=
 
 gst-launch-0.10 videotestsrc num_buffers=200 ! glupload !  video/x-raw-gl, width=720, height=576 ! glfiltercube ! video/x-raw-gl, width=320, height=240 ! gldownload ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
 gst-launch-0.10 gltestsrc ! glfiltercube ! gldownload ! ximagesink
-gst-launch-0.10 videotestsrc ! glupload ! gldownload ! glupload ! gldownload ! glupload ! ximagesink
-gst-launch-0.10 videotestsrc ! glupload ! gldownload ! glupload ! gldownload ! glupload ! gldownload ! glupload ! ximagesink
+gst-launch-0.10 videotestsrc ! glupload ! gldownload ! glupload ! gldownload ! glupload ! glimagesink
 
 gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glimagesink t. ! queue ! glimagesink
 gst-launch-0.10 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glupload ! glfiltercube ! glimagesink

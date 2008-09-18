@@ -7,7 +7,6 @@
 #else
 #include <gdk/gdkx.h>
 #endif
-#include <gst/interfaces/xoverlay.h>
 
 static void end_stream_cb(GstBus* bus, GstMessage* message, GstElement* pipeline)
 {

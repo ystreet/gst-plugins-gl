@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fxtest", "fxtest\fxtest.vcp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pixbufdrop", "pixbufdrop\pixbufdrop.vcproj", "{09F68B62-1D4C-4C24-A6AD-AA76A9F3237C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "filternoxoverlay", "filternoxoverlay\filternoxoverlay.vcproj", "{F41F3034-3E0B-4630-8D1E-35E14C606863}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -31,6 +33,10 @@ Global
 		{09F68B62-1D4C-4C24-A6AD-AA76A9F3237C}.Debug|Win32.Build.0 = Debug|Win32
 		{09F68B62-1D4C-4C24-A6AD-AA76A9F3237C}.Release|Win32.ActiveCfg = Release|Win32
 		{09F68B62-1D4C-4C24-A6AD-AA76A9F3237C}.Release|Win32.Build.0 = Release|Win32
+		{F41F3034-3E0B-4630-8D1E-35E14C606863}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F41F3034-3E0B-4630-8D1E-35E14C606863}.Debug|Win32.Build.0 = Debug|Win32
+		{F41F3034-3E0B-4630-8D1E-35E14C606863}.Release|Win32.ActiveCfg = Release|Win32
+		{F41F3034-3E0B-4630-8D1E-35E14C606863}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
