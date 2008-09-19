@@ -1,3 +1,11 @@
+2008-09-19  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/effects/gstgleffectlumatocurve.c:
+	* gst/gl/effects/gstgleffectrgbtocurve.c:
+	  explicitly bind the main texture and the curve one to separate
+	  units in rgb and luma to curve effects. This should solve the
+	  issue pointed in TODO item 21.
+
 2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
 	
 	* TODO
