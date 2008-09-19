@@ -236,24 +236,24 @@ AC_SUBST(HAVE_CLUTTER_X11)
 AM_CONDITIONAL(HAVE_CLUTTER_X11, test "x$HAVE_CLUTTER_X11" = "xyes")
 
 
-dnl OpenGL is required
-translit(dnm, m, l) AM_CONDITIONAL(USE_OPENGL, true)
-AG_GST_CHECK_X
-save_CPPFLAGS="$CPPFLAGS"
-save_LIBS="$LIBS"
-CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-LIBS="$LIBS $X_LIBS"
-AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
-  AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h, [
-      HAVE_OPENGL="yes"
-      GL_LIBS="-lGL"
-  ], [
-      HAVE_OPENGL="no"
-  ])
-  AC_SUBST(GL_LIBS)
-])
-CPPFLAGS="$save_CPPFLAGS"
-LIBS="$save_LIBS"
+#dnl OpenGL is required
+#translit(dnm, m, l) AM_CONDITIONAL(USE_OPENGL, true)
+#AG_GST_CHECK_X
+#save_CPPFLAGS="$CPPFLAGS"
+#save_LIBS="$LIBS"
+#CPPFLAGS="$CPPFLAGS $X_CFLAGS"
+#LIBS="$LIBS $X_LIBS"
+#AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
+#  AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h, [
+#      HAVE_OPENGL="yes"
+#      GL_LIBS="-lGL"
+#  ], [
+#      HAVE_OPENGL="no"
+#  ])
+#  AC_SUBST(GL_LIBS)
+#])
+#CPPFLAGS="$save_CPPFLAGS"
+#LIBS="$save_LIBS"
 
 dnl Eventually use pkgconfig check
 #AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
@@ -288,7 +288,7 @@ AG_GST_DEFAULT_ELEMENTS
 
 dnl *** plugins to includes ***
 
-AG_GST_CHECK_PLUGIN(gl)
+AG_GST_CHECK_PLUGIN(opengl)
 
 dnl *** sys plug-ins ***
 
