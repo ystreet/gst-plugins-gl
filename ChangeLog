@@ -1,3 +1,21 @@
+2008-09-20  Julien Isorce  <julien.isorce@gmail.com>
+
+	* TODO
+	* gst-libs/gst/gl/gstglbuffer.c
+	* gst-libs/gst/gl/gstglbuffer.h
+	* gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstgldisplay.h
+	* gst-libs/gst/gl/gstglfilter.c
+	* gst-libs/gst/gl/gstglfilter.h
+	* gst/gl/gstgldownload.c
+	* gst/gl/gstglimagesink.c
+	* gst/gl/gstglimagesink.h
+	* gst/gl/gstgltestsrc.h
+	* gst/gl/gstglupload.c
+	* gst/gl/gstopengl.c
+	  update authors from the CVS repository (TODO task 19)
+	  up TODO task 7.
+
 2008-09-20  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst-libs/gst/gl/gstglshader.c:

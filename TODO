@@ -24,6 +24,7 @@
      involving several glfilters. In order to test switching bettween gst states on it.
 
 - 7: put the pipelines listed in tests/pipelines to an automated test that attempts to reach some states.
+	 Use tests/check/generic/states.c and tests/check/pipelines/simple-launch-lines.c
 
 - 8: make two elements named "gltee" (attach as much texture (to its fbo) as tee src pads) and "glqueue".
      In order to have something like that:
@@ -78,7 +79,7 @@
 	  gst_debug was not the proper choice. Maybe we can disable them is by setting 
 	  a print handler (g_set_print_handler) and enabling them with some environment variable.
 
-- 19: update authors from the CVS repository
+(DONE) - 19: update authors from the CVS repository
 
 (DONE) - 20: update AG_GST_CHECK_PLUGIN(gl) in configure.ac in order to correctly list 
 	  the gl elements that would be built
