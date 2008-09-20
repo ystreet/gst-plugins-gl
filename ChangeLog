@@ -1,3 +1,9 @@
+2008-09-20  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstglshader.c:
+	  output shaders info log only if GST_GL_SHADER_DEBUG env variable
+	  is set. Should fix TODO task 18
+
 2008-09-19  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/effects/gstgleffectlumatocurve.c:
