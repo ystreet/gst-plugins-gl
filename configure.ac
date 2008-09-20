@@ -288,7 +288,7 @@ AG_GST_DEFAULT_ELEMENTS
 
 dnl *** plugins to includes ***
 
-AG_GST_CHECK_PLUGIN(opengl)
+AG_GST_CHECK_PLUGIN(gl)
 
 dnl *** sys plug-ins ***
 
