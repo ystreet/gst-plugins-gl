@@ -73,11 +73,12 @@
      (for examples gleffects does not check you have shaders available so it can cause segfault.)
      (whereas using "gst_gl_display_gen_shader", the check is done)
 
-- 18: use a custom debug category in GstGLShader instead of g_debug etc..
+- (ALSMOST DONE) 18: use a custom debug category in GstGLShader instead of g_debug etc..
 	  fargiolas: GstGLShader is a generic object not a gst_object, when I wrote it I 
 	  asked at gstreamer developers which debugging system was better suited and 
 	  gst_debug was not the proper choice. Maybe we can disable them is by setting 
 	  a print handler (g_set_print_handler) and enabling them with some environment variable.
+	  -> GST_GL_SHADER_DEBUG has to work on win32 too
 
 (DONE) - 19: update authors from the CVS repository
 

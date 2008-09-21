@@ -204,6 +204,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglfiltercube.h" />
+		<Unit filename="..\..\gst\gl\gstglfilterglass.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglfilterglass.h" />
 		<Unit filename="..\..\gst\gl\gstglfilterlaplacian.c">
 			<Option compilerVar="CC" />
 		</Unit>
