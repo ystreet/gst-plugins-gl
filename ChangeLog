@@ -16,6 +16,12 @@
 	* gst-libs/gst/gl/gstglshader.c:
 	  explicit check g_getenv return value to be not NULL
 
+2008-09-21  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/effects/gstgleffectlumatocurve.c:
+	* gst/gl/effects/gstgleffectrgbtocurve.c:
+	  use texture1 for curve textures
+
 2008-09-20  Julien Isorce  <julien.isorce@gmail.com>
 
 	* TODO
