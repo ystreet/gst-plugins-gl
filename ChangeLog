@@ -1,5 +1,10 @@
 2008-09-22  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/gstglpixbufoverlay.c:
+	  use right blending function with pixbuf overlay
+
+2008-09-22  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* gst-libs/gst/gl/gstgldisplay.c:
 	  no need to explicit set the debug category if default one is used
 	* gst/gl/effects/gstgleffectlumatocurve.c:
