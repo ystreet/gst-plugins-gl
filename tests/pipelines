@@ -56,3 +56,6 @@ gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! gleffects effect=3 ! gl
 
 gst-launch-0.10 videotestsrc ! glupload ! glbumper location=normalmap.bmp ! glimagesink
 gst-launch-0.10 videotestsrc ! glupload ! glbumper location=bumpwall.bmp ! "video/x-raw-gl, width=1200, height=800" ! glimagesink
+
+gst-launch-0.10 videotestsrc ! glupload ! glfilterglass ! glimagesink
+gst-launch-0.10 videotestsrc ! glupload ! "video/x-raw-gl, width=640, height=480" ! glfilterglass ! glimagesink

@@ -1,3 +1,15 @@
+2008-09-24  Julien Isorce  <julien.isorce@gmail.com>
+
+	* INSTALL
+	* TODO
+	* docs/DEBUGGING
+	* gst/gl/gstglfilterglass.c
+	* tests/pipelines
+	Update install instructions.
+	Close TODO task 18. (works with msvc8 now)
+	Replace GST_CAT_LOG by GST_LOG.
+	Add a some debugging tips.
+
 2008-09-22  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/gstglpixbufoverlay.c:

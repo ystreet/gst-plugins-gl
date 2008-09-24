@@ -7,14 +7,21 @@ Software Foundation, Inc.
 This file is free documentation; the Free Software Foundation gives
 unlimited permission to copy, distribute and modify it.
 
-Cross-platform Installation
-==========================
 
-Using CMake http://www.cmake.org
+Builders summary:
+=======================================================
+Cross-platform build: Using CMake http://www.cmake.org
+Unix frozen builds: autotools or unix/codeblocks
+Win32 frozen builds: win32/codeblocks or win32/vs8
+=======================================================
 
---------
-* WIN32:
---------
+
+Cross-platform build: Using CMake http://www.cmake.org
+======================================================
+
+-----------------
+* cmake on WIN32:
+-----------------
 
 -mingw32:
 cd gst-plugins-gl
@@ -41,7 +48,7 @@ mkdir codeblocks
 cd codeblocks
 cmake -G "CodeBlocks - MinGW Makefiles" ..\gst-plugins-gl
 Open GST-PLUGINS-GL.cbp and press Ctrl-F9 to build the project
-result in gst\gl\libgstopengl.dll
+result is gst\gl\libgstopengl.dll
 
 -Others:
 Type "cmake --help" to have a look of possible builds
@@ -50,7 +57,7 @@ Eclipse CDT4 - MinGW Makefiles
 etc...)
 
 -On win32 I usually write a file named glcmake.bat
-in the same dir as gst-plugins-gl is.
+in the same dir as gst-plugins-gl dir is (not in the gst-plugins-gl dir).
 BUT IT IS NOT AN OBLIGATION
 This file contains:
 
@@ -76,21 +83,72 @@ del *ache* && cmake -G "CodeBlocks - MinGW Makefiles" ..\gst-plugins-gl
 cmd
 rem ########################################################################
 
-In this way you have to set manually the env variables
+In this way you have to set manually the env variables.
 
 
--------
-* UNIX:
--------
+----------------
+* cmake on UNIX:
+----------------
 
-For now just use ./autogen.sh then make
-because I have not correctly configured yet the cmake build on 
-unix (cmake -G "Unix Makefiles")
+-Unix Makefiles:
+cd gst-plugins-gl
+cd ..
+mkdir unix
+cd unix
+cmake -G "Unix Makefiles" ../gst-plugins-gl
+make
+result is gst/gl/libgstopengl.so
+
+-CodeBlocks:
+cd gst-plugins-gl
+cd ..
+mkdir codeblocks
+cd codeblocks
+cmake -G "CodeBlocks - MinGW Makefiles" ../gst-plugins-gl
+Open GST-PLUGINS-GL.cbp and press Ctrl-F9 to build the project
+result is gst/gl/libgstopengl.so
+
+-Others:
+Type "cmake --help" to have a look of possible builds
+(Eclipse CDT4 - Unix Makefiles,
+KDevelop3,
+KDevelop3 - Unix Makefiles
+etc...)
+
+
+Unix frozen builds: autotools or unix/codeblocks
+================================================
+
+-Autotools
+./autogen.sh
+make
 result in gst-plugins-gl/gst/gl/.libs/libgstopengl.so
-Or you can use gst-plugins-gl/unix/codeblocks/gstopengl/gstopengl.cbp
-But this unix codeblocks build will be replaced when 
-the cmake build will work on unix because cmake can generate it
-through cmake -G "CodeBlocks - Unix Makefiles"
+
+-CodeBlocks
+gst-plugins-gl/unix/codeblocks/gstopengl/gstopengl.cbp
+
+
+Win32 frozen builds: win32/codeblocks or win32/vs8
+=================================================
+
+-CodeBlocks
+gst-plugins-gl\win32\codeblock\gstopengl.cbp
+
+-vs8
+gst-plugins-gl\win32\vs8\libgstopengl.sln
+
+
+Simple test:
+============
+
+-From the command line:
+export GST_GL_SHADER_DEBUG=1 
+(or set GST_GL_SHADER_DEBUG=1 on win32)
+gst-launch-0.10 --gst-debug=gldisplay:3 videotestsrc ! glimagesink
+
+see gst-plugins-gl/tests/pipelines for other simple cmd examples.
+and gst-plugins-gl/tests/examples for more complex tests.
+
 
 Basic Installation
 ==================

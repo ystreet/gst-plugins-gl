@@ -1,0 +1,62 @@
+
+=====
+Notes
+=====
+
+First on win32, if you are using msvc, you should check the glibconfig.h file:
+About line 130, you should have:
+
+#else /* _MSC_VER */
+/* varargs macros available since msvc8 (vs2005) */
+#  if _MSC_VER >= 1400
+#    define G_HAVE_ISO_VARARGS 1
+#    define __func__ __FUNCTION__
+#   endif
+#endif /* not _MSC_VER */
+
+
+====================
+OpenGL context infos
+====================
+
+#gst-launch-0.10 --gst-debug=gldisplay:N pipeline
+#N=1: errors
+#N=2: errors warnings
+#N=3: errors warnings infos
+#N=4: errors warnings infos
+#N=5: errors warnings infos logs
+
+gst-launch-0.10 --gst-debug=gldisplay:3 videotestsrc ! glimagesink
+
+
+=======
+Shaders
+=======
+
+win32:
+set GST_GL_SHADER_DEBUG=1 (or something else because setting it to 0 is NOT like to not setting it at all)
+gst-launch-0.10 videotestsrc ! glimagesink
+when you are done, just type "set GST_GL_SHADER_DEBUG=" to unset it.
+
+unix:
+export GST_GL_SHADER_DEBUG=1
+gst-launch-0.10 videotestsrc ! glimagesink
+when you are done, just type "export GST_GL_SHADER_DEBUG=" or "export GST_GL_SHADER_DEBUG=0" to unset it.
+
+
+===========
+gl elements
+===========
+
+gst-launch-0.10 --gst-debug=gleffects:3 videotestsrc ! glupload ! gleffects effect=8 ! glimagesink
+gst-launch-0.10 --gst-debug=gleffects:3,gldisplay:3 videotestsrc ! glupload ! gleffects effect=8 ! glimagesink
+
+
+========
+Remarks:
+========
+
+If you are not already mind irreversible, or if you are still looking for a dev environment
+then you should try CodeBlocks which is available on both linux and windows, or vs8(9) on windows.
+Indeed, nowadays ponctual debug traces, like printf and others (I mean not definitive traces like GST_DEBUG),
+are forbidden. They have been replaced by break points which are useable only through a good IDE.
