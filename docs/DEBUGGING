@@ -39,9 +39,16 @@ gst-launch-0.10 videotestsrc ! glimagesink
 when you are done, just type "set GST_GL_SHADER_DEBUG=" to unset it.
 
 unix:
+(Probably bash-specific, check your shell docs to know how to do it)
+
 export GST_GL_SHADER_DEBUG=1
 gst-launch-0.10 videotestsrc ! glimagesink
-when you are done, just type "export GST_GL_SHADER_DEBUG=" or "export GST_GL_SHADER_DEBUG=0" to unset it.
+when you are done, just type "export -n GST_GL_SHADER_DEBUG" to unset it.
+
+or just prepend your app with GST_GL_SHADER=1 (no need to unset):
+GST_GL_SHADER=1 gst-launch-0.10 videotestsrc ! glimagesink
+Note: the "1" value is completely arbitrary, what matters here is whether the
+environment variable is set or not.
 
 
 ===========
@@ -50,6 +57,10 @@ gl elements
 
 gst-launch-0.10 --gst-debug=gleffects:3 videotestsrc ! glupload ! gleffects effect=8 ! glimagesink
 gst-launch-0.10 --gst-debug=gleffects:3,gldisplay:3 videotestsrc ! glupload ! gleffects effect=8 ! glimagesink
+GST_DEBUG=gl*:5 gst-launch-0.10 videotestsrc ! glupload ! glimagesink
+
+Look at "Running GStreamer Application" section in the GStreamer Core
+Reference Manual if you want more details about GStreamer debugging.
 
 
 ========

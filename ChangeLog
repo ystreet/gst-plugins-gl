@@ -1,3 +1,17 @@
+2008-09-24  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* docs/DEBUGGING:
+	  added some bit to debugging file
+
+2008-09-24  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/gstglfiltersobel.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/gstopengl.c:
+	* gst/gl/Makefile.am:
+	  import sobel edge detector from cvs branch
+
 2008-09-24  Julien Isorce  <julien.isorce@gmail.com>
 
 	* INSTALL
