@@ -212,6 +212,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglfilterlaplacian.h" />
+		<Unit filename="..\..\gst\gl\gstglfiltersobel.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="..\..\gst\gl\gstglimagesink.c">
 			<Option compilerVar="CC" />
 		</Unit>

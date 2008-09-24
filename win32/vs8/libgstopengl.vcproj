@@ -282,6 +282,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst\gl\gstglfiltersobel.c"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglimagesink.c"
 					>
 				</File>
