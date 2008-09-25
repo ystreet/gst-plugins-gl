@@ -1,3 +1,20 @@
+2008-09-25  Julien Isorce  <julien.isorce@gmail.com>
+
+	* gst/gl/gstglfilterglass.c:
+	  Fix glfilterglass: nothing was drawn when uploading from rgb
+	  because the texture had an alpha channel equals to 0.
+	  By default, when doing, gst-launch-0.10 videotestsrc ! \
+	  "video/x-raw-rgb" ! glupload ..., the format is bpp=32, depth=24.
+	  And in the glfilterglass's fragment source, this alpha channel
+	  was used instead of the frame buffer's alpha channel (background gradient).
+	  So to resolve the problem I have just replaced texture_color.a by glColor.a .
+	  By the way, it also resolved the reflection.
+	  Finally, I have changed the rounded corner algorithm which was wrong.
+	  Now we have the same result as this
+	  "http://www.mdk.org.pl/2007/11/17/gl-colorspace-conversions"
+	* gst/gl/gstglfiltercube.c
+	  Disable depth_test.
+
 2008-09-24  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* docs/DEBUGGING:
