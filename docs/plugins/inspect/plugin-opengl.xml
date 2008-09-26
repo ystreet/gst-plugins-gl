@@ -1,0 +1,316 @@
+<plugin>
+  <name>opengl</name>
+  <description>OpenGL plugin</description>
+  <filename>../../gst/gl/.libs/libgstopengl.so</filename>
+  <basename>libgstopengl.so</basename>
+  <version>0.10.0.1</version>
+  <license>LGPL</license>
+  <source>gst-plugins-gl</source>
+  <package>GStreamer OpenGL Plug-ins CVS/prerelease</package>
+  <origin>Unknown package origin</origin>
+  <elements>
+    <element>
+      <name>glbumper</name>
+      <longname>OpenGL bumper filter</longname>
+      <class>Filter/Effect</class>
+      <description>Bump mapping filter</description>
+      <author>Cyril Comparon &lt;cyril.comparon@gmail.com&gt;, Julien Isorce &lt;julien.isorce@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glcolorscale</name>
+      <longname>OpenGL color scale</longname>
+      <class>Filter/Effect</class>
+      <description>Colorspace converter and video scaler</description>
+      <author>Julien Isorce &lt;julien.isorce@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)-16777216, green_mask=(int)16711680, blue_mask=(int)65280, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-yuv, format=(fourcc){ I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)-16777216, green_mask=(int)16711680, blue_mask=(int)65280, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-yuv, format=(fourcc){ I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>gldifferencematte</name>
+      <longname>Gstreamer OpenGL DifferenceMatte</longname>
+      <class>Filter/Effect</class>
+      <description>Saves a background frame and replace it with a pixbuf</description>
+      <author>Filippo Argiolas &lt;filippo.argiolas@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>gldownload</name>
+      <longname>OpenGL video maker</longname>
+      <class>Filter/Effect</class>
+      <description>A from GL to video flow filter</description>
+      <author>Julien Isorce &lt;julien.isorce@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-rgb, bpp=(int)24, depth=(int)24, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)24, depth=(int)24, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)-16777216, green_mask=(int)16711680, blue_mask=(int)65280, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)-16777216, green_mask=(int)16711680, blue_mask=(int)65280, alpha_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, alpha_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, alpha_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, alpha_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-yuv, format=(fourcc){ I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>gleffects</name>
+      <longname>Gstreamer OpenGL Effects</longname>
+      <class>Filter/Effect</class>
+      <description>GL Shading Language effects</description>
+      <author>Filippo Argiolas &lt;filippo.argiolas@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glfilterapp</name>
+      <longname>OpenGL application filter</longname>
+      <class>Filter/Effect</class>
+      <description>Use client callbacks to define the scene</description>
+      <author>Julien Isorce &lt;julien.isorce@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glfilterblur</name>
+      <longname>Gstreamer OpenGL Blur</longname>
+      <class>Filter/Effect</class>
+      <description>Blur with 9x9 separable convolution</description>
+      <author>Filippo Argiolas &lt;filippo.argiolas@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glfiltercube</name>
+      <longname>OpenGL cube filter</longname>
+      <class>Filter/Effect</class>
+      <description>Map input texture on the 6 cube faces</description>
+      <author>Julien Isorce &lt;julien.isorce@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glfilterglass</name>
+      <longname>OpenGL glass filter</longname>
+      <class>Filter/Effect</class>
+      <description>Glass Filter</description>
+      <author>Julien Isorce &lt;julien.isorce@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glfilterlaplacian</name>
+      <longname>OpenGL laplacian filter</longname>
+      <class>Filter/Effect</class>
+      <description>Laplacian Convolution Demo Filter</description>
+      <author>Filippo Argiolas &lt;filippo.argiolas@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glfiltersobel</name>
+      <longname>Gstreamer OpenGL Sobel</longname>
+      <class>Filter/Effect</class>
+      <description>Sobel edge detection</description>
+      <author>Filippo Argiolas &lt;filippo.argiolas@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glimagesink</name>
+      <longname>OpenGL video sink</longname>
+      <class>Sink/Video</class>
+      <description>A videosink based on OpenGL</description>
+      <author>Julien Isorce &lt;julien.isorce@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]; video/x-raw-rgb, bpp=(int)24, depth=(int)24, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)24, depth=(int)24, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)-16777216, green_mask=(int)16711680, blue_mask=(int)65280, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)-16777216, green_mask=(int)16711680, blue_mask=(int)65280, alpha_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, alpha_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, alpha_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, alpha_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-yuv, format=(fourcc){ I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glpixbufoverlay</name>
+      <longname>Gstreamer OpenGL PixbufOverlay</longname>
+      <class>Filter/Effect</class>
+      <description>Overlay GL video texture with a gdkpixbuf</description>
+      <author>Filippo Argiolas &lt;filippo.argiolas@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>gltestsrc</name>
+      <longname>Video test source</longname>
+      <class>Source/Video</class>
+      <description>Creates a test video stream</description>
+      <author>David A. Schleef &lt;ds@schleef.org&gt;</author>
+      <pads>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>glupload</name>
+      <longname>OpenGL upload</longname>
+      <class>Filter/Effect</class>
+      <description>A from video to GL flow filter</description>
+      <author>Julien Isorce &lt;julien.isorce@gmail.com&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-rgb, bpp=(int)24, depth=(int)24, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)24, depth=(int)24, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)-16777216, green_mask=(int)16711680, blue_mask=(int)65280, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)24, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)-16777216, green_mask=(int)16711680, blue_mask=(int)65280, alpha_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)65280, green_mask=(int)16711680, blue_mask=(int)-16777216, alpha_mask=(int)255, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)16711680, green_mask=(int)65280, blue_mask=(int)255, alpha_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-rgb, bpp=(int)32, depth=(int)32, endianness=(int)4321, red_mask=(int)255, green_mask=(int)65280, blue_mask=(int)16711680, alpha_mask=(int)-16777216, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]; video/x-raw-yuv, format=(fourcc){ I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+  </elements>
+</plugin>
