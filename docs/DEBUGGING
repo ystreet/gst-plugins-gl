@@ -45,8 +45,8 @@ export GST_GL_SHADER_DEBUG=1
 gst-launch-0.10 videotestsrc ! glimagesink
 when you are done, just type "export -n GST_GL_SHADER_DEBUG" to unset it.
 
-or just prepend your app with GST_GL_SHADER=1 (no need to unset):
-GST_GL_SHADER=1 gst-launch-0.10 videotestsrc ! glimagesink
+or just prepend your app with GST_GL_SHADER_DEBUG=1 (no need to unset):
+GST_GL_SHADER_DEBUG=1 gst-launch-0.10 videotestsrc ! glimagesink
 Note: the "1" value is completely arbitrary, what matters here is whether the
 environment variable is set or not.
 

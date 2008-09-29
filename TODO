@@ -102,4 +102,4 @@
 	  -> it seems we cannot remove this glsl ATI compiler message.
 	  
     
-- 22: move gst-plugins-gl/docs/libgstopengl.pdf to Gdoc
+(ALMOST DONE) - 22: write gtk-doc

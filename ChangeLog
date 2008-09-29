@@ -1,3 +1,19 @@
+2008-09-29  Julien Isorce  <julien.isorce@gmail.com>
+
+	* docs/DEBUGGING
+	* gst/gl/gltestsrc.c
+	* gst/gl/gstglbumper.c
+	* gst/gl/gstglcolorscale.c
+	* gst/gl/gstgldownload.c
+	* gst/gl/gstglfilterapp.c
+	* gst/gl/gstglfiltercube.c
+	* gst/gl/gstglfilterglass.c
+	* gst/gl/gstglimagesink.c
+	* gst/gl/gstgltestsrc.c
+	* gst/gl/gstglupload.c
+	* gst/gl/gstopengl.c
+	Fix gltestsrc (SMPTE was a little bit dark) and start to write the gtk doc (no tested)
+
 2008-09-25  Julien Isorce  <julien.isorce@gmail.com>
 
 	* gst/gl/gstglfilterglass.c:
