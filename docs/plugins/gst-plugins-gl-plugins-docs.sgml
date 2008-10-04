@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY % version-entities SYSTEM "version.entities">
+  %version-entities;
+]>
+<book id="index">
+  <bookinfo>
+    <title>GStreamer OpenGL Plugins &GST_MAJORMINOR; Plugins Reference Manual</title>
+    <releaseinfo>
+      for gst-plugins-gl &GST_MAJORMINOR; (&GST_VERSION;)
+      The latest version of this documentation can be found on-line at
+      <ulink role="online-location" url="http://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-gl-plugins/index.html">http://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-gl-plugins/</ulink>.
+    </releaseinfo>
+  </bookinfo>
+
+  <chapter>
+    <title>gst-plugins-gl Elements</title>
+    <xi:include href="xml/element-glbumper.xml"/>
+    <xi:include href="xml/element-glcolorscale.xml"/>
+    <xi:include href="xml/element-gldownload.xml"/>
+    <xi:include href="xml/element-gleffects.xml"/>
+    <xi:include href="xml/element-glfilterapp.xml"/>
+    <xi:include href="xml/element-glfiltercube.xml"/>
+    <xi:include href="xml/element-glfilterglass.xml"/>
+    <xi:include href="xml/element-glfilterlaplacian.xml"/>
+    <xi:include href="xml/element-glimagesink.xml"/>
+    <xi:include href="xml/element-gltestsrc.xml"/>
+    <xi:include href="xml/element-glupload.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>gst-plugins-gl Plugins</title>
+    <xi:include href="xml/plugin-opengl.xml"/>
+  </chapter>
+</book>

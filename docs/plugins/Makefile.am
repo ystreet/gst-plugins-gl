@@ -74,9 +74,20 @@ IGNORE_CFILES =
 # but I'm not sure about that - it might be this Just Works given that
 # the registry won't have the element
 
-EXTRA_HFILES = 
+EXTRA_HFILES = \ 
+	$(top_srcdir)/gst/gl/gstglbumper.h \
+	$(top_srcdir)/gst/gl/gstglcolorscale.h \
+	$(top_srcdir)/gst/gl/gstgldownload.h \
+	$(top_srcdir)/gst/gl/gstgleffects.h \
+	$(top_srcdir)/gst/gl/gstglfilterapp.h \
+	$(top_srcdir)/gst/gl/gstglfiltercube.h \
+	$(top_srcdir)/gst/gl/gstglfilterglass.h \
+	$(top_srcdir)/gst/gl/gstglfilterlaplacian.h \
+	$(top_srcdir)/gst/gl/gstglimagesink.h \
+	$(top_srcdir)/gst/gl/gstgltestsrc.h \
+	$(top_srcdir)/gst/gl/gstglupload.h
 
-#	$(top_srcdir)/gst/gl/gstgltestsrc.h
+	
 
 # Images to copy into HTML directory.
 HTML_IMAGES =

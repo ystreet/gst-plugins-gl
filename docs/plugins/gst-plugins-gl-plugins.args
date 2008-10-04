@@ -1,0 +1,200 @@
+<ARG>
+<NAME>GstGLTestSrc::is-live</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Is Live</NICK>
+<BLURB>Whether to act as a live source.</BLURB>
+<DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLTestSrc::pattern</NAME>
+<TYPE>GstGLTestSrcPattern</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Pattern</NICK>
+<BLURB>Type of test pattern to generate.</BLURB>
+<DEFAULT>SMPTE 100% color bars</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLTestSrc::timestamp-offset</NAME>
+<TYPE>gint64</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Timestamp offset</NICK>
+<BLURB>An offset added to timestamps set on buffers (in ns).</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::aspect</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Aspect</NICK>
+<BLURB>Field of view in the x direction.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::blue</NAME>
+<TYPE>gfloat</TYPE>
+<RANGE>[0,1]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Blue</NICK>
+<BLURB>Background blue color.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::fovy</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,180]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Fovy</NICK>
+<BLURB>Field of view angle in degrees.</BLURB>
+<DEFAULT>45</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::green</NAME>
+<TYPE>gfloat</TYPE>
+<RANGE>[0,1]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Green</NICK>
+<BLURB>Background reen color.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::red</NAME>
+<TYPE>gfloat</TYPE>
+<RANGE>[0,1]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Red</NICK>
+<BLURB>Background red color.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::zfar</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,1000]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Zfar</NICK>
+<BLURB>Specifies the	distance from the viewer to the	far clipping plane.</BLURB>
+<DEFAULT>100</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::znear</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Znear</NICK>
+<BLURB>Specifies the	distance from the viewer to the	near clipping plane.</BLURB>
+<DEFAULT>0,1</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLPixbufOverlay::location</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Location of the image</NICK>
+<BLURB>Location of the image.</BLURB>
+<DEFAULT>NULL</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLDifferenceMatte::location</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Background image location</NICK>
+<BLURB>Background image location.</BLURB>
+<DEFAULT>NULL</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLBumper::location</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Normal map location</NICK>
+<BLURB>Normal map location.</BLURB>
+<DEFAULT>NULL</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLEffects::effect</NAME>
+<TYPE>GstGLEffectsEffect</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Effect</NICK>
+<BLURB>Select which effect apply to GL video texture.</BLURB>
+<DEFAULT>Do nothing Effect</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLEffects::hswap</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Horizontal Swap</NICK>
+<BLURB>Switch video texture left to right, useful with webcams.</BLURB>
+<DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterApp::client-draw-callback</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client draw callback</NICK>
+<BLURB>Define a custom draw callback in a client code.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterApp::client-reshape-callback</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client reshape callback</NICK>
+<BLURB>Define a custom reshape callback in a client code.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::client-draw-callback</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client draw callback</NICK>
+<BLURB>Define a custom draw callback in a client code.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::client-reshape-callback</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client reshape callback</NICK>
+<BLURB>Define a custom reshape callback in a client code.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::display</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Display</NICK>
+<BLURB>Display name.</BLURB>
+<DEFAULT>NULL</DEFAULT>
+</ARG>
+
