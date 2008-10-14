@@ -31,6 +31,8 @@ private:
     GstElement* m_glimagesink;
 
     void create();
+    void seek();
+    void setState(GstState state);
     WId winId() const { return m_winId; }
     void doExpose () const;
 

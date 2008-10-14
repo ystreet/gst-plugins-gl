@@ -42,7 +42,6 @@ void Pipeline::create()
         return;
     }
 
-    g_object_set(G_OBJECT(videosrc), "num-buffers", 800, NULL);
     g_object_set(G_OBJECT(videosrc), "location", m_videoLocation.toAscii().data(), NULL);
 
     gst_bin_add_many (GST_BIN (m_pipeline), videosrc, decodebin, m_glimagesink, NULL);
@@ -56,9 +55,21 @@ void Pipeline::create()
     gst_object_unref (pad);
 }
 
-void Pipeline::start()
+void Pipeline::seek()
 {
-    GstStateChangeReturn ret = gst_element_set_state (m_pipeline, GST_STATE_PLAYING);
+    if (gst_element_seek(
+           m_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
+           GST_SEEK_TYPE_SET, 2 * GST_SECOND,
+           GST_SEEK_TYPE_SET, 20 * GST_SECOND)
+       )
+        qDebug ("Success to seek");
+    else
+        qDebug ("Failed to seek");
+}
+
+void Pipeline::setState(GstState state)
+{
+    GstStateChangeReturn ret = gst_element_set_state (m_pipeline, state);
     if (ret == GST_STATE_CHANGE_FAILURE)
     {
         qDebug ("Failed to start up pipeline!");
@@ -75,6 +86,11 @@ void Pipeline::start()
         }
         return;
     }
+}
+
+void Pipeline::start()
+{
+    setState(GST_STATE_PLAYING);
 
 #ifdef WIN32
     g_main_loop_run(m_loop);    
@@ -126,6 +142,7 @@ void Pipeline::resize(int width, int height)
 
 gboolean Pipeline::bus_call (GstBus *bus, GstMessage *msg, Pipeline* p)
 {
+  
     switch (GST_MESSAGE_TYPE (msg))
     {
         case GST_MESSAGE_EOS:
@@ -145,6 +162,16 @@ gboolean Pipeline::bus_call (GstBus *bus, GstMessage *msg, Pipeline* p)
                 g_free (debug);
             }
             p->stop();
+            break;
+        }
+        case GST_MESSAGE_STATE_CHANGED:
+        {
+            GstState oldState = GST_STATE_NULL; 
+            GstState currentState = GST_STATE_NULL;
+            GstState pendingState = GST_STATE_NULL; 
+            gst_message_parse_state_changed (msg, &oldState, &currentState, &pendingState);
+            if (oldState == GST_STATE_READY && currentState == GST_STATE_PAUSED && pendingState == GST_STATE_PLAYING)
+                p->seek();
             break;
         }
         default:

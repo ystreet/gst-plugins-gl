@@ -7,13 +7,13 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
-    QString videolcoation = QFileDialog::getOpenFileName(0, "Select a video file", 
+    QString videolocation = QFileDialog::getOpenFileName(0, "Select a video file", 
         ".", "Format (*.avi *.mkv *.ogg *.asf *.mov)");
 
-    if (videolcoation.isEmpty())
+    if (videolocation.isEmpty())
         return -1;
 
-    QRenderer w(videolcoation);
+    QRenderer w(videolocation);
     w.setWindowTitle("glimagesink implements the gstxoverlay interface");
 
     return a.exec();
