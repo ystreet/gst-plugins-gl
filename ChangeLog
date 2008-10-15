@@ -1,3 +1,24 @@
+2008-10-15  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/Makefile.am:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst/gl/effects/gstgleffectscurves.h:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/effects/gstgleffectxray.c:
+	* gst/gl/gstglfiltersobel.c:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstgleffects.h:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	Merge of some patches from my local development branch. See git log
+	for detailed info about each commit.
+	Add support for missing videoformats (RGBA, BGRA, ARGB, ABGR) in
+	gst_gl_do_upload_fill.
+	Make luma_to_curve effect non-static.
+	Add invert property to GstGLFilterSobel.
+	Add a fragment shader for "multiply" blending mode.
+	Import xray effect.
+
 2008-09-29  Julien Isorce  <julien.isorce@gmail.com>
 
 	* docs/DEBUGGING
