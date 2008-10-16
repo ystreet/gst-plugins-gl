@@ -364,6 +364,10 @@
 						RelativePath="..\..\gst\gl\effects\gstgleffecttwirl.c"
 						>
 					</File>
+					<File
+						RelativePath="..\..\gst\gl\effects\gstgleffectxray.c"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -470,6 +474,10 @@
 				<Filter
 					Name="effects"
 					>
+					<File
+						RelativePath="..\..\gst\gl\effects\gstgleffectlumatocurve.h"
+						>
+					</File>
 					<File
 						RelativePath="..\..\gst\gl\effects\gstgleffectscurves.h"
 						>

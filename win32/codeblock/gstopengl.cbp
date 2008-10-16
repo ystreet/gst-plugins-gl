@@ -141,6 +141,7 @@
 		<Unit filename="..\..\gst\gl\effects\gstgleffectlumatocurve.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectlumatocurve.h" />
 		<Unit filename="..\..\gst\gl\effects\gstgleffectmirror.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -168,6 +169,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\effects\gstgleffecttwirl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\effects\gstgleffectxray.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gltestsrc.c">
