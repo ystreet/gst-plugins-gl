@@ -33,7 +33,7 @@
      t. ! glqueue ! glfilterC ! glimagesink
      Assuming glfilterA is GPU consumming and so do not need to duplicate it.
 
-- 9: rewrite the freeglut part that I minimized. Although I removed 90% of the orignal code,
+(IN PROGRESS) - 9: rewrite the freeglut part that I minimized. Although I removed 90% of the orignal code,
      it should be rewrite with the GLib API. To have a better design and handle X/WIN32 with interfaces
      instead of having a lot of "define WIN32" scopes.
      And make it thread safe in order to have one glthread per GstGLDisplay, instead of having a global glthread.
@@ -74,9 +74,9 @@
      (whereas using "gst_gl_display_gen_shader", the check is done)
 
 (DONE) - 18: use a custom debug category in GstGLShader instead of g_debug etc..
-	  fargiolas: GstGLShader is a generic object not a gst_object, when I wrote it I 
-	  asked at gstreamer developers which debugging system was better suited and 
-	  gst_debug was not the proper choice. Maybe we can disable them is by setting 
+	  fargiolas: GstGLShader is a generic object not a gst_object, when I wrote it I
+	  asked at gstreamer developers which debugging system was better suited and
+	  gst_debug was not the proper choice. Maybe we can disable them is by setting
 	  a print handler (g_set_print_handler) and enabling them with some environment variable.
 	  -> GST_GL_SHADER_DEBUG has to work on win32+vc8, too.
 	  Now it works, I have added:
@@ -88,18 +88,18 @@
       #   endif
       #endif /* not _MSC_VER */
       in the glibconfig.h file.
-	  
+
 
 (DONE) - 19: update authors from the CVS repository
 
-(DONE) - 20: update AG_GST_CHECK_PLUGIN(gl) in configure.ac in order to correctly list 
+(DONE) - 20: update AG_GST_CHECK_PLUGIN(gl) in configure.ac in order to correctly list
 	  the gl elements that would be built
-	  
+
 (DONE) - 21: cap: I got "Validation failed - samplers of different types are bound to the same texture image unit".
 	  when doing gst-launch-0.10 --gst-debug=gldisplay:3 videotestsrc ! glupload ! gleffects effect=9 ! glimagesink.
 	  (on my ATI RADEON X800 GTO) (same for effects 10, 11, 12, 13)
 	  Sometime it can causes to not use the effect then screen is white. (it works every times now)
 	  -> it seems we cannot remove this glsl ATI compiler message.
-	  
-    
+
+
 (ALMOST DONE) - 22: write gtk-doc

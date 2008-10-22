@@ -1,3 +1,39 @@
+2008-10-23  Julien Isorce  <julien.isorce@gmail.com>
+
+	* gst-libs/gst/CMakeLists.txt
+	* gst-libs/gst/Makefile.am
+	* gst-libs/gst/freeglut/CMakeLists.txt
+	* gst-libs/gst/freeglut/Makefile.am
+	* gst-libs/gst/freeglut/freeglut_callbacks.c
+	* gst-libs/gst/freeglut/freeglut_display.c
+	* gst-libs/gst/freeglut/freeglut_ext.h
+	* gst-libs/gst/freeglut/freeglut_init.c
+	* gst-libs/gst/freeglut/freeglut_internal.h
+	* gst-libs/gst/freeglut/freeglut_main.c
+	* gst-libs/gst/freeglut/freeglut_state.c
+	* gst-libs/gst/freeglut/freeglut_std.h
+	* gst-libs/gst/freeglut/freeglut_structure.c
+	* gst-libs/gst/freeglut/freeglut_window.c
+	* gst-libs/gst/freeglut/gstfreeglut.h
+	* gst-libs/gst/gl/CMakeLists.txt
+	* gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstgldisplay.h
+	* gst-libs/gst/gl/gstglwindow.h
+	* gst-libs/gst/gl/gstglwindow_win32.c
+	* win32/vs8/libgstopengl.vcproj
+	Remove gstfreeglut.
+	Begin gstglwindow.
+	There is now one gl thread per gldisplay
+	and one glwindow per gldisplay.
+	On win32, N distincts opengl context can be current in
+	N distincts threads.
+	A gldisplay owns one glwindow and one glthread.
+	The custom message loop in the gldisplay has been removed because
+	we now use the system main loop. (and this is a big improvement).
+	A lot of things are still not working (re-implemented).
+	(gstglwindow_X11.c in future commits)
+	And the buils are broken temporarly, except vs8.
+
 2008-10-15  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst/gl/Makefile.am:
@@ -142,7 +178,7 @@
 	  issue pointed in TODO item 21.
 
 2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
-	
+
 	* TODO
 	Add TODO task 21.
 	* gst-libs/gst/gl/gstgldisplay.c
@@ -182,24 +218,24 @@
     * tests/pipelines
     Use a better key for the pool of textures.
     Up TODO task 18.
-    
+
 2008-09-13  Julien Isorce  <julien.isorce@gmail.com>
 
     * TODO
     Up TODO tasks 0 and 9.
     Add TODO task 17, 18, 19 and 20.
-    
+
     * gst-libs/gst/gl/gstgldisplay.c
     * gst/gl/gstglimagesink.c
     Use debug category instead of g_print.
     I put GST_CAT_XXX because it does not work without CAT,
     Indeed, it seems that the GST_CAT_DEFAULT is not set correctly when
     using GST_INFO (...) for example. Someone knows why ?
-    
+
     * gst/gl/gstgltestsrc.c
     * gst/gl/gstgltestsrc.h
     Re-up authors.
-    
+
     * gst/gl/gstglupload.c
     * win32/common/config.h
     Replace CVS by GIT

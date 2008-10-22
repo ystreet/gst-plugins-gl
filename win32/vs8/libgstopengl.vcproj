@@ -183,38 +183,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<Filter
-				Name="gstfreeglut"
-				>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_callbacks.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_display.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_init.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_main.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_state.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_structure.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_window.c"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="gstgl"
 				>
 				<File
@@ -235,6 +203,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstglshader.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglwindow_win32.c"
 					>
 				</File>
 			</Filter>
@@ -377,26 +349,6 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<Filter
-				Name="gstfreeglut"
-				>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_ext.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_internal.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\freeglut_std.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\gst-libs\gst\freeglut\gstfreeglut.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="gstgl"
 				>
 				<File
@@ -421,6 +373,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstglshader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglwindow.h"
 					>
 				</File>
 			</Filter>

@@ -1,5 +1,5 @@
 
-SUBDIRS = freeglut gl
+SUBDIRS = gl
 
 noinst_HEADERS = \
 	gettext.h \
