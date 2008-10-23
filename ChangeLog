@@ -1,3 +1,11 @@
+2008-10-24  Julien Isorce  <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c
+    * gst-libs/gst/gl/gstglwindow_win32.c
+    Re-up "when clicking on the cross".
+    Basic stuffs are working.
+    Next step is to re-up xoveraly support.
+
 2008-10-23  Julien Isorce  <julien.isorce@gmail.com>
 
 	* gst-libs/gst/CMakeLists.txt
