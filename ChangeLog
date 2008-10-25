@@ -1,6 +1,14 @@
 2008-10-25  Julien Isorce  <julien.isorce@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstglshader.c
+	* gst-libs/gst/gl/gstglwindow.h
+	* gst-libs/gst/gl/gstglwindow_win32.c
+	Avoid a dead lock on gl window closure.
+
+2008-10-25  Julien Isorce  <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c
 	* gst-libs/gst/gl/gstgldisplay.h
 	* gst-libs/gst/gl/gstglwindow_win32.c
 	* gst/gl/gstglcolorscale.c
