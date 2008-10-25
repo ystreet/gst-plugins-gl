@@ -1,3 +1,17 @@
+2008-10-25  Julien Isorce  <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstgldisplay.h
+	* gst-libs/gst/gl/gstglwindow_win32.c
+	* gst/gl/gstglcolorscale.c
+	* gst/gl/gstglimagesink.c
+	* gst/gl/gstgltestsrc.c
+	* gst/gl/gstglupload.c
+	Properly clean opengl context.
+	And gst-launch videotestsrc ! tee name=t ! queue ! glimagesink t. \
+	! queue ! glimagesink t. ! queue ! glimagesink  t. ! etc...
+	are re-working now.
+
 2008-10-24  Julien Isorce  <julien.isorce@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c
