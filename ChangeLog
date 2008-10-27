@@ -1,3 +1,17 @@
+2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstgldisplay.h
+	* gst-libs/gst/gl/gstglwindow.h
+	* gst-libs/gst/gl/gstglwindow_win32.c
+	* gst/gl/gstglcolorscale.c
+	* gst/gl/gstglimagesink.c
+	* gst/gl/gstgltestsrc.c
+	* gst/gl/gstglupload.c
+    Win32: Re-implement supports for gst xoverlay interface.
+    Win32: All tests (pipelines, generic, gtk, and qt) almost work again
+    on this branch.
+
 2008-10-25  Julien Isorce  <julien.isorce@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c
