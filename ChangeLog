@@ -1,5 +1,13 @@
 2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
 
+	* gst-libs/gst/gl/gstglwindow.h
+	* gst-libs/gst/gl/gstglwindow_win32.c
+	Win32: Better handle when the external window (xoverlay interface)
+	is resizing.
+	Remove unused GstGLWindow methods.
+
+2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
+
 	* gst-libs/gst/gl/gstgldisplay.c
 	* gst-libs/gst/gl/gstgldisplay.h
 	* gst-libs/gst/gl/gstglwindow.h
