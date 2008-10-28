@@ -1,5 +1,13 @@
 2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
 
+	* gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstglwindow_win32.c
+    Fix window closure when using gst xoverlay interface.
+    The tests gtkxoveraly and filterxoverlay work now on this branch:
+    (switching a lot of time bettween GST_STATES)
+
+2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
+
 	* gst-libs/gst/gl/gstglwindow.h
 	* gst-libs/gst/gl/gstglwindow_win32.c
 	Win32: Better handle when the external window (xoverlay interface)
