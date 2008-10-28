@@ -88,7 +88,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
     
     if ((current_time.tv_sec - last_sec) >= 1)
     {
-        std::cout << "GRAPHIC FPS of the scene which contains the cube) = " << nbFrames << std::endl;
+        std::cout << "GRAPHIC FPS of the scene which contains the custom cube) = " << nbFrames << std::endl;
         nbFrames = 0;
         last_sec = current_time.tv_sec;
     }
@@ -227,12 +227,18 @@ gint main (gint argc, gchar *argv[])
     GstElement* glimagesink0  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
     GstElement* queue1 = gst_element_factory_make ("queue", "queue1");
+    GstElement* glupload1  = gst_element_factory_make ("glupload", "glupload1");
+    GstElement* glfiltercube  = gst_element_factory_make ("glfiltercube", "glfiltercube");
     GstElement* glimagesink1  = gst_element_factory_make ("glimagesink", "glimagesink1");
+
+    GstElement* queue2 = gst_element_factory_make ("queue", "queue2");
+    GstElement* glimagesink2  = gst_element_factory_make ("glimagesink", "glimagesink2");
 
 
     if (!videosrc || !decodebin || !identity || !textoverlay || !tee ||
         !queue0 || !glupload0 || !glimagesink0 ||
-        !queue1 || !glimagesink1) 
+        !queue1 || !glupload1 || !glfiltercube || !glimagesink1 ||
+        !queue2 || !glimagesink2) 
     {
         g_warning ("one element could not be found \n");
         return -1;
@@ -244,7 +250,7 @@ gint main (gint argc, gchar *argv[])
                                             NULL) ;
 
     /* configure elements */
-    g_object_set(G_OBJECT(videosrc), "num-buffers", 800, NULL);
+    g_object_set(G_OBJECT(videosrc), "num-buffers", 1000, NULL);
     g_object_set(G_OBJECT(videosrc), "location", video_location.c_str(), NULL);
     g_signal_connect(identity, "handoff", G_CALLBACK(identityCallback), textoverlay) ;
     g_object_set(G_OBJECT(textoverlay), "font_desc", "Ahafoni CLM Bold 30", NULL);
@@ -253,8 +259,9 @@ gint main (gint argc, gchar *argv[])
     
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, decodebin, identity, textoverlay, tee, 
-                                          queue0, glupload0, glimagesink0, 
-                                          queue1, glimagesink1, NULL);
+                                          queue0, glupload0, glimagesink0,
+                                          queue1, glupload1, glfiltercube, glimagesink1, 
+                                          queue2, glimagesink2, NULL);
     
 
     gst_element_link_pads (videosrc, "src", decodebin, "sink");
@@ -281,9 +288,15 @@ gint main (gint argc, gchar *argv[])
         return -1 ;
     }
 
-    if (!gst_element_link_many(tee, queue1, glimagesink1, NULL)) 
+    if (!gst_element_link_many(tee, queue1, glupload1, glfiltercube, glimagesink1, NULL)) 
     {
         g_warning ("Failed to link one or more elements bettween tee and glimagesink1!\n");
+        return -1;
+    }
+
+    if (!gst_element_link_many(tee, queue2, glimagesink2, NULL)) 
+    {
+        g_warning ("Failed to link one or more elements bettween tee and glimagesink2!\n");
         return -1;
     }
     

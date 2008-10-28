@@ -1,5 +1,13 @@
 2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
 
+	* tests/examples/generic/doublecube/main.cpp
+	Add a cube to have 2 cubes as title said (doublecube).
+	Now it works perfectly on this branch since we can have
+	now several opengl contexts current at the same time.
+	(one gl thread and one GstGLwindow, per GstGLDisplay)
+
+2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
+
 	* gst-libs/gst/gl/gstgldisplay.c
 	* gst-libs/gst/gl/gstglwindow_win32.c
     Fix window closure when using gst xoverlay interface.
