@@ -63,8 +63,8 @@ CFILE_GLOB=$(DOC_SOURCE_DIR)/*/*/*.c
 SCANOBJ_DEPS =
 
 # Header files to ignore when scanning.
-IGNORE_HFILES = 
-IGNORE_CFILES = 
+IGNORE_HFILES =
+IGNORE_CFILES =
 
 # we add all .h files of elements that have signals/args we want
 # sadly this also pulls in the private methods - maybe we should
@@ -74,7 +74,7 @@ IGNORE_CFILES =
 # but I'm not sure about that - it might be this Just Works given that
 # the registry won't have the element
 
-EXTRA_HFILES = \ 
+EXTRA_HFILES = \
 	$(top_srcdir)/gst/gl/gstglbumper.h \
 	$(top_srcdir)/gst/gl/gstglcolorscale.h \
 	$(top_srcdir)/gst/gl/gstgldownload.h \
@@ -87,7 +87,7 @@ EXTRA_HFILES = \
 	$(top_srcdir)/gst/gl/gstgltestsrc.h \
 	$(top_srcdir)/gst/gl/gstglupload.h
 
-	
+
 
 # Images to copy into HTML directory.
 HTML_IMAGES =

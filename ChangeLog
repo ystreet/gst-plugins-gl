@@ -1,3 +1,18 @@
+2008-11-05  Julien Isorce  <julien.isorce@gmail.com>
+
+	* ChangeLog
+	* configure.ac
+	* docs/plugins/Makefile.am
+	* gst-libs/gst/gl/Makefile.am
+	* gst-libs/gst/gl/gstgldisplay.c
+	* gst-libs/gst/gl/gstgldisplay.h
+	* gst-libs/gst/gl/gstglshader.c
+	* gst-libs/gst/gl/gstglwindow.h
+	* gst-libs/gst/gl/gstglwindow_x11.c
+	* gst/gl/gstglupload.c
+	* unix/codeblocks/gstopengl/gstopengl.cbp
+  Begin gstglwindow_x11.c implementation.
+
 2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
 
 	* tests/examples/generic/doublecube/main.cpp

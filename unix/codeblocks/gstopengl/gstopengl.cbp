@@ -65,31 +65,6 @@
 			<Add library="GLU" />
 			<Add library="GL" />
 		</Linker>
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_callbacks.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_display.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_ext.h" />
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_init.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_internal.h" />
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_main.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_state.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_std.h" />
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_structure.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst-libs/gst/freeglut/freeglut_window.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst-libs/gst/freeglut/gstfreeglut.h" />
 		<Unit filename="../../../gst-libs/gst/gettext.h" />
 		<Unit filename="../../../gst-libs/gst/gl/gstglbuffer.c">
 			<Option compilerVar="CC" />
@@ -107,6 +82,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst-libs/gst/gl/gstglshader.h" />
+		<Unit filename="../../../gst-libs/gst/gl/gstglwindow.h" />
+		<Unit filename="../../../gst-libs/gst/gl/gstglwindow_x11.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst-libs/gst/gst-i18n-plugin.h" />
 		<Unit filename="../../../gst/gl/effects/gstgleffectbulge.c">
 			<Option compilerVar="CC" />
@@ -123,6 +102,7 @@
 		<Unit filename="../../../gst/gl/effects/gstgleffectlumatocurve.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="../../../gst/gl/effects/gstgleffectlumatocurve.h" />
 		<Unit filename="../../../gst/gl/effects/gstgleffectmirror.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -150,6 +130,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/effects/gstgleffecttwirl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/effects/gstgleffectxray.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gltestsrc.c">
