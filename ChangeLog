@@ -1,6 +1,11 @@
+2008-11-09  Julien Isorce  <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c
+  Implement send x custom message loop and quit x message loop.
+  Properly close the gl window.
+
 2008-11-05  Julien Isorce  <julien.isorce@gmail.com>
 
-	* ChangeLog
 	* configure.ac
 	* docs/plugins/Makefile.am
 	* gst-libs/gst/gl/Makefile.am
