@@ -1,5 +1,13 @@
 2008-11-09  Julien Isorce  <julien.isorce@gmail.com>
 
+	* gst-libs/gst/gl/Makefile.am
+	* gst-libs/gst/gl/gstglwindow_x11.c
+	* gst/gl/Makefile.am
+	Works on linux but still some bugs.
+	Fix autotools  build.
+
+2008-11-09  Julien Isorce  <julien.isorce@gmail.com>
+
 	* gst-libs/gst/gl/gstglwindow_x11.c
   Implement send x custom message loop and quit x message loop.
   Properly close the gl window.
