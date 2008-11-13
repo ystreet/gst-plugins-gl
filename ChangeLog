@@ -1,3 +1,12 @@
+2008-11-13  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglwindow_x11.c
+    * gst/gl/gstglimagesink.c
+    Rewrite gstglwindow_x11.c because X is not thread safe.
+    FLow is ok but there is still a pthread segfault when closing the window,
+    but I cannot find where it's happen because error occurs after that the
+    glimagesink element is finalized.
+
 2008-11-09  Julien Isorce  <julien.isorce@gmail.com>
 
 	* gst-libs/gst/gl/Makefile.am
