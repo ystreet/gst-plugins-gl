@@ -1,3 +1,15 @@
+2008-11-14  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglwindow_x11.c
+    Get ride of calling sleep in "gl thread X loop".
+    The following pipeline works:
+    gst-launch-0.10 videotestsrc ! tee name=t t. ! \
+    queue ! glimagesink t. ! \
+    queue ! glupload ! glfiltercube ! glimagesink
+    This if a proof (on X11) of having two gl context currents at the same time
+    (one gl context per gl thread)
+    Note there is still this SIGSEGV that I was talking about in the last commit.
+
 2008-11-13  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstglwindow_x11.c
