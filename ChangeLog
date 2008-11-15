@@ -1,6 +1,13 @@
 2008-11-15  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstglwindow_x11.c
+    Remove a GMutex and a GCond. XNextEvent is now waiting from a disp
+    while we can call XSendEvent from other threads at the same time because
+    we send event from other disp.
+
+2008-11-15  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglwindow_x11.c
     Better deal with Atoms.
 
 2008-11-14  Julien Isorce  <julien.isorce@gmail.com>
