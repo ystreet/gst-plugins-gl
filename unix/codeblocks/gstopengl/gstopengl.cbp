@@ -39,6 +39,7 @@
 			<Add option="-Wall" />
 			<Add option="-g" />
 			<Add option="-DHAVE_CONFIG_H" />
+			<Add option="-DHAVE_GDKPIXBUF" />
 			<Add directory="/usr/lib/glib-2.0/include" />
 			<Add directory="/usr/include/glib-2.0" />
 			<Add directory="/usr/include/libxml2" />
@@ -54,8 +55,6 @@
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
-			<Add library="gdk_pixbuf-2.0" />
-			<Add library="gmodule-2.0" />
 			<Add library="gobject-2.0" />
 			<Add library="gthread-2.0" />
 			<Add library="gstreamer-0.10" />
@@ -140,17 +139,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gltestsrc.h" />
-		<Unit filename="../../../gst/gl/gstglbumper.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../../../gst/gl/gstglbumper.h" />
 		<Unit filename="../../../gst/gl/gstglcolorscale.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglcolorscale.h" />
-		<Unit filename="../../../gst/gl/gstgldifferencematte.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="../../../gst/gl/gstgldownload.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -185,9 +177,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglimagesink.h" />
-		<Unit filename="../../../gst/gl/gstglpixbufoverlay.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="../../../gst/gl/gstgltestsrc.c">
 			<Option compilerVar="CC" />
 		</Unit>

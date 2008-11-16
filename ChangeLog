@@ -1,3 +1,45 @@
+2008-11-16  Julien Isorce  <julien.isorce@gmail.com>
+
+    * unix/codeblocks/gstopengl/gstopengl.cbp
+    Waw, the SIGSEGV I was talking about in the last commits was
+    caused when linking libgstopengl.so with libgdk_pixbuf-2.0.so.
+    I got it after gst_deinit, in gstlaunch.c line 205 in g_usleep:
+    gst-launch-0.10 videotestsrc ! glimagesink
+    Définition du pipeline à PAUSED...
+    Le pipeline est en phase de PREROLL...
+    Le pipeline a terminé la phase PREROLL...
+    Passage du pipeline à la phase PLAYING...
+    New clock: GstSystemClock
+    EOS reçu de l'élément « pipeline0 ».
+    Execution ended after 2233552959 ns.
+    Définition du pipeline à PAUSED...
+    Définition du pipeline à READY (prêt)...
+    Définition du pipeline à NULL...
+    Libération du pipeline (FREE)...
+    Caught SIGSEGV accessing address 0x40
+    #0  0xb8024430 in __kernel_vsyscall ()
+    #1  0xb7e3b04b in waitpid () from /lib/tls/i686/cmov/libpthread.so.0
+    #2  0xb7e5a1a5 in IA__g_on_error_stack_trace (prg_name=0x804c80f "gst-launch")
+    #3  0x0804ae82 in fault_handler_sigaction (signum=11, si=0xbfd234fc,
+    #4  <signal handler called>
+    #5  0xb74d3974 in ?? () from /lib/libselinux.so.1
+    #6  0xb74ccb8e in ?? () from /lib/libselinux.so.1
+    #7  0xb74c51d8 in ?? () from /lib/libselinux.so.1
+    #8  0xb74d5350 in _fini () from /lib/libselinux.so.1
+    #9  0xb8018153 in ?? () from /lib/ld-linux.so.2
+    #10 0xb7cfdd69 in exit () from /lib/tls/i686/cmov/libc.so.6
+    #11 0xb7ce568d in __libc_start_main () from /lib/tls/i686/cmov/libc.so.6
+    #12 0x0804a1b1 in _start ()
+    Spinning.  Please run 'gdb gst-launch 26323' to continue debugging, Ctrl-C to quit, or Ctrl-\ to dump core.
+
+    It makes the debugger off in codeblocks, I mean I could not use breakpoints.
+    That's why I removed gldifferencematte, glpixbufoverlay and glbumper because they
+    are using gdkpixbuf and I have to not link with gdk_pixbuf-2.0 temporaly
+    to make libgstopengl.so work.
+
+    Anyway I got the same problem when making libgstopengl.so with autotools (./autogen.sh).
+    (I am on ubuntu intrepid)
+
 2008-11-15  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstglwindow_x11.c
