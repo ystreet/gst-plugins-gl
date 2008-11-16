@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option parameters="videotestsrc ! glimagesink" />
+				<Option parameters="videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glimagesink" />
 				<Option host_application="gst-launch-0.10" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
@@ -55,6 +55,7 @@
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
+			<Add library="gdk_pixbuf-2.0" />
 			<Add library="gobject-2.0" />
 			<Add library="gthread-2.0" />
 			<Add library="gstreamer-0.10" />
@@ -139,10 +140,17 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gltestsrc.h" />
+		<Unit filename="../../../gst/gl/gstglbumper.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglbumper.h" />
 		<Unit filename="../../../gst/gl/gstglcolorscale.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglcolorscale.h" />
+		<Unit filename="../../../gst/gl/gstgldifferencematte.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst/gl/gstgldownload.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -177,6 +185,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglimagesink.h" />
+		<Unit filename="../../../gst/gl/gstglpixbufoverlay.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../../../gst/gl/gstgltestsrc.c">
 			<Option compilerVar="CC" />
 		</Unit>

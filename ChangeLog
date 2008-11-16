@@ -1,6 +1,21 @@
 2008-11-16  Julien Isorce  <julien.isorce@gmail.com>
 
     * unix/codeblocks/gstopengl/gstopengl.cbp
+    Revert last commit because the crash comes from a bug in libselinux.
+    download https://launchpad.net/ubuntu/hardy/+source/libselinux/2.0.55-0ubuntu4/+files/libselinux_2.0.55.orig.tar.gz
+    untar then apply this patch: http://www.gnome.org/~johan/libselinux2.patch
+    recompile libselinux.so.1 and install (sudo apt-get install libsepol1-dev, make and sudo make install)
+    Thx you Filippo :P
+    For more informations, see:
+    https://bugs.launchpad.net/bugs/237156
+    https://bugs.launchpad.net/bugs/275082
+
+    * gst-libs/gst/gl/gstglwindow_x11.c
+    Small updates about running var
+
+2008-11-16  Julien Isorce  <julien.isorce@gmail.com>
+
+    * unix/codeblocks/gstopengl/gstopengl.cbp
     Waw, the SIGSEGV I was talking about in the last commits was
     caused when linking libgstopengl.so with libgdk_pixbuf-2.0.so.
     I got it after gst_deinit, in gstlaunch.c line 205 in g_usleep:
