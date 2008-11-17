@@ -1,3 +1,10 @@
+2008-11-17  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglwindow_x11.c
+    Add a visible member in order to deal better with the first frame.
+    Indeed, it avoid to draw when receiving Expose events after mapping
+    window and before the gl context is ready.
+
 2008-11-16  Julien Isorce  <julien.isorce@gmail.com>
 
     * unix/codeblocks/gstopengl/gstopengl.cbp

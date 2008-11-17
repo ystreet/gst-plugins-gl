@@ -39,7 +39,6 @@
 			<Add option="-Wall" />
 			<Add option="-g" />
 			<Add option="-DHAVE_CONFIG_H" />
-			<Add option="-DHAVE_GDKPIXBUF" />
 			<Add directory="/usr/lib/glib-2.0/include" />
 			<Add directory="/usr/include/glib-2.0" />
 			<Add directory="/usr/include/libxml2" />
