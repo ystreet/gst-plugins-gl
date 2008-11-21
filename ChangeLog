@@ -1,6 +1,11 @@
 2008-11-21  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstglwindow_x11.c
+    Implement set_xwindow_id (gst_gl_window_set_external_window_id).
+
+2008-11-21  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglwindow_x11.c
     We have a different x client connection for sender and receiver.
     Make this first connection only when creating the gl window and not
     each time a message is sent.
