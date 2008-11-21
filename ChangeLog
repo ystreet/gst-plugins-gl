@@ -1,5 +1,12 @@
 2008-11-21  Julien Isorce  <julien.isorce@gmail.com>
 
+    * gst-libs/gst/gl/gstglwindow_x11.c
+    We have a different x client connection for sender and receiver.
+    Make this first connection only when creating the gl window and not
+    each time a message is sent.
+
+2008-11-21  Julien Isorce  <julien.isorce@gmail.com>
+
     * gst-libs/gst/gl/gstgldisplay.c
     * gst-libs/gst/gl/gstgldisplay.h
     * gst-libs/gst/gl/gstglwindow_x11.c
