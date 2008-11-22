@@ -1,3 +1,16 @@
+2008-11-22  Julien Isorce  <julien.isorce@gmail.com>
+
+    *  gst-libs/gst/gl/gstgldisplay.c
+    *  gst-libs/gst/gl/gstgldisplay.h
+    *  gst-libs/gst/gl/gstglwindow.h
+    *  gst-libs/gst/gl/gstglwindow_win32.c
+    *  gst-libs/gst/gl/gstglwindow_x11.c
+    *  gst/gl/gstglimagesink.c
+    Remove set_visible, because it's now automatically done when 
+    the first post redisplay comes.
+    Apply the same mecanism I did for _x11 implemantion: Make sure the gl 
+    ressoures are destroyed before to destroy gl window.
+
 2008-11-21  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstglwindow_x11.c
