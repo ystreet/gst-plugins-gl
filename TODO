@@ -33,7 +33,7 @@
      t. ! glqueue ! glfilterC ! glimagesink
      Assuming glfilterA is GPU consumming and so do not need to duplicate it.
 
-(IN PROGRESS) - 9: rewrite the freeglut part that I minimized. Although I removed 90% of the orignal code,
+(DONE) - 9: rewrite the freeglut part that I minimized. Although I removed 90% of the orignal code,
      it should be rewrite with the GLib API. To have a better design and handle X/WIN32 with interfaces
      instead of having a lot of "define WIN32" scopes.
      And make it thread safe in order to have one glthread per GstGLDisplay, instead of having a global glthread.
