@@ -8,13 +8,13 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 {
     GMainLoop *loop = (GMainLoop*)data;
 
-    switch (GST_MESSAGE_TYPE (msg)) 
+    switch (GST_MESSAGE_TYPE (msg))
     {
         case GST_MESSAGE_EOS:
               g_print ("End-of-stream\n");
               g_main_loop_quit (loop);
               break;
-        case GST_MESSAGE_ERROR: 
+        case GST_MESSAGE_ERROR:
           {
               gchar *debug = NULL;
               GError *err = NULL;
@@ -24,7 +24,7 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
               g_print ("Error: %s\n", err->message);
               g_error_free (err);
 
-              if (debug) 
+              if (debug)
               {
                   g_print ("Debug deails: %s\n", debug);
                   g_free (debug);
@@ -32,7 +32,7 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 
               g_main_loop_quit (loop);
               break;
-          } 
+          }
         default:
           break;
     }
@@ -46,30 +46,30 @@ void reshapeCallback (GLuint width, GLuint height)
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, (gfloat)width/(gfloat)height, 0.1, 100);  
-    glMatrixMode(GL_MODELVIEW);	
+    gluPerspective(45, (gfloat)width/(gfloat)height, 0.1, 100);
+    glMatrixMode(GL_MODELVIEW);
 }
 
 //client draw callback
 gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 {
     static GLfloat	xrot = 0;
-    static GLfloat	yrot = 0;				
+    static GLfloat	yrot = 0;
     static GLfloat	zrot = 0;
     static GTimeVal current_time;
     static glong last_sec = current_time.tv_sec;
-    static gint nbFrames = 0;  
+    static gint nbFrames = 0;
 
     g_get_current_time (&current_time);
     nbFrames++ ;
-    
+
     if ((current_time.tv_sec - last_sec) >= 1)
     {
         std::cout << "GRPHIC FPS = " << nbFrames << std::endl;
         nbFrames = 0;
         last_sec = current_time.tv_sec;
     }
-  
+
     glEnable(GL_DEPTH_TEST);
 
     glEnable (GL_TEXTURE_RECTANGLE_ARB);
@@ -83,7 +83,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-	
+
     glTranslatef(0.0f,0.0f,-5.0f);
 
     glRotatef(xrot,1.0f,0.0f,0.0f);
@@ -132,12 +132,12 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 }
 
 
-//gst-launch-0.10 videotestsrc num_buffers=400 ! video/x-raw-rgb, width=320, height=240 ! 
+//gst-launch-0.10 videotestsrc num_buffers=400 ! video/x-raw-rgb, width=320, height=240 !
 //glgraphicmaker ! glfiltercube ! video/x-raw-gl, width=800, height=600 ! glimagesink
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *glupload, *glimagesink; 
+    GstElement *pipeline, *videosrc, *glupload, *glimagesink;
 
     GMainLoop *loop;
     GstBus *bus;
@@ -161,7 +161,7 @@ gint main (gint argc, gchar *argv[])
     glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
-    if (!videosrc || !glupload || !glimagesink) 
+    if (!videosrc || !glupload || !glimagesink)
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -183,11 +183,11 @@ gint main (gint argc, gchar *argv[])
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
     g_object_set(G_OBJECT(glimagesink), "client-reshape-callback", reshapeCallback, NULL);
-    g_object_set(G_OBJECT(glimagesink), "client-draw-callback", drawCallback, NULL);  
-    
+    g_object_set(G_OBJECT(glimagesink), "client-draw-callback", drawCallback, NULL);
+
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glimagesink, NULL);
-    
+
     /* link elements */
     gboolean link_ok = gst_element_link_filtered(videosrc, glupload, caps) ;
     gst_caps_unref(caps) ;
@@ -204,16 +204,16 @@ gint main (gint argc, gchar *argv[])
         return -1 ;
     }
 
-    
+
     /* run */
     ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
-    if (ret == GST_STATE_CHANGE_FAILURE) 
+    if (ret == GST_STATE_CHANGE_FAILURE)
     {
         g_print ("Failed to start up pipeline!\n");
 
         /* check if there is an error message with details on the bus */
         GstMessage* msg = gst_bus_poll (bus, GST_MESSAGE_ERROR, 0);
-        if (msg) 
+        if (msg)
         {
           GError *err = NULL;
 
