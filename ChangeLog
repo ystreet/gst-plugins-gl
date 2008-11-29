@@ -1,6 +1,15 @@
+2008-11-29  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglwindow_x11.c
+    setlocale("LC_NUMERIC", "C") due to an ATI shader compiler bug.
+    (reported to ATI dev)
+
+    *  gst-libs/gst/gl/gstgldisplay.c
+    Fix colorspace conversion on ATI/linux because I can see something now on
+    the ati 9800 pro graphic card.
+
 2008-11-23  Julien Isorce  <julien.isorce@gmail.com>
 
-    *  ChangeLog
     *  gst-libs/gst/gl/gstgldisplay.c
     *  gst-libs/gst/gl/gstglwindow.h
     *  gst-libs/gst/gl/gstglwindow_win32.c
