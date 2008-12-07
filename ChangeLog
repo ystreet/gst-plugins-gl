@@ -1,3 +1,15 @@
+2008-12-07  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglwindow_x11.c
+    Also consider position when using xoverlay.
+
+    * gst/gl/gstglupload.c
+    Fix framerate in gl caps. (it was always set to 0/1)
+
+    * tests/examples/clutter/clutteractortee.c
+    Fix inversion about ROWS and COLS.
+    Move window because clutter does not.
+
 2008-11-29  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstglwindow_x11.c
