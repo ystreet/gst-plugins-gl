@@ -1,3 +1,8 @@
+2008-12-13  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglwindow_win32.c
+    Register window class in gst_gl_window_class_init.
+
 2008-12-07  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstglwindow_x11.c
