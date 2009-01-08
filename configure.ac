@@ -160,8 +160,8 @@ then
 fi
 
 dnl Check for GLEW/OpenGL
-AC_SEARCH_LIBS(glLoadIdentity, [GL opengl32], , AC_MSG_ERROR([Opengl not found make sure you have Opengl installed]))
-AC_SEARCH_LIBS(glewInit, [GLEW glew32], , AC_MSG_ERROR([Glew not found make sure you have GLEW installed]))
+#AC_SEARCH_LIBS(glLoadIdentity, [opengl32], , AC_MSG_ERROR([Opengl not found make sure you have Opengl installed]))
+#AC_SEARCH_LIBS(glewInit, [GLEW glew32], , AC_MSG_ERROR([Glew not found make sure you have GLEW installed]))
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
@@ -254,6 +254,9 @@ AM_CONDITIONAL(HAVE_CLUTTER_X11, test "x$HAVE_CLUTTER_X11" = "xyes")
 #])
 #CPPFLAGS="$save_CPPFLAGS"
 #LIBS="$save_LIBS"
+
+GL_LIBS="-lglew32 -lglu32 -lopengl32 -lgdi32"
+AC_SUBST(GL_LIBS)
 
 dnl Eventually use pkgconfig check
 #AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
