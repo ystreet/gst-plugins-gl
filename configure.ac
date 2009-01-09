@@ -255,8 +255,27 @@ AM_CONDITIONAL(HAVE_CLUTTER_X11, test "x$HAVE_CLUTTER_X11" = "xyes")
 #CPPFLAGS="$save_CPPFLAGS"
 #LIBS="$save_LIBS"
 
-GL_LIBS="-lglew32 -lglu32 -lopengl32 -lgdi32"
+dnl
+dnl How lame is this?
+dnl
+
+echo host is $host
+case $host in
+  *-linux*)
+    GL_LIBS="-lGLEW -lGLU -lGL -lX11"
+    GL_BACKEND=x11
+    ;;
+  *-mingw32*)
+    GL_LIBS="-lglew32 -lglu32 -lopengl32 -lgdi32"
+    GL_BACKEND=win32
+    ;;
+  *)
+    exit 1
+    ;;
+esac
 AC_SUBST(GL_LIBS)
+AC_SUBST(GL_BACKEND)
+
 
 dnl Eventually use pkgconfig check
 #AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
