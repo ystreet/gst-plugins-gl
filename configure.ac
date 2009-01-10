@@ -265,6 +265,10 @@ case $host in
     GL_LIBS="-lGLEW -lGLU -lGL -lX11"
     GL_BACKEND=x11
     ;;
+  *-darwin*)
+    GL_LIBS="-lGLEW -lGLU -lGL -lX11"
+    GL_BACKEND=x11
+    ;;
   *-mingw32*)
     GL_LIBS="-lglew32 -lglu32 -lopengl32 -lgdi32"
     GL_BACKEND=win32
