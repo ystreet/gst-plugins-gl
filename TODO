@@ -102,4 +102,4 @@
 	  -> it seems we cannot remove this glsl ATI compiler message.
 
 
-(ALMOST DONE) - 22: write gtk-doc
+(DONE) - 22: write gtk-doc

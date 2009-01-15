@@ -1,3 +1,16 @@
+2009-01-15  Julien Isorce  <julien.isorce@gmail.com>
+
+    * TODO
+    * gst/gl/gstglbumper.c
+    * gst/gl/gstgldifferencematte.c
+    * gst/gl/gstgldownload.c
+    * gst/gl/gstgleffects.c
+    * gst/gl/gstglfilterblur.c
+    * gst/gl/gstglfilterlaplacian.c
+    * gst/gl/gstglfiltersobel.c
+    * gst/gl/gstglpixbufoverlay.c
+    Minimal gtk doc.
+
 2008-12-14  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst-libs/gst/gl/gstglwindow_x11.c
@@ -5,7 +18,6 @@
     Indeed, attributes must be less restrictives).
     It causes a crash when using mesa.
     (I should have checked it again before the merge 1 week ago)
-
 
 2008-12-13  Julien Isorce  <julien.isorce@gmail.com>
 
