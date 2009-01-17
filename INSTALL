@@ -128,14 +128,17 @@ result in gst-plugins-gl/gst/gl/.libs/libgstopengl.so
 gst-plugins-gl/unix/codeblocks/gstopengl/gstopengl.cbp
 
 
-Win32 frozen builds: win32/codeblocks or win32/vs8
-=================================================
+Win32 frozen builds: win32/codeblocks, win32/vs8 or win32/vs9
+=============================================================
 
 -CodeBlocks
 gst-plugins-gl\win32\codeblock\gstopengl.cbp
 
 -vs8
 gst-plugins-gl\win32\vs8\libgstopengl.sln
+
+-vs9
+gst-plugins-gl\win32\vs9\libgstopengl.sln
 
 
 Simple test:
