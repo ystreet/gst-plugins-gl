@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cube", "cube\cube.vcproj", "{DA41FBFF-E1DE-4DA1-BB96-C56C63D5CDBE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cubeyuv", "cubeyuv\cubeyuv.vcproj", "{6C94B86A-8E34-4163-840A-BFD5C80B1F2E}"

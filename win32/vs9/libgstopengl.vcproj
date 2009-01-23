@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;D:\workspace\glib\include\glib-2.0&quot;;&quot;D:\workspace\glib\lib\glib-2.0\include&quot;;D:\workspace\gstreamer\include;D:\workspace\glew\include;D:\workspace\png\include;D:\workspace\zlib\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
+				AdditionalIncludeDirectories="&quot;..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\glib\lib\glib-2.0\include&quot;;..\..\..\gstreamer\include;..\..\..\glew\include;..\..\..\png\include;..\..\..\zlib\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;HAVE_GDKPIXBUF"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,7 +64,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="libgstreamer-0.10.lib libgstbase-0.10.lib libgstinterfaces-0.10.lib libgstvideo-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libpngd.lib zlibd.lib opengl32.lib glu32.lib glew32.lib glew32s.lib winmm.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="D:\workspace\gstreamer\lib;D:\workspace\glib\lib;D:\workspace\glew\lib;D:\workspace\png\lib;D:\workspace\zlib\lib"
+				AdditionalLibraryDirectories="..\..\..\gstreamer\lib;..\..\..\glib\lib;..\..\..\glew\lib;..\..\..\png\lib;..\..\..\zlib\lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;D:\workspace\glib\include\glib-2.0&quot;;&quot;D:\workspace\glib\lib\glib-2.0\include&quot;;D:\workspace\gstreamer\include;D:\workspace\glew\include;D:\workspace\png\include;D:\workspace\zlib\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
+				AdditionalIncludeDirectories="&quot;..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\glib\lib\glib-2.0\include&quot;;..\..\..\gstreamer\include;..\..\..\glew\include;..\..\..\png\include;..\..\..\zlib\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;HAVE_GDKPIXBUF"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -140,7 +140,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="libgstreamer-0.10.lib libgstbase-0.10.lib libgstinterfaces-0.10.lib libgstvideo-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libpng.lib zlib.lib opengl32.lib glu32.lib glew32.lib glew32s.lib winmm.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\workspace\gstreamer\lib;D:\workspace\glib\lib;D:\workspace\glew\lib;D:\workspace\png\lib;D:\workspace\zlib\lib"
+				AdditionalLibraryDirectories="..\..\..\gstreamer\lib;..\..\..\glib\lib;..\..\..\glew\lib;..\..\..\png\lib;..\..\..\zlib\lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
