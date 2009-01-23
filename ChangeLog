@@ -1,3 +1,23 @@
+2009-01-23  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst/gl/gstgldifferencematte.c
+    * gst/gl/gstglpixbufoverlay.c
+    * win32/vs9/libgstopengl.vcproj
+    Do not depends on gtk (gdk) anymore. Those 3 elements (with glbumper)
+    depend now on libpng.
+    
+    * gst-libs/gst/gl/gstgldisplay.c
+    Fix YV12 GLSL conversion on win32 (I am using gstreamer 0.10.21+ now)
+    
+    * tests/examples/gtk/filternoxoverlay/filternoxoverlay.vcproj
+    * tests/examples/gtk/filterxoverlay/filterxoverlay.vcproj
+    * tests/examples/gtk/fxtest/fxtest.vcproj
+    * tests/examples/gtk/fxtest/pixbufdrop.c
+    * tests/examples/gtk/gtk.sln
+    * tests/examples/gtk/gtkxoverlay/gtkxoverlay.vcproj
+    * tests/examples/gtk/pixbufdrop/pixbufdrop.vcproj
+    Update to vs9
+
 2009-01-15  Julien Isorce  <julien.isorce@gmail.com>
 
     * TODO

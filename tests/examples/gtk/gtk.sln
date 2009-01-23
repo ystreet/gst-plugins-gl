@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "filterxoverlay", "filterxoverlay\filterxoverlay.vcproj", "{F9CC027E-CC9F-4B34-AA8F-58852EC32CD0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtkxoverlay", "gtkxoverlay\gtkxoverlay.vcproj", "{E83070C2-58E4-48AE-AEB3-A4580EDE1212}"
