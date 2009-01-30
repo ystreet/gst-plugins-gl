@@ -5,16 +5,13 @@ DIE=0
 package=gst-plugins-gl
 srcfile=gst-libs/gst/gl/gstgldisplay.h
 
-# a quick cvs co to ease the transition
-if test ! -d common;
+# Make sure we have common
+if test ! -f common/gst-autogen.sh;
 then
-  echo "+ getting common/ from cvs"
-  if test -e CVS/Tag
-  then
-    TAG="-r `tail -c +2 CVS/Tag`"
-  fi
-  cvs -d :pserver:anoncvs@anoncvs.freedesktop.org:/cvs/gstreamer co $TAG common
+  echo "+ Setting up common submodule"
+  git submodule init
 fi
+git submodule update
 
 # source helper functions
 if test ! -f common/gst-autogen.sh;
@@ -24,6 +21,13 @@ then
   exit 1
 fi
 . common/gst-autogen.sh
+
+# install pre-commit hook for doing clean commits
+if test ! \( -x .git/hooks/pre-commit -a -L .git/hooks/pre-commit \);
+then
+    rm -f .git/hooks/pre-commit
+    ln -s ../../common/hooks/pre-commit.hook .git/hooks/pre-commit
+fi
 
 CONFIGURE_DEF_OPT='--enable-maintainer-mode --enable-gtk-doc --enable-plugin-docs'
 
