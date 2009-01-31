@@ -1,3 +1,3 @@
 GstChildProxy GstObject
-GstImplementsInterface GstElement
-GstXOverlay GstImplementsInterface GstElement
+GstImplementsInterface GstObject GstElement
+GstXOverlay GstObject GstImplementsInterface GstElement

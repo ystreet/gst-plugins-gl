@@ -198,3 +198,13 @@
 <DEFAULT>NULL</DEFAULT>
 </ARG>
 
+<ARG>
+<NAME>GstGLFilterSobel::invert</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Invert the colors</NICK>
+<BLURB>Invert colors to get dark edges on bright background.</BLURB>
+<DEFAULT>FALSE</DEFAULT>
+</ARG>
+
