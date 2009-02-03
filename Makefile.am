@@ -2,8 +2,7 @@ DISTCHECK_CONFIGURE_FLAGS=--enable-gtk-doc
 
 SUBDIRS = 			\
 	gst-libs 		\
-	gst sys ext	 	\
-	tools 			\
+	gst		 	\
 	tests 			\
 	docs			\
 	po 			\
@@ -14,8 +13,7 @@ SUBDIRS = 			\
 DIST_SUBDIRS = 			\
 	docs			\
 	gst-libs		\
-	gst sys ext		\
-	tools 			\
+	gst			\
 	tests 			\
 	po 			\
 	common 			\
