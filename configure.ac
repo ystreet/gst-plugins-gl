@@ -159,9 +159,41 @@ then
   AC_ERROR([liboil-0.3.8 or later is required])
 fi
 
-dnl Check for GLEW/OpenGL
-#AC_SEARCH_LIBS(glLoadIdentity, [opengl32], , AC_MSG_ERROR([Opengl not found make sure you have Opengl installed]))
-#AC_SEARCH_LIBS(glewInit, [GLEW glew32], , AC_MSG_ERROR([Glew not found make sure you have GLEW installed]))
+#dnl Check for OpenGL, GLU and GLEW
+echo host is $host
+case $host in
+  *-linux* | *-darwin*)
+    AG_GST_CHECK_X
+    save_CPPFLAGS="$CPPFLAGS"
+    save_LIBS="$LIBS"
+    CPPFLAGS="$CPPFLAGS $X_CFLAGS"
+    LIBS="$LIBS $X_LIBS"
+    AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h,, AC_MSG_ERROR([OpenGL is required]))
+    AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h,, AC_MSG_ERROR([GLU is required]))
+    AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h,, AC_MSG_ERROR([GLEW is required]))
+    GL_LIBS="$LIBS $X_LIBS -lGL -lGLU -lGLEW"
+    CPPFLAGS="$save_CPPFLAGS"
+    LIBS="$save_LIBS"
+    GL_BACKEND=x11
+    ;;
+  *-mingw32*)
+    save_CPPFLAGS="$CPPFLAGS"
+    save_LIBS="$LIBS"
+    LIBS="$LIBS -lgdi32"
+    AG_GST_CHECK_LIBHEADER(GL, opengl32, glTexImage2D,, GL/gl.h)
+    AG_GST_CHECK_LIBHEADER(GLU, glu32, gluSphere,, GL/glu.h)
+    AG_GST_CHECK_LIBHEADER(GLEW, glew32, glewInit,, GL/glew.h)
+    GL_LIBS="$LIBS -lgdi32 -lopengl32 -lglu32 -lglew32"
+    CPPFLAGS="$save_CPPFLAGS"
+    LIBS="$save_LIBS"
+    GL_BACKEND=win32
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+AC_SUBST(GL_LIBS)
+AC_SUBST(GL_BACKEND)
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
@@ -234,64 +266,6 @@ AC_SUBST(CLUTTER_X11_LIBS)
 AC_SUBST(CLUTTER_X11_CFLAGS)
 AC_SUBST(HAVE_CLUTTER_X11)
 AM_CONDITIONAL(HAVE_CLUTTER_X11, test "x$HAVE_CLUTTER_X11" = "xyes")
-
-
-#dnl OpenGL is required
-#translit(dnm, m, l) AM_CONDITIONAL(USE_OPENGL, true)
-#AG_GST_CHECK_X
-#save_CPPFLAGS="$CPPFLAGS"
-#save_LIBS="$LIBS"
-#CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-#LIBS="$LIBS $X_LIBS"
-#AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
-#  AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h, [
-#      HAVE_OPENGL="yes"
-#      GL_LIBS="-lGL"
-#  ], [
-#      HAVE_OPENGL="no"
-#  ])
-#  AC_SUBST(GL_LIBS)
-#])
-#CPPFLAGS="$save_CPPFLAGS"
-#LIBS="$save_LIBS"
-
-dnl
-dnl How lame is this?
-dnl
-
-echo host is $host
-case $host in
-  *-linux*)
-    GL_LIBS="-lGLEW -lGLU -lGL -lX11"
-    GL_BACKEND=x11
-    ;;
-  *-darwin*)
-    GL_LIBS="-lGLEW -lGLU -lGL -lX11"
-    GL_BACKEND=x11
-    ;;
-  *-mingw32*)
-    GL_LIBS="-lglew32 -lglu32 -lopengl32 -lgdi32"
-    GL_BACKEND=win32
-    ;;
-  *)
-    exit 1
-    ;;
-esac
-AC_SUBST(GL_LIBS)
-AC_SUBST(GL_BACKEND)
-
-
-dnl Eventually use pkgconfig check
-#AG_GST_CHECK_FEATURE(OPENGL, [Open GL], glsink, [
-#  PKG_CHECK_MODULES(GL, gl >= 7.1.0, [
-#    HAVE_GL="yes"
-#    AC_SUBST(GL_CFLAGS)
-#    AC_SUBST(GL_LIBS)
-#  ],[
-#    HAVE_GL=no
-#    AC_MSG_RESULT(no)
-#  ])
-#])
 
 dnl *** set variables based on configure arguments ***
 
