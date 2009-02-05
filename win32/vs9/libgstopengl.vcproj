@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\glib\lib\glib-2.0\include&quot;;..\..\..\gstreamer\include;..\..\..\glew\include;..\..\..\png\include;..\..\..\zlib\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;HAVE_GDKPIXBUF"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;HAVE_LIBPNG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -120,7 +120,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="&quot;..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\glib\lib\glib-2.0\include&quot;;..\..\..\gstreamer\include;..\..\..\glew\include;..\..\..\png\include;..\..\..\zlib\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;HAVE_GDKPIXBUF"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;HAVE_LIBPNG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"

@@ -1,3 +1,16 @@
+2009-02-05  Julien Isorce  <julien.isorce@gmail.com>
+
+    * gst-libs/gst/gl/gstglshader.c
+    Fix Uniform -> Attrib
+    
+    * gst/gl/gstgldifferencematte.c
+    * gst/gl/gstglpixbufoverlay.c
+    Make sure we load an RGBA image.png.
+    
+    * gst/gl/gstopengl.c
+    * win32/vs9/libgstopengl.vcproj
+    HAVE_GDKPIXBUF -> HAVE_LIBPNG
+    
 2009-01-23  Julien Isorce  <julien.isorce@gmail.com>
 
     * gst/gl/gstgldifferencematte.c
