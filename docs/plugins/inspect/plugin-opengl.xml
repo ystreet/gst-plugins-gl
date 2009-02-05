@@ -256,10 +256,10 @@
       </pads>
     </element>
     <element>
-      <name>glpixbufoverlay</name>
-      <longname>Gstreamer OpenGL PixbufOverlay</longname>
+      <name>gloverlay</name>
+      <longname>Gstreamer OpenGL Overlay</longname>
       <class>Filter/Effect</class>
-      <description>Overlay GL video texture with a gdkpixbuf</description>
+      <description>Overlay GL video texture with a PNG image</description>
       <author>Filippo Argiolas &lt;filippo.argiolas@gmail.com&gt;</author>
       <pads>
         <caps>

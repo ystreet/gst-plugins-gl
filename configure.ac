@@ -245,16 +245,16 @@ AC_SUBST(GTK_CFLAGS)
 AC_SUBST(HAVE_GTK)
 AM_CONDITIONAL(HAVE_GTK, test "x$HAVE_GTK" = "xyes")
 
-dnl optional gdk-pixbuf (for pixbufoverlay)
-HAVE_GDKPIXBUF=NO
+dnl optional gdk-pixbuf (for examples)
+#HAVE_GDKPIXBUF=NO
 #PKG_CHECK_MODULES(GDKPIXBUF, gdk-pixbuf-2.0, HAVE_GDKPIXBUF=yes, HAVE_GDKPIXBUF=no)
-AC_SUBST(GDKPIXBUF_LIBS)
-AC_SUBST(GDKPIXBUF_CFLAGS)
-AC_SUBST(HAVE_GDKPIXBUF)
-AM_CONDITIONAL(HAVE_GDKPIXBUF, test "x$HAVE_GDKPIXBUF" = "xyes")
-if test "x$HAVE_GDKPIXBUF" = "xyes"; then
-  AC_DEFINE_UNQUOTED([HAVE_GDKPIXBUF], [], ["Have GdkPixbuf"])
-fi
+#AC_SUBST(GDKPIXBUF_LIBS)
+#AC_SUBST(GDKPIXBUF_CFLAGS)
+#AC_SUBST(HAVE_GDKPIXBUF)
+#AM_CONDITIONAL(HAVE_GDKPIXBUF, test "x$HAVE_GDKPIXBUF" = "xyes")
+#if test "x$HAVE_GDKPIXBUF" = "xyes"; then
+#  AC_DEFINE_UNQUOTED([HAVE_GDKPIXBUF], [], ["Have GdkPixbuf"])
+#fi
 
 
 dnl clutter is optional and used in examples

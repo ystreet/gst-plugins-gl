@@ -199,7 +199,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglimagesink.h" />
-		<Unit filename="..\..\gst\gl\gstglpixbufoverlay.c">
+		<Unit filename="..\..\gst\gl\gstgloverlay.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstgltestsrc.c">

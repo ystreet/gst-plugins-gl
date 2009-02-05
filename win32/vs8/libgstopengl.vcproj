@@ -262,7 +262,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\gst\gl\gstglpixbufoverlay.c"
+					RelativePath="..\..\gst\gl\gstgloverlay.c"
 					>
 				</File>
 				<File
