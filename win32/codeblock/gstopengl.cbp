@@ -17,7 +17,7 @@
 					<Add option="-g" />
 				</Compiler>
 				<ExtraCommands>
-					<Add after="copy /Y Debug\libgstopengl.dll H:\svn\gstreamer\bin\lib\gstreamer-0.10" />
+					<Add after="copy /Y Debug\libgstopengl.dll C:\gstreamer\lib\gstreamer-0.10" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -35,7 +35,7 @@
 					<Add option="-s" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="copy /Y Release\libgstopengl.dll H:\svn\gstreamer\bin\lib\gstreamer-0.10" />
+					<Add after="copy /Y Release\libgstopengl.dll C:\gstreamer\lib\gstreamer-0.10" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -45,21 +45,18 @@
 			<Add option="-Wall" />
 			<Add option="-DWIN32" />
 			<Add option="-DHAVE_CONFIG_H" />
-			<Add option="-DHAVE_GDKPIXBUF" />
-			<Add directory="H:\svn\gstreamer\include" />
-			<Add directory="H:\svn\libiconv\include" />
-			<Add directory="H:\svn\glib\include" />
-			<Add directory="H:\svn\libxml2-2.6.30+.win32\include" />
-			<Add directory="H:\svn\glew\include" />
-			<Add directory="..\..\gst-libs\gst\freeglut" />
-			<Add directory="..\..\gst\gl" />
+			<Add option="-DHAVE_LIBPNG" />
+			<Add directory="..\..\..\gstreamer\include" />
+			<Add directory="..\..\..\glib\include\glib-2.0" />
+			<Add directory="..\..\..\glib\lib\glib-2.0\include" />
+			<Add directory="..\..\..\glew\include" />
+			<Add directory="..\..\..\zlib\include" />
+			<Add directory="..\..\..\png\include" />
 			<Add directory="..\common" />
-			<Add directory="..\..\gst\gl\effects" />
-			<Add directory="..\..\gst-libs\gst\gl" />
-			<Add directory="H:\svn\atk\include" />
-			<Add directory="H:\svn\cairo\include" />
-			<Add directory="H:\svn\gtk+\include" />
 			<Add directory="..\..\gst-libs" />
+			<Add directory="..\..\gst-libs\gst\gl" />
+			<Add directory="..\..\gst\gl" />
+			<Add directory="..\..\gst\gl\effects" />
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
@@ -70,18 +67,18 @@
 			<Add library="gstbase-0.10" />
 			<Add library="gstvideo-0.10" />
 			<Add library="gstinterfaces-0.10" />
-			<Add library="gdk_pixbuf-2.0" />
-			<Add library="gdk-win32-2.0" />
-			<Add library="gtk-win32-2.0" />
 			<Add library="glew32" />
 			<Add library="glu32" />
 			<Add library="opengl32" />
 			<Add library="gdi32" />
+			<Add library="png" />
+			<Add library="z" />
 			<Add library="winmm" />
-			<Add directory="H:\svn\glib\lib" />
-			<Add directory="H:\svn\gstreamer\bin\bin" />
-			<Add directory="H:\svn\glew\bin" />
-			<Add directory="H:\svn\gtk+\lib" />
+			<Add directory="..\..\..\glib\lib" />
+			<Add directory="C:\gstreamer\bin" />
+			<Add directory="..\..\..\glew\bin" />
+			<Add directory="..\..\..\png\lib" />
+			<Add directory="..\..\..\zlib\lib" />
 		</Linker>
 		<Unit filename="..\..\gst-libs\gst\gettext.h" />
 		<Unit filename="..\..\gst-libs\gst\gl\gstglbuffer.c">
