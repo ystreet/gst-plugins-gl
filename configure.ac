@@ -92,7 +92,6 @@ AG_GST_ARG_WITH_PLUGINS
 dnl *** checks for platform ***
 
 dnl * hardware/architecture *
-AC_CHECK_SIZEOF(void *)
 
 dnl common/m4/gst-arch.m4
 dnl check CPU type
