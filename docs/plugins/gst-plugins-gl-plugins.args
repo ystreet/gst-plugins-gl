@@ -84,7 +84,7 @@
 <RANGE>[0,1000]</RANGE>
 <FLAGS>w</FLAGS>
 <NICK>Zfar</NICK>
-<BLURB>Specifies the	distance from the viewer to the	far clipping plane.</BLURB>
+<BLURB>Specifies the distance from the viewer to the far clipping plane.</BLURB>
 <DEFAULT>100</DEFAULT>
 </ARG>
 
@@ -94,8 +94,8 @@
 <RANGE>[0,100]</RANGE>
 <FLAGS>w</FLAGS>
 <NICK>Znear</NICK>
-<BLURB>Specifies the	distance from the viewer to the	near clipping plane.</BLURB>
-<DEFAULT>0,1</DEFAULT>
+<BLURB>Specifies the distance from the viewer to the near clipping plane.</BLURB>
+<DEFAULT>0.1</DEFAULT>
 </ARG>
 
 <ARG>
@@ -206,5 +206,15 @@
 <NICK>Invert the colors</NICK>
 <BLURB>Invert colors to get dark edges on bright background.</BLURB>
 <DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::location</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Location of the image</NICK>
+<BLURB>Location of the image.</BLURB>
+<DEFAULT>NULL</DEFAULT>
 </ARG>
 

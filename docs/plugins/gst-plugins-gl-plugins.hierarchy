@@ -16,7 +16,7 @@ GObject
         GstGLUpload
         GstGLFilter
           GstGLFilterCube
-          GstGLPixbufOverlay
+          GstGLOverlay
           GstGLDifferenceMatte
           GstGLBumper
           GstGLEffects
