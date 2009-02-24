@@ -36,6 +36,10 @@ check_package(GLIB2 1)
 check_package(GSTREAMER 1)
 check_package(OPENGL 1)
 check_package(GLEW 1)
+check_package(PNG 1)
+if (WIN32)
+check_package(ZLIB 1)
+endif (WIN32)
 
 # conditionnal required packages
 INCLUDE (CheckIncludeFiles)
@@ -46,10 +50,6 @@ check_package(LIBICONV 1)
 endif (NOT GST_USING_BINARY_REGISTRY)
 
 # optionnal packages
-check_package(PNG 0)
-if (WIN32)
-check_package(ZLIB 0)
-endif (WIN32)
 check_package(GTK2 0)
 check_package(ATK 0)
 check_package(CAIRO 0)
