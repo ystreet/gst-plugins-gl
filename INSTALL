@@ -62,23 +62,28 @@ BUT IT IS NOT AN OBLIGATION
 This file contains:
 
 rem ########################################################################
-set GLIB2_DIR=H:\svn\glib
-set GTK2_DIR=H:\svn\gtk+
-set ATK_DIR=H:\svn\atk
-set CAIRO_DIR=H:\svn\cairo
-set LIBXML2_DIR=H:\svn\libxml2-2.6.30+.win32
-set LIBICONV_DIR=H:\svn\libiconv
-set GSTREAMER_DIR=H:\svn\gstreamer
-set GLEW_DIR=H:\svn\glew
+set GSTREAMER_DIR=D:\workspace\gstreamer
+set GLEW_DIR=D:\workspace\glew
+set PNG_DIR=D:\workspace\png
+set ZLIB_DIR=D:\workspace\zlib
+set LIBXML2_DIR=D:\workspace\libxml
+set LIBICONV_DIR=D:\workspace\libiconv
+set GLIB2_DIR=D:\workspace\glib
+set GTK2_DIR=D:\workspace\gtk+
+set ATK_DIR=D:\workspace\atk
+set CAIRO_DIR=D:\workspace\cairo
 
-rem cd mingw32
-rem del *ache* && cmake -G "MinGW Makefiles" ..\gst-plugins-gl
+cd mingw32
+del *ache* && cmake -G "MinGW Makefiles" ..\gst-plugins-gl
 
 rem cd vs8
 rem del *ache* && cmake -G "Visual Studio 8 2005" ..\gst-plugins-gl
 
-cd codeblocks
-del *ache* && cmake -G "CodeBlocks - MinGW Makefiles" ..\gst-plugins-gl
+rem cd vs9
+rem del *ache* && cmake -G "Visual Studio 9 2008" ..\gst-plugins-gl
+
+rem cd codeblocks
+rem del *ache* && cmake -G "CodeBlocks - MinGW Makefiles" ..\gst-plugins-gl
 
 cmd
 rem ########################################################################
@@ -139,6 +144,14 @@ gst-plugins-gl\win32\vs8\libgstopengl.sln
 
 -vs9
 gst-plugins-gl\win32\vs9\libgstopengl.sln
+
+
+Cross-platform build: Using GNUstep http://www.gnu.org/software/gnustep/
+========================================================================
+
+#it will use the GNUmakefile files
+- make clean all
+result in gst-plugins-gl/obj/libgstopengl.(so/dll)
 
 
 Simple test:
