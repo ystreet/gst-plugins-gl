@@ -2,6 +2,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 LIBRARY_NAME = libgstopengl
 
+libgstopengl_VERSION = 1.0.0
+
 libgstopengl_SUBPROJECTS = gst-libs/gst/gl gst/gl gst/gl/effects
 
 ifeq ($(GNUSTEP_TARGET_OS), mingw32)
@@ -9,7 +11,7 @@ ifeq ($(GNUSTEP_TARGET_OS), mingw32)
     -LD:/workspace/glib/lib \
     -LC:/gstreamer/bin \
     -LD:/workspace/png/lib \
-    -LD:/workspace/z/lib \
+    -LD:/workspace/zlib/lib \
     -LD:/workspace/glew/bin
 endif
 
