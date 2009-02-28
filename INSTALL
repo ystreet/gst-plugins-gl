@@ -149,8 +149,8 @@ gst-plugins-gl\win32\vs9\libgstopengl.sln
 Cross-platform build: Using GNUstep http://www.gnu.org/software/gnustep/
 ========================================================================
 
-#it will use the GNUmakefile files
-- make clean all
+#it will use the GNUmakefile.gnustep files
+make clean all -f GNUmakefile.gnustep
 result in gst-plugins-gl/obj/libgstopengl.(so/dll)
 
 

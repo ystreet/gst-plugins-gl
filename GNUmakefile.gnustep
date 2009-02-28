@@ -1,3 +1,5 @@
+export MAKEFILE_NAME = GNUmakefile.gnustep
+
 include $(GNUSTEP_MAKEFILES)/common.make
 
 LIBRARY_NAME = libgstopengl
