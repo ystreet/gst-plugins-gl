@@ -1,0 +1,8 @@
+generic/cube/cube
+generic/cubeyuv/cubeyuv
+generic/doublecube/doublecube
+gtk/filternoxoverlay/filternoxoverlay
+gtk/filterxoverlay/filterxoverlay
+gtk/fxtest/fxtest
+gtk/fxtest/pixbufdrop
+gtk/gtkxoverlay/gtkxoverlay
