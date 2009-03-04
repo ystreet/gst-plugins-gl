@@ -8,13 +8,14 @@ win32 {
 DEFINES += WIN32
 INCLUDEPATH += ./GeneratedFiles \
     ./GeneratedFiles/Debug \
-	./../../../../libxml2-2.6.30+.win32/include \
-    ./../../../../libiconv/include \
-    ./../../../../glib/include \
-    ./../../../../gstreamer/include
-LIBS += -L"./../../../../glib/lib" \
-    -L"./../../../../gstreamer/lib" \
-    -llibgstreamer-0.10 \
+    ./../../../../../libxml2/include \
+    ./../../../../../libiconv/include \
+    ./../../../../../glib/include/glib-2.0 \
+    ./../../../../../glib/lib/glib-2.0/include \
+    ./../../../../../gstreamer/include
+LIBS += -L"./../../../../../glib/lib" \
+    -L"./../../../../../gstreamer/lib" \
+    -lgstreamer-0.10 \
     -lglib-2.0 \
     -lgmodule-2.0 \
     -lgobject-2.0 \
