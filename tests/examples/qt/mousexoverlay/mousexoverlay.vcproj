@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="9,00"
 	Name="mousexoverlay"
 	ProjectGUID="{E94F8CAA-628F-4872-8E73-AD56D34899CB}"
 	Keyword="Qt4VSv1.0"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -37,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=".\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;.\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;..\..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\..\libiconv\include;..\..\..\..\glib\include;..\..\..\..\gstreamer\include"
+				AdditionalIncludeDirectories=".\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;.\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;..\..\..\..\..\libxml2\include;..\..\..\..\..\libiconv\include;&quot;..\..\..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\..\..\glib\lib\glib-2.0\include&quot;;..\..\..\..\..\gstreamer\include;..\..\..\..\..\glew\include"
 				PreprocessorDefinitions="UNICODE,WIN32,QT_THREAD_SUPPORT,QT_NO_DEBUG,NDEBUG,QT_CORE_LIB,QT_GUI_LIB"
 				RuntimeLibrary="2"
 				TreatWChar_tAsBuiltInType="false"
@@ -56,9 +57,11 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmain.lib QtCore4.lib QtGui4.lib libgstreamer-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libgstinterfaces-0.10.lib  opengl32.lib glu32.lib glew32.lib glew32s.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;..\..\..\..\glib\lib;..\..\..\..\gstreamer\lib"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;..\..\..\..\..\glib\lib;..\..\..\..\..\gstreamer\lib;..\..\..\..\..\glew\lib"
 				GenerateDebugInformation="false"
 				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -77,9 +80,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -109,7 +109,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;.\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;..\..\..\..\libxml2-2.6.30+.win32\include&quot;;..\..\..\..\libiconv\include;..\..\..\..\glib\include;..\..\..\..\gstreamer\include"
+				AdditionalIncludeDirectories=".\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;.\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;..\..\..\..\..\libxml2\include;..\..\..\..\..\libiconv\include;&quot;..\..\..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\..\..\glib\lib\glib-2.0\include&quot;;..\..\..\..\..\gstreamer\include;..\..\..\..\..\glew\include"
 				PreprocessorDefinitions="UNICODE,WIN32,QT_THREAD_SUPPORT,QT_CORE_LIB,QT_GUI_LIB"
 				RuntimeLibrary="3"
 				TreatWChar_tAsBuiltInType="false"
@@ -128,9 +128,11 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib libgstreamer-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libgstinterfaces-0.10.lib opengl32.lib glu32.lib glew32.lib glew32s.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;..\..\..\..\glib\lib;..\..\..\..\gstreamer\lib"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;..\..\..\..\..\glib\lib;..\..\..\..\..\gstreamer\lib;..\..\..\..\..\glew\lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -149,9 +151,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -197,7 +196,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing gstthread.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -I&quot;.\GeneratedFiles&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;.\..\..\..\..\libxml2-2.6.30+.win32\include&quot; -I&quot;.\..\..\..\..\libiconv\include&quot; -I&quot;.\..\..\..\..\glib\include&quot; -I&quot;.\..\..\..\..\gstreamer\include&quot; &quot;.\gstthread.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_gstthread.cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;.\..\..\..\..\..\libxml2\include\.&quot; -I&quot;.\..\..\..\..\..\libiconv\include\.&quot; -I&quot;.\..\..\..\..\..\glib\include\glib-2.0\.&quot; -I&quot;.\..\..\..\..\..\glib\lib\glib-2.0\include\.&quot; -I&quot;.\..\..\..\..\..\gstreamer\include\.&quot; -I&quot;.\..\..\..\..\..\glew\include\.&quot; &quot;.\gstthread.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_gstthread.cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\gstthread.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_gstthread.cpp&quot;"
 					/>
@@ -208,7 +207,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing gstthread.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -I&quot;.\GeneratedFiles&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;.\..\..\..\..\libxml2-2.6.30+.win32\include&quot; -I&quot;.\..\..\..\..\libiconv\include&quot; -I&quot;.\..\..\..\..\glib\include&quot; -I&quot;.\..\..\..\..\gstreamer\include&quot; &quot;.\gstthread.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_gstthread.cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;.\..\..\..\..\..\libxml2\include\.&quot; -I&quot;.\..\..\..\..\..\libiconv\include\.&quot; -I&quot;.\..\..\..\..\..\glib\include\glib-2.0\.&quot; -I&quot;.\..\..\..\..\..\glib\lib\glib-2.0\include\.&quot; -I&quot;.\..\..\..\..\..\gstreamer\include\.&quot; -I&quot;.\..\..\..\..\..\glew\include\.&quot; &quot;.\gstthread.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_gstthread.cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\gstthread.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_gstthread.cpp&quot;"
 					/>
@@ -223,7 +222,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing pipeline.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -I&quot;.\GeneratedFiles&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;.\..\..\..\..\libxml2-2.6.30+.win32\include&quot; -I&quot;.\..\..\..\..\libiconv\include&quot; -I&quot;.\..\..\..\..\glib\include&quot; -I&quot;.\..\..\..\..\gstreamer\include&quot; &quot;.\pipeline.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_pipeline.cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;.\..\..\..\..\..\libxml2\include\.&quot; -I&quot;.\..\..\..\..\..\libiconv\include\.&quot; -I&quot;.\..\..\..\..\..\glib\include\glib-2.0\.&quot; -I&quot;.\..\..\..\..\..\glib\lib\glib-2.0\include\.&quot; -I&quot;.\..\..\..\..\..\gstreamer\include\.&quot; -I&quot;.\..\..\..\..\..\glew\include\.&quot; &quot;.\pipeline.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_pipeline.cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\pipeline.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_pipeline.cpp&quot;"
 					/>
@@ -234,7 +233,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing pipeline.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -I&quot;.\GeneratedFiles&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;.\..\..\..\..\libxml2-2.6.30+.win32\include&quot; -I&quot;.\..\..\..\..\libiconv\include&quot; -I&quot;.\..\..\..\..\glib\include&quot; -I&quot;.\..\..\..\..\gstreamer\include&quot; &quot;.\pipeline.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_pipeline.cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;.\..\..\..\..\..\libxml2\include\.&quot; -I&quot;.\..\..\..\..\..\libiconv\include\.&quot; -I&quot;.\..\..\..\..\..\glib\include\glib-2.0\.&quot; -I&quot;.\..\..\..\..\..\glib\lib\glib-2.0\include\.&quot; -I&quot;.\..\..\..\..\..\gstreamer\include\.&quot; -I&quot;.\..\..\..\..\..\glew\include\.&quot; &quot;.\pipeline.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_pipeline.cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\pipeline.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_pipeline.cpp&quot;"
 					/>
@@ -249,7 +248,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing qrenderer.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -I&quot;.\GeneratedFiles&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;.\..\..\..\..\libxml2-2.6.30+.win32\include&quot; -I&quot;.\..\..\..\..\libiconv\include&quot; -I&quot;.\..\..\..\..\glib\include&quot; -I&quot;.\..\..\..\..\gstreamer\include&quot; &quot;.\qrenderer.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_qrenderer.cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;.\..\..\..\..\..\libxml2\include\.&quot; -I&quot;.\..\..\..\..\..\libiconv\include\.&quot; -I&quot;.\..\..\..\..\..\glib\include\glib-2.0\.&quot; -I&quot;.\..\..\..\..\..\glib\lib\glib-2.0\include\.&quot; -I&quot;.\..\..\..\..\..\gstreamer\include\.&quot; -I&quot;.\..\..\..\..\..\glew\include\.&quot; &quot;.\qrenderer.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_qrenderer.cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\qrenderer.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_qrenderer.cpp&quot;"
 					/>
@@ -260,7 +259,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing qrenderer.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -I&quot;.\GeneratedFiles&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;.\..\..\..\..\libxml2-2.6.30+.win32\include&quot; -I&quot;.\..\..\..\..\libiconv\include&quot; -I&quot;.\..\..\..\..\glib\include&quot; -I&quot;.\..\..\..\..\gstreamer\include&quot; &quot;.\qrenderer.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_qrenderer.cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  -I&quot;.\GeneratedFiles\.&quot; -I&quot;$(QTDIR)\include\.&quot; -I&quot;.\GeneratedFiles\$(ConfigurationName)\.&quot; -I&quot;$(QTDIR)\include\QtCore\.&quot; -I&quot;$(QTDIR)\include\QtGui\.&quot; -I&quot;.\..\..\..\..\..\libxml2\include\.&quot; -I&quot;.\..\..\..\..\..\libiconv\include\.&quot; -I&quot;.\..\..\..\..\..\glib\include\glib-2.0\.&quot; -I&quot;.\..\..\..\..\..\glib\lib\glib-2.0\include\.&quot; -I&quot;.\..\..\..\..\..\gstreamer\include\.&quot; -I&quot;.\..\..\..\..\..\glew\include\.&quot; &quot;.\qrenderer.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_qrenderer.cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;.\qrenderer.h"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_qrenderer.cpp&quot;"
 					/>
