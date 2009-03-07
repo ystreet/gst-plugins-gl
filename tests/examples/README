@@ -5,3 +5,5 @@
 - gui: use the xoverlay interface through an user interface,
        and using cross-platform framework (gtk, qt or wx).
        the video is loaded from the gui.
+       Cocoa can be considered as a multi-platform gui too
+       through GNUstep for example.

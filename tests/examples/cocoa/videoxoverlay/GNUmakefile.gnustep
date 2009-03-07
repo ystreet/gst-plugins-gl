@@ -1,0 +1,34 @@
+export MAKEFILE_NAME = GNUmakefile.gnustep
+
+include $(GNUSTEP_MAKEFILES)/common.make
+
+TOOL_NAME = videoxoverlay
+
+videoxoverlay_OBJC_FILES = main.m
+
+ifeq ($(GNUSTEP_TARGET_OS), mingw32)
+videoxoverlay_INCLUDE_DIRS = \
+  -ID:/workspace/glib/include/glib-2.0 \
+  -ID:/workspace/gstreamer/include \
+  -ID:/workspace/glib/lib/glib-2.0/include
+endif
+
+ifeq ($(GNUSTEP_TARGET_OS), mingw32)
+  videoxoverlay_LIB_DIRS += \
+    -LD:/workspace/glib/lib \
+    -LC:/gstreamer/bin
+endif
+
+videoxoverlay_TOOL_LIBS = \
+  -lglib-2.0 \
+	-lgobject-2.0 \
+	-lgmodule-2.0 \
+	-lgthread-2.0 \
+	-lgstreamer-0.10 \
+	-lgstbase-0.10 \
+	-lgstvideo-0.10 \
+	-lgstinterfaces-0.10
+
+ADDITIONAL_TOOL_LIBS = -lgnustep-gui
+
+include $(GNUSTEP_MAKEFILES)/tool.make
