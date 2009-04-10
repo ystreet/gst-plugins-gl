@@ -48,18 +48,17 @@
 			<Add directory="../../../gst/gl" />
 			<Add directory="../../.." />
 			<Add directory="../../../gst/gl/effects" />
-			<Add directory="/usr/include/gtk-2.0" />
 			<Add directory="../../../gst-libs" />
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
-			<Add library="gdk_pixbuf-2.0" />
 			<Add library="gobject-2.0" />
 			<Add library="gthread-2.0" />
 			<Add library="gstreamer-0.10" />
 			<Add library="gstbase-0.10" />
 			<Add library="gstvideo-0.10" />
 			<Add library="gstinterfaces-0.10" />
+			<Add library="png" />
 			<Add library="GLEW" />
 			<Add library="GLU" />
 			<Add library="GL" />

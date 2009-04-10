@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="gstopengl" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/libgstopengl" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option parameters="videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glimagesink" />
+				<Option host_application="gst-launch-0.10" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/libgstopengl" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-g" />
+			<Add option="-DHAVE_CONFIG_H" />
+			<Add option="-DOPENGL_ES2" />
+			<Add directory="/usr/lib/glib-2.0/include" />
+			<Add directory="/usr/include/glib-2.0" />
+			<Add directory="/usr/include/libxml2" />
+			<Add directory="/usr/include/gstreamer-0.10" />
+			<Add directory="/usr/local/include/gstreamer-0.10" />
+			<Add directory="../../gst-libs/gst/gl" />
+			<Add directory="../../gst/gl" />
+			<Add directory="../.." />
+			<Add directory="../../gst-libs" />
+			<Add directory="../../../../Documents/SDKPackage/Builds/OGLES2/Include" />
+		</Compiler>
+		<Linker>
+			<Add library="glib-2.0" />
+			<Add library="gobject-2.0" />
+			<Add library="gthread-2.0" />
+			<Add library="gstreamer-0.10" />
+			<Add library="gstbase-0.10" />
+			<Add library="gstvideo-0.10" />
+			<Add library="gstinterfaces-0.10" />
+			<Add library="EGL" />
+			<Add library="GLESv2" />
+			<Add directory="../../../../Documents/SDKPackage/Builds/OGLES2/LinuxPC/Lib" />
+		</Linker>
+		<Unit filename="../../gst-libs/gst/gettext.h" />
+		<Unit filename="../../gst-libs/gst/gl/gstglbuffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst-libs/gst/gl/gstglbuffer.h" />
+		<Unit filename="../../gst-libs/gst/gl/gstgldisplay.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst-libs/gst/gl/gstgldisplay.h" />
+		<Unit filename="../../gst-libs/gst/gl/gstgles2.h" />
+		<Unit filename="../../gst-libs/gst/gl/gstglfilter.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst-libs/gst/gl/gstglfilter.h" />
+		<Unit filename="../../gst-libs/gst/gl/gstglshader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst-libs/gst/gl/gstglshader.h" />
+		<Unit filename="../../gst-libs/gst/gl/gstglwindow.h" />
+		<Unit filename="../../gst-libs/gst/gl/gstglwindow_x11ES2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst-libs/gst/gst-i18n-plugin.h" />
+		<Unit filename="../../gst/gl/gstgldownload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/gstgldownload.h" />
+		<Unit filename="../../gst/gl/gstglfiltercube.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/gstglfiltercube.h" />
+		<Unit filename="../../gst/gl/gstglimagesink.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/gstglimagesink.h" />
+		<Unit filename="../../gst/gl/gstglupload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/gstglupload.h" />
+		<Unit filename="../../gst/gl/gstopengl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
+			</wxsmith>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
