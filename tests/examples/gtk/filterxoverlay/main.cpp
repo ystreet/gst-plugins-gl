@@ -2,12 +2,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#ifdef WIN32
-#include <gdk/gdkwin32.h>
-#else
-#include <gdk/gdkx.h>
-#endif
-#include <gst/interfaces/xoverlay.h>
+#include "../gstgtk.h"
 
 
 static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, GtkWidget* widget)
@@ -21,13 +16,7 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, GtkWidge
 
     g_print ("setting xwindow id\n");
 
-#ifdef WIN32
-    gst_x_overlay_set_xwindow_id (GST_X_OVERLAY (GST_MESSAGE_SRC (message)),
-        reinterpret_cast<gulong>GDK_WINDOW_HWND(widget->window));
-#else
-    gst_x_overlay_set_xwindow_id (GST_X_OVERLAY (GST_MESSAGE_SRC (message)),
-        GDK_WINDOW_XWINDOW(widget->window));
-#endif
+    gst_x_overlay_set_gtk_window (GST_X_OVERLAY (GST_MESSAGE_SRC (message)), widget);
 
     gst_message_unref (message);
 

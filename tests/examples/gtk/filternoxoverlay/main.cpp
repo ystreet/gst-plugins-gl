@@ -2,11 +2,6 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#ifdef WIN32
-#include <gdk/gdkwin32.h>
-#else
-#include <gdk/gdkx.h>
-#endif
 
 static void end_stream_cb(GstBus* bus, GstMessage* message, GstElement* pipeline)
 {
