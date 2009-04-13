@@ -56,6 +56,7 @@ dnl AS_LIBTOOL_TAGS
 
 AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
+AC_PROG_OBJC
 
 dnl *** required versions of GStreamer stuff ***
 GST_REQ=0.10.15.1
@@ -163,7 +164,7 @@ fi
 #dnl Check for OpenGL, GLU and GLEW
 echo host is $host
 case $host in
-  *-linux* | *-darwin*)
+  *-linux*)
     AG_GST_CHECK_X
     save_CPPFLAGS="$CPPFLAGS"
     save_LIBS="$LIBS"
@@ -176,6 +177,15 @@ case $host in
     CPPFLAGS="$save_CPPFLAGS"
     LIBS="$save_LIBS"
     GL_BACKEND=x11
+    ;;
+  *-darwin*)
+    save_CPPFLAGS="$CPPFLAGS"
+    save_LIBS="$LIBS"
+    AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h,, AC_MSG_ERROR([GLEW is required]))
+    GL_LIBS="$LIBS -lGLEW -framework OpenGL -framework Cocoa"
+    CPPFLAGS="$save_CPPFLAGS -framework OpenGL"
+    LIBS="$save_LIBS"
+    GL_BACKEND=cocoa
     ;;
   *-mingw32*)
     save_CPPFLAGS="$CPPFLAGS"
@@ -195,6 +205,9 @@ case $host in
 esac
 AC_SUBST(GL_LIBS)
 AC_SUBST(GL_BACKEND)
+AM_CONDITIONAL(GL_BACKEND_X11, test "x$GL_BACKEND" = "xx11")
+AM_CONDITIONAL(GL_BACKEND_COCOA, test "x$GL_BACKEND" = "xcocoa")
+AM_CONDITIONAL(GL_BACKEND_WIN32, test "x$GL_BACKEND" = "xwin32")
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
