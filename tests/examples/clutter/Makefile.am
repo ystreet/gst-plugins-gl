@@ -3,7 +3,7 @@ noinst_PROGRAMS = ##
 if HAVE_CLUTTER_GLX
 if HAVE_CLUTTER_X11
 
-noinst_PROGRAMS += clutteractor clutteractortee
+noinst_PROGRAMS += clutteractor clutteractortee cluttershare
 
 clutteractor_SOURCES = clutteractor.c
 
@@ -26,6 +26,17 @@ clutteractortee_LDADD=$(GST_PLUGINS_GL_LIBS) $(GST_PLUGINS_BASE_LIBS) $(GST_LIBS
 	$(GL_LIBS) $(GTK_LIBS) -lgstinterfaces-$(GST_MAJORMINOR) \
 	$(CLUTTER_LIBS) \
 	$(CLUTTER_GLX_LIBS) $(CLUTTER_X11_LIBS)
+
+cluttershare_SOURCES = cluttershare.c
+
+cluttershare_CFLAGS=$(GST_PLUGINS_GL_CFLAGS) $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS) \
+    $(GL_CFLAGS) $(GTK_CFLAGS) \
+    $(CLUTTER_CFLAGS) \
+    $(CLUTTER_GLX_CFLAGS) $(CLUTTER_X11_CFLAGS)
+cluttershare_LDADD=$(GST_PLUGINS_GL_LIBS) $(GST_PLUGINS_BASE_LIBS) $(GST_LIBS) \
+    $(GL_LIBS) $(GTK_LIBS) -lgstinterfaces-$(GST_MAJORMINOR) \
+    $(CLUTTER_LIBS) \
+    $(CLUTTER_GLX_LIBS) $(CLUTTER_X11_LIBS)
 
 endif
 endif
