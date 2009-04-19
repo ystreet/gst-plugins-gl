@@ -17,6 +17,7 @@ gst-launch-0.10 videotestsrc ! "video/x-raw-yuv, format=(fourcc)I420, width=720,
 
 gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! glimagesink
 gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! glfiltercube ! glimagesink
+gst-launch-0.10 videotestsrc ! glupload ! glfiltercube ! glimagesink force-aspect-ratio=1
 gst-launch-0.10 videotestsrc ! glupload ! glfiltercube red=1.0 green=0.5 blue=0.1 ! glfiltercube red=0.6 green=0.9 blue=1.0 ! glimagesink
 gst-launch-0.10 videotestsrc ! glupload ! glfiltercube red=0.6 green=0.2 blue=1.0 ! glfiltercube fovy=50.0 znear=0.2 zfar=1000.0 ! glimagesink
 gst-launch-0.10 videotestsrc ! glupload ! "video/x-raw-gl, width=720, height=576" ! glfiltercube ! "video/x-raw-gl, width=320, height=240" ! glimagesink
