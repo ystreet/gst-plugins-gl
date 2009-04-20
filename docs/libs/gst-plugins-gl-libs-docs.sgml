@@ -24,9 +24,6 @@
     <xi:include href="xml/gstgldisplay.xml"/>
     <xi:include href="xml/gettext.xml"/>
     <xi:include href="xml/gst-i18n-plugin.xml"/>
-    <xi:include href="xml/freeglut_internal.xml"/>
-    <xi:include href="xml/freeglut_ext.xml"/>
-    <xi:include href="xml/freeglut_std.xml"/>
   </chapter>
 
   <part id="gstreamer-libs-hierarchy">
