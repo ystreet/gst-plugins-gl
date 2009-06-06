@@ -1,5 +1,5 @@
 
-SUBDIRS = . gtkxoverlay filternoxoverlay filterxoverlay fxtest
+SUBDIRS = . gtkxoverlay filternoxoverlay filterxoverlay fxtest switchxoverlay
 
 
 noinst_LTLIBRARIES = libgstgtkhelper.la

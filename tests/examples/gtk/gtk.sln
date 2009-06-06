@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pixbufdrop", "pixbufdrop\pi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "filternoxoverlay", "filternoxoverlay\filternoxoverlay.vcproj", "{F41F3034-3E0B-4630-8D1E-35E14C606863}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "switchxoverlay", "switchxoverlay\switchxoverlay.vcproj", "{BA78B4B4-3268-483E-9676-911E29FD2C69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -37,6 +39,10 @@ Global
 		{F41F3034-3E0B-4630-8D1E-35E14C606863}.Debug|Win32.Build.0 = Debug|Win32
 		{F41F3034-3E0B-4630-8D1E-35E14C606863}.Release|Win32.ActiveCfg = Release|Win32
 		{F41F3034-3E0B-4630-8D1E-35E14C606863}.Release|Win32.Build.0 = Release|Win32
+		{BA78B4B4-3268-483E-9676-911E29FD2C69}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BA78B4B4-3268-483E-9676-911E29FD2C69}.Debug|Win32.Build.0 = Debug|Win32
+		{BA78B4B4-3268-483E-9676-911E29FD2C69}.Release|Win32.ActiveCfg = Release|Win32
+		{BA78B4B4-3268-483E-9676-911E29FD2C69}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

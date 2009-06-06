@@ -13,10 +13,14 @@ A more complex pipeline is switched bettween the GST states.
 using the xoverlay interface.
 
 -fxtest:
-(TODO: write a comment)
+switch bettween effects of the gleffects filter.
 
 -pixbufdrop:
-(TODO: write a comment)
+drag and drop a png file and overlay it using alpha channel.
+It uses gloverlay filter.
+
+-switchxoverlay:
+change the xoverlay window while the stream is playing.
 
 --- How to build the GTK examples ---
 
