@@ -439,6 +439,7 @@ tests/examples/gtk/gtkxoverlay/Makefile
 tests/examples/gtk/filternoxoverlay/Makefile
 tests/examples/gtk/filterxoverlay/Makefile
 tests/examples/gtk/fxtest/Makefile
+tests/examples/gtk/switchxoverlay/Makefile
 tests/examples/qt/Makefile
 tests/examples/wx/Makefile
 tests/icles/Makefile
