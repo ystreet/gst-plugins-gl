@@ -46,6 +46,7 @@ static gboolean on_click_drawing_area(GtkWidget* widget, GdkEventButton* event, 
 {
     g_print ("switch the drawing area\n");
     gst_x_overlay_set_gtk_window (GST_X_OVERLAY (videosink), widget);
+    gst_x_overlay_expose (GST_X_OVERLAY (videosink));
     return FALSE;
 }
 
