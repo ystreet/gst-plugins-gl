@@ -7,11 +7,11 @@ DOCS_ARE_INCOMPLETE_PLEASE_FIXME=yespleasedo
 #DOC_MODULE=gst-plugins-libs-@GST_MAJORMINOR@
 DOC_MODULE=gst-plugins-gl-libs
 
-# for upload.mak
+# for upload-doc.mak
 DOC=gst-plugins-gl-libs
 FORMATS=html
 html: html-build.stamp
-include $(top_srcdir)/common/upload.mak
+include $(top_srcdir)/common/upload-doc.mak
 
 # generated basefiles
 #basefiles = \
