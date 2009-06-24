@@ -145,6 +145,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglcolorscale.h" />
+    <Unit filename="..\..\gst\gl\gstgldeinterlace.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstgldeinterlace.h" />
 		<Unit filename="../../../gst/gl/gstgldifferencematte.c">
 			<Option compilerVar="CC" />
 		</Unit>

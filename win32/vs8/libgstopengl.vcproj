@@ -221,6 +221,10 @@
 					RelativePath="..\..\gst\gl\gstglcolorscale.c"
 					>
 				</File>
+        <File
+					RelativePath="..\..\gst\gl\gstgldeinterlace.c"
+					>
+				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstgldifferencematte.c"
 					>
@@ -389,6 +393,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglcolorscale.h"
+					>
+				</File>
+        <File
+					RelativePath="..\..\gst\gl\gstgldeinterlace.h"
 					>
 				</File>
 				<File
