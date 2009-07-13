@@ -1,3 +1,95 @@
 
-Release notes for GStreamer OpengGL Plug-ins 0.10.0.1
+Release notes for GStreamer OpenGL Plug-ins 0.10.1 "La Fromage De La Belle France"
         
+
+
+The GStreamer team is proud to announce a new release
+in the 0.10.x stable series of the GStreamer OpenGL Plug-ins.
+
+
+The 0.10.x series is a stable series targeted at end users.
+It is not API or ABI compatible with the stable 0.8.x series.
+It is, however, parallel installable with the 0.8.x series.
+
+Please note that at this time, the GStreamer GL plugins
+        module is not considered API/ABI stable, and public interfaces
+        may change from release to release.
+
+
+
+This module contains integration libraries and plug-ins for using OpenGL within
+GStreamer pipelines.
+
+This module contains elements for, among others:
+
+  output: glimagesink
+  adapters: glupload, gldownload
+  video processing: gldeinterlace, glcolorscale
+  GL effects: glfiltersobel, glfilterblur, gleffects, others
+  sources: gltestsrc
+
+
+Other modules containing plug-ins are:
+
+
+gst-plugins-base
+contains a basic set of well-supported plug-ins
+gst-plugins-good
+contains a set of well-supported plug-ins under our preferred license
+gst-plugins-ugly
+contains a set of well-supported plug-ins, but might pose problems for
+    distributors
+gst-plugins-bad
+contains a set of less supported plug-ins that haven't passed the
+    rigorous quality testing we expect
+
+
+
+  
+
+Features of this release
+    
+      * Initial release of gst-plugins-gl
+      * Integration with standard GStreamer video buffers
+      * Various OpenGL effects and filters
+      * Direct GL output via glimagesink
+There were no bugs fixed in this release
+    
+
+Download
+
+You can find source releases of gst-plugins-gl in the download directory:
+http://gstreamer.freedesktop.org/src/gst-plugins-gl/
+
+GStreamer Homepage
+
+More details can be found on the project's website:
+http://gstreamer.freedesktop.org/
+
+Support and Bugs
+
+We use GNOME's bugzilla for bug reports and feature requests:
+http://bugzilla.gnome.org/enter_bug.cgi?product=GStreamer
+
+Developers
+
+GStreamer is stored in Git, hosted at git.freedesktop.org, and can be cloned from there.
+Interested developers of the core library, plug-ins, and applications should
+subscribe to the gstreamer-devel list. If there is sufficient interest we
+will create more lists as necessary.
+
+        
+Applications
+  
+Contributors to this release
+    
+      * David Schleef
+      * Edward Hervey
+      * Felipe Contreras
+      * Filippo Argiolas
+      * Jan Schmidt
+      * Julien Isorce
+      * Marc-Andre Lureau
+      * Sebastian Dröge
+      * Stefan Kost
+ 

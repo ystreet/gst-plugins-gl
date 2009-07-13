@@ -9,11 +9,9 @@ GObject
     GstElement
       GstBin
         GstPipeline
-      GstBaseSrc
-        GstPushSrc
-          GstGLTestSrc
       GstBaseTransform
         GstGLUpload
+        GstGLDownload
         GstGLFilter
           GstGLFilterCube
           GstGLOverlay
@@ -25,11 +23,14 @@ GObject
           GstGLFilterLaplacian
           GstGLFilterGlass
           GstGLFilterApp
-        GstGLDownload
+          GstGLDeinterlace
         GstGLColorscale
       GstBaseSink
         GstVideoSink
           GstGLImageSink
+      GstBaseSrc
+        GstPushSrc
+          GstGLTestSrc
     GstBus
     GstTask
     GstClock

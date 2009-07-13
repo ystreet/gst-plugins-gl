@@ -1,881 +1,2146 @@
-2009-02-05  Julien Isorce  <julien.isorce@gmail.com>
+=== release 0.10.1 ===
 
-    * gst-libs/gst/gl/gstglshader.c
-    Fix Uniform -> Attrib
-    
-    * gst/gl/gstgldifferencematte.c
-    * gst/gl/gstglpixbufoverlay.c
-    Make sure we load an RGBA image.png.
-    
-    * gst/gl/gstopengl.c
-    * win32/vs9/libgstopengl.vcproj
-    HAVE_GDKPIXBUF -> HAVE_LIBPNG
-    
-2009-01-23  Julien Isorce  <julien.isorce@gmail.com>
+2009-07-13  Jan Schmidt <jan.schmidt@sun.com>
 
-    * gst/gl/gstgldifferencematte.c
-    * gst/gl/gstglpixbufoverlay.c
-    * win32/vs9/libgstopengl.vcproj
-    Do not depends on gtk (gdk) anymore. Those 3 elements (with glbumper)
-    depend now on libpng.
-    
-    * gst-libs/gst/gl/gstgldisplay.c
-    Fix YV12 GLSL conversion on win32 (I am using gstreamer 0.10.21+ now)
-    
-    * tests/examples/gtk/filternoxoverlay/filternoxoverlay.vcproj
-    * tests/examples/gtk/filterxoverlay/filterxoverlay.vcproj
-    * tests/examples/gtk/fxtest/fxtest.vcproj
-    * tests/examples/gtk/fxtest/pixbufdrop.c
-    * tests/examples/gtk/gtk.sln
-    * tests/examples/gtk/gtkxoverlay/gtkxoverlay.vcproj
-    * tests/examples/gtk/pixbufdrop/pixbufdrop.vcproj
-    Update to vs9
+	* configure.ac:
+	  releasing 0.10.1, "La Fromage De La Belle France"
 
-2009-01-15  Julien Isorce  <julien.isorce@gmail.com>
+2009-07-13 12:53:17 +0100  Jan Schmidt <thaytan@noraisin.net>
 
-    * TODO
-    * gst/gl/gstglbumper.c
-    * gst/gl/gstgldifferencematte.c
-    * gst/gl/gstgldownload.c
-    * gst/gl/gstgleffects.c
-    * gst/gl/gstglfilterblur.c
-    * gst/gl/gstglfilterlaplacian.c
-    * gst/gl/gstglfiltersobel.c
-    * gst/gl/gstglpixbufoverlay.c
-    Minimal gtk doc.
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  gstgldisplay: Close a small race starting the display thread
+	  Take the display lock before signalling the create-context cond
+	  to ensure the caller has dropped the lock and is therefore listening
+	  for the signal.
 
-2008-12-14  Julien Isorce  <julien.isorce@gmail.com>
+2009-07-13 12:52:31 +0100  Jan Schmidt <thaytan@noraisin.net>
 
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Fix a regression about glXChooseVisual failure
-    Indeed, attributes must be less restrictives).
-    It causes a crash when using mesa.
-    (I should have checked it again before the merge 1 week ago)
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  x11: Don't crash when the X11 display is not available.
+	  Error out cleanly instead of crashing when the X11 display can't
+	  be contacted.
 
-2008-12-13  Julien Isorce  <julien.isorce@gmail.com>
+2009-07-13 12:50:25 +0100  Jan Schmidt <thaytan@noraisin.net>
 
-    * gst-libs/gst/gl/gstglwindow_win32.c
-    Register window class in gst_gl_window_class_init.
+	* tests/check/Makefile.am:
+	  check: Cleanup STATE_IGNORE_ELEMENTS env var
+	  Remove elements that don't exist in this module from
+	  STATE_IGNORE_ELEMENTS
 
-2008-12-07  Julien Isorce  <julien.isorce@gmail.com>
+2009-07-13 12:49:55 +0100  Jan Schmidt <thaytan@noraisin.net>
 
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Also consider position when using xoverlay.
+	* docs/libs/Makefile.am:
+	  build: Fix out-of-source-tree docs build (fixes distcheck)
 
-    * gst/gl/gstglupload.c
-    Fix framerate in gl caps. (it was always set to 0/1)
-
-    * tests/examples/clutter/clutteractortee.c
-    Fix inversion about ROWS and COLS.
-    Move window because clutter does not.
-
-2008-11-29  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    setlocale("LC_NUMERIC", "C") due to an ATI shader compiler bug.
-    (reported to ATI dev)
-
-    *  gst-libs/gst/gl/gstgldisplay.c
-    Fix colorspace conversion on ATI/linux because I can see something now on
-    the ati 9800 pro graphic card.
-
-2008-11-23  Julien Isorce  <julien.isorce@gmail.com>
-
-    *  gst-libs/gst/gl/gstgldisplay.c
-    *  gst-libs/gst/gl/gstglwindow.h
-    *  gst-libs/gst/gl/gstglwindow_win32.c
-    *  gst-libs/gst/gl/gstglwindow_x11.c
-    Make cube and other related example work with x11.
-    This commit terminates the first acceptable gstglwindow_x11.c
-    implementation.
-    *  TODO
-    End of TODO task 9.
-
-2008-11-22  Julien Isorce  <julien.isorce@gmail.com>
-
-    *  gst-libs/gst/gl/gstgldisplay.c
-    *  gst-libs/gst/gl/gstgldisplay.h
-    *  gst-libs/gst/gl/gstglwindow.h
-    *  gst-libs/gst/gl/gstglwindow_win32.c
-    *  gst-libs/gst/gl/gstglwindow_x11.c
-    *  gst/gl/gstglimagesink.c
-    Remove set_visible, because it's now automatically done when
-    the first post redisplay comes.
-    Apply the same mecanism I did for _x11 implemantion: Make sure the gl
-    ressoures are destroyed before to destroy gl window.
-
-2008-11-21  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Implement set_xwindow_id (gst_gl_window_set_external_window_id).
-
-2008-11-21  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    We have a different x client connection for sender and receiver.
-    Make this first connection only when creating the gl window and not
-    each time a message is sent.
-
-2008-11-21  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/gl/gstgldisplay.h
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Make sure the gl ressoures are destroyed before to destroy gl window.
-
-2008-11-17  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Add a visible member in order to deal better with the first frame.
-    Indeed, it avoid to draw when receiving Expose events after mapping
-    window and before the gl context is ready.
-
-2008-11-16  Julien Isorce  <julien.isorce@gmail.com>
-
-    * unix/codeblocks/gstopengl/gstopengl.cbp
-    Revert last commit because the crash comes from a bug in libselinux.
-    download https://launchpad.net/ubuntu/hardy/+source/libselinux/2.0.55-0ubuntu4/+files/libselinux_2.0.55.orig.tar.gz
-    untar then apply this patch: http://www.gnome.org/~johan/libselinux2.patch
-    recompile libselinux.so.1 and install (sudo apt-get install libsepol1-dev, make and sudo make install)
-    Thx you Filippo :P
-    For more informations, see:
-    https://bugs.launchpad.net/bugs/237156
-    https://bugs.launchpad.net/bugs/275082
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Small updates about running var
-
-2008-11-16  Julien Isorce  <julien.isorce@gmail.com>
-
-    * unix/codeblocks/gstopengl/gstopengl.cbp
-    Waw, the SIGSEGV I was talking about in the last commits was
-    caused when linking libgstopengl.so with libgdk_pixbuf-2.0.so.
-    I got it after gst_deinit, in gstlaunch.c line 205 in g_usleep:
-    gst-launch-0.10 videotestsrc ! glimagesink
-    Définition du pipeline à PAUSED...
-    Le pipeline est en phase de PREROLL...
-    Le pipeline a terminé la phase PREROLL...
-    Passage du pipeline à la phase PLAYING...
-    New clock: GstSystemClock
-    EOS reçu de l'élément « pipeline0 ».
-    Execution ended after 2233552959 ns.
-    Définition du pipeline à PAUSED...
-    Définition du pipeline à READY (prêt)...
-    Définition du pipeline à NULL...
-    Libération du pipeline (FREE)...
-    Caught SIGSEGV accessing address 0x40
-    #0  0xb8024430 in __kernel_vsyscall ()
-    #1  0xb7e3b04b in waitpid () from /lib/tls/i686/cmov/libpthread.so.0
-    #2  0xb7e5a1a5 in IA__g_on_error_stack_trace (prg_name=0x804c80f "gst-launch")
-    #3  0x0804ae82 in fault_handler_sigaction (signum=11, si=0xbfd234fc,
-    #4  <signal handler called>
-    #5  0xb74d3974 in ?? () from /lib/libselinux.so.1
-    #6  0xb74ccb8e in ?? () from /lib/libselinux.so.1
-    #7  0xb74c51d8 in ?? () from /lib/libselinux.so.1
-    #8  0xb74d5350 in _fini () from /lib/libselinux.so.1
-    #9  0xb8018153 in ?? () from /lib/ld-linux.so.2
-    #10 0xb7cfdd69 in exit () from /lib/tls/i686/cmov/libc.so.6
-    #11 0xb7ce568d in __libc_start_main () from /lib/tls/i686/cmov/libc.so.6
-    #12 0x0804a1b1 in _start ()
-    Spinning.  Please run 'gdb gst-launch 26323' to continue debugging, Ctrl-C to quit, or Ctrl-\ to dump core.
-
-    It makes the debugger off in codeblocks, I mean I could not use breakpoints.
-    That's why I removed gldifferencematte, glpixbufoverlay and glbumper because they
-    are using gdkpixbuf and I have to not link with gdk_pixbuf-2.0 temporaly
-    to make libgstopengl.so work.
-
-    Anyway I got the same problem when making libgstopengl.so with autotools (./autogen.sh).
-    (I am on ubuntu intrepid)
-
-2008-11-15  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Remove a GMutex and a GCond. XNextEvent is now waiting from a disp
-    while we can call XSendEvent from other threads at the same time because
-    we send event from other disp.
-
-2008-11-15  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Better deal with Atoms.
-
-2008-11-14  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    Get ride of calling sleep in "gl thread X loop".
-    The following pipeline works:
-    gst-launch-0.10 videotestsrc ! tee name=t t. ! \
-    queue ! glimagesink t. ! \
-    queue ! glupload ! glfiltercube ! glimagesink
-    This if a proof (on X11) of having two gl context currents at the same time
-    (one gl context per gl thread)
-    Note there is still this SIGSEGV that I was talking about in the last commit.
-
-2008-11-13  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglwindow_x11.c
-    * gst/gl/gstglimagesink.c
-    Rewrite gstglwindow_x11.c because X is not thread safe.
-    FLow is ok but there is still a pthread segfault when closing the window,
-    but I cannot find where it's happen because error occurs after that the
-    glimagesink element is finalized.
-
-2008-11-09  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/gl/Makefile.am
-	* gst-libs/gst/gl/gstglwindow_x11.c
-	* gst/gl/Makefile.am
-	Works on linux but still some bugs.
-	Fix autotools  build.
-
-2008-11-09  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/gl/gstglwindow_x11.c
-  Implement send x custom message loop and quit x message loop.
-  Properly close the gl window.
-
-2008-11-05  Julien Isorce  <julien.isorce@gmail.com>
-
-	* configure.ac
-	* docs/plugins/Makefile.am
-	* gst-libs/gst/gl/Makefile.am
-	* gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstgldisplay.h
-	* gst-libs/gst/gl/gstglshader.c
-	* gst-libs/gst/gl/gstglwindow.h
-	* gst-libs/gst/gl/gstglwindow_x11.c
-	* gst/gl/gstglupload.c
-	* unix/codeblocks/gstopengl/gstopengl.cbp
-  Begin gstglwindow_x11.c implementation.
-
-2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
-
-	* tests/examples/generic/doublecube/main.cpp
-	Add a cube to have 2 cubes as title said (doublecube).
-	Now it works perfectly on this branch since we can have
-	now several opengl contexts current at the same time.
-	(one gl thread and one GstGLwindow, per GstGLDisplay)
-
-2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstglwindow_win32.c
-    Fix window closure when using gst xoverlay interface.
-    The tests gtkxoveraly and filterxoverlay work now on this branch:
-    (switching a lot of time bettween GST_STATES)
-
-2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/gl/gstglwindow.h
-	* gst-libs/gst/gl/gstglwindow_win32.c
-	Win32: Better handle when the external window (xoverlay interface)
-	is resizing.
-	Remove unused GstGLWindow methods.
-
-2008-10-28  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstgldisplay.h
-	* gst-libs/gst/gl/gstglwindow.h
-	* gst-libs/gst/gl/gstglwindow_win32.c
-	* gst/gl/gstglcolorscale.c
-	* gst/gl/gstglimagesink.c
-	* gst/gl/gstgltestsrc.c
-	* gst/gl/gstglupload.c
-    Win32: Re-implement supports for gst xoverlay interface.
-    Win32: All tests (pipelines, generic, gtk, and qt) almost work again
-    on this branch.
-
-2008-10-25  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstglshader.c
-	* gst-libs/gst/gl/gstglwindow.h
-	* gst-libs/gst/gl/gstglwindow_win32.c
-	Avoid a dead lock on gl window closure.
-
-2008-10-25  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstgldisplay.h
-	* gst-libs/gst/gl/gstglwindow_win32.c
-	* gst/gl/gstglcolorscale.c
-	* gst/gl/gstglimagesink.c
-	* gst/gl/gstgltestsrc.c
-	* gst/gl/gstglupload.c
-	Properly clean opengl context.
-	And gst-launch videotestsrc ! tee name=t ! queue ! glimagesink t. \
-	! queue ! glimagesink t. ! queue ! glimagesink  t. ! etc...
-	are re-working now.
-
-2008-10-24  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/gl/gstglwindow_win32.c
-    Re-up "when clicking on the cross".
-    Basic stuffs are working.
-    Next step is to re-up xoveraly support.
-
-2008-10-23  Julien Isorce  <julien.isorce@gmail.com>
-
-	* gst-libs/gst/CMakeLists.txt
-	* gst-libs/gst/Makefile.am
-	* gst-libs/gst/freeglut/CMakeLists.txt
-	* gst-libs/gst/freeglut/Makefile.am
-	* gst-libs/gst/freeglut/freeglut_callbacks.c
-	* gst-libs/gst/freeglut/freeglut_display.c
-	* gst-libs/gst/freeglut/freeglut_ext.h
-	* gst-libs/gst/freeglut/freeglut_init.c
-	* gst-libs/gst/freeglut/freeglut_internal.h
-	* gst-libs/gst/freeglut/freeglut_main.c
-	* gst-libs/gst/freeglut/freeglut_state.c
-	* gst-libs/gst/freeglut/freeglut_std.h
-	* gst-libs/gst/freeglut/freeglut_structure.c
-	* gst-libs/gst/freeglut/freeglut_window.c
-	* gst-libs/gst/freeglut/gstfreeglut.h
-	* gst-libs/gst/gl/CMakeLists.txt
-	* gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstgldisplay.h
-	* gst-libs/gst/gl/gstglwindow.h
-	* gst-libs/gst/gl/gstglwindow_win32.c
-	* win32/vs8/libgstopengl.vcproj
-	Remove gstfreeglut.
-	Begin gstglwindow.
-	There is now one gl thread per gldisplay
-	and one glwindow per gldisplay.
-	On win32, N distincts opengl context can be current in
-	N distincts threads.
-	A gldisplay owns one glwindow and one glthread.
-	The custom message loop in the gldisplay has been removed because
-	we now use the system main loop. (and this is a big improvement).
-	A lot of things are still not working (re-implemented).
-	(gstglwindow_X11.c in future commits)
-	And the buils are broken temporarly, except vs8.
-
-2008-10-15  Filippo Argiolas <filippo.argiolas@gmail.com>
+2009-07-13 12:08:11 +0100  Jan Schmidt <thaytan@noraisin.net>
 
 	* gst/gl/Makefile.am:
+	  build: Fix typo: gstglbumber.h -> gstglbumper.h
+
+2009-06-28 02:03:03 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* po/Makevars:
+	  use --no-location to avoid a msgmerge error
+
+2009-06-26 13:44:18 +0100  Jan Schmidt <thaytan@noraisin.net>
+
+	* common:
+	  Automatic update of common submodule
+	  From f810030 to 5845b63
+
+2009-06-25 21:32:38 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/gstgldeinterlace.c:
+	  same motion compensation
+
+2009-06-25 10:44:46 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  fix frozen unix CodeBlocks build
+
+2009-06-25 01:30:44 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/CMakeLists.txt:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstgldeinterlace.c:
+	* gst/gl/gstopengl.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	* win32/codeblock/gstopengl.cbp:
+	* win32/vs8/libgstopengl.vcproj:
+	* win32/vs9/libgstopengl.vcproj:
+	  fix and add gldeinterlace filter to the builds
+
+2009-06-24 17:58:35 +0200  julien <julien@KJIS.(none)>
+
+	* gst/gl/gstgldeinterlace.c:
+	* gst/gl/gstgldeinterlace.h:
+	  add a gldeinterlace filter
+	  Greedyh operation implemented using OpenGL Shading Language.
+	  We could add other operations later.
+	  Does some good results but still not as expected.
+	  That's why I do not add it yet to the build.
+
+2009-06-24 15:17:37 +0100  Jan Schmidt <jan.schmidt@sun.com>
+
+	* common:
+	  Automatic update of common submodule
+	  From f3bb51b to f810030
+
+2009-06-12 11:33:02 +0100  Jan Schmidt <thaytan@noraisin.net>
+
 	* gst-libs/gst/gl/gstgldisplay.c:
-	* gst/gl/effects/gstgleffectscurves.h:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstglfilterapp.c:
+	* gst/gl/gstglfiltercube.c:
+	* gst/gl/gstglfilterglass.c:
+	  fix typo
+	  Change GST_GL_DISPLAY_PROJECTION_PERSPECIVE to
+	  GST_GL_DISPLAY_PROJECTION_PERSPECTIVE.
+	  Re-indent a couple of files that needed it.
+
+2009-06-11 13:55:48 +0100  Jan Schmidt <thaytan@noraisin.net>
+
+	* common:
+	* docs/libs/Makefile.am:
+	* docs/plugins/Makefile.am:
+	  docs: bump common. Use upload-doc.mak instead of upload.mak
+
+2009-06-09 20:35:26 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/gstglimagesink.c:
+	* tests/examples/gtk/switchxoverlay/main.cpp:
+	  allow to switch xoverlay while being in paused state
+
+2009-06-07 20:19:03 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst-libs/gst/gl/gstglwindow_x11ES2.c:
+	  fix window position when using xoverlay
+	  x, y are the coordinates of the position inside
+	  the new parent window.
+	  Fixes #584877
+
+2009-06-06 15:05:10 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* configure.ac:
+	* tests/examples/gtk/switchxoverlay/Makefile.am:
+	  compile switchxoverlay example
+
+2009-06-06 14:34:57 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_winCE.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstglimagesink.h:
+	* tests/examples/gtk/Makefile.am:
+	* tests/examples/gtk/README:
+	* tests/examples/gtk/gtk.sln:
+	* tests/examples/gtk/switchxoverlay/Makefile.am:
+	* tests/examples/gtk/switchxoverlay/main.cpp:
+	* tests/examples/gtk/switchxoverlay/switchxoverlay.vcproj:
+	  can switch xoverlays while playing
+	  Fixes bug #584877
+	  Before this commit calling "gst_x_overlay_set_xwindow_id" more
+	  than one time, had no effect.
+	  It mainly affects the glimagesink implementation.
+	  But on win32 (and CE), some stuff has to be done to
+	  release the old parent.
+	  And add a switchxoverlay example where the user
+	  can click on left/right part of the main window to
+	  switch the xoverlay.
+
+2009-06-04 18:49:27 +0400  LRN <lrn1986@gmail.com>
+
+	* tests/examples/gtk/filternoxoverlay/Makefile.am:
+	  Add -base libs and cflags to filternoxoverlay. Fixes bug #584681
+
+2009-06-04 09:50:52 +0200  LRN <lrn1986@gmail.com>
+
+	* gst/gl/Makefile.am:
+	  Add gstvideo to glimagesink LIBADD. Fixes bug #584680
+
+2009-06-04 00:27:44 +0200  LRN <lrn1986@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	  fix miscast of a pointer in SetWindowLongPtr
+	  GCC 4.4.0 complains error: cast from pointer to integer of different size
+	  Fixes #584678.
+
+2009-05-26 17:21:05 +0100  Jan Schmidt <thaytan@noraisin.net>
+
+	* common:
+	  Automatic update of common submodule
+	  From 888e0a2 to c572721
+
+2009-05-22 10:21:46 +0100  Jan Schmidt <thaytan@noraisin.net>
+
+	* common:
+	  Automatic update of common submodule
+	  From 6ab11d1 to 888e0a2
+
+2009-05-12 11:41:19 +0200  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* gst-libs/gst/gl/Makefile.am:
+	  Fix linking by providing libtool the correct --tag parameter
+
+2009-05-11 18:06:18 +0200  julien <julien@KJIS.(none)>
+
+	* tests/examples/clutter/cluttershare.c:
+	  change rotation center in cluttershare example
+
+2009-05-10 11:17:21 +0200  Marc-Andre Lureau <marcandre.lureau@gmail.com>
+
+	* autogen.sh:
+	  Run libtoolize before aclocal
+	  This unbreaks the build in some cases. Fixes bug #582021
+
+2009-05-09 21:30:30 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/clutter/cluttershare.c:
+	  Use a more complex gst gl pipeline in the cluttershare example
+
+2009-05-09 21:26:42 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/clutter/cluttershare.c:
+	  Add a signal watch bus callback to check gst messages
+
+2009-05-09 20:51:36 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/clutter/cluttershare.c:
+	  Fix texture actor update due to a too strong thread locking.
+	  On linux, the GSource func attached to the clutter_threads_add_idle
+	  was not getting the cpu ressource periodically.
+	  Because the use of clutter_threads_enter/leave inside the fakesink
+	  callback seems to be too strong.
+	  So remove the use if clutter_threads_enter/leave in the fakesink callback.
+	  Then replace GQueue by GAsyncQueue to keep thread safe access to the
+	  communication queues between clutter and gst-gl.
+	  Call clutter_threads_add_idle with high priority.
+
+2009-05-09 15:44:09 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/clutter/cluttershare.c:
+	  Properly clean up pending gst gl buffers in cluttershare example
+
+2009-05-09 12:55:38 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* configure.ac:
+	* tests/examples/clutter/Makefile.am:
+	  cluttershare example does not requires X
+	  It works on win32 too.
+	  Note that the two other clutter examples (clutteractor and clutteractortee)
+	  are using GLX_EXT_texture_from_pixmap which is X specific.
+
+2009-05-08 21:43:56 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/clutter/cluttershare.c:
+	  Fix cluttershare example.
+	  It requires at least clutter 0.8.6 since lower clutter versions are
+	  not compatible with GL_TEXTURE_RECTANGLE_ARB.
+	  Remove use of ClutterEffectTemplace since it does not exist in
+	  clutter 0.9.
+
+2009-05-04 11:24:30 +0200  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* tests/examples/clutter/cluttershare.c:
+	  Cast to a GstBuffer* before passing to gst_buffer_unref to fix compiler warning
+
+2009-05-02 14:27:23 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/clutter/cluttershare.c:
+	  Use GQueue in the cluttershare example
+
+2009-04-30 23:40:38 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_winCE.c:
+	* tests/examples/clutter/cluttershare.c:
+	  Improve cluttershare example
+	  Use clutter_threads_API.
+	  When just using glupload from rgb, we have to be sure that
+	  the upload texture is not in use in our gst gl context.
+
+2009-04-21 22:14:51 +0100  Jan Schmidt <thaytan@noraisin.net>
+
+	* common:
+	  Automatic update of common submodule
+	  From b3941ea to 6ab11d1
+
+2009-04-20 18:32:24 -0400  Julien Isorce <julien.isorce@gmail.com>
+
+	* docs/libs/gst-plugins-gl-libs-docs.sgml:
+	* docs/libs/gst-plugins-gl-libs-sections.txt:
+	  fix gtk doc
+
+2009-04-20 18:17:54 -0400  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst-libs/gst/gl/gstglwindow_x11ES2.c:
+	  [x11/x11ES] fix some pointer cast warnings
+
+2009-04-20 23:55:51 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_cocoa.m:
+	  [cocoa] update since interface changed
+
+2009-04-20 23:48:15 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_winCE.c:
+	* gst/gl/gstglupload.c:
+	* gst/gl/gstglupload.h:
+	* tests/examples/clutter/cluttershare.c:
+	* tests/examples/gtk/filternoxoverlay/filternoxoverlay.vcproj:
+	* tests/examples/gtk/filterxoverlay/filterxoverlay.vcproj:
+	* tests/examples/gtk/fxtest/fxtest.vcproj:
+	* tests/examples/gtk/gtkxoverlay/gtkxoverlay.vcproj:
+	* tests/examples/gtk/pixbufdrop/pixbufdrop.vcproj:
+	* win32/vs9/libgstopengl.vcproj:
+	* winCE/vs9/libgstopengl.vcproj:
+	  [win32/winCE] fix some pointer cast warnings with mingw
+	  And turn off deprecated Wp64 msvc compiler option.
+
+2009-04-20 00:52:41 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstglimagesink.h:
+	* tests/pipelines:
+	  add force-aspect-ratio support
+
+2009-04-20 00:49:57 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/gtk/filterxoverlay/filterxoverlay.vcproj:
+	* tests/examples/gtk/fxtest/fxtest.vcproj:
+	* tests/examples/gtk/gtkxoverlay/gtkxoverlay.vcproj:
+	* tests/examples/gtk/pixbufdrop/pixbufdrop.vcproj:
+	  fix vs9 build of gtk examples
+
+2009-04-18 16:08:23 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/clutter/Makefile.am:
+	* tests/examples/clutter/cluttershare.c:
+	  just gst-indent and C90 on cluttershare example
+
+2009-04-18 08:40:51 -0400  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst-libs/gst/gl/gstglwindow_x11ES2.c:
+	* gst/gl/gstglupload.c:
+	  indent and fix some compiler warnings
+
+2009-04-18 13:57:44 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_cocoa.m:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_winCE.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst-libs/gst/gl/gstglwindow_x11ES2.c:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstglupload.c:
+	* gst/gl/gstglupload.h:
+	* tests/examples/clutter/cluttershare.c:
+	* tests/examples/clutter/cluttershare.cbp:
+	  Can now share textures with an external gl context
+	  The external opengl context must be specify when creating
+	  our OpenGL context (glx) or just after (wgl).
+	  When calling glXCreateContext or wglShareLists, the
+	  external opengl context must not be current.
+	  Then our gl context can be current in the gl thread while
+	  the external gl context is current in an other thread.
+	  See tests/examples/clutter/cluttershare.c
+
+2009-04-14 11:24:40 -0700  David Schleef <ds@schleef.org>
+
+	* configure.ac:
+	* tests/examples/gtk/Makefile.am:
+	  Fix Objective C compile problems
+	  Fixes #578939
+
+2009-04-12 22:24:06 -0700  David Schleef <ds@hutch-2.local>
+
+	* configure.ac:
+	* gst-libs/gst/gl/Makefile.am:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_cocoa.m:
+	  Build for Cocoa on darwin, with various fixes
+
+2009-04-12 20:03:30 -0700  David Schleef <ds@hutch-2.local>
+
+	* tests/examples/gtk/Makefile.am:
+	* tests/examples/gtk/filternoxoverlay/main.cpp:
+	* tests/examples/gtk/filterxoverlay/Makefile.am:
+	* tests/examples/gtk/filterxoverlay/main.cpp:
+	* tests/examples/gtk/fxtest/Makefile.am:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	* tests/examples/gtk/gstgtk.c:
+	* tests/examples/gtk/gstgtk.h:
+	* tests/examples/gtk/gtkxoverlay/Makefile.am:
+	* tests/examples/gtk/gtkxoverlay/main.cpp:
+	  Convert gtk examples to use helper library
+	  Helper lib implements gst-gtk glue on all platforms
+
+2009-04-10 20:42:59 +0200  Julien <julien@Julien-Kubuntu.(none)>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  fix init FBO's texture attachment on ES 2.0
+
+2009-04-10 20:30:46 +0200  Julien <julien@Julien-Kubuntu.(none)>
+
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstgles2.h:
+	* gst-libs/gst/gl/gstglwindow_winCE.c:
+	* gst-libs/gst/gl/gstglwindow_x11ES2.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	* unixES/codeblocks/gstopengl.cbp:
+	* winCE/vs9/libgstopengl.vcproj:
+	  add X backend for OpenGL ES 2.0
+
+2009-04-04 21:20:07 +0300  Felipe Contreras <felipe.contreras@gmail.com>
+
+	* common:
+	  Automatic update of common submodule
+	  From d0ea89e to b3941ea
+
+2009-04-04 14:55:35 +0200  Edward Hervey <bilboed@bilboed.com>
+
+	* common:
+	  Automatic update of common submodule
+	  From f8b3d91 to d0ea89e
+
+2009-03-29 15:40:16 +0000  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* tests/examples/clutter/clutteractortee.c:
+	  Restore glimagesink instead of ximagesink
+	  Partially revert previous commit. It's not an issue with glimagesink
+	  Xoverlay interface. It's always the same intel bug with direct
+	  rendering redirection (the one that affects each opengl application
+	  with compositing managers). It works fine with DRI2 and UXA
+	  acceleration. Still leaving effects disabled because I'm testing intel
+	  hardware that doesn't support FBOs.
+
+2009-03-29 09:01:55 +0000  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* tests/examples/clutter/clutteractortee.c:
+	  Temporary disable glimagesink in clutteractortee
+	  GLimagesink XOverlay interface doesn't seem to work with composite
+	  redirection on intel (and I believe ati too). Windows aren't
+	  redirected offscreen at all.  This commit just shows that the example
+	  correcty works with ximagesink. The most evident difference I see is
+	  that glimagesink reparents the xoverlay window into its own while both
+	  x and xvimagesink destroy their window and render directly to the
+	  xoverlay one.
+
+2009-03-29 08:51:16 +0000  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* tests/examples/clutter/clutteractortee.c:
+	  Remove redundant XMoveWindow call
+	  Revert the "move windows" thing from commit
+	  175f7a707bc922f3facc63e7d9b6d01f9bb6b1b0
+	  Windows are offscreen who cares about their position? If you see the
+	  windows something is going wrong with composite redirection.
+
+2009-03-18 22:46:56 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  [download YUY2/UYVY] fix a regression
+	  The call to glLoadIdentity was removed by mistake during
+	  OpenGL ES 2.0 integration.
+
+2009-03-15 14:48:19 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstgles2.h:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglshader.h:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_winCE.c:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstglfiltercube.c:
+	* gst/gl/gstglfiltercube.h:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstglupload.c:
+	* gst/gl/gstopengl.c:
+	* winCE/common/config.h:
+	* winCE/common/config.h.in:
+	* winCE/vs9/libgstopengl.sln:
+	* winCE/vs9/libgstopengl.vcproj:
+	  add OpenGL ES 2.x support.
+	  In OpenGL 2.x for Embedded System, a lot of basic scene/draw functions
+	  have been removed. It means that everything is made using vertex and
+	  fragment shaders.
+	  I have also added a gstglwindow backend for winCE that uses EGL
+	  (Native Platform Graphics Intercace) (which is a full part of
+	  OpenGL ES specification). It remove the use of wgl/glx functions.
+
+2009-03-09 23:14:45 +0000  Jan Schmidt <thaytan@noraisin.net>
+
+	* common:
+	  Automatic update of common submodule
+	  From 7032163 to f8b3d91
+
+2009-03-08 12:07:19 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* common:
+	  Automatic update of common submodule
+	  From ffa738d to 7032163
+
+2009-03-08 11:22:54 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* common:
+	  Automatic update of common submodule
+	  From 3f13e4e to ffa738d
+
+2009-03-07 11:48:27 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* common:
+	  Automatic update of common submodule
+	  From 3c7456b to 3f13e4e
+
+2009-03-07 10:48:42 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* common:
+	  Automatic update of common submodule
+	  From a6ce5c6 to 3c7456b
+
+2009-03-07 03:17:04 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/README:
+	* tests/examples/cocoa/README:
+	* tests/examples/cocoa/videoxoverlay/GNUmakefile.gnustep:
+	* tests/examples/cocoa/videoxoverlay/main.m:
+	  add Cocoa xoverlay interface example
+
+2009-03-07 03:13:38 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_cocoa.m:
+	  fix position and content rect
+
+2009-03-06 22:43:41 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* tests/examples/qt/mousexoverlay/mousexoverlay.sln:
+	* tests/examples/qt/mousexoverlay/mousexoverlay.vcproj:
+	  [win32 backend] fix transmition message to the parent.
+	  The Qt mouvexoverlay example shows how to rotate the cube
+	  by moving (+click) the mouve over a qwidget using xoverlay
+	  interface.
+
+2009-03-04 01:09:00 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	  Merge branch 'master' of ssh://cap@git.freedesktop.org/git/gstreamer/gst-plugins-gl
+
+2009-03-04 01:08:30 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/qt/mousexoverlay/mousexoverlay.pro:
+	* tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.pro:
+	* tests/examples/qt/videoxoverlay/videoxoverlay.pro:
+	  fix Qt (4.5.0 LGPL) examples .pro build on win32
+
+2009-03-02 15:20:15 +0100  Edward Hervey <bilboed@bilboed.com>
+
+	* .gitignore:
+	* po/.gitignore:
+	* tests/check/.gitignore:
+	* tests/examples/.gitignore:
+	  Add more files to ignore
+
+2009-02-28 01:50:20 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* GNUmakefile.gnustep:
+	* INSTALL:
+	  fix GNUstep build
+
+2009-02-26 17:45:21 -0500  Julien Isorce <julien.isorce@gmail.com>
+
+	* GNUmakefile:
+	* GNUmakefile.gnustep:
+	* gst-libs/gst/gl/GNUmakefile:
+	* gst-libs/gst/gl/GNUmakefile.gnustep:
+	* gst/gl/GNUmakefile:
+	* gst/gl/GNUmakefile.gnustep:
+	* gst/gl/effects/GNUmakefile:
+	* gst/gl/effects/GNUmakefile.gnustep:
+	  rename GNUmakefile(s) to GNUmakefile(s).gnustep
+
+2009-02-26 01:06:58 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* GNUmakefile:
+	* gst-libs/gst/gl/GNUmakefile:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_cocoa.m:
+	* gst/gl/GNUmakefile:
+	  implement gstglwindow for Cocoa (MacOS and GNUstep)
+
+2009-02-25 11:33:36 +0000  Jan Schmidt <thaytan@noraisin.net>
+
+	* common:
+	  Automatic update of common submodule
+	  From 9cf8c9b to a6ce5c6
+
+2009-02-25 00:39:48 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* CMakeLists.txt:
+	* gst/gl/CMakeLists.txt:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	* win32/codeblock/gstopengl.cbp:
+	* win32/vs8/libgstopengl.vcproj:
+	* win32/vs9/libgstopengl.vcproj:
+	  remove some unused HAVE_LIBPNG: libpng is a required package
+
+2009-02-25 00:12:12 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* GNUmakefile:
+	* INSTALL:
+	* gst-libs/gst/gl/GNUmakefile:
+	* gst/gl/CMakeLists.txt:
+	* gst/gl/GNUmakefile:
+	* gst/gl/effects/GNUmakefile:
+	  add GNUstep build
+
+2009-02-23 11:07:22 -0800  David Schleef <ds@schleef.org>
+
+	* pkgconfig/gstreamer-gl-uninstalled.pc.in:
+	  Add srcdir to includes for out-of-source builds
+	  When you use gstreamer uninstalled and build outside
+	  the source tree, the includes need to be specified for
+	  both the source tree and the build tree.
+
+2009-02-23 13:39:29 +0200  Stefan Kost <ensonic@users.sf.net>
+
+	* docs/plugins/gst-plugins-gl-plugins.args:
+	* docs/plugins/gst-plugins-gl-plugins.hierarchy:
+	* docs/plugins/inspect/plugin-opengl.xml:
+	* gst/gl/gstglfiltercube.c:
+	  indent: don't use tabs inside property descriptions
+
+2009-02-23 13:35:48 +0200  Stefan Kost <ensonic@users.sf.net>
+
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/gstgloverlay.c:
+	  build: include stdlib.h when using free().
+
+2009-02-22 19:36:40 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstgltestsrc.c:
+	  Cast GstBuffer subclasses to GstBuffer * before passing to gst_buffer_unref()
+
+2009-02-22 16:05:01 +0000  Jan Schmidt <thaytan@noraisin.net>
+
+	* common:
+	  Automatic update of common submodule
+	  From 5d7c9cc to 9cf8c9b
+
+2009-02-21 11:14:45 -0800  David Schleef <ds@schleef.org>
+
+	* common:
+	  Automatic update of common submodule
+	  From 80c627d to 5d7c9cc
+
+2009-02-10 22:39:14 -0800  David Schleef <ds@schleef.org>
+
+	* gst-libs/gst/gl/gstglbuffer.c:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/effects/gstgleffectbulge.c:
+	* gst/gl/effects/gstgleffectfisheye.c:
+	* gst/gl/effects/gstgleffectglow.c:
+	* gst/gl/effects/gstgleffectidentity.c:
+	* gst/gl/effects/gstgleffectlumatocurve.c:
+	* gst/gl/effects/gstgleffectmirror.c:
+	* gst/gl/effects/gstgleffectrgbtocurve.c:
+	* gst/gl/effects/gstgleffectsin.c:
+	* gst/gl/effects/gstgleffectsquare.c:
+	* gst/gl/effects/gstgleffectsqueeze.c:
 	* gst/gl/effects/gstgleffectssources.c:
-	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/effects/gstgleffectstretch.c:
+	* gst/gl/effects/gstgleffecttunnel.c:
+	* gst/gl/effects/gstgleffecttwirl.c:
 	* gst/gl/effects/gstgleffectxray.c:
+	* gst/gl/gltestsrc.c:
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstglfilterapp.c:
+	* gst/gl/gstglfilterblur.c:
+	* gst/gl/gstglfiltercube.c:
+	* gst/gl/gstglfilterglass.c:
+	* gst/gl/gstglfilterlaplacian.c:
 	* gst/gl/gstglfiltersobel.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstgloverlay.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstglupload.c:
+	* gst/gl/gstopengl.c:
+	* tests/examples/clutter/clutteractor.c:
+	* tests/examples/clutter/clutteractortee.c:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	  Global reindent
+	  Indent parameters:
+	  INDENT_PARAMETERS="--braces-on-if-line \
+	  --case-brace-indentation0 \
+	  --case-indentation2 \
+	  --braces-after-struct-decl-line \
+	  --line-length80 \
+	  --no-tabs \
+	  --cuddle-else \
+	  --dont-line-up-parentheses \
+	  --honour-newlines \
+	  --continuation-indentation4 \
+	  --tab-size8 \
+	  --indent-level2"
+
+2009-02-03 18:58:00 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* configure.ac:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Replay: Fix callbacks passed over XEvents on 64 bit architectures
+	  Althought the XEvent's xclient.data.l array is an array of
+	  longs they will be constrained to 32 bit by the X11 protocol.
+	  On 64 bit architectures use two elements of the array to store
+	  one pointer.
+	  This fixes segfaults that happen at least for every example
+	  on startup.
+
+2009-02-05 13:13:51 -0800  David Schleef <ds@schleef.org>
+
+	* configure.ac:
+	* docs/plugins/inspect/plugin-opengl.xml:
+	* gst/gl/CMakeLists.txt:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstgloverlay.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	* gst/gl/gstopengl.c:
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	* win32/codeblock/gstopengl.cbp:
+	* win32/vs8/libgstopengl.vcproj:
+	* win32/vs9/libgstopengl.vcproj:
+	  Rename glpixbufoverlay to gloverlay
+
+2009-02-04 16:57:14 -0800  David Schleef <ds@schleef.org>
+
+	* gst/gl/Makefile.am:
+	* gst/gl/gstglpixbufoverlay.c:
+	* gst/gl/gstopengl.c:
+	* tests/examples/gtk/fxtest/Makefile.am:
+	  Remove conditionals on gdkpixbuf
+
+2009-02-08 01:50:10 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* CMakeLists.txt:
+	* cmake/modules/FindGlib2.cmake:
+	* cmake/modules/FindGstreamer.cmake:
+	* cmake/modules/FindLibpng.cmake:
+	* cmake/modules/FindZlib.cmake:
+	* gst-libs/gst/gl/CMakeLists.txt:
+	* gst/gl/CMakeLists.txt:
+	* win32/codeblock/gstopengl.cbp:
+	  fix CMake build and frozen CodeBlocks build
+
+2009-02-07 21:19:24 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* CMakeLists.txt:
+	* cmake/modules/FindLibpng.cmake:
+	* gst/gl/CMakeLists.txt:
+	  CMake build now checks for libpng
+
+2009-02-07 17:16:51 +0100  Julien <julien@Julien-Kubuntu.(none)>
+
+	* tests/examples/Makefile.am:
+	  compile examples in gtk dir if HAVE_GTK
+
+2009-02-05 19:59:27 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	* gst/gl/gstopengl.c:
+	* win32/vs9/libgstopengl.vcproj:
+	  only load RGBA files.png
+
+2009-02-04 16:18:15 -0800  David Schleef <ds@schleef.org>
+
+	* configure.ac:
+	* gst/gl/Makefile.am:
+	  Add libpng dependency
+
+2009-01-26 16:30:22 -0800  David Schleef <ds@schleef.org>
+
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	  Fix some warnings
+
+2009-01-24 00:50:46 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/generic/cube/cube.vcproj:
+	* tests/examples/generic/cubeyuv/cubeyuv.vcproj:
+	* tests/examples/generic/doublecube/doublecube.vcproj:
+	* tests/examples/generic/generic.sln:
+	* tests/examples/generic/recordgraphic/recordgraphic.vcproj:
+	* win32/vs9/libgstopengl.vcproj:
+	  vs8 -> vs9 about gtk examples
+
+2009-01-23 02:04:23 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	* tests/examples/gtk/filternoxoverlay/filternoxoverlay.vcproj:
+	* tests/examples/gtk/filterxoverlay/filterxoverlay.vcproj:
+	* tests/examples/gtk/fxtest/fxtest.vcproj:
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	* tests/examples/gtk/gtk.sln:
+	* tests/examples/gtk/gtkxoverlay/gtkxoverlay.vcproj:
+	* tests/examples/gtk/pixbufdrop/pixbufdrop.vcproj:
+	* win32/vs9/libgstopengl.vcproj:
+	  depends on libpng instead of gdk_pixbuf
+
+2009-01-22 02:19:31 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	* gst/gl/gstopengl.c:
+	  use libpng in glpixbufoverlay filter.
+
+2009-01-22 01:16:38 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstglbumper.h:
+	* win32/vs9/libgstopengl.vcproj:
+	  use libpng to load the normal map instead of using gdkpixbuf
+
+2009-02-10 21:57:31 -0800  David Schleef <ds@schleef.org>
+
+	* gst-libs/gst/gl/gstglbuffer.c:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/effects/gstgleffectbulge.c:
+	* gst/gl/effects/gstgleffectfisheye.c:
+	* gst/gl/effects/gstgleffectglow.c:
+	* gst/gl/effects/gstgleffectidentity.c:
+	* gst/gl/effects/gstgleffectlumatocurve.c:
+	* gst/gl/effects/gstgleffectmirror.c:
+	* gst/gl/effects/gstgleffectrgbtocurve.c:
+	* gst/gl/effects/gstgleffectsin.c:
+	* gst/gl/effects/gstgleffectsquare.c:
+	* gst/gl/effects/gstgleffectsqueeze.c:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectstretch.c:
+	* gst/gl/effects/gstgleffecttunnel.c:
+	* gst/gl/effects/gstgleffecttwirl.c:
+	* gst/gl/effects/gstgleffectxray.c:
+	* gst/gl/gltestsrc.c:
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstglfilterapp.c:
+	* gst/gl/gstglfilterblur.c:
+	* gst/gl/gstglfiltercube.c:
+	* gst/gl/gstglfilterglass.c:
+	* gst/gl/gstglfilterlaplacian.c:
+	* gst/gl/gstglfiltersobel.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstglupload.c:
+	* gst/gl/gstopengl.c:
+	* tests/examples/clutter/clutteractor.c:
+	* tests/examples/clutter/clutteractortee.c:
+	* tests/examples/generic/cube/main.cpp:
+	* tests/examples/generic/cubeyuv/main.cpp:
+	* tests/examples/generic/doublecube/main.cpp:
+	* tests/examples/generic/recordgraphic/main.cpp:
+	* tests/examples/gtk/filternoxoverlay/main.cpp:
+	* tests/examples/gtk/filterxoverlay/main.cpp:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	* tests/examples/gtk/gtkxoverlay/main.cpp:
+	* tests/examples/qt/mousexoverlay/gstthread.cpp:
+	* tests/examples/qt/mousexoverlay/main.cpp:
+	* tests/examples/qt/mousexoverlay/pipeline.cpp:
+	* tests/examples/qt/mousexoverlay/qrenderer.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/gstthread.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/main.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/pipeline.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/qglrenderer.cpp:
+	* tests/examples/qt/videoxoverlay/gstthread.cpp:
+	* tests/examples/qt/videoxoverlay/main.cpp:
+	* tests/examples/qt/videoxoverlay/pipeline.cpp:
+	* tests/examples/qt/videoxoverlay/qrenderer.cpp:
+	  Revert "Fix indention"
+	  This reverts commit 96e4ab18c2cf9876f6c031b9aba6282d0bd45a93.
+	  You should have asked first.  And you would have been told "no",
+	  because it causes people on development branches to do a huge
+	  amount of extra work.
+
+2009-02-10 21:57:08 -0800  David Schleef <ds@schleef.org>
+
+	* configure.ac:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Revert "Fix callbacks passed over XEvents on 64 bit architectures"
+	  This reverts commit 280771d09b58617b27201027de0e1194da376e72.
+
+2009-02-09 12:07:11 +0100  Edward Hervey <bilboed@bilboed.com>
+
+	* common:
+	  Bump revision to use for common submodule.
+
+2009-02-03 18:58:00 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* configure.ac:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Fix callbacks passed over XEvents on 64 bit architectures
+	  Althought the XEvent's xclient.data.l array is an array of
+	  longs they will be constrained to 32 bit by the X11 protocol.
+	  On 64 bit architectures use two elements of the array to store
+	  one pointer.
+	  This fixes segfaults that happen at least for every example
+	  on startup.
+
+2009-02-03 18:33:36 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* gst-libs/gst/gl/gstglbuffer.c:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/effects/gstgleffectbulge.c:
+	* gst/gl/effects/gstgleffectfisheye.c:
+	* gst/gl/effects/gstgleffectglow.c:
+	* gst/gl/effects/gstgleffectidentity.c:
+	* gst/gl/effects/gstgleffectlumatocurve.c:
+	* gst/gl/effects/gstgleffectmirror.c:
+	* gst/gl/effects/gstgleffectrgbtocurve.c:
+	* gst/gl/effects/gstgleffectsin.c:
+	* gst/gl/effects/gstgleffectsquare.c:
+	* gst/gl/effects/gstgleffectsqueeze.c:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectstretch.c:
+	* gst/gl/effects/gstgleffecttunnel.c:
+	* gst/gl/effects/gstgleffecttwirl.c:
+	* gst/gl/effects/gstgleffectxray.c:
+	* gst/gl/gltestsrc.c:
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstglfilterapp.c:
+	* gst/gl/gstglfilterblur.c:
+	* gst/gl/gstglfiltercube.c:
+	* gst/gl/gstglfilterglass.c:
+	* gst/gl/gstglfilterlaplacian.c:
+	* gst/gl/gstglfiltersobel.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstglupload.c:
+	* gst/gl/gstopengl.c:
+	* tests/examples/clutter/clutteractor.c:
+	* tests/examples/clutter/clutteractortee.c:
+	* tests/examples/generic/cube/main.cpp:
+	* tests/examples/generic/cubeyuv/main.cpp:
+	* tests/examples/generic/doublecube/main.cpp:
+	* tests/examples/generic/recordgraphic/main.cpp:
+	* tests/examples/gtk/filternoxoverlay/main.cpp:
+	* tests/examples/gtk/filterxoverlay/main.cpp:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	* tests/examples/gtk/gtkxoverlay/main.cpp:
+	* tests/examples/qt/mousexoverlay/gstthread.cpp:
+	* tests/examples/qt/mousexoverlay/main.cpp:
+	* tests/examples/qt/mousexoverlay/pipeline.cpp:
+	* tests/examples/qt/mousexoverlay/qrenderer.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/gstthread.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/main.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/pipeline.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/qglrenderer.cpp:
+	* tests/examples/qt/videoxoverlay/gstthread.cpp:
+	* tests/examples/qt/videoxoverlay/main.cpp:
+	* tests/examples/qt/videoxoverlay/pipeline.cpp:
+	* tests/examples/qt/videoxoverlay/qrenderer.cpp:
+	  Fix indention
+
+2009-02-03 11:50:12 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* Makefile.am:
+	* configure.ac:
+	* ext/Makefile.am:
+	* sys/Makefile.am:
+	* tools/Makefile.am:
+	  Remove empty directories
+
+2009-02-03 11:45:11 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* configure.ac:
+	* tests/examples/clutter/Makefile.am:
+	* tests/examples/generic/cube/Makefile.am:
+	* tests/examples/generic/cubeyuv/Makefile.am:
+	* tests/examples/generic/doublecube/Makefile.am:
+	* tests/examples/gtk/filternoxoverlay/Makefile.am:
+	* tests/examples/gtk/filterxoverlay/Makefile.am:
+	* tests/examples/gtk/fxtest/Makefile.am:
+	* tests/examples/gtk/gtkxoverlay/Makefile.am:
+	  Fix CFLAGS, add CXXFLAGS and correctly link to the required libraries
+
+2009-02-03 11:23:06 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Fix format string compiler warnings by using G_GUINT64_FORMAT
+
+2009-02-03 11:20:38 +0100  Sebastian Dröge <sebastian.droege@collabora.co.uk>
+
+	* configure.ac:
+	  Add proper checks for OpenGL, GLU and GLEW
+
+2009-01-31 18:28:34 +0200  Stefan Kost <ensonic@users.sf.net>
+
+	* docs/plugins/gst-plugins-gl-plugins.args:
+	* docs/plugins/gst-plugins-gl-plugins.prerequisites:
+	  Update docs.
+
+2009-01-31 18:26:52 +0200  Stefan Kost <ensonic@users.sf.net>
+
+	* docs/libs/gst-plugins-gl-libs-docs.sgml:
+	* docs/plugins/gst-plugins-gl-plugins-docs.sgml:
+	  Add releaseinfo with online url.
+
+2009-01-30 08:44:50 +0100  Edward Hervey <bilboed@bilboed.com>
+
+	* .gitmodules:
+	* autogen.sh:
+	* common:
+	  Add common submodule and use pre-commit client-side hook
+
+2009-01-17 19:39:36 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* INSTALL:
+	* win32/vs9/libgstopengl.sln:
+	* win32/vs9/libgstopengl.vcproj:
+	  add vs9 build project (Visual Studio 2008 and vc9)
+
+2009-01-15 18:39:48 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* TODO:
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstgldifferencematte.c:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstglfilterblur.c:
+	* gst/gl/gstglfilterlaplacian.c:
+	* gst/gl/gstglfiltersobel.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	  minimal gtk doc
+
+2009-01-09 17:47:46 -0800  David Schleef <ds@hutch-2.local>
+
+	* configure.ac:
+	  Add OpenGL hard-code for OS/X
+
+2009-01-09 17:46:01 -0800  David Schleef <ds@hutch-2.local>
+
+	* gst/gl/effects/gstgleffectssources.h:
+	  Add 'extern' for data symbols in headers
+
+2009-01-09 17:20:25 -0800  David Schleef <ds@schleef.org>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  Add check for GLEW_EXT_framebuffer_object
+
+2009-01-08 19:18:47 -0800  David Schleef <ds@schleef.org>
+
+	* configure.ac:
+	* gst-libs/gst/gl/Makefile.am:
+	  Set GL_LIBS correctly in configure.ac
+	  This doesn't detect the existence of libraries, which needs to
+	  be fixed.
+
+2009-01-07 19:11:01 -0800  David Schleef <ds@schleef.org>
+
+	* configure.ac:
+	* gst-libs/gst/gl/Makefile.am:
+	* gst/gl/Makefile.am:
+	* tests/examples/clutter/Makefile.am:
+	* tests/examples/generic/cube/Makefile.am:
+	* tests/examples/generic/cubeyuv/Makefile.am:
+	* tests/examples/generic/doublecube/Makefile.am:
+	* tests/examples/gtk/filternoxoverlay/Makefile.am:
+	* tests/examples/gtk/filterxoverlay/Makefile.am:
+	* tests/examples/gtk/fxtest/Makefile.am:
+	* tests/examples/gtk/gtkxoverlay/Makefile.am:
+	  build fixes for Windows libraries
+
+2008-12-14 12:06:06 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  add more debug ouputs about GLSL and mesa
+
+2008-12-13 19:36:32 -0500  julien <julien@julien-desktop.(none)>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  fix a regression about glXChooseVisual which failed when using mesa, so attributes must be less restrictives.
+
+2008-12-13 00:50:16 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	  [win32] Register window class in gst_gl_window_class_init
+
+2008-12-08 00:52:19 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* docs/libgstopengl.pdf:
+	* docs/libgstopengl.vsd:
+	  update pdf about the new internal functionning of gst-gl
+
+2008-12-07 03:25:59 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/gstglupload.c:
+	* tests/examples/clutter/clutteractortee.c:
+	  fix gl framerate in gst caps. Consider position in xoverlay. Fix inversion bettween COLS and ROWS, and move windows.
+
+2008-12-06 01:36:22 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* docs/libs/Makefile.am:
+	  remove old references to freeglut in doc Makefile
+
+2008-11-29 22:16:44 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  workaround about the ATI shader compiler on linux (setlocale)
+
+2008-11-25 01:01:01 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* tests/examples/generic/cube/main.cpp:
+	  better result in cube and doublecube example. And some clean up debug and comments
+
+2008-11-23 16:14:26 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/CMakeLists.txt:
+	  update CMake build
+
+2008-11-23 16:04:27 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Make cube example work on x11. Finish TODO task 9.
+
+2008-11-22 16:43:24 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/gstglimagesink.c:
+	  Remove set_visible, because it's now automatically done when the first post redisplay comes.
+
+2008-11-22 00:51:30 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  finish set_xwindow_id (gst_gl_window_set_external_win_id): child is resized at the same time as the parent is.
+
+2008-11-21 20:51:48 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Implement set_xwindow_id (gst_gl_window_set_external_window_id).
+
+2008-11-21 19:37:21 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  open x client connection for sender only at start up
+
+2008-11-21 19:11:11 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  better deal with last pending custom cb and destroy_context_cb
+
+2008-11-21 01:31:19 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Make sure the gl ressoures are destroyed before to destroy gl window
+
+2008-11-20 01:24:10 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  add some other debug outputs and checks
+
+2008-11-19 00:07:22 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/gstglimagesink.c:
+	  add some debug outputs about Visual and XVisualInfo
+
+2008-11-17 01:04:32 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  add a visible member to deal better with the first expose events
+
+2008-11-16 16:57:00 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  revert last commit because the crash comes from libselinux
+
+2008-11-16 04:04:52 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  remove gdkpixbuf, from codeblocks unix frozen build, which causes a segfault
+
+2008-11-15 23:32:04 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  fix use of different Display structures which point on the same display name
+
+2008-11-15 18:51:44 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Better deal with XNextEvent and XSendEvent
+
+2008-11-15 02:24:07 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Better deal with Atoms
+
+2008-11-14 01:00:33 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  Get ride of calling sleep in gl thread X loop
+
+2008-11-13 02:05:33 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  secure close when clicking on the cross
+
+2008-11-13 01:29:10 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  CRLF -> LF
+
+2008-11-13 01:23:51 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/gstglimagesink.c:
+	  Rewrite gstglwindow_x11.c because X API is not thread safe.
+
+2008-11-11 03:19:51 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  discard x custom messages which are of date
+
+2008-11-09 23:23:30 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/Makefile.am:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/Makefile.am:
+	  Works on linux but still some bugs. Fix autotools  build.
+
+2008-11-09 22:14:29 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  implement quit x message loop
+
+2008-11-09 02:44:25 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  try to make XSendEvent blocker (as win32 SendMessage is)
+
+2008-11-06 23:41:11 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  continue x implementation (but still not tested)
+
+2008-11-06 01:28:26 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	  setup x message loop
+
+2008-11-05 02:06:33 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* configure.ac:
+	* docs/plugins/Makefile.am:
+	* gst-libs/gst/gl/Makefile.am:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_x11.c:
+	* gst/gl/gstglupload.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  begin gstglwindow_x11.c implementation
+
+2008-10-29 23:53:22 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/CMakeLists.txt:
+	* win32/codeblock/gstopengl.cbp:
+	  fix CMake an CodeBlocks builds
+
+2008-10-28 22:39:16 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* tests/examples/generic/doublecube/main.cpp:
+	  Add a cube to have 2 cubes as title said (doublecube)
+
+2008-10-28 21:44:09 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	  fix window closure when using gst xoverlay interface
+
+2008-10-28 01:38:45 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	  Better handle when the parent window is resizing, and cleanup some code
+
+2008-10-28 00:22:27 +0100  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstglupload.c:
+	  win32: re-implement supports for gst xoverlay interface, on this branch
+
+2008-10-25 16:18:23 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	  avoid a dead lock on window closure
+
+2008-10-25 02:03:16 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstglupload.c:
+	  Properly clean OpenGL contexts
+
+2008-10-24 01:39:00 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	  win32: basic stuffs are working now on this branch with this new deep design (gstglwindow)
+
+2008-10-23 01:40:52 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/CMakeLists.txt:
+	* gst-libs/gst/Makefile.am:
+	* gst-libs/gst/freeglut/CMakeLists.txt:
+	* gst-libs/gst/freeglut/Makefile.am:
+	* gst-libs/gst/freeglut/freeglut_callbacks.c:
+	* gst-libs/gst/freeglut/freeglut_display.c:
+	* gst-libs/gst/freeglut/freeglut_ext.h:
+	* gst-libs/gst/freeglut/freeglut_init.c:
+	* gst-libs/gst/freeglut/freeglut_internal.h:
+	* gst-libs/gst/freeglut/freeglut_main.c:
+	* gst-libs/gst/freeglut/freeglut_state.c:
+	* gst-libs/gst/freeglut/freeglut_std.h:
+	* gst-libs/gst/freeglut/freeglut_structure.c:
+	* gst-libs/gst/freeglut/freeglut_window.c:
+	* gst-libs/gst/freeglut/gstfreeglut.h:
+	* gst-libs/gst/gl/CMakeLists.txt:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglwindow.h:
+	* gst-libs/gst/gl/gstglwindow_win32.c:
+	* win32/vs8/libgstopengl.vcproj:
+	  begin GstGLWindow in order to totally remove gstfreeglut
+
+2008-10-16 23:47:01 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/CMakeLists.txt:
+	* gst/gl/effects/gstgleffectxray.c:
+	* win32/codeblock/gstopengl.cbp:
+	* win32/vs8/libgstopengl.vcproj:
+	  fix msvc warnings and update CMake build, win32 CodeBlocks build and vs8 build
+
+2008-10-15 17:42:07 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
+	  ChangeLog for previous merge (forgot it, sorry)
+
+2008-10-15 16:18:22 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectscurves.h:
+	* gst/gl/effects/gstgleffectxray.c:
 	* gst/gl/gstgleffects.c:
 	* gst/gl/gstgleffects.h:
 	* tests/examples/gtk/fxtest/fxtest.c:
-	Merge of some patches from my local development branch. See git log
-	for detailed info about each commit.
-	Add support for missing videoformats (RGBA, BGRA, ARGB, ABGR) in
-	gst_gl_do_upload_fill.
-	Make luma_to_curve effect non-static.
-	Add invert property to GstGLFilterSobel.
-	Add a fragment shader for "multiply" blending mode.
-	Import xray effect.
+	  Import xray effect
+	  Add xray effect. Maps luma to a negative, slightly cyan tinted, curve,
+	  applies some light gaussian blur and multiplies it with its sobel edges. Not
+	  sure about the name, likely to change. Probably still needs some tuning.
 
-2008-09-29  Julien Isorce  <julien.isorce@gmail.com>
+2008-10-15 16:14:52 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* docs/DEBUGGING
-	* gst/gl/gltestsrc.c
-	* gst/gl/gstglbumper.c
-	* gst/gl/gstglcolorscale.c
-	* gst/gl/gstgldownload.c
-	* gst/gl/gstglfilterapp.c
-	* gst/gl/gstglfiltercube.c
-	* gst/gl/gstglfilterglass.c
-	* gst/gl/gstglimagesink.c
-	* gst/gl/gstgltestsrc.c
-	* gst/gl/gstglupload.c
-	* gst/gl/gstopengl.c
-	Fix gltestsrc (SMPTE was a little bit dark) and start to write the gtk doc (no tested)
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	  Add multiply fragment shader
+	  Add a fragment shader to blend two textures with multiply blend mode
 
-2008-09-25  Julien Isorce  <julien.isorce@gmail.com>
+2008-10-15 15:49:12 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/gstglfiltersobel.c:
+	  Add invert property to sobel filter
+	  Add an invert property to sobel_fragment_source and Sobel filter. Useful
+	  to have dark edges with white background.
+
+2008-10-15 12:50:07 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/effects/gstgleffectlumatocurve.c:
+	* gst/gl/effects/gstgleffectlumatocurve.h:
+	  Make luma_to_curve non-static
+	  Make luma_to_curve public so that it can be used as a step for more
+	  complex effects.
+
+2008-10-15 12:42:29 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  Support for missing videoformats in glupload
+	  Add support for missing alpha channeled videoformats (RGBA, BGRA,
+	  ARGB, ABGR) in gst_gl_display_do_upload_fill.
+
+2008-10-15 00:07:52 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/qt/videoxoverlay/main.cpp:
+	* tests/examples/qt/videoxoverlay/pipeline.cpp:
+	* tests/examples/qt/videoxoverlay/pipeline.h:
+	  up qt videoxoverlay example: can seek
+
+2008-10-13 23:14:27 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglfilter.c:
+	  Fix crash in filters when going to NULL with no display
+
+2008-10-11 11:45:54 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/CMakeLists.txt:
+	  fix CMake build
+
+2008-10-04 22:34:07 +0300  Stefan Kost <ensonic@users.sf.net>
+
+	* docs/plugins/Makefile.am:
+	* docs/plugins/gst-plugins-gl-plugins-docs.sgml:
+	* docs/plugins/gst-plugins-gl-plugins-overrides.txt:
+	* docs/plugins/gst-plugins-gl-plugins-sections.txt:
+	* docs/plugins/gst-plugins-gl-plugins.args:
+	* docs/plugins/gst-plugins-gl-plugins.hierarchy:
+	* docs/plugins/gst-plugins-gl-plugins.prerequisites:
+	* docs/plugins/gst-plugins-gl-plugins.signals:
+	* docs/plugins/gst-plugins-gl-plugins.types:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstgldownload.c:
+	  Build gtk-docs for plugins.
+	  Add include to otherwise empty .types file to fix the scanner build.
+	  Edit Makefile.am, .sections, -docs.sgml to scan all plugins and include
+	  them in the master file. Fix xml errors in two sources (missing closing
+	  tag).
+
+2008-10-04 21:56:23 +0300  Stefan Kost <ensonic@users.sf.net>
+
+	* docs/libs/Makefile.am:
+	* docs/libs/gst-plugins-gl-libs-docs.sgml:
+	* docs/libs/gst-plugins-gl-libs-sections.txt:
+	* docs/libs/gst-plugins-gl-libs.types:
+	  Build gtk-docs for libs.
+	  Configure CFLAGS and LDFLAGS in Makefile.am. Add gobject and their include to
+	  the .types file. Edit -docs.sgml and replace defaults.
+
+2008-09-30 00:26:55 +0200  Julien <julien@bowob.(none)>
+
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  update frozen unix CodeBlocks build
+
+2008-09-29 23:45:10 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* TODO:
+	* docs/DEBUGGING:
+	* gst/gl/gltestsrc.c:
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstglfilterapp.c:
+	* gst/gl/gstglfiltercube.c:
 	* gst/gl/gstglfilterglass.c:
-	  Fix glfilterglass: nothing was drawn when uploading from rgb
-	  because the texture had an alpha channel equals to 0.
-	  By default, when doing, gst-launch-0.10 videotestsrc ! \
-	  "video/x-raw-rgb" ! glupload ..., the format is bpp=32, depth=24.
-	  And in the glfilterglass's fragment source, this alpha channel
-	  was used instead of the frame buffer's alpha channel (background gradient).
-	  So to resolve the problem I have just replaced texture_color.a by glColor.a .
-	  By the way, it also resolved the reflection.
-	  Finally, I have changed the rounded corner algorithm which was wrong.
-	  Now we have the same result as this
-	  "http://www.mdk.org.pl/2007/11/17/gl-colorspace-conversions"
-	* gst/gl/gstglfiltercube.c
-	  Disable depth_test.
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstglupload.c:
+	* gst/gl/gstopengl.c:
+	  start to write the gtk doc
 
-2008-09-24  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-09-26 13:41:13 -0700  David Schleef <ds@schleef.org>
 
+	* docs/libs/Makefile.am:
+	* docs/plugins/Makefile.am:
+	* docs/plugins/inspect/plugin-opengl.xml:
+	  Fix up gtk-doc documentation generation
+
+2008-09-25 22:25:29 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst/gl/gstglfiltercube.c:
+	* gst/gl/gstglfilterglass.c:
+	  fix glfilterglass (reason: videotestsrc rgb is by default bpp=32, depth=24, so alpha channel is 0)
+
+2008-09-24 19:32:48 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/CMakeLists.txt:
+	* win32/codeblock/gstopengl.cbp:
+	* win32/vs8/libgstopengl.vcproj:
+	  update cmake build and the 2 frozen win32 builds (CodeBlocks, vs8)
+
+2008-09-24 15:53:32 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* docs/DEBUGGING:
 	  added some bit to debugging file
 
-2008-09-24  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-09-23 10:37:58 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst/gl/gstglfiltersobel.c:
-	* gst/gl/effects/gstgleffectssources.h:
-	* gst/gl/effects/gstgleffectssources.c:
-	* gst/gl/gstopengl.c:
+	* gst/gl/CMakeLists.txt:
 	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectssources.c:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstglfiltersobel.c:
+	* gst/gl/gstopengl.c:
 	  import sobel edge detector from cvs branch
 
-2008-09-24  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-24 02:07:41 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-	* INSTALL
-	* TODO
-	* docs/DEBUGGING
-	* gst/gl/gstglfilterglass.c
-	* tests/pipelines
-	Update install instructions.
-	Close TODO task 18. (works with msvc8 now)
-	Replace GST_CAT_LOG by GST_LOG.
-	Add a some debugging tips.
+	* ChangeLog:
+	* INSTALL:
+	* TODO:
+	* docs/DEBUGGING:
+	* gst/gl/gstglfilterglass.c:
+	* tests/pipelines:
+	  can use several G_LOG_DOMAINs and GST_CATegories, with msvc8
 
-2008-09-22  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-09-22 09:47:16 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/gstglpixbufoverlay.c:
 	  use right blending function with pixbuf overlay
 
-2008-09-22  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-09-21 10:58:13 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst-libs/gst/gl/gstgldisplay.c:
 	  no need to explicit set the debug category if default one is used
+
+2008-09-21 10:04:49 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectlumatocurve.c:
 	* gst/gl/effects/gstgleffectrgbtocurve.c:
 	  use texture1 for curve textures
 
-2008-09-21  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-21 19:50:34 +0200  Julien <julien@bowob.(none)>
 
-	* TODO
-	* gst/gl/CMakeLists.txt
-	* gst/gl/Makefile.am
-	* gst/gl/gstglfilterglass.c
-	* gst/gl/gstglfilterglass.h
-	* gst/gl/gstopengl.c
-	* win32/codeblock/gstopengl.cbp
-	* win32/vs8/libgstopengl.vcproj
-	Add a glfilterglass inspired from "http://www.mdk.org.pl/2007/11/17/gl-colorspace-conversions"
-	(The reflection still does not work, any idea ?)
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  Update unix codeblocks build
 
-2008-09-21  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-09-21 19:36:42 +0200  Julien Isorce <julien.isorce@gmail.com>
 
+	  trying to resolve conflicts ...
+
+2008-09-21 19:26:37 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* TODO:
+	* gst/gl/CMakeLists.txt:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstglfilterglass.c:
+	* gst/gl/gstglfilterglass.h:
+	* gst/gl/gstopengl.c:
+	* win32/codeblock/gstopengl.cbp:
+	* win32/vs8/libgstopengl.vcproj:
+	  Add a glfilterglass inspired from http://www.mdk.org.pl/2007/11/17/gl-colorspace-conversions
+
+2008-09-21 16:40:38 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* gst-libs/gst/gl/gstglshader.c:
 	  explicit check g_getenv return value to be not NULL
 
-2008-09-20  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-20 15:44:24 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-	* TODO
-	* gst-libs/gst/gl/gstglbuffer.c
-	* gst-libs/gst/gl/gstglbuffer.h
-	* gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstgldisplay.h
-	* gst-libs/gst/gl/gstglfilter.c
-	* gst-libs/gst/gl/gstglfilter.h
-	* gst/gl/gstgldownload.c
-	* gst/gl/gstglimagesink.c
-	* gst/gl/gstglimagesink.h
-	* gst/gl/gstgltestsrc.h
-	* gst/gl/gstglupload.c
-	* gst/gl/gstopengl.c
-	  update authors from the CVS repository (TODO task 19)
-	  up TODO task 7.
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstglbuffer.c:
+	* gst-libs/gst/gl/gstglbuffer.h:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst-libs/gst/gl/gstglfilter.h:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstglimagesink.h:
+	* gst/gl/gstgltestsrc.h:
+	* gst/gl/gstglupload.c:
+	* gst/gl/gstopengl.c:
+	  update authors from the CVS repository
 
-2008-09-20  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-09-20 14:12:49 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst-libs/gst/gl/gstglshader.c:
-	  output shaders info log only if GST_GL_SHADER_DEBUG env variable
-	  is set. Should fix TODO task 18
+	  output shaders info log only if GST_GL_SHADER_DEBUG env variable is set. Should fix TODO task 18
 
-2008-09-19  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-09-20 13:32:33 +0200  Julien <julien@bowob.(none)>
 
+	* configure.ac:
+	  revert a change: opengl->gl in configure.ac, because it was looking for an opengl directory which does not exist
+
+2008-09-20 01:50:28 +0200  Julien <julien@bowob.(none)>
+
+	* TODO:
+	* configure.ac:
+	* win32/common/config.h.in:
+	  few changes about configure outputs, close TODO task 20 and 21
+
+2008-09-19 12:47:06 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectlumatocurve.c:
 	* gst/gl/effects/gstgleffectrgbtocurve.c:
-	  explicitly bind the main texture and the curve one to separate
-	  units in rgb and luma to curve effects. This should solve the
-	  issue pointed in TODO item 21.
+	  explicitly bind the main texture and the curve one to separate units in rgb and luma to curve effects. This should solve the issue pointed in TODO item 21.
 
-2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-18 22:50:05 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-	* TODO
-	Add TODO task 21.
-	* gst-libs/gst/gl/gstgldisplay.c
-	Fix a regression: MESA YCbCr colorspace conversion
-	(was not working since I removed the need of FBO
-	in some cases)
+	* .gitignore:
+	* docs/libgstopengl.pdf:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* tests/examples/gtk/filternoxoverlay/filternoxoverlay.vcproj:
+	* tests/examples/gtk/filternoxoverlay/main.cpp:
+	* tests/examples/gtk/gtk.sln:
+	* tests/pipelines:
+	  check on win32 that every tests/pipelines and tests/examples (generic, gtk, qt) still work
 
-2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-18 21:13:37 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * gst-libs/gst/gl/gstgldisplay.c
-    * tests/pipelines
-    * tests/examples/generic/cubeyuv/main.cpp
-    Fix a regression:
-    For example this pipeline does not need a FBO:
-    gst-launch-0.10 videotestsrc ! "video/x-raw-rgb, width=w, height=h" ! \
-	  glupload ! "video/x-raw-gl, width=w, height=h" ! glimagesink
-    because the w and h are the same.
-    But this pipeline needs a FBO:
-    gst-launch-0.10 videotestsrc ! "video/x-raw-rgb, width=320, height=240" ! \
-      glupload ! "video/x-raw-gl, width=800, height=600" ! glimagesink
-    because we need to redraw the texture through a FBO in order to create
-    a new one with the correct size.
-    (The regression was to always not use a FBO when the video source
-    is rgb whereas we can need it)
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  fix a regression that made the gltestsrc element not working
 
-2008-09-14  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-17 23:48:29 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * TODO
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst/gl/gstgleffects.c
-    Finish TODO task 17
+	* TODO:
+	* docs/libgstopengl.vsd:
+	* tests/pipelines:
+	  up doc
 
-2008-09-13  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-16 02:10:31 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * TODO
-    * gst-libs/gst/gl/gstgldisplay.c
-    * tests/pipelines
-    Use a better key for the pool of textures.
-    Up TODO task 18.
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  fix a regression about MESA YCbCr colorspace conversion
 
-2008-09-13  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-14 23:22:58 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * TODO
-    Up TODO tasks 0 and 9.
-    Add TODO task 17, 18, 19 and 20.
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* tests/examples/generic/cubeyuv/main.cpp:
+	* tests/pipelines:
+	  fix a regression (sometimes a FBO is needed even if the video source is rgb)
 
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst/gl/gstglimagesink.c
-    Use debug category instead of g_print.
-    I put GST_CAT_XXX because it does not work without CAT,
-    Indeed, it seems that the GST_CAT_DEFAULT is not set correctly when
-    using GST_INFO (...) for example. Someone knows why ?
+2008-09-14 19:56:50 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * gst/gl/gstgltestsrc.c
-    * gst/gl/gstgltestsrc.h
-    Re-up authors.
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst/gl/gstgleffects.c:
+	  Finish TODO task 17
 
-    * gst/gl/gstglupload.c
-    * win32/common/config.h
-    Replace CVS by GIT
+2008-09-13 19:47:44 +0200  Julien <julien@bowob.(none)>
 
-2008-09-12  Julien Isorce  <julien.isorce@gmail.com>
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  fix g_int_hash -> g_direct_hash
 
-    * CMakeLists.txt
-    * cmake/modules/FindATK.cmake
-    * cmake/modules/FindCairo.cmake
-    * cmake/modules/FindGTK2.cmake
-    * cmake/modules/FindGlew.cmake
-    * cmake/modules/FindGlib2.cmake
-    * cmake/modules/FindGstreamer.cmake
-    * cmake/modules/FindLibXml2.cmake
-    * cmake/modules/FindOpenGL.cmake.off
-    * gst-libs/gst/freeglut/CMakeLists.txt
-    * gst-libs/gst/gl/CMakeLists.txt
-    * gst/gl/Makefile.am
-    The CMake build now works on my kubuntu-kde4.1.1
+2008-09-13 18:17:42 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-2008-09-11  Julien Isorce  <julien.isorce@gmail.com>
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* tests/pipelines:
+	  Use a better key for the pool of textures
 
-    * .gitignore
-    * AUTHORS
-    * CMakeLists.txt
-    * INSTALL
-    * TODO
-    * cmake/modules/FindATK.cmake
-    * cmake/modules/FindCairo.cmake
-    * cmake/modules/FindGTK2.cmake
-    * cmake/modules/FindGlew.cmake
-    * cmake/modules/FindGlib2.cmake
-    * cmake/modules/FindGstreamer.cmake
-    * cmake/modules/FindLibIconv.cmake
-    * cmake/modules/FindLibXml2.cmake
-    * gst-libs/CMakeLists.txt
-    * gst-libs/gst/CMakeLists.txt
-    * gst-libs/gst/freeglut/CMakeLists.txt
-    * gst-libs/gst/gl/CMakeLists.txt
-    * gst/CMakeLists.txt
-    * gst/gl/CMakeLists.txt
-    * win32/common/config.h
-    Add cmake build http://www.cmake.org.
-    See CMake install instructions in the INSTALL file.
-    (I have not correctly configured yet the cmake build for unix, BE patient)
+2008-09-13 03:32:04 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * AUTHORS
-    * BUGS
-    * ChangeLog
-    * TODO
-    * configure.ac
-    CRLF to LF
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstgltestsrc.h:
+	* gst/gl/gstglupload.c:
+	* win32/common/config.h:
+	  Use a gst debug category for GstGLDisplay instead of g_print, gst-launch-0.10 --gst-debug=gldisplay:3 videotestsrc ! glimagesink
 
-2008-09-07  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-12 01:27:37 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * TODO
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/gl/gstgldisplay.h
-    * gst-libs/gst/gl/gstglshader.c
-    * gst-libs/gst/gl/gstglshader.h
-    * gst/gl/Makefile.am
-    * gst/gl/gstglbumper.c
-    * gst/gl/gstglbumper.h
-    * gst/gl/gstglfilterblur.c
-    * gst/gl/gstglfilterlaplacian.c
-    * gst/gl/gstglpixbufoverlay.c
-    * gst/gl/gstopengl.c
-    * tests/pipelines
-    * win32/vs8/libgstopengl.vcproj
-    Add glbumper: this gl filter is an example of bump mapping.
-    You can pass a normal map through the glbumper location property.
-    The glbumper expoxes how to use both vertex and fragment shader.
-    Add support for attributes in gstglshader.
+	* gst-libs/gst/freeglut/CMakeLists.txt:
+	  small condition for the cmake build on win32
 
-2008-08-25  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-12 01:13:50 +0200  Julien <julien@bowob.(none)>
 
-    * gst-libs/gst/gl/gstgldisplay.c
-    Fix upload AYUV and YV12 (a regression in last commits).
-    Fix download YV12 (same convidtion as upload YV12).
+	* CMakeLists.txt:
+	* ChangeLog:
+	* cmake/modules/FindATK.cmake:
+	* cmake/modules/FindCairo.cmake:
+	* cmake/modules/FindGTK2.cmake:
+	* cmake/modules/FindGlew.cmake:
+	* cmake/modules/FindGlib2.cmake:
+	* cmake/modules/FindGstreamer.cmake:
+	* cmake/modules/FindLibXml2.cmake:
+	* cmake/modules/FindOpenGL.cmake.off:
+	* gst-libs/gst/freeglut/CMakeLists.txt:
+	* gst-libs/gst/gl/CMakeLists.txt:
+	* gst/gl/Makefile.am:
+	* win32/common/config.h:
+	  The CMake build now works on my Kubuntu-KDE4.1.1
 
-2008-08-24  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-11 02:07:12 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * gst/gl/BUGS
-    * gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstgldisplay.h
-	* gst/gl/gstgldownload.c
-	* gst/gl/gstglimagesink.c
-	* gst/gl/gstglupload.c
-    Do not use frame buffer object when "input video is RGB"
-    or when "GLSL is not available and YCbCr is available".
-    So frame buffer object is not a plugin requirement anymore.
-    So I decreased the OpengGL version from 1.4 to 1.2 (maybe less?)
+	* .gitignore:
+	* AUTHORS:
+	* CMakeLists.txt:
+	* ChangeLog:
+	* INSTALL:
+	* TODO:
+	* cmake/modules/FindATK.cmake:
+	* cmake/modules/FindCairo.cmake:
+	* cmake/modules/FindGTK2.cmake:
+	* cmake/modules/FindGlew.cmake:
+	* cmake/modules/FindGlib2.cmake:
+	* cmake/modules/FindGstreamer.cmake:
+	* cmake/modules/FindLibIconv.cmake:
+	* cmake/modules/FindLibXml2.cmake:
+	* gst-libs/CMakeLists.txt:
+	* gst-libs/gst/CMakeLists.txt:
+	* gst-libs/gst/freeglut/CMakeLists.txt:
+	* gst-libs/gst/gl/CMakeLists.txt:
+	* gst/CMakeLists.txt:
+	* gst/gl/CMakeLists.txt:
+	* win32/common/config.h:
+	  Add cmake build http://www.cmake.org. See CMake install instructions in the INSTALL file. (I have not correctly configured yet the CMake build for unix, BE patient)
 
-2008-08-21  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-07 17:44:42 +0200  Julien <julien@bowob.(none)>
 
-    * BUGS
-    * gst-libs/gst/freeglut/freeglut_init.c
-    * gst-libs/gst/freeglut/freeglut_main.c
-    * gst-libs/gst/freeglut/freeglut_window.c
-    Fix a bug about going NULL<->PLAYING state multiple times.
-    The solution is not clean. I think the best way is to start
-    the TODO task 9.
+	* gst/gl/gstopengl.c:
+	  fix glbumper related gtk dependencies
 
-2008-08-21  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-07 14:17:57 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/gl/gstgldisplay.h
-    Use a GHash table instead of a GData for the texture pool
+	* gst/gl/Makefile.am:
+	* gst/gl/gstopengl.c:
+	* win32/codeblock/gstopengl.cbp:
+	  glbumper is compiled only when having GdkPixBuf. And update win32 codeblocks build
 
-2008-08-20  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-07 01:38:10 +0200  julien User <julien@ubuntu.ubuntu-domain>
 
-    * BUGS
-    * tests/examples/gtk/filternoxoverlay/main.cpp
-    * tests/examples/gtk/filterxoverlay/main.cpp
-    * tests/examples/gtk/gtkxoverlay/main.cpp
-    Correctly uses signal watches on gst bus,
-    which resolved the bug about clicking on the cross
-    in the filter_NO_xoverlay example.
+	* gst/gl/gstglbumper.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  update codeblocks build on linux and fix a warning
 
-2008-08-20  Julien Isorce  <julien.isorce@gmail.com>
+2008-09-07 01:23:19 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * gst-libs/gst/gl/gstgldisplay.c
-    * unix/codeblocks/gstopengl/gstopengl.cbp
-    Get ride of a bug on ATI related to YV12 to rgb
-    colorspace conversion through GLSL
+	* ChangeLog:
+	* gst/gl/gstglbumper.c:
+	* gst/gl/gstglbumper.h:
+	  forgot to add the bumper files
 
-    * BUGS
-    * configure.ac
-    * tests/examples/gtk/Makefile.am
-    * tests/examples/gtk/README
-    * tests/examples/gtk/filternoxoverlay/main.cpp
-    * tests/examples/gtk/filternoxoverlay/Makefile.am
-    Add an examples that no uses the xoverlayinterfaces
-    but we can switch bettween the gst states.
+2008-09-07 00:45:34 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-2008-08-20  Filippo Argiolas <filippo.argiolas@gmail.com>
-
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglshader.h:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstglfilterblur.c:
+	* gst/gl/gstglfilterlaplacian.c:
 	* gst/gl/gstglpixbufoverlay.c:
-	  use opengl for pixbuf resizing in glpixbufoverlay, start to work
-	  on properties
+	* gst/gl/gstopengl.c:
+	* tests/pipelines:
+	* win32/vs8/libgstopengl.vcproj:
+	  add a glbumper (bump mapping filter through GLSL) that exposes how to use both vertex and fragment shaders
 
-2008-08-20  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-25 10:34:54 +0200  Julien Isorce <julien.isorce@gmail.com>
 
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  Fix upload AYUV and YV12 (a regression in last commits)
+
+2008-08-24 16:33:26 +0200  julien User <julien@ubuntu.ubuntu-domain>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  get ride of a wrong color on nvidia/linux when converting yv12 to rgb through GLSL
+
+2008-08-24 15:39:14 +0200  julien User <julien@ubuntu.ubuntu-domain>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  fix warnings
+
+2008-08-24 04:24:29 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  fix upload AYUV, regression during the 2 last commits
+
+2008-08-24 03:38:40 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  oups, fix my mistake on last commit
+
+2008-08-24 03:12:12 +0200  unknown <Luc@.(none)>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst/gl/BUGS:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstglupload.c:
+	  Do not use frame buffer object when "input video is RGB" or when "GLSL is not available and YCbCr is available". So frame buffer object is not a plugin requirement anymore. So I decreased the OpengGL version from 1.4 to 1.2 (maybe less?)
+
+2008-08-21 16:04:28 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* BUGS:
+	* ChangeLog:
+	* gst-libs/gst/freeglut/freeglut_init.c:
+	* gst-libs/gst/freeglut/freeglut_main.c:
+	* gst-libs/gst/freeglut/freeglut_window.c:
+	  fix a bug about switching from NULL to  PLAYING gst states multiple times
+
+2008-08-21 11:12:42 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	  use a GHash  table instead of a GData for the texture pool
+
+2008-08-20 17:55:46 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* BUGS:
+	* ChangeLog:
+	* tests/examples/gtk/filternoxoverlay/main.cpp:
+	* tests/examples/gtk/filterxoverlay/main.cpp:
+	* tests/examples/gtk/gtkxoverlay/main.cpp:
+	  fix last isssue in filter_NO_xoverlay example
+
+2008-08-20 15:47:51 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* BUGS:
+	* ChangeLog:
+	* configure.ac:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* tests/examples/gtk/Makefile.am:
+	* tests/examples/gtk/README:
+	* tests/examples/gtk/filternoxoverlay/Makefile.am:
+	* tests/examples/gtk/filternoxoverlay/main.cpp:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  get ride of a bug on ATI related to YV12 to rgb conversion through GLSL and add an example
+
+2008-08-20 10:02:02 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
+	* gst/gl/gstglpixbufoverlay.c:
+	  use opengl for pixbuf resizing in glpixbufoverlay, start to work on properties
+
+2008-08-20 09:26:46 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* gst/gl/gstglpixbufoverlay.c:
 	  use fixed opengl pipeline for glpixbufoverlay (any drawback?)
 
-2008-08-20  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-20 09:24:53 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst-libs/gst/gl/gstgldisplay.c:
 	  fix a signedness warning
 
-2008-08-19  Julien Isorce  <julien.isorce@gmail.com>
+2008-08-20 00:11:39 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * gst-libs/gst/gl/gstgldisplay.c
-    get ride of a bug on ATI related to I420_YV12 to rgb
-    colorspace conversion through GLSL
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  get ride of a ATI bug related to GLSL colorspace conversion for I420 and YV12 to rgb
 
-2008-08-19  Julien Isorce  <julien.isorce@gmail.com>
+2008-08-19 22:15:17 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * gst/gl/gstgleffects.c
-    * unix/codeblocks/gstopengl/gstopengl.cbp
-    Shaders which are in the shaderstable are now released
-    in the glthread
+	* BUGS:
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	* tests/examples/gtk/gtk.sln:
+	* tests/examples/gtk/pixbufdrop/pixbufdrop.vcproj:
+	* win32/vs8/libgstopengl.vcproj:
+	  add pixbufdrop vs8 project
 
-    * TODO
-    End task 1, Filippo makes his gleffects work on master branch.
-    End task 6.
+2008-08-19 21:04:29 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-2008-08-19  Filippo Argiolas <filippo.argiolas@gmail.com>
+	* gst/gl/gstgldifferencematte.c:
+	* tests/examples/gtk/fxtest/fxtest.c:
+	* tests/examples/gtk/fxtest/fxtest.vcproj:
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	* tests/examples/gtk/gtk.sln:
+	* win32/vs8/libgstopengl.vcproj:
+	  add fxtest vs8 project
 
+2008-08-19 11:07:18 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* TODO:
+	* gst/gl/gstgleffects.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  Shaders which are in the shaderstable are now released
+
+2008-08-19 09:48:14 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* gst/gl/gstgldifferencematte.c:
 	  fix a differencematte memory issue
 
-2008-08-19  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-19 08:50:14 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/gstgldifferencematte.c:
 	* tests/examples/gtk/fxtest/Makefile.am:
-	  fix gstgldifferencematte and add an example app to test it
-	  dragging an image over the video (works with pixbufoverlay too,
-	  see pixbufdrop --help)
+	* tests/examples/gtk/fxtest/pixbufdrop.c:
+	  fix gstgldifferencematte and add an example app to test it dragging an image over the video (works with pixbufoverlay too, see pixbufdrop --help)
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 21:50:09 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/gstgldifferencematte.c:
 	  another typo, restore old twirl fragment source
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 21:43:02 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/gstgldifferencematte.c:
 	  fix typos
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 21:40:26 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
 	* gst/gl/gstgldifferencematte.c:
-	  complete differencematte filter.. I did it quickly, probably
-	  still needs some work
+	  complete differencematte filter.. I did it quickly, probably still needs some work
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 20:25:25 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst/gl/gstgldifferencematte.c:
+	* ChangeLog:
 	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstgldifferencematte.c:
 	* gst/gl/gstglpixbufoverlay.c:
 	* gst/gl/gstopengl.c:
-	  little cleanup. add first draft of gstgldifferencematte. still
-	  doesn't work
+	  little cleanup. add first draft of gstgldifferencematte. still doesn't work
 
-2008-08-18  Julien Isorce  <julien.isorce@gmail.com>
+2008-08-18 18:53:13 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-    * gst/gl/gstglimagesink.c
-    Force to call GstBaseSink[glimagesink]->stop() when going
-    from GST_STATE_PAUSED to GST_STATE_READY.
+	* ChangeLog:
+	* gst/gl/gstglimagesink.c:
+	  force calling glimagesink->stop() when going from PAUSED to READY
 
-2008-08-18  Julien Isorce  <julien.isorce@gmail.com>
+2008-08-18 17:19:06 +0200  unknown <Administrateur@.(none)>
 
-    * gst/gl/effects/gstgleffectbulge.c
-    * gst/gl/effects/gstgleffectfisheye.c
-    * gst/gl/effects/gstgleffectglow.c
-    * gst/gl/effects/gstgleffectmirror.c
-    * gst/gl/effects/gstgleffectsquare.c
-    * gst/gl/effects/gstgleffectsqueeze.c
-    * gst/gl/effects/gstgleffectstretch.c
-    * gst/gl/effects/gstgleffecttunnel.c
-    * gst/gl/effects/gstgleffecttwirl.c
-    * gst/gl/gstgleffects.c
-    * gst/gl/gstglfilterblur.c
-    * gst/gl/gstglpixbufoverlay.c
-    * win32/vs8/libgstopengl.vcproj
-    Update vs8 build. And fix warnings that comes from vc8.
+	* ChangeLog:
+	* gst/gl/effects/gstgleffectbulge.c:
+	* gst/gl/effects/gstgleffectfisheye.c:
+	* gst/gl/effects/gstgleffectglow.c:
+	* gst/gl/effects/gstgleffectmirror.c:
+	* gst/gl/effects/gstgleffectsquare.c:
+	* gst/gl/effects/gstgleffectsqueeze.c:
+	* gst/gl/effects/gstgleffectstretch.c:
+	* gst/gl/effects/gstgleffecttunnel.c:
+	* gst/gl/effects/gstgleffecttwirl.c:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstglfilterblur.c:
+	* gst/gl/gstglpixbufoverlay.c:
+	* win32/vs8/libgstopengl.vcproj:
+	  update vs8 build and fix some warnings that comes from vc8
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 16:29:04 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* win32/common/config.h:
 	  restore win32/common/config.h
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 16:16:58 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst/gl/gstglpixbufoverlay.c:
+	* ChangeLog:
 	* configure.ac:
 	* gst/gl/Makefile.am:
+	* gst/gl/gstglpixbufoverlay.c:
 	* gst/gl/gstopengl.c:
-	  add first draft of a pixbuf overlay element. add macros to
-	  optionally build the latter if gdk-pixbuf is found
+	  add first draft of a pixbuf overlay element. add macros to optionally build the latter if gdk-pixbuf is found
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 13:08:41 +0200  Julien Isorce <julien.isorce@gmail.com>
 
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  update codeblocks build
+
+2008-08-18 11:48:47 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* tests/examples/clutter/clutteractortee.c:
-	  remove expose event handling, it's map-unmap that is not behaving
-	  correctly, any idea?
+	  remove expose event handling, it's map-unmap that is not behaving correctly, any idea?
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 11:08:09 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* tests/examples/clutter/clutteractortee.c:
 	  add expose event handling to clutteractortee
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 10:50:37 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* tests/examples/clutter/Makefile.am:
 	* tests/examples/clutter/clutteractor.c:
 	* tests/examples/clutter/clutteractortee.c:
-	  add clutteractortee example, a nice example about how clutter
-	  could be used to create a live preview widget for gleffects. It
-	  uses texture from pixmap, still needs some work regarding clean
-	  exit and expose event management.
+	  add clutteractortee example, a nice example about how clutter could be used to create a live preview widget for gleffects. It uses texture from pixmap, still needs some work regarding clean exit and expose event management.
 
-2008-08-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-18 09:06:09 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* configure.ac:
 	* gst/gl/effects/gstgleffectssources.c:
-	  Add a couple of macros to autotools to compile with uintrepid
-	  automake. Remove array constructor so we don't have to depend on
-	  glsl #version 120.
+	  add a couple of macros to autotools to compile with uintrepid automake. remove array constructor so we don't have to depend on glsl #version 120.
 
-2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-17 17:45:52 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* tests/examples/clutter/Makefile.am:
 	* tests/examples/clutter/clutteractor.c:
-	  Add an example to use Texture From Pixmap to do some kind of
-	  x_overlay on a clutteractor. A better way would be to directly
-	  share gl handles between clutter and gstgl but still I cannot
-	  find a way to do it.
+	  add an example to use texture from pixmap to do some kind of x_overlay on a clutteractor. A better way would be to directly share gl handles between clutter and gstgl but still I cannot find a way to do it.
 
-2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-17 15:32:16 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* configure.ac:
 	* tests/examples/Makefile.am:
 	  add clutter macros on configure.ac
 
-2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-17 12:21:49 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectscurves.h:
 	  add a better sepia toning curve
 
-2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-17 09:39:16 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* AUTHORS:
+	* ChangeLog:
 	  add me to AUTHORS file
 
-2008-08-17  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-17 09:24:24 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/gstgltestsrc.c:
 	* po/en.po:
-	  add a translatable string to testsrc to get rid of po dir errors
-	  after distclean and git clean
+	  add a translatable string to testsrc to get rid of po dir errors after distclean and git clean
 
-2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-16 17:36:10 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* tests/examples/gtk/fxtest/fxtest.c:
 	  minor cleanup in fxtest
 
-2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-16 12:37:36 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectbulge.c:
 	* gst/gl/effects/gstgleffectfisheye.c:
 	* gst/gl/effects/gstgleffectmirror.c:
+	* gst/gl/effects/gstgleffectsdistortion.c:
 	* gst/gl/effects/gstgleffectsquare.c:
 	* gst/gl/effects/gstgleffectsqueeze.c:
 	* gst/gl/effects/gstgleffectstretch.c:
@@ -883,81 +2148,83 @@
 	* gst/gl/effects/gstgleffecttwirl.c:
 	  distortion effect cleanup
 
-2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-16 10:15:31 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* BUGS:
+	* ChangeLog:
 	* tests/examples/gtk/fxtest/fxtest.c:
-	  improve fxtest command line option handling, default to
-	  videotestsrc if no source bin description is given
+	  improve fxtest command line option handling, default to videotestsrc if no source bin description is given
 
-2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-16 09:40:54 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/gstgleffects.c:
-	  fix gleffects memory issue (init resources on start and reset
-	  them on stop)
+	  fix gleffects memory issue (init resources on start and reset them on stop)
 
-2008-08-16  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-16 09:17:14 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst/gl/effects/gstgleffectsin.c:
+	* gst/gl/effects/gstgleffectssources.c:
+	  fix a typo
+
+2008-08-16 09:13:39 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectsin.c:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
 	* gst/gl/gstgleffects.c:
 	* gst/gl/gstgleffects.h:
 	* tests/examples/gtk/fxtest/fxtest.c:
-	  add sin effect (desaturate everything but red shades). still
-	  needs some tuning.
+	  add sin effect (desaturate everything but red shades). still needs some tuning.
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 22:28:19 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/gstgleffects.c:
 	* gst/gl/gstgleffects.h:
-	  add a property to gleffects to switch video left to right, useful
-	  with webcams to resemble a mirror (maybe move it to GstGLFilter?)
+	  add a property to gleffects to switch video left to right, useful with webcams to resemble a mirror
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 21:29:02 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectlumatocurve.c:
 	* gst/gl/effects/gstgleffectscurves.h:
 	* gst/gl/gstgleffects.c:
 	* gst/gl/gstgleffects.h:
 	* tests/examples/gtk/fxtest/fxtest.c:
-	  Add lumaxpro (desaturate + cross process) effect. Nothing too
-	  impressive but I like it.
+	  add lumaxpro (desaturate + cross process) effect. nothing too impressive but I like it.
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 20:54:54 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* tests/examples/gtk/fxtest/fxtest.c:
 	* BUGS:
 	* ChangeLog:
-	  Add support for command line parsing to fxtest (try fxtest
-	  videotestsrc ! desired caps ! identity). Report a new issue on
-	  BUGS.
-
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
-
 	* tests/examples/gtk/fxtest/fxtest.c:
-	* BUGS:
-	  Add support for command line parsing to fxtest (try "fxtest
-	  videotestsrc ! desired caps ! identity"). Report a new issue on
-	  BUGS.
+	  add support for command line parsing to fxtest (try fxtest videotestsrc ! desired caps ! identity). report a new issue on BUGS.
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 20:02:04 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* tests/examples/gtk/fxtest/Makefile.am:
-	* tests/examples/gtk/fxtest/fxtest.c:
+	* ChangeLog:
 	* configure.ac:
 	* gst-libs/gst/gl/gstglfilter.c:
 	* gst-libs/gst/gl/gstglfilter.h:
 	* gst/gl/effects/gstgleffectrgbtocurve.c:
 	* gst/gl/gstgleffects.c:
 	* tests/examples/gtk/Makefile.am:
+	* tests/examples/gtk/fxtest/Makefile.am:
 	* tests/examples/gtk/fxtest/fxtest.c:
-	  import fxtest (little gtk app to easily test effects) from cvs
-	  branch, fixed rgbtocurve.
+	  import fxtest (little gtk app to easily test effects) from cvs branch, fixed rgbtocurve.
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 17:03:21 +0200  Julien Isorce <julien.isorce@gmail.com>
 
+	* gst/gl/gstopengl.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  update codeblocks build
+
+2008-08-14 14:08:23 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
+	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffectbulge.c:
 	* gst/gl/effects/gstgleffectfisheye.c:
 	* gst/gl/effects/gstgleffectsdistortion.c:
@@ -966,549 +2233,630 @@
 	* gst/gl/effects/gstgleffectssources.h:
 	* gst/gl/effects/gstgleffecttunnel.c:
 	* gst/gl/effects/gstgleffecttwirl.c:
-	* gst/gl/Makefile.am:
 	* gst/gl/gstgleffects.c:
 	* gst/gl/gstgleffects.h:
-	  import remaining distortion effects from cvs branch (fisheye,
-	  twirl, bulge, tunnel, square)
+	  import remaining distortion effects from cvs branch (fisheye, twirl, bulge, tunnel, square)
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 12:39:01 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectscurves.h:
 	  cleanup curves header
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 12:26:25 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectscurves.h:
 	  better cross processing curve
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 12:09:39 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
+	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffectrgbtocurve.c:
 	* gst/gl/effects/gstgleffectscurves.h:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
-	* gst/gl/Makefile.am:
-	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/gstgleffects.c:
 	* gst/gl/gstgleffects.h:
-	  add rgb_to_luma_fragment source and correspondent effect. use the
-	  latter for a cross processing effect.
+	  add rgb_to_luma_fragment source and correspondent effect. use the latter for a cross processing effect.
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 11:31:09 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
+	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffectlumatocurve.c:
 	* gst/gl/effects/gstgleffectscurves.h:
-	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
 	* gst/gl/gstgleffects.c:
 	* gst/gl/gstgleffects.h:
-	  import luma_to_curve effects (Sepia, Heat) from cvs branch with
-	  better texture memory handling (teximage curves only once). Sepia
-	  curve still needs some love.
+	  import luma_to_curve effects (Sepia, Heat) from cvs branch with better texture memory handling (teximage curves only once). Sepia curve still needs some love.
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 10:37:32 +0200  Julien Isorce <julien.isorce@gmail.com>
 
+	* autogen.sh:
+	* configure.ac:
+	* tests/pipelines:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  add GLEW check in configure.ac
+
+2008-08-14 09:39:55 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* gst/gl/effects/gstgleffectglow.c:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
-	  rename blend_fragment_source to sum_fragment_source and add
-	  uniform blending parameters
+	  rename blend_fragment_source to sum_fragment_source and add uniform blending parameters
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 09:26:23 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst/gl/effects/gstgleffectglow.c:
-	* gst/gl/gstgleffects.h:
+	* ChangeLog:
 	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectglow.c:
+	* gst/gl/effects/gstgleffects.h:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
 	* gst/gl/gstgleffects.c:
-	  import glow effect (maybe the most tricky, 4 rendering steps) from
-	  cvs branch
+	* gst/gl/gstgleffects.h:
+	  import glow effect (maybe the most tricky) from cvs branch
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 08:03:49 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst/gl/effects/gstgleffectstretch.c:
+	* ChangeLog:
 	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffects.h:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/effects/gstgleffectstretch.c:
 	* gst/gl/gstgleffects.c:
 	  import stretch effect from cvs
 
-2008-08-14  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-14 00:07:20 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst/gl/effects/gstgleffectsqueeze.c:
+	* ChangeLog:
 	* gst/gl/Makefile.am:
 	* gst/gl/effects/gstgleffects.h:
+	* gst/gl/effects/gstgleffectsqueeze.c:
 	* gst/gl/effects/gstgleffectssources.c:
 	* gst/gl/effects/gstgleffectssources.h:
 	* gst/gl/gstgleffects.c:
 	  import squeeze effect from cvs
 
-2008-08-13  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-13 22:42:48 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst/gl/effects/gstgleffectidentity.c:
+	* gst/gl/effects/gstgleffectssources.c:
+	  forgot to add a file
+
+2008-08-13 22:36:13 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
 	* ChangeLog:
 	* gst/gl/Makefile.am:
-	* gst/gl/effects/gstgleffectmirror.c:
 	* gst/gl/effects/gstgleffectidentity.c:
-	* gst/gl/effects/gstgleffects.h:
-	* gst/gl/effects/gstgleffectssources.h:
-	* gst/gl/gstgleffects.c:
-	  still some source tree reorganize, fixed some issue with headers
-	  and ifdefs, moved identity into effects dir
-
-2008-08-13  Filippo Argiolas <filippo.argiolas@gmail.com>
-
-	* gst/gl/Makefile.am:
-	* gst/gl/gstgleffects.c:
-	* gst/gl/effects/gstgleffects.h:
-	* gst/gl/effects/gstgleffectssources.h:
 	* gst/gl/effects/gstgleffectmirror.c:
-	  Still working on merging gstgleffects from cvs branch, added mirror
-	  effect and reorganized the source tree.
-
-2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/gl/gstgldisplay.h
-    * gst/gl/gstglcolorscale.c
-    * gst/gl/gstglimagesink.c
-    * gst/gl/gstglupload.c
-    * tests/pipelines
-    Move gst_gl_display_thread_do_upload_make from
-    gst_gl_display_thread_do_upload to gst_gl_display_thread_init_upload
-
-2008-08-13  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/freeglut/freeglut_main.c
-    * gst/gl/BUGS
-    Fix a crash that could happen when closing a window on linux
-    when using at least two gl context.
-
-2008-08-12  Filippo Argiolas <filippo.argiolas@gmail.com>
-
+	* gst/gl/effects/gstgleffects.h:
+	* gst/gl/effects/gstgleffectssources.h:
 	* gst/gl/gstgleffects.c:
-	* gst/gl/Makefile.am:
-	* gst/gl/gstopengl.c:
-	  added gstgleffects element, doesn't work yet, just a skeleton.
+	  still some source tree reorganize, fixed some issue with headers and ifdefs, moved identity into effects dir
 
-2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-13 20:58:49 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst/gl/Makefile.am:
+	* gst/gl/effects/gstgleffectmirror.c:
+	* gst/gl/effects/gstgleffects.h:
+	* gst/gl/effects/gstgleffectssources.h:
+	* gst/gl/gstgleffects.c:
+	  still working on mergin gstgleffects, add mirror effect. reorganize source tree.
+
+2008-08-13 17:59:09 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstglupload.c:
+	* tests/pipelines:
+	  move thread_do_upload_make from thread_do_upload to thread_init_upload
+
+2008-08-13 17:16:17 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/freeglut/freeglut_main.c:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst/gl/BUGS:
+	  fix a crash that could happens when using at least 2 gl context and when closing a window on linux
+
+2008-08-13 16:01:21 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/BUGS:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstgleffects.c:
+	* tests/pipelines:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  fix some errors and check all the pipelines listed in tests/pipelines
+
+2008-08-12 11:09:37 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
+	* gst/gl/Makefile.am:
+	* gst/gl/gstgleffects.c:
+	* gst/gl/gstopengl.c:
+	  added first skeleton of gstgleffects, imported basic stuff from cvs branch.
+
+2008-08-11 20:26:30 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* BUGS:
-	  remove fixed bugs: rgb is fixed, flickering seems to belong to my
-	  webcams or v4l*src since it happens with ximagesink too
+	* ChangeLog:
+	  remove fixed bugs: rgb is fixed, flickering seems to belong to my webcams or v4l*src since it happens with ximagesink too
 
-2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-11 20:12:02 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst/gl/gstglfilterblur.c:
-	  Try to genereate textures within gstglfilterblur to see if the
-	  new thread_use_fbo works both with textures from the pool and
-	  custom ones.
+	  Try to genereate textures within gstglfilterblur to see if the new thread_use_fbo works both with textures from the pool and custom ones
 
-2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-11 20:01:41 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst-libs/gst/gl/gstgldisplay.c:
 	  remove an unneeded (really?) glTexImage
 
-2008-08-11  Julien Isorce  <julien.isorce@gmail.com>
-
-    * gst-libs/gst/gl/gstglbuffer.c
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/gl/gstgldisplay.h
-    * gst/gl/gstglfilterblur.c
-      The GData texture pool is now splitted in several GQueue (one per framesize).
-      So glTexImage2D(w,h,NULL) is called only one time (memory allocation).
-      So I could remove the glTexImage2D(w,h,NULL) call in
-      the gst_gl_display_thread_use_fbo func.
-
-2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-11 19:08:22 +0200  Julien Isorce <julien.isorce@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c:
-	  Fix rgb issue. Current program should always be set to 0 when a
-	  new texture is attached to a fbo.
+	* gst/gl/Makefile.am:
+	  ISO C90
 
-2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-11 19:01:33 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstglbuffer.c:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst/gl/gstglfilterblur.c:
+	  glTexImage2D(w, h, NULL) is now called only one time (mem alloc)
+
+2008-08-11 17:21:30 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  same as previous commit
+
+2008-08-11 17:17:22 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  Fix rgb issue. Current program should always be set to 0 when a new texture is attached to a fbo.
+
+2008-08-11 15:53:12 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst/gl/gstopengl.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  oups forgot to add 2 files to the previous commit
+
+2008-08-11 15:40:39 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst/gl/gstglfilteredge.c:
+	* gst/gl/gstglfilteredge.h:
+	* gst/gl/gstglupload.c:
+	  remove filteredge
+
+2008-08-11 15:30:38 +0200  Julien Isorce <julien.isorce@gmail.com>
 
 	* gst/gl/gstglfilterblur.c:
-	  remove gstglfilterblur.h, it's easier to have everything in the
-	  same file
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  gen/del the middle texture only one time in the gstglfilterblur
 
-2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-11 11:26:32 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
+	* gst/gl/gstglfilterblur.c:
+	* gst/gl/gstglfilterblur.h:
+	* gst/gl/gstopengl.c:
+	  remove gstglfilterblur.h, it's easier to have everything in the same file
+
+2008-08-11 10:19:37 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* BUGS:
+	  add a BUGS file to take note of known bugs
+
+2008-08-11 10:08:37 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* win32/common/config.h:
+	  remove win32/common/config.h since it's autogenerated by autotools.
+
+2008-08-11 09:52:16 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst-libs/gst/gl/gstgldisplay.h:
 	* gst-libs/gst/gl/gstglfilter.c:
 	* gst-libs/gst/gl/gstglfilter.h:
 	* gst/gl/gstglfilterblur.c:
-	  Add init and reset callbacks in GstGLFilter to run arbitrary gl
-	  code at start and stop. Useful to init and cleanup custom gl
-	  resources.
+	  Add init and reset callbacks in GstGLFilter to run arbitrary gl code at start and stop. Useful to init and cleanup custom gl resources.
 
-2008-08-11  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-11 09:00:40 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
+	* ChangeLog:
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst-libs/gst/gl/gstgldisplay.h:
 	* gst/gl/gstglfilterblur.c:
-	  Add a generic action to be able to execute arbitrary gl code
-	  within the gl thread with less pain
+	  Add a generic action to be able to execute arbitrary gl code within the gl thread with less pain
 
-2008-08-10  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-10 12:30:51 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
+	  changelog update
+
+2008-08-10 11:22:34 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst-libs/gst/gl/gstglfilter.c:
 	* gst-libs/gst/gl/gstglfilter.h:
 	* gst/gl/gstglfilterblur.c:
-	  some steps towards simplification. added a convenience function
-	  to gstglfilter and some comment here and there
+	  some steps towards simplification. added a convenience function to gstglfilter and some comment here and there
 
-2008-08-04  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-05 10:15:07 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
+
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  Fix GL_STACK_OVERFLOW
+
+2008-08-04 12:13:29 +0200  Julien Isorce <julien.isorce@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c:
-	Fix GL_STACK_OVERFLOW caused by PopMatrix called right before the
-	correspondent glMatrixMode.
+	* gst/gl/gstglfilterblur.c:
+	  fix warnings when compiling upload/download shaders
 
-2008-08-04  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-08-04 11:40:24 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* tests/examples/generic/cubeyuv/main.cpp:
+	* tests/examples/generic/doublecube/main.cpp:
+	  use gst_element_get_static_pad instead of gst_element_get_pad which is deprecated
+
+2008-08-04 09:56:59 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
 	* gst-libs/gst/gl/gstgldisplay.c:
 	* gst-libs/gst/gl/gstgldisplay.h:
-	Don't call glTexImage so much times for each frame in the upload
-	functions. Texture memory has to be allocated only once. First step to
-	fix the framerate issue with gstglfilterblur.
+	  is that videoformat pointer really needed?
 
-2008-07-31  Julien Isorce  <julien.isorce@gmail.com>
+2008-08-04 09:46:14 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-    * gst/gl/gstglfilterblur.h
-    * gst/gl/gstglfilterblur.c
-    * gst/gl/gstopengl.c
-    Make the glfilterblur works on the master branch.
+	* ChangeLog:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	  Don't reallocate texture memory every time in upload_* functions.
 
-    * gst/gl/gstglfilterlaplacian.c
-    Up a comment
+2008-08-01 11:30:26 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-    * gst/gl/Makefile.am
-    * unix/codeblocks/gstopengl/gstopengl.cbp
-    Add filterblur to build
+	* configure.ac:
+	* tests/examples/gtk/filterxoverlay/Makefile.am:
+	  fix autotools stuff
 
-    * TODO
-    Task 1 almost done (see the comment)
+2008-08-01 11:00:49 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-2008-07-31  Julien Isorce  <julien.isorce@gmail.com>
-    * tests/examples/qt/*
-    Fix  warnings under linux
-    and add some build instructions
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	  reindent gstgldisplay with gstreamer-c-mode
 
-2008-07-22  Julien Isorce  <julien.isorce@gmail.com>
-    Finish to arrange the examples
+2008-07-31 17:48:04 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-2008-07-22  Julien Isorce  <julien.isorce@gmail.com>
-    Arranged examples, but some of them are temporarly off
-
-2008-07-21  Julien Isorce  <julien.isorce@gmail.com>
-
-    * tests/examples/Makefile.am
-    * tests/examples/README
-    * tests/examples/cubeyuv/main.cpp
-    * tests/examples/doublecube/main.cpp
-    * tests/examples/generic/Makefile.am
-    * tests/examples/generic/README
-    * tests/examples/gtk/Makefile.am
-    * tests/examples/gtk/README
-    * tests/examples/gtk/filterxoverlay/Makefile.am
-    * tests/examples/gtk/filterxoverlay/filterxoverlay.vcproj
-    * tests/examples/gtk/filterxoverlay/main.cpp
-    * tests/examples/gtk/gtk.sln
-    * tests/examples/qt/Makefile.am
-    * tests/examples/qt/README
-    * tests/examples/readme.txt
-    * tests/examples/wx/Makefile.am
-    Prepare to arrange/classify the examples
-
-2008-07-21  Julien Isorce  <julien.isorce@gmail.com>
-
-    * TODO
-    * gst-libs/gst/gl/gstgldisplay.c
-    Finish todo task 4
-
-2008-07-20  Julien Isorce  <julien.isorce@gmail.com>
-
-    * TODO
-    * gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/gl/gstgldisplay.h
-    * gst-libs/gst/gl/gstglfilter.c
-    * gst/gl/gstglcolorscale.c
-    * gst/gl/gstgldownload.c
-    * gst/gl/gstglimagesink.c
-    * gst/gl/gstgltestsrc.c
-    * gst/gl/gstglupload.c
-    Finish todo task 5
-
-2008-07-19  Julien Isorce  <julien.isorce@gmail.com>
-
-	* REQUIREMENTS
-	Glew 1.4
-
-    * TODO
-    Add a note to the task 9
-
-    * tests/examples/Makefile.am
-    * tests/examples/readme.txt
-    Update
-
-    * tests/examples/cubeyuv/main.cpp
-    * tests/examples/doublecube/main.cpp
-    The video location is given in the command line arguments.
-    Use decodebin instead of a fixed decoder and demuxer.
-
-    * tests/examples/mousexoverlay/pipeline.cpp
-    * tests/examples/videoxoverlay/pipeline.cpp
-    * tests/examples/qglwidgetxoverlay/pipeline.cpp
-    A check was wrong in the cb_new_back function.
-
-2008-07-19  Julien Isorce  <julien.isorce@gmail.com>
-
+	* ChangeLog:
 	* TODO:
-	Fisnish task 2, add task 16
+	* gst/gl/Makefile.am:
+	* gst/gl/gstglfilterblur.c:
+	* gst/gl/gstglfilterblur.h:
+	* gst/gl/gstglfilterlaplacian.c:
+	* gst/gl/gstopengl.c:
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  add and make the Filippo's gstglfilterblur works on the master branch (example of multiple step rendering)
 
-	* gst-libs/gst/gl/gstgldisplay.c
-    * gst-libs/gst/gl/gstgldisplay.h
-    * gst/gl/gstglfilteredge.c
-    * gst/gl/gstglfilteredge.h
-    * gst/gl/gstglfilterlaplacian.c
-    * gst/gl/gstglfilterlaplacian.h
-	Use GstGLShader in the GLSL colorspace conversion
+2008-07-31 13:59:44 +0200  julien <julien@KJIS.(none)>
 
-2008-07-18  Julien Isorce  <julien.isorce@gmail.com>
+	* unix/codeblocks/gstopengl/gstopengl.cbp:
+	  add GstGLShader stuffs into codeblocks project
 
+2008-07-31 13:17:49 +0200  julien <julien@KJIS.(none)>
+
+	* ChangeLog:
+	  fix qt warnings under linux
+
+2008-07-31 13:17:17 +0200  julien <julien@KJIS.(none)>
+
+	* tests/examples/qt/README:
+	* tests/examples/qt/mousexoverlay/main.cpp:
+	* tests/examples/qt/mousexoverlay/mousexoverlay.pro:
+	* tests/examples/qt/qglwidgetxoverlay/main.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.pro:
+	* tests/examples/qt/videoxoverlay/main.cpp:
+	* tests/examples/qt/videoxoverlay/videoxoverlay.pro:
+	  fix qt warnings under linux
+
+2008-07-25 01:43:28 +0200  julien User <julien@ubuntu.ubuntu-domain>
+
+	* configure.ac:
+	* gst/gl/gstglimagesink.c:
+	  fix makefiles list from configure.ac (tests have changes) and fix a warning
+
+2008-07-22 00:30:32 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* tests/examples/generic/cube/cube.sln:
+	* tests/examples/generic/cubeyuv/cubeyuv.sln:
+	* tests/examples/generic/doublecube/doublecube.sln:
+	* tests/examples/generic/generic.sln:
+	* tests/examples/generic/recordgraphic/recordgraphic.sln:
+	* tests/examples/gtk/gtk.sln:
+	* tests/examples/gtk/gtkxoverlay/gtkoverlay.sln:
+	* tests/examples/gtk/gtkxoverlay/gtkxoverlay.vcproj:
+	  Finish to arrange the examples
+
+2008-07-22 00:18:00 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* tests/examples/Makefile.am:
+	* tests/examples/cube/Makefile.am:
+	* tests/examples/cube/cube.sln:
+	* tests/examples/cube/cube.vcproj:
+	* tests/examples/cube/main.cpp:
+	* tests/examples/cubeyuv/Makefile.am:
+	* tests/examples/cubeyuv/cubeyuv.sln:
+	* tests/examples/cubeyuv/cubeyuv.vcproj:
+	* tests/examples/cubeyuv/main.cpp:
+	* tests/examples/doublecube/Makefile.am:
+	* tests/examples/doublecube/doublecube.sln:
+	* tests/examples/doublecube/doublecube.vcproj:
+	* tests/examples/doublecube/main.cpp:
+	* tests/examples/generic/Makefile.am:
+	* tests/examples/generic/README:
+	* tests/examples/generic/cube/Makefile.am:
+	* tests/examples/generic/cube/cube.sln:
+	* tests/examples/generic/cube/cube.vcproj:
+	* tests/examples/generic/cube/main.cpp:
+	* tests/examples/generic/cubeyuv/Makefile.am:
+	* tests/examples/generic/cubeyuv/cubeyuv.sln:
+	* tests/examples/generic/cubeyuv/cubeyuv.vcproj:
+	* tests/examples/generic/cubeyuv/main.cpp:
+	* tests/examples/generic/doublecube/Makefile.am:
+	* tests/examples/generic/doublecube/doublecube.sln:
+	* tests/examples/generic/doublecube/doublecube.vcproj:
+	* tests/examples/generic/doublecube/main.cpp:
+	* tests/examples/generic/recordgraphic/Makefile:
+	* tests/examples/generic/recordgraphic/main.cpp:
+	* tests/examples/generic/recordgraphic/recordgraphic.sln:
+	* tests/examples/generic/recordgraphic/recordgraphic.vcproj:
+	* tests/examples/gtk/Makefile.am:
+	* tests/examples/gtk/gtkxoverlay/Makefile.am:
+	* tests/examples/gtk/gtkxoverlay/gtkoverlay.sln:
+	* tests/examples/gtk/gtkxoverlay/gtkxoverlay.vcproj:
+	* tests/examples/gtk/gtkxoverlay/main.cpp:
+	* tests/examples/gtkxoverlay/Makefile.am:
+	* tests/examples/gtkxoverlay/gtkoverlay.sln:
+	* tests/examples/gtkxoverlay/gtkxoverlay.vcproj:
+	* tests/examples/gtkxoverlay/main.cpp:
+	* tests/examples/mousexoverlay/gstthread.cpp:
+	* tests/examples/mousexoverlay/gstthread.h:
+	* tests/examples/mousexoverlay/main.cpp:
+	* tests/examples/mousexoverlay/mousexoverlay.pri:
+	* tests/examples/mousexoverlay/mousexoverlay.pro:
+	* tests/examples/mousexoverlay/mousexoverlay.sln:
+	* tests/examples/mousexoverlay/mousexoverlay.vcproj:
+	* tests/examples/mousexoverlay/pipeline.cpp:
+	* tests/examples/mousexoverlay/pipeline.h:
+	* tests/examples/mousexoverlay/qrenderer.cpp:
+	* tests/examples/mousexoverlay/qrenderer.h:
+	* tests/examples/qglwidgetxoverlay/gstthread.cpp:
+	* tests/examples/qglwidgetxoverlay/gstthread.h:
+	* tests/examples/qglwidgetxoverlay/main.cpp:
+	* tests/examples/qglwidgetxoverlay/pipeline.cpp:
+	* tests/examples/qglwidgetxoverlay/pipeline.h:
+	* tests/examples/qglwidgetxoverlay/qglrenderer.cpp:
+	* tests/examples/qglwidgetxoverlay/qglrenderer.h:
+	* tests/examples/qglwidgetxoverlay/qglwidgetxoverlay.pri:
+	* tests/examples/qglwidgetxoverlay/qglwidgetxoverlay.pro:
+	* tests/examples/qglwidgetxoverlay/qglwidgetxoverlay.sln:
+	* tests/examples/qglwidgetxoverlay/qglwidgetxoverlay.vcproj:
+	* tests/examples/qt/README:
+	* tests/examples/qt/mousexoverlay/gstthread.cpp:
+	* tests/examples/qt/mousexoverlay/gstthread.h:
+	* tests/examples/qt/mousexoverlay/main.cpp:
+	* tests/examples/qt/mousexoverlay/mousexoverlay.pri:
+	* tests/examples/qt/mousexoverlay/mousexoverlay.pro:
+	* tests/examples/qt/mousexoverlay/mousexoverlay.sln:
+	* tests/examples/qt/mousexoverlay/mousexoverlay.vcproj:
+	* tests/examples/qt/mousexoverlay/pipeline.cpp:
+	* tests/examples/qt/mousexoverlay/pipeline.h:
+	* tests/examples/qt/mousexoverlay/qrenderer.cpp:
+	* tests/examples/qt/mousexoverlay/qrenderer.h:
+	* tests/examples/qt/qglwidgetxoverlay/gstthread.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/gstthread.h:
+	* tests/examples/qt/qglwidgetxoverlay/main.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/pipeline.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/pipeline.h:
+	* tests/examples/qt/qglwidgetxoverlay/qglrenderer.cpp:
+	* tests/examples/qt/qglwidgetxoverlay/qglrenderer.h:
+	* tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.pri:
+	* tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.pro:
+	* tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.sln:
+	* tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.vcproj:
+	* tests/examples/qt/videoxoverlay/gstthread.cpp:
+	* tests/examples/qt/videoxoverlay/gstthread.h:
+	* tests/examples/qt/videoxoverlay/main.cpp:
+	* tests/examples/qt/videoxoverlay/pipeline.cpp:
+	* tests/examples/qt/videoxoverlay/pipeline.h:
+	* tests/examples/qt/videoxoverlay/qrenderer.cpp:
+	* tests/examples/qt/videoxoverlay/qrenderer.h:
+	* tests/examples/qt/videoxoverlay/videoxoverlay.pri:
+	* tests/examples/qt/videoxoverlay/videoxoverlay.pro:
+	* tests/examples/qt/videoxoverlay/videoxoverlay.sln:
+	* tests/examples/qt/videoxoverlay/videoxoverlay.vcproj:
+	* tests/examples/recordgraphic/Makefile:
+	* tests/examples/recordgraphic/main.cpp:
+	* tests/examples/recordgraphic/recordgraphic.sln:
+	* tests/examples/recordgraphic/recordgraphic.vcproj:
+	* tests/examples/videoxoverlay/gstthread.cpp:
+	* tests/examples/videoxoverlay/gstthread.h:
+	* tests/examples/videoxoverlay/main.cpp:
+	* tests/examples/videoxoverlay/pipeline.cpp:
+	* tests/examples/videoxoverlay/pipeline.h:
+	* tests/examples/videoxoverlay/qrenderer.cpp:
+	* tests/examples/videoxoverlay/qrenderer.h:
+	* tests/examples/videoxoverlay/videoxoverlay.pri:
+	* tests/examples/videoxoverlay/videoxoverlay.pro:
+	* tests/examples/videoxoverlay/videoxoverlay.sln:
+	* tests/examples/videoxoverlay/videoxoverlay.vcproj:
+	  Arranged examples, but some of them are temporarly off
+
+2008-07-21 23:46:13 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* tests/examples/Makefile.am:
+	* tests/examples/README:
+	* tests/examples/cubeyuv/main.cpp:
+	* tests/examples/doublecube/main.cpp:
+	* tests/examples/generic/Makefile.am:
+	* tests/examples/generic/README:
+	* tests/examples/gtk/Makefile.am:
+	* tests/examples/gtk/README:
+	* tests/examples/gtk/filterxoverlay/Makefile.am:
+	* tests/examples/gtk/filterxoverlay/filterxoverlay.vcproj:
+	* tests/examples/gtk/filterxoverlay/main.cpp:
+	* tests/examples/gtk/gtk.sln:
+	* tests/examples/qt/Makefile.am:
+	* tests/examples/qt/README:
+	* tests/examples/readme.txt:
+	* tests/examples/wx/Makefile.am:
+	  Prepare to arrange the examples
+
+2008-07-21 00:24:48 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
 	* TODO:
-	add task 4 and 5
+	* gst-libs/gst/gl/gstgldisplay.c:
+	  finish todo task 4
 
-	* gst-libs/gst/gl/gstgldisplay.c
-	* gst-libs/gst/gl/gstgldisplay.h
-	Fix check function about OpenGL >= 1.4
-	and Glew >= 1.4
-	(version in [1.0, 1.4[ was not detected
+2008-07-20 16:38:48 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-	* gst-libs/gst/gl/gstglfilter.h
-	* gst-libs/gst/gl/gstglshader.c:
-	* gst-libs/gst/gl/gstglshader.h:
-	* gst/gl/gstgltestsrc.h
-	* gst/gl/gstopengl.c
-	* gst/gl/gstglfilterlaplacian.h
-	I just make sure to save them to LF but
-	git is still writting its wrong message.
-	Let me know if I have commited in CRLF
-	by mistake.
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst-libs/gst/gl/gstglfilter.c:
+	* gst/gl/gstglcolorscale.c:
+	* gst/gl/gstgldownload.c:
+	* gst/gl/gstglimagesink.c:
+	* gst/gl/gstgltestsrc.c:
+	* gst/gl/gstglupload.c:
+	  make the plugin properly shutdown when one of the check requirements failed
 
-	* gst/gl/gstglfilterlaplacian.c
-	Fix convolution_fragment_source to make
-	it compile on ATI. (size array must be explicit in
-	the declaration)
+2008-07-20 12:26:42 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* tests/examples/qglwidgetxoverlay/qglrenderer.cpp
-	* tests/examples/qglwidgetxoverlay/qglrenderer.h
-	Forgot to push them in my previous push
+	* configure.ac:
+	* tests/examples/Makefile.am:
+	* tests/examples/gtkxoverlay/Makefile:
+	* tests/examples/gtkxoverlay/Makefile.am:
+	  convert tests/examples/gtkxoverlay to automake
 
-	* tests/pipelines
-	Add two funny example pipelines that use
-	the gstglfilterlaplacian
+2008-07-19 17:15:41 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-	* win32/vs8/libgstopengl.vcproj
-	Add gstglshader.h, .c, and gstglfilterlaplacian.h, .c
-	to the project.
+	* ChangeLog:
+	* REQUIREMENTS:
+	* TODO:
+	* tests/examples/cubeyuv/main.cpp:
+	* tests/examples/doublecube/main.cpp:
+	* tests/examples/mousexoverlay/pipeline.cpp:
+	* tests/examples/qglwidgetxoverlay/pipeline.cpp:
+	* tests/examples/readme.txt:
+	* tests/examples/videoxoverlay/pipeline.cpp:
+	  The video location is given in argument for the cubeyuv and doulecube example. Use decodebin.
 
-2008-07-18  Filippo Argiolas <filippo.argiolas@gmail.com>
+2008-07-19 08:32:38 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* gst-libs/gst/gl/Makefile.am:
-	* gst-libs/gst/gl/gstglshader.c:
-	* gst-libs/gst/gl/gstglshader.h:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst/gl/gstglfilteredge.c:
+	  fix warnings (unused vars)
+
+2008-07-19 03:00:26 +0200  Julien Isorce <julien.isorce@gmail.com>
+
+	* ChangeLog:
+	* TODO:
+	* gst-libs/gst/gl/gstgldisplay.c:
+	* gst-libs/gst/gl/gstgldisplay.h:
+	* gst/gl/gstglfilteredge.c:
+	* gst/gl/gstglfilteredge.h:
 	* gst/gl/gstglfilterlaplacian.c:
 	* gst/gl/gstglfilterlaplacian.h:
-	* gst/gl/Makefile.am:
-	* gst/gl/gstopengl.c:
+	  use GstGLShader in the GLSL colorspace conversion
 
-	Import gstglshader stuff from cvs branch.
-	Add a demo laplacian filter to demonstrate how gstglshader can be
-	easily integrated with minimum effort. Note that at the moment it does
-	everything in the filter callback, I didn't use the onInitFBO callback
-	to keep it simple.
+2008-07-18 22:58:33 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-2008-07-18  Julien Isorce  <julien.isorce@gmail.com>
+	* TODO:
+	  Add coding style suggestion in TODO file
 
-	* tests/examples/qglwidgetxoverlay: Browse files to load
-	  a local video.
+2008-07-18 22:33:44 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-2008-07-17  Julien Isorce  <julien.isorce@gmail.com>
+	* gst/gl/gstglfilterlaplacian.c:
+	  fixed warning for unused variable (fatal with -Werror)
 
-	* tests/examples/mousexoverlay: Browse files to load
-	  a local video.
+2008-07-18 22:15:40 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-2008-07-17  Julien Isorce  <julien.isorce@gmail.com>
+	* TODO:
+	  I was wrong about the : instead of using g_assert
 
-	* tests/examples/videoxoverlay: Browse files to load
-	  a local video.
+2008-07-18 21:55:00 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-2008-07-11  David Schleef  <ds@schleef.org>
-
-	* configure.ac: Add AG_GST_ARG_WITH_PLUGINS
-
-2008-04-06  Sebastian Dröge  <slomo@circular-chaos.org>
-
-        Patch by: Damien Lespiau <damien dot lespiau at gmail dot com>
-
-        * configure.ac:
-        Actually build dlls when cross-compiling with mingw32.
-        Fixes bug #526247.
-
-2008-03-24  David Schleef  <ds@schleef.org>
-
-	* Makefile.am:
-	* configure.ac: Fix build system for recent changes in m4
-	  files.  Fixed problem building gst/gl/
-
-2008-02-23  Tim-Philipp Müller  <tim at centricular dot net>
-
-	* gst-libs/gst/gl/gstglbuffer.c:
-	  (gst_gl_buffer_format_from_video_format):
-	  Fix compiler warning if there are video format
-	  enums gstglbuffer doesn't know about yet.
-
+	* ChangeLog:
+	* TODO:
 	* gst-libs/gst/gl/gstgldisplay.c:
-	  (gst_gl_display_upload_texture_rectangle),
-	  (gst_gl_display_draw_texture):
-	  Fix printf format for 64-bit integers.
+	* gst/gl/gstglfilterlaplacian.c:
+	* tests/examples/qglwidgetxoverlay/qglrenderer.cpp:
+	* tests/examples/qglwidgetxoverlay/qglrenderer.h:
+	* tests/pipelines:
+	* win32/vs8/libgstopengl.vcproj:
+	  add GstGLShader stuffs in the vs8 project, fix laplacian fragment code to make it compile on ATI, and fix check function about Opengl and Glew version
 
-2008-01-31  David Schleef  <ds@schleef.org>
+2008-07-18 10:49:34 +0200  Filippo Argiolas <filippo.argiolas@gmail.com>
 
-	* configure.ac:
-	* pkgconfig/Makefile.am:
-	* pkgconfig/gstreamer-gl-uninstalled.pc.in:
-	* pkgconfig/gstreamer-gl.pc.in:
-	* pkgconfig/gstreamer-plugins-gl-uninstalled.pc.in:
-	* pkgconfig/gstreamer-plugins-gl.pc.in:
-	  Rename pkgconfig files.  And install them.
-	* tests/check/Makefile.am:
-	* tests/check/generic/states.c:
-	* tests/check/pipelines/simple-launch-lines.c:
-	  Add some tests copied from -good.
-
-2008-01-31  Tim-Philipp Müller  <tim at centricular dot net>
-
+	* ChangeLog:
 	* gst-libs/gst/gl/Makefile.am:
-	  The library needs to link against libgstvideo-0.10.
-
+	* gst-libs/gst/gl/gstglshader.c:
+	* gst-libs/gst/gl/gstglshader.h:
 	* gst/gl/Makefile.am:
-	  The plugin does not (I think) need to link against GL or libgstvideo,
-	  since our new gstreamer GL library already does that, but it does
-	  need to link against our brand-new libgstgl-0.10.
-
-2008-01-31  Tim-Philipp Müller  <tim at centricular dot net>
-
-	* configure.ac:
-	  When using the non-pkg-config check, set and export GL_LIBS
-	  correctly.
-
-2008-01-31  David Schleef  <ds@schleef.org>
-
-	* gst/gl/.cvsignore: ingore some files
-	* gst-libs/gst/Makefile.am: distcheck fixes
-	* gst/gl/Makefile.am: distcheck fixes
-	* win32/common/config.h: -good has this in CVS, so we will too.
-
-2008-01-31  David Schleef  <ds@schleef.org>
-
-	* configure.ac:
-	  Readd pre-pkgconfig OpenGL detection, since pkgconfig requires
-	  Mesa from git master.
-	* gst/gl/glimagesink.c:
+	* gst/gl/gstglfilterlaplacian.c:
+	* gst/gl/gstglfilterlaplacian.h:
 	* gst/gl/gstopengl.c:
-	  Move debug category initialization to element.
-	* gst-libs/gst/gl/Makefile.am:
-	* gst-libs/gst/gl/gstglfilter.c:
-	* gst-libs/gst/gl/gstglfilter.h:
-	* gst/gl/gstglfilter.c:
-	* gst/gl/gstglfilter.h:
-	  Move glfilter to library.
-	* pkgconfig/gstreamer-plugins-gl.pc.in:
-	  Add gstreamer-base-0.10 as a requirement.
-	* po/en.po:
-	  Update.
+	  Imported GstGLShader from cvs branch. Added a demo laplacian convolution filter to demonstrate how this can be integrated with minimum effort.
 
-2008-01-18  Tim-Philipp Müller  <tim at centricular dot net>
+2008-07-18 01:39:56 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-	* configure.ac:
-	* docs/Makefile.am:
-	* gst-libs/Makefile.am:
-	* gst-libs/gst/gl/Makefile.am:
-	* gst/gl/Makefile.am:
-	* tests/Makefile.am:
-	  Fix compilation in uninstalled setup and some
-	  distcheck-y bits (not all though).
+	* ChangeLog:
+	* tests/examples/mousexoverlay/gstthread.cpp:
+	* tests/examples/mousexoverlay/main.cpp:
+	* tests/examples/qglwidgetxoverlay/gstthread.cpp:
+	* tests/examples/qglwidgetxoverlay/gstthread.h:
+	* tests/examples/qglwidgetxoverlay/main.cpp:
+	* tests/examples/qglwidgetxoverlay/pipeline.cpp:
+	* tests/examples/qglwidgetxoverlay/pipeline.h:
+	  Make the qglwidgetxoverlay example work on linux, and browse files to load a local video
 
-2008-01-17  David Schleef  <ds@schleef.org>
+2008-07-17 23:54:28 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-	Add some files to make project compile.
-	* gst-libs/gst/gettext.h:
-	* gst-libs/gst/gst-i18n-plugin.h:
-	* po/.cvsignore:
-	* po/Makevars:
-	* po/POTFILES.in:
-	* po/en.po:
+	  Merge branch 'master' of cap@diracvideo.org:/git/gst-plugins-gl
 
-2008-01-17  David Schleef  <ds@schleef.org>
+2008-07-17 23:53:51 +0200  Julien Isorce <julien.isorce@gmail.com>
 
-	Fixes to make project compile.  Probably still doesn't work.
-	* configure.ac:
-	* gst-libs/gst/Makefile.am:
-	* gst-libs/gst/gl/Makefile.am:
-	* gst/Makefile.am:
-	* gst/gl/Makefile.am:
-	* gst/gl/gstgltestsrc.c:
-	* po/LINGUAS:
-	* win32/MANIFEST:
-
-2008-01-17  David Schleef  <ds@schleef.org>
-
-	Add project infrastructure.  Not complete, doesn't work.
-	* .cvsignore:
-	* AUTHORS:
-	* COPYING:
-	* COPYING.LIB:
-	* INSTALL:
-	* Makefile.am:
-	* NEWS:
-	* README:
-	* RELEASE:
-	* REQUIREMENTS:
-	* autogen.sh:
-	* configure.ac:
-	* docs/.cvsignore:
-	* docs/Makefile.am:
-	* docs/libs/Makefile.am:
-	* docs/plugins/Makefile.am:
-	* docs/version.entities.in:
-	* ext/Makefile.am:
-	* gst-libs/Makefile.am:
-	* gst-libs/gst/Makefile.am:
-	* gst-libs/gst/gl/Makefile.am:
-	* gst-plugins-gl.doap:
-	* gst-plugins-gl.spec.in:
-	* gst/Makefile.am:
-	* m4/.cvsignore:
-	* m4/Makefile.am:
-	* pkgconfig/.cvsignore:
-	* pkgconfig/Makefile.am:
-	* pkgconfig/gstreamer-plugins-gl-uninstalled.pc.in:
-	* pkgconfig/gstreamer-plugins-gl.pc.in:
-	* sys/Makefile.am:
-	* tests/Makefile.am:
-	* tests/check/Makefile.am:
-	* tests/examples/Makefile.am:
-	* tests/icles/Makefile.am:
-	* tools/Makefile.am:
-	* win32/common/config.h.in:
+	* ChangeLog:
+	* tests/examples/doublecube/data/Thumbs.db:
+	* tests/examples/mousexoverlay/gstthread.cpp:
+	* tests/examples/mousexoverlay/gstthread.h:
+	* tests/examples/mousexoverlay/main.cpp:
+	* tests/examples/mousexoverlay/pipeline.cpp:
+	* tests/examples/mousexoverlay/pipeline.h:
+	* tests/examples/mousexoverlay/qrenderer.cpp:
+	* tests/examples/mousexoverlay/qrenderer.h:
+	* tests/examples/videoxoverlay/pipeline.cpp:
+	  Make the mousexoverlay work on linux, and browse files to load a local video
 

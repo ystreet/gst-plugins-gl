@@ -199,6 +199,16 @@
 </ARG>
 
 <ARG>
+<NAME>GstGLImageSink::force-aspect-ratio</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Force aspect ratio</NICK>
+<BLURB>When enabled, scaling will respect original aspect ratio.</BLURB>
+<DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
 <NAME>GstGLFilterSobel::invert</NAME>
 <TYPE>gboolean</TYPE>
 <RANGE></RANGE>
@@ -216,5 +226,15 @@
 <NICK>Location of the image</NICK>
 <BLURB>Location of the image.</BLURB>
 <DEFAULT>NULL</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLUpload::external-opengl-context</NAME>
+<TYPE>gulong</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>External OpenGL context</NICK>
+<BLURB>Give an external OpenGL context with which to share textures.</BLURB>
+<DEFAULT></DEFAULT>
 </ARG>
 
