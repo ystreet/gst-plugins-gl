@@ -429,6 +429,8 @@ pkgconfig/gstreamer-gl-uninstalled.pc
 tests/Makefile
 tests/check/Makefile
 tests/examples/Makefile
+tests/examples/cocoa/Makefile
+tests/examples/cocoa/videoxoverlay/Makefile
 tests/examples/generic/Makefile
 tests/examples/generic/cube/Makefile
 tests/examples/generic/cubeyuv/Makefile

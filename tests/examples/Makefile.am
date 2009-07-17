@@ -5,4 +5,8 @@ SUBDIRS += clutter
 endif
 if HAVE_GTK
 SUBDIRS += gtk
-endif 
+endif
+if GL_BACKEND_COCOA
+SUBDIRS += cocoa
+endif
+ 
