@@ -120,6 +120,28 @@ KDevelop3,
 KDevelop3 - Unix Makefiles
 etc...)
 
+------------------
+* cmake on MacOSX:
+------------------
+
+-Unix Makefiles:
+cd gst-plugins-gl
+cd ..
+mkdir unix
+cd unix
+cmake -G "Unix Makefiles" ../gst-plugins-gl
+make
+result is gst/gl/libgstopengl.so
+
+-Xcode:
+cd gst-plugins-gl
+cd ..
+mkdir xcode
+cd xcode
+cmake -G Xcode ../gst-plugins-gl
+Open GST-PLUGINS-GL.xcode
+result is gst/gl/Debug/libgstopengl.so
+
 
 Unix frozen builds: autotools or unix/codeblocks
 ================================================
