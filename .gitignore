@@ -6,7 +6,7 @@ autom4te.cache
 config.h
 config.h.in
 config.log
-config.status
+config.status*
 config.guess
 config.sub
 config.rpath
@@ -50,6 +50,16 @@ gst*.pc
 *.ncb
 *.suo
 
+docs/libs/doc-registry.*
+docs/libs/html
+docs/libs/tmpl
+docs/libs/xml
+docs/libs/*bak
+docs/plugins/html
+docs/plugins/tmpl
+docs/plugins/xml
+docs/plugins/*bak
+
 # You might want to consider simplifying the ignores here...
 sh.exe.stackdump
 tests/examples/generic/cube/Debug/
@@ -87,6 +97,7 @@ tests/examples/qt/videoxoverlay/videoxoverlay.vcproj.BOWOB.Julien.user
 tests/examples/generic/recordgraphic/record.avi
 tests/examples/gtk/filternoxoverlay/Debug/
 tests/examples/gtk/filternoxoverlay/filternoxoverlay.vcproj.BOWOB.Julien.user
+tests/examples/gtk/switchxoverlay/switchxoverlay
 tests/examples/qt/mousexoverlay/Debug/
 tests/examples/qt/mousexoverlay/generatedfiles/
 tests/examples/qt/mousexoverlay/mousexoverlay.ncb

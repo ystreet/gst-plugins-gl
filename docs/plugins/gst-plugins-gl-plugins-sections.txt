@@ -3,6 +3,7 @@
 <TITLE>glbumper</TITLE>
 GstGLBumper
 <SUBSECTION Standard>
+GstGLBumperClass
 GST_GL_BUMPER
 GST_IS_GL_BUMPER
 GST_TYPE_GL_BUMPER
@@ -17,6 +18,7 @@ GST_GL_BUMPER_GET_CLASS
 <TITLE>glcolorscale</TITLE>
 GstGLColorscale
 <SUBSECTION Standard>
+GstGLColorscaleClass
 GST_GL_COLORSCALE
 GST_IS_GL_COLORSCALE
 GST_TYPE_GL_COLORSCALE
@@ -27,10 +29,40 @@ GST_GL_COLORSCALE_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>element-gldeinterlace</FILE>
+<TITLE>gldeinterlace</TITLE>
+GstGLDeinterlace
+<SUBSECTION Standard>
+GstGLDeinterlaceClass
+GST_GL_DEINTERLACE
+GST_IS_GL_DEINTERLACE
+GST_TYPE_GL_DEINTERLACE
+gst_gl_deinterlace_get_type
+GST_GL_DEINTERLACE_CLASS
+GST_IS_GL_DEINTERLACE_CLASS
+GST_GL_DEINTERLACE_GET_CLASS
+</SECTION>
+
+<SECTION>
+<FILE>element-gldifferencematte</FILE>
+<TITLE>gldifferencematte</TITLE>
+GstGLDifferenceMatte
+<SUBSECTION Standard>
+GstGLDifferenceMatteClass
+GST_GL_DIFFERENCEMATTE
+GST_IS_GL_DIFFERENCEMATTE
+GST_TYPE_GL_DIFFERENCEMATTE
+GST_GL_DIFFERENCEMATTE_CLASS
+GST_IS_GL_DIFFERENCEMATTE_CLASS
+GST_GL_DIFFERENCEMATTE_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>element-gldownload</FILE>
 <TITLE>gldownload</TITLE>
 GstGLDownload
 <SUBSECTION Standard>
+GstGLDownloadClass
 GST_GL_DOWNLOAD
 GST_IS_GL_DOWNLOAD
 GST_TYPE_GL_DOWNLOAD
@@ -46,6 +78,7 @@ GstGLEffectProcessFunc
 NEEDED_TEXTURES
 <TITLE>gleffects</TITLE>
 GstGLEffects
+GstGLEffectsClass
 gst_gl_effects_draw_texture
 gst_gl_effects_identity
 gst_gl_effects_mirror
@@ -59,6 +92,7 @@ gst_gl_effects_square
 gst_gl_effects_heat
 gst_gl_effects_sepia
 gst_gl_effects_xpro
+gst_gl_effects_xray
 gst_gl_effects_luma_xpro
 gst_gl_effects_sin
 gst_gl_effects_glow
@@ -77,6 +111,7 @@ GST_GL_EFFECTS_GET_CLASS
 <TITLE>glfilterapp</TITLE>
 GstGLFilterApp
 <SUBSECTION Standard>
+GstGLFilterAppClass
 GST_GL_FILTER_APP
 GST_IS_GL_FILTER_APP
 GST_TYPE_GL_FILTER_APP
@@ -87,10 +122,26 @@ GST_GL_FILTER_APP_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>element-glfilterblur</FILE>
+<TITLE>glfilterblur</TITLE>
+GstGLFilterBlur
+<SUBSECTION Standard>
+GstGLFilterBlurClass
+GST_GL_FILTERBLUR
+GST_IS_GL_FILTERBLUR
+GST_TYPE_GL_FILTERBLUR
+gst_gl_glfilterblur_get_type
+GST_GL_FILTERBLUR_CLASS
+GST_IS_GL_FILTERBLUR_CLASS
+GST_GL_FILTERBLUR_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>element-glfiltercube</FILE>
 <TITLE>glfiltercube</TITLE>
 GstGLFilterCube
 <SUBSECTION Standard>
+GstGLFilterCubeClass
 GST_GL_FILTER_CUBE
 GST_IS_GL_FILTER_CUBE
 GST_TYPE_GL_FILTER_CUBE
@@ -105,6 +156,7 @@ GST_GL_FILTER_CUBE_GET_CLASS
 <TITLE>glfilterglass</TITLE>
 GstGLFilterGlass
 <SUBSECTION Standard>
+GstGLFilterGlassClass
 GST_GL_FILTER_GLASS
 GST_IS_GL_FILTER_GLASS
 GST_TYPE_GL_FILTER_GLASS
@@ -119,6 +171,7 @@ GST_GL_FILTER_GLASS_GET_CLASS
 <TITLE>glfilterlaplacian</TITLE>
 GstGLFilterLaplacian
 <SUBSECTION Standard>
+GstGLFilterLaplacianClass
 GST_GL_FILTER_LAPLACIAN
 GST_IS_GL_FILTER_LAPLACIAN
 GST_TYPE_GL_FILTER_LAPLACIAN
@@ -129,10 +182,26 @@ GST_GL_FILTER_LAPLACIAN_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>element-glfiltersobel</FILE>
+<TITLE>glfiltersobel</TITLE>
+GstGLFilterSobel
+<SUBSECTION Standard>
+GstGLFilterSobelClass
+GST_GL_FILTERSOBEL
+GST_IS_GL_FILTERSOBEL
+GST_TYPE_GL_FILTERSOBEL
+gst_gl_glfiltersobel_get_type
+GST_GL_FILTERSOBEL_CLASS
+GST_IS_GL_FILTERSOBEL_CLASS
+GST_GL_FILTERSOBEL_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>element-glimagesink</FILE>
 <TITLE>glimagesink</TITLE>
 GstGLImageSink
 <SUBSECTION Standard>
+GstGLImageSinkClass
 GST_GLIMAGE_SINK
 GST_IS_GLIMAGE_SINK
 GST_TYPE_GLIMAGE_SINK
@@ -142,11 +211,26 @@ GST_IS_GLIMAGE_SINK_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>element-gloverlay</FILE>
+<TITLE>gloverlay</TITLE>
+GstGLOverlay
+<SUBSECTION Standard>
+GstGLOverlayClass
+GST_GL_OVERLAY
+GST_IS_GL_OVERLAY
+GST_TYPE_GL_OVERLAY
+GST_GL_OVERLAY_CLASS
+GST_IS_GL_OVERLAY_CLASS
+GST_GL_OVERLAY_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>element-gltestsrc</FILE>
 GstGLTestSrcPattern
 <TITLE>gltestsrc</TITLE>
 GstGLTestSrc
 <SUBSECTION Standard>
+GstGLTestSrcClass
 GST_GL_TEST_SRC
 GST_IS_GL_TEST_SRC
 GST_TYPE_GL_TEST_SRC
@@ -160,6 +244,7 @@ GST_IS_GL_TEST_SRC_CLASS
 <TITLE>glupload</TITLE>
 GstGLUpload
 <SUBSECTION Standard>
+GstGLUploadClass
 GST_GL_UPLOAD
 GST_IS_GL_UPLOAD
 GST_TYPE_GL_UPLOAD

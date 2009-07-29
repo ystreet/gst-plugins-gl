@@ -20,13 +20,18 @@
     <title>gst-plugins-gl Elements</title>
     <xi:include href="xml/element-glbumper.xml"/>
     <xi:include href="xml/element-glcolorscale.xml"/>
+    <xi:include href="xml/element-gldeinterlace.xml"/>
+    <xi:include href="xml/element-gldifferencematte.xml"/>
     <xi:include href="xml/element-gldownload.xml"/>
     <xi:include href="xml/element-gleffects.xml"/>
     <xi:include href="xml/element-glfilterapp.xml"/>
+    <xi:include href="xml/element-glfilterblur.xml"/>
     <xi:include href="xml/element-glfiltercube.xml"/>
     <xi:include href="xml/element-glfilterglass.xml"/>
     <xi:include href="xml/element-glfilterlaplacian.xml"/>
+    <xi:include href="xml/element-glfiltersobel.xml"/>
     <xi:include href="xml/element-glimagesink.xml"/>
+    <xi:include href="xml/element-gloverlay.xml"/>
     <xi:include href="xml/element-gltestsrc.xml"/>
     <xi:include href="xml/element-glupload.xml"/>
   </chapter>

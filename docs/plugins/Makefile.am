@@ -77,13 +77,18 @@ IGNORE_CFILES =
 EXTRA_HFILES = \
 	$(top_srcdir)/gst/gl/gstglbumper.h \
 	$(top_srcdir)/gst/gl/gstglcolorscale.h \
+	$(top_srcdir)/gst/gl/gstgldeinterlace.h \
+	$(top_srcdir)/gst/gl/gstgldifferencematte.h \
 	$(top_srcdir)/gst/gl/gstgldownload.h \
 	$(top_srcdir)/gst/gl/gstgleffects.h \
 	$(top_srcdir)/gst/gl/gstglfilterapp.h \
+	$(top_srcdir)/gst/gl/gstglfilterblur.h \
 	$(top_srcdir)/gst/gl/gstglfiltercube.h \
 	$(top_srcdir)/gst/gl/gstglfilterglass.h \
 	$(top_srcdir)/gst/gl/gstglfilterlaplacian.h \
+	$(top_srcdir)/gst/gl/gstglfiltersobel.h \
 	$(top_srcdir)/gst/gl/gstglimagesink.h \
+	$(top_srcdir)/gst/gl/gstgloverlay.h \
 	$(top_srcdir)/gst/gl/gstgltestsrc.h \
 	$(top_srcdir)/gst/gl/gstglupload.h
 
