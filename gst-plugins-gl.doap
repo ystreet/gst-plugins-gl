@@ -38,7 +38,7 @@ that use OpenGL.
   <Version>
    <revision>0.10.1</revision>
    <branch>0.10</branch>
-   <name>La Fromage De La Belle France</name>
+   <name>Le Fromage De La Belle France</name>
    <created>2009-07-13</created>
    <file-release rdf:resource="http://gstreamer.freedesktop.org/src/gst-plugins-gl/gst-plugins-gl-0.10.1.tar.bz2" />
    <file-release rdf:resource="http://gstreamer.freedesktop.org/src/gst-plugins-gl/gst-plugins-gl-0.10.1.tar.gz" />
