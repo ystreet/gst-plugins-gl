@@ -9,16 +9,23 @@
 /* ============================================================= */
 
 @interface MainWindow: NSWindow {
+  GMainLoop *m_loop;
   GstElement *m_pipeline;
+  gboolean m_isClosed;
 }
-- (id) initWithContentRect: (NSRect) contentRect Pipeline: (GstElement*) pipeline;
+- (id) initWithContentRect:(NSRect) contentRect Loop:(GMainLoop*)loop Pipeline:(GstElement*)pipeline;
+- (GMainLoop*) loop;
+- (GstElement*) pipeline;
+- (gboolean) isClosed;
 @end
 
 @implementation MainWindow
 
-- (id) initWithContentRect: (NSRect) contentRect Pipeline: (GstElement*) pipeline
+- (id) initWithContentRect:(NSRect)contentRect Loop:(GMainLoop*)loop Pipeline:(GstElement*)pipeline
 {
+  m_loop = loop;
   m_pipeline = pipeline;
+  m_isClosed = FALSE;
   
   self = [super initWithContentRect: contentRect
 		styleMask: (NSTitledWindowMask | NSClosableWindowMask | NSResizableWindowMask | NSMiniaturizableWindowMask)
@@ -32,33 +39,35 @@
   return self;
 }
 
+- (GMainLoop*) loop {
+  return m_loop;  
+}
+
+- (GstElement*) pipeline {
+  return m_pipeline;  
+}
+
+- (gboolean) isClosed {
+  return m_isClosed;  
+}
+
+- (void) customClose {
+  m_isClosed = TRUE;
+}
+
 - (BOOL) windowShouldClose:(id)sender {
-  NSLog(@"close");
   gst_element_send_event (m_pipeline, gst_event_new_eos ());
-  [NSApp stop:self];
-  NSLog(@"eos sent");
   return YES;
 }
 
-- (void) windowDidResize: (NSNotification *) not {
-  NSLog(@"window did resize");
-}
-
 - (void) applicationDidFinishLaunching: (NSNotification *) not {
-  NSLog(@"applicationDidFinishLaunching");
   [self makeMainWindow];
   [self center];
   [self orderFront:self];
 }
 
-- (void) applicationWillFinishLaunching: (NSNotification *) not {
-}
-
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)app {
   return NO;
-}
-
-- (void) applicationWillTerminate:(NSNotification *)aNotification {
 }
 
 @end
@@ -90,29 +99,22 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, MainWind
 }
 
 
-static void end_stream_cb(GstBus* bus, GstMessage* message, GMainLoop* loop)
+static void end_stream_cb(GstBus* bus, GstMessage* message, MainWindow* window)
 {
-  g_print("End of stream\n");
-  g_main_loop_quit (loop);
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  
+  gst_element_set_state ([window pipeline], GST_STATE_NULL);
+  g_object_unref ([window pipeline]);	
+  g_main_loop_quit ([window loop]);
+  
+  [window performSelectorOnMainThread:@selector(customClose) withObject:nil waitUntilDone:YES];
+  
+  [pool release];
 }
 
-
-/*static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* videosink)
+static gpointer thread_func (MainWindow* window)
 {
-    gst_x_overlay_expose (GST_X_OVERLAY (videosink));
-    return FALSE;
-}*/
-
-GstElement* pipeline = NULL;
-
-
-static gpointer thread_func (GMainLoop* loop)
-{
-  g_print ("loop started\n");
-  g_main_loop_run (loop);
-  g_print ("loop left\n");
-  gst_element_set_state (pipeline, GST_STATE_NULL);
-  g_print ("state null\n");
+  g_main_loop_run ([window loop]);
   return NULL;
 }
 
@@ -128,17 +130,18 @@ int main(int argc, char **argv)
 	int width = 640;
   int height = 480;
   
-  GMainLoop* loop = NULL;
+  GMainLoop *loop = NULL;
+  GstElement *pipeline = NULL;
       
-  GstElement* videosrc  = NULL;
-  GstElement* videosink = NULL;
-  GstCaps* caps=NULL;
+  GstElement *videosrc  = NULL;
+  GstElement *videosink = NULL;
+  GstCaps *caps=NULL;
   gboolean ok=FALSE;
   GstBus *bus=NULL;
   GThread *loop_thread=NULL;
   NSAutoreleasePool *pool=nil;
   NSRect rect;
-  MainWindow* window=nil;
+  MainWindow *window=nil;
 
   g_print("app created\n");
   
@@ -155,23 +158,16 @@ int main(int argc, char **argv)
   gst_bin_add_many (GST_BIN (pipeline), videosrc, videosink, NULL);
   
   caps = gst_caps_new_simple("video/x-raw-yuv",
-                                      "width", G_TYPE_INT, width,
-                                      "height", G_TYPE_INT, height,
-                                      "framerate", GST_TYPE_FRACTION, 25, 1,
-                                      "format", GST_TYPE_FOURCC, GST_MAKE_FOURCC ('I', '4', '2', '0'),
-                                      NULL);
+    "width", G_TYPE_INT, width,
+    "height", G_TYPE_INT, height,
+    "framerate", GST_TYPE_FRACTION, 25, 1,
+    "format", GST_TYPE_FOURCC, GST_MAKE_FOURCC ('I', '4', '2', '0'), 
+    NULL);
 
   ok = gst_element_link_filtered(videosrc, videosink, caps);
   gst_caps_unref(caps);
   if (!ok)
     g_warning("could not link videosrc to videosink\n");
-
-  bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
-  gst_bus_add_signal_watch (bus);
-  g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), loop);
-  g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), loop);
-  g_signal_connect(bus, "message::eos", G_CALLBACK(end_stream_cb), loop);
-  gst_object_unref (bus);
   
   pool = [[NSAutoreleasePool alloc] init];
   [NSApplication sharedApplication];
@@ -179,34 +175,40 @@ int main(int argc, char **argv)
   rect.origin.x = 0; rect.origin.y = 0;
   rect.size.width = width; rect.size.height = height;
   
-  window = [[MainWindow alloc] initWithContentRect:rect Pipeline:pipeline];
-  
+  window = [[MainWindow alloc] initWithContentRect:rect Loop:loop Pipeline:pipeline];
+
   bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
+  gst_bus_add_signal_watch (bus);
+  g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), window);
+  g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), window);
+  g_signal_connect(bus, "message::eos", G_CALLBACK(end_stream_cb), window);
   gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, window);
   gst_object_unref (bus);
   
-  g_print ("sync handler set\n");
-  
   loop_thread = g_thread_create (
-      (GThreadFunc) thread_func, loop, TRUE, NULL);
+      (GThreadFunc) thread_func, window, TRUE, NULL);
+  
+#ifdef GNUSTEP
+  GSRegisterCurrentThread();
+#endif
   
   gst_element_set_state (pipeline, GST_STATE_PLAYING);
   
   [window orderFront:window];	
 	
-  [NSApp run];
-  
-  g_print ("NSApp loop left\n");
+  while (![window isClosed]) {
+    NSEvent *event = [NSApp nextEventMatchingMask:NSAnyEventMask 
+      untilDate:[NSDate dateWithTimeIntervalSinceNow:1] 
+      inMode:NSDefaultRunLoopMode dequeue:YES];
+    if (event)
+      [NSApp sendEvent:event];
+  }
   
   g_thread_join (loop_thread);
-  
-  g_print ("glib loop thread joined\n");
   
   [window release]; 
   
   [pool release];
-	
-  g_object_unref (pipeline);	
   
   return 0;
 }
