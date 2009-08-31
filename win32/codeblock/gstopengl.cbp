@@ -45,12 +45,12 @@
 			<Add option="-Wall" />
 			<Add option="-DWIN32" />
 			<Add option="-DHAVE_CONFIG_H" />
-			<Add directory="..\..\..\gstreamer\include" />
+			<Add directory="C:\gstreamer\include\gstreamer-0.10" />
+			<Add directory="C:\gstreamer\include\libxml2" />
 			<Add directory="..\..\..\glib\include\glib-2.0" />
 			<Add directory="..\..\..\glib\lib\glib-2.0\include" />
 			<Add directory="..\..\..\glew\include" />
-			<Add directory="..\..\..\zlib\include" />
-			<Add directory="..\..\..\png\include" />
+			<Add directory="C:\gstreamer\include" />
 			<Add directory="..\common" />
 			<Add directory="..\..\gst-libs" />
 			<Add directory="..\..\gst-libs\gst\gl" />
@@ -70,14 +70,13 @@
 			<Add library="glu32" />
 			<Add library="opengl32" />
 			<Add library="gdi32" />
-			<Add library="png" />
+			<Add library="png12" />
 			<Add library="z" />
 			<Add library="winmm" />
 			<Add directory="..\..\..\glib\lib" />
 			<Add directory="C:\gstreamer\bin" />
 			<Add directory="..\..\..\glew\bin" />
-			<Add directory="..\..\..\png\lib" />
-			<Add directory="..\..\..\zlib\lib" />
+			<Add directory="C:\gstreamer\lib" />
 		</Linker>
 		<Unit filename="..\..\gst-libs\gst\gettext.h" />
 		<Unit filename="..\..\gst-libs\gst\gl\gstglbuffer.c">
