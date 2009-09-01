@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.3\include&quot;;&quot;..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\glib\lib\glib-2.0\include&quot;;..\..\..\gstreamer\include;..\..\..\glew\include;..\..\..\png\include;..\..\..\zlib\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.3\include&quot;;&quot;..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\glib\lib\glib-2.0\include&quot;;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include;C:\gstreamer\include\libxml2;..\..\..\glew\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;OPENGL_ES2"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,9 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libgstreamer-0.10.lib libgstbase-0.10.lib libgstinterfaces-0.10.lib libgstvideo-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libpngd.lib zlibd.lib libEGL.lib libGLESv2.lib winmm.lib"
+				AdditionalDependencies="gstreamer.lib gstbase.lib gstinterfaces.lib gstvideo.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png12.lib z.lib libEGL.lib libGLESv2.lib winmm.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\gstreamer\lib;&quot;..\..\..\gtk+\lib&quot;;..\..\..\glib\lib;..\..\..\glew\lib;..\..\..\png\lib;..\..\..\zlib\lib;&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.3\lib&quot;"
+				AdditionalLibraryDirectories="C:\gstreamer\lib;&quot;..\..\..\gtk+\lib&quot;;..\..\..\glib\lib;..\..\..\glew\lib;&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.3\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -119,12 +119,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.3\include&quot;;&quot;..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\glib\lib\glib-2.0\include&quot;;..\..\..\gstreamer\include;..\..\..\glew\include;..\..\..\png\include;..\..\..\zlib\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.3\include&quot;;&quot;..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\glib\lib\glib-2.0\include&quot;;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include;C:\gstreamer\include\libxml2;..\..\..\glew\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;OPENGL_ES2"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
+				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -138,9 +138,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libgstreamer-0.10.lib libgstbase-0.10.lib libgstinterfaces-0.10.lib libgstvideo-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libpng.lib zlib.lib libEGL.lib libGLESv2.lib winmm.lib"
+				AdditionalDependencies="gstreamer.lib gstbase.lib gstinterfaces.lib gstvideo.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png12.lib z.lib libEGL.lib libGLESv2.lib winmm.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\gstreamer\lib;&quot;..\..\..\gtk+\lib&quot;;..\..\..\glib\lib;..\..\..\glew\lib;..\..\..\png\lib;..\..\..\zlib\lib;&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.3\lib&quot;"
+				AdditionalLibraryDirectories="C:\gstreamer\lib;&quot;..\..\..\gtk+\lib&quot;;..\..\..\glib\lib;..\..\..\glew\lib;&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.3\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
