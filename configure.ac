@@ -164,7 +164,7 @@ fi
 #dnl Check for OpenGL, GLU and GLEW
 echo host is $host
 case $host in
-  *-linux*)
+  *-linux* | *-cygwin*)
     AG_GST_CHECK_X
     save_CPPFLAGS="$CPPFLAGS"
     save_LIBS="$LIBS"
