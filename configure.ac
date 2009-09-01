@@ -170,13 +170,23 @@ case $host in
     save_LIBS="$LIBS"
     CPPFLAGS="$CPPFLAGS $X_CFLAGS"
     LIBS="$LIBS $X_LIBS"
-    AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h,, AC_MSG_ERROR([OpenGL is required]))
-    AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h,, AC_MSG_ERROR([GLU is required]))
-    AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h,, AC_MSG_ERROR([GLEW is required]))
-    GL_LIBS="$LIBS $X_LIBS -lGL -lGLU -lGLEW"
+    PKG_CHECK_MODULES(GL, gl, HAVE_GL=yes, HAVE_GL=no)
+    if test "x$HAVE_GL" = "xyes"; then
+      AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h,, AC_MSG_ERROR([OpenGL is required]))
+      AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h,, AC_MSG_ERROR([GLU is required]))
+      AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h,, AC_MSG_ERROR([GLEW is required]))
+      GL_LIBS="$LIBS $X_LIBS -lGL -lGLU -lGLEW"
+      GL_BACKEND=x11
+      GL_TYPE=gl
+    else
+      AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h,, AC_MSG_ERROR([EGL is required]))
+      AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h,, AC_MSG_ERROR([OpenGLES2 is required]))
+      GL_LIBS="$LIBS $X_LIBS -lEGL -lGLESv2"
+      GL_BACKEND=x11ES2
+      GL_TYPE=gles
+    fi
     CPPFLAGS="$save_CPPFLAGS"
     LIBS="$save_LIBS"
-    GL_BACKEND=x11
     ;;
   *-darwin*)
     save_CPPFLAGS="$CPPFLAGS"
@@ -186,6 +196,7 @@ case $host in
     CPPFLAGS="$save_CPPFLAGS -framework OpenGL"
     LIBS="$save_LIBS"
     GL_BACKEND=cocoa
+    GL_TYPE=gl
     ;;
   *-mingw32*)
     save_CPPFLAGS="$CPPFLAGS"
@@ -198,16 +209,23 @@ case $host in
     CPPFLAGS="$save_CPPFLAGS"
     LIBS="$save_LIBS"
     GL_BACKEND=win32
+    GL_TYPE=gl
     ;;
   *)
     exit 1
     ;;
 esac
+if test "x$GL_TYPE" = "xgles"; then
+  AC_DEFINE(OPENGL_ES2, [1] , [Use OpenGLES2])
+fi
 AC_SUBST(GL_LIBS)
 AC_SUBST(GL_BACKEND)
+AC_SUBST(OPENGL_ES2)
 AM_CONDITIONAL(GL_BACKEND_X11, test "x$GL_BACKEND" = "xx11")
+AM_CONDITIONAL(GL_BACKEND_X11ES2, test "x$GL_BACKEND" = "xx11ES2")
 AM_CONDITIONAL(GL_BACKEND_COCOA, test "x$GL_BACKEND" = "xcocoa")
 AM_CONDITIONAL(GL_BACKEND_WIN32, test "x$GL_BACKEND" = "xwin32")
+AM_CONDITIONAL(GL_IS_OPENGL, test "x$GL_TYPE" = "xgl")
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
