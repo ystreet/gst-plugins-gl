@@ -95,7 +95,7 @@
 <FLAGS>w</FLAGS>
 <NICK>Znear</NICK>
 <BLURB>Specifies the distance from the viewer to the near clipping plane.</BLURB>
-<DEFAULT>0.1</DEFAULT>
+<DEFAULT>0,1</DEFAULT>
 </ARG>
 
 <ARG>
@@ -226,6 +226,36 @@
 <NICK>Location of the image</NICK>
 <BLURB>Location of the image.</BLURB>
 <DEFAULT>NULL</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::proportion</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Relative size of overlay image, in percents</NICK>
+<BLURB>Relative size of iverlay image, in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::xpos</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>X position of overlay image in percents</NICK>
+<BLURB>X position of overlay image in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::ypos</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Y position of overlay image in percents</NICK>
+<BLURB>Y position of overlay image in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
 </ARG>
 
 <ARG>
