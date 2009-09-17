@@ -6,6 +6,9 @@ endif
 if HAVE_GTK
 SUBDIRS += gtk
 endif
+if HAVE_SDL
+SUBDIRS += sdl
+endif
 if GL_BACKEND_COCOA
 SUBDIRS += cocoa
 endif

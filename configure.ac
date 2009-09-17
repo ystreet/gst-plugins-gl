@@ -318,6 +318,15 @@ AC_SUBST(HAVE_CLUTTER_X11)
 AM_CONDITIONAL(HAVE_CLUTTER_X11, test "x$HAVE_CLUTTER_X11" = "xyes")
 
 
+dnl sdl is optional and used in examples
+HAVE_SDL=NO
+PKG_CHECK_MODULES(SDL, sdl >= 1.2.0, HAVE_SDL=yes, HAVE_SDL=no)
+AC_SUBST(SDL_LIBS)
+AC_SUBST(SDL_CFLAGS)
+AC_SUBST(SDL_CLUTTER)
+AM_CONDITIONAL(HAVE_SDL, test "x$HAVE_SDL" = "xyes")
+
+
 dnl *** set variables based on configure arguments ***
 
 dnl set license and copyright notice
@@ -465,6 +474,7 @@ tests/examples/gtk/filterxoverlay/Makefile
 tests/examples/gtk/fxtest/Makefile
 tests/examples/gtk/switchxoverlay/Makefile
 tests/examples/qt/Makefile
+tests/examples/sdl/Makefile
 tests/examples/wx/Makefile
 tests/icles/Makefile
 docs/Makefile
