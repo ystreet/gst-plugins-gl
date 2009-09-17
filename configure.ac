@@ -170,7 +170,8 @@ case $host in
     save_LIBS="$LIBS"
     CPPFLAGS="$CPPFLAGS $X_CFLAGS"
     LIBS="$LIBS $X_LIBS"
-    PKG_CHECK_MODULES(GL, gl, HAVE_GL=yes, HAVE_GL=no)
+    #PKG_CHECK_MODULES(GL, gl, HAVE_GL=yes, HAVE_GL=no)
+    AC_CHECK_HEADERS([GL/gl.h], [HAVE_GL=yes], [HAVE_GL=no])
     if test "x$HAVE_GL" = "xyes"; then
       AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h,, AC_MSG_ERROR([OpenGL is required]))
       AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h,, AC_MSG_ERROR([GLU is required]))
