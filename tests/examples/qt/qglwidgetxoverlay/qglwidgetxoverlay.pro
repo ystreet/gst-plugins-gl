@@ -9,14 +9,15 @@ win32 {
 DEFINES += WIN32
 INCLUDEPATH +=  ./GeneratedFiles \
     ./GeneratedFiles/Debug \
-    ./../../../../../libxml2/include \
+    C:/gstreamer/include/libxml2 \
     ./../../../../../libiconv/include \
     ./../../../../../glib/include/glib-2.0 \
     ./../../../../../glib/lib/glib-2.0/include \
-    ./../../../../../gstreamer/include \
+    C:/gstreamer/include/gstreamer-0.10 \
     ./../../../../../glew/include
 LIBS += -L"./../../../../../glib/lib" \
-    -L"./../../../../../gstreamer/lib" \
+    -L"C:/gstreamer/lib" \
+    -L"C:/gstreamer/bin" \
     -L"./../../../../../glew/lib" \
     -lgstreamer-0.10 \
     -lglib-2.0 \

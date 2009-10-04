@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\..\..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\..\..\glib\lib\glib-2.0\include&quot;;&quot;..\..\..\..\..\gtk+\include\gtk-2.0&quot;;&quot;..\..\..\..\..\gtk+\lib\gtk-2.0\include&quot;;..\..\..\..\..\gstreamer\include;..\..\..\..\..\cairo\include\cairo;&quot;..\..\..\..\..\pango\include\pango-1.0&quot;;&quot;..\..\..\..\..\atk\include\atk-1.0&quot;"
+				AdditionalIncludeDirectories="&quot;..\..\..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\..\..\glib\lib\glib-2.0\include&quot;;&quot;..\..\..\..\..\gtk+\include\gtk-2.0&quot;;&quot;..\..\..\..\..\gtk+\lib\gtk-2.0\include&quot;;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include\cairo;&quot;C:\gstreamer\include\pango-1.0&quot;;&quot;..\..\..\..\..\atk\include\atk-1.0&quot;;C:\gstreamer\include\libxml2"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,9 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libgstreamer-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libgstinterfaces-0.10.lib gtk-win32-2.0.lib gdk-win32-2.0.lib gdk_pixbuf-2.0.lib"
+				AdditionalDependencies="gstreamer.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib gstinterfaces.lib gtk-win32-2.0.lib gdk-win32-2.0.lib gdk_pixbuf-2.0.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\..\glib\lib;..\..\..\..\..\gstreamer\lib;&quot;..\..\..\..\..\gtk+\lib&quot;"
+				AdditionalLibraryDirectories="..\..\..\..\..\glib\lib;C:\gstreamer\lib;&quot;..\..\..\..\..\gtk+\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				RandomizedBaseAddress="1"
@@ -118,7 +118,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;..\..\..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\..\..\glib\lib\glib-2.0\include&quot;;&quot;..\..\..\..\..\gtk+\include\gtk-2.0&quot;;&quot;..\..\..\..\..\gtk+\lib\gtk-2.0\include&quot;;..\..\..\..\..\gstreamer\include;..\..\..\..\..\cairo\include\cairo;&quot;..\..\..\..\..\pango\include\pango-1.0&quot;;&quot;..\..\..\..\..\atk\include\atk-1.0&quot;"
+				AdditionalIncludeDirectories="&quot;..\..\..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\..\..\glib\lib\glib-2.0\include&quot;;&quot;..\..\..\..\..\gtk+\include\gtk-2.0&quot;;&quot;..\..\..\..\..\gtk+\lib\gtk-2.0\include&quot;;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include\cairo;&quot;C:\gstreamer\include\pango-1.0&quot;;&quot;..\..\..\..\..\atk\include\atk-1.0&quot;;C:\gstreamer\include\libxml2"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -137,9 +137,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libgstreamer-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libgstinterfaces-0.10.lib gtk-win32-2.0.lib gdk-win32-2.0.lib gdk_pixbuf-2.0.lib"
+				AdditionalDependencies="gstreamer.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib gstinterfaces.lib gtk-win32-2.0.lib gdk-win32-2.0.lib gdk_pixbuf-2.0.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\..\glib\lib;..\..\..\..\..\gstreamer\lib;&quot;..\..\..\..\..\gtk+\lib&quot;"
+				AdditionalLibraryDirectories="..\..\..\..\..\glib\lib;C:\gstreamer\lib;&quot;..\..\..\..\..\gtk+\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
