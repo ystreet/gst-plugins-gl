@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gstreamer.lib gstbase.lib gstinterfaces.lib gstvideo.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png12.lib z.lib opengl32.lib glu32.lib glew32.lib glew32s.lib winmm.lib"
+				AdditionalDependencies="gstreamer.lib gstbase.lib gstinterfaces.lib gstvideo.lib gstcontroller.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png12.lib z.lib opengl32.lib glu32.lib glew32.lib glew32s.lib winmm.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="C:\gstreamer\lib;..\..\..\glib\lib;..\..\..\glew\lib"
 				GenerateDebugInformation="true"
@@ -138,7 +138,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gstreamer.lib gstbase.lib gstinterfaces.lib gstvideo.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png12.lib z.lib opengl32.lib glu32.lib glew32.lib glew32s.lib winmm.lib"
+				AdditionalDependencies="gstreamer.lib gstbase.lib gstinterfaces.lib gstvideo.lib gstcontroller.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png12.lib z.lib opengl32.lib glu32.lib glew32.lib glew32s.lib winmm.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="C:\gstreamer\lib;..\..\..\glib\lib;..\..\..\glew\lib"
 				GenerateDebugInformation="true"
@@ -198,6 +198,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstglfilter.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglmixer.c"
 					>
 				</File>
 				<File
@@ -262,6 +266,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglimagesink.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglmosaic.c"
 					>
 				</File>
 				<File
@@ -375,6 +383,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglmixer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglmixerpad.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstglshader.h"
 					>
 				</File>
@@ -424,6 +440,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglimagesink.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglmosaic.h"
 					>
 				</File>
 				<File
