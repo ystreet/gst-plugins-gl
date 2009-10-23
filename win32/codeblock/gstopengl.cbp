@@ -66,6 +66,7 @@
 			<Add library="gstbase-0.10" />
 			<Add library="gstvideo-0.10" />
 			<Add library="gstinterfaces-0.10" />
+			<Add library="gstcontroller-0.10" />
 			<Add library="glew32" />
 			<Add library="glu32" />
 			<Add library="opengl32" />
@@ -91,6 +92,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst-libs\gst\gl\gstglfilter.h" />
+		<Unit filename="..\..\gst-libs\gst\gl\gstglmixer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\gl\gstglmixer.h" />
 		<Unit filename="..\..\gst-libs\gst\gl\gstglshader.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -201,6 +206,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglimagesink.h" />
+		<Unit filename="..\..\gst\gl\gstglmosaic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglmosaic.h" />
 		<Unit filename="..\..\gst\gl\gstgloverlay.c">
 			<Option compilerVar="CC" />
 		</Unit>
