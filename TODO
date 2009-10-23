@@ -1,27 +1,12 @@
-//not arranged
 
-- 0: agree over a common coding style (I'd suggest gobject/gstreamer plus gnome
-     coding guidelines) as pointed here:
-     http://gstreamer.freedesktop.org/data/doc/gstreamer/head/faq/html/chapter-developing.html
-     cap: I am ok, but I am not using emacs, so I let you run the re-indent script
-     cap: Can someone RE execute a re-indent script ? thx because it seems the first execution failed
-     (for example gst-libs/gst/gl/gstgldisplay.c seems to be NOT indented)
+- 1: replace the use of GST_QUERY_CUSTOM by registering a specific query,
+		 gst_query_type_register ("gstgldisplay", "gstgldisplay of gl chain");
 
-(DONE) - 1: make Filippo's GstGLEffects work on this repository.
+- 2: test new gstglwindow_cocoa.m implementation with a GNU step environnement
 
-(DONE) - 2: use GstGLShader in the GLSL colorspace conversion.
+- 3: finalize glmosaic element
 
-(DONE) - 3: add GLEW check in configure.ac
-
-(DONE) - 4: make the plugin (any pipeline) properly shutdown when Shader compilation failed.
-            (using "return GST_FLOW_UNEXPECTED")
-
-(DONE) - 5: make the plugin (any pipeline) properly shutdown when one of the "check requirements" failed.
-            (for example when FBO extension is not available)
-            For now it properly shutdown only when using the glimagesink
-
-(DONE) - 6: make an example named "filterxoverlay" similar to gtkxoverlay one. But use a more complex pipeline
-     involving several glfilters. In order to test switching bettween gst states on it.
+- 4: write a GstGLFrameBuffer gobject. Would be usefull to factorize a lot of code in gstgldisplay.c
 
 - 7: put the pipelines listed in tests/pipelines to an automated test that attempts to reach some states.
 	 Use tests/check/generic/states.c and tests/check/pipelines/simple-launch-lines.c
@@ -33,30 +18,11 @@
      t. ! glqueue ! glfilterC ! glimagesink
      Assuming glfilterA is GPU consumming and so do not need to duplicate it.
 
-(DONE) - 9: rewrite the freeglut part that I minimized. Although I removed 90% of the orignal code,
-     it should be rewrite with the GLib API. To have a better design and handle X/WIN32 with interfaces
-     instead of having a lot of "define WIN32" scopes.
-     And make it thread safe in order to have one glthread per GstGLDisplay, instead of having a global glthread.
-     The tests/examples/doublecube test shows the limitation of having only one (global) glthread.
-     (I am not really sure about this last remark since I made a modification in this example. Now the video speed is
-     very clean, even after moving/resizing the window).
-     Maybe we just should use the lib GtkGL if there is a way to give a winId.
-     Filippo:
-     I don't know too much about it but afaik it's almost unmaintained (the
-	 wiki says it has new maintainers but the last release is from 2006) and
-	 it's a library to embed opengl into a gtk app or use it to draw
-	 opengl-based widgets. I don't see how it could fit our needs, we just
-	 need a cross platform wrapper library around those glx/wgl functions.
-	 Anyway, I don't know, I could be wrong.
-	 Cap: ok I agree with that.
-
 - 10: make colorspace conversion through ColorMatrix when GLSL (and mesa YCbCr) is not available and when imaging extension
-      is available.
+      is available. (I think it has no future now, see OpenGL 3.0)
 
 - 11: make a test to estimate how much is a colorspace conversion. I mean compare an output frame
       to reference frame and estimate the differences. (usefull to compare several implementations)
-
-(DONE) - 12: write a cmake build or an other well known opensource and multiplatform builder.
 
 - 13: test colorspace conversion with Apple YCbCr extension.
 
@@ -67,39 +33,4 @@
 - 16: If it exists a tool that can automatically convert fragment_shader code to fragment_program code
       then we would be able to do some basic stuffs as colorspace conversion even if GLSL is not available.
       (And so have some more cool stuffs work on Intel card for example)
-      cg can convert GLSL code to ARB_fp/ARB_vp.
-
-(DONE) - 17: add a generic way to check that a given extension is available. (and set isAlive to false..)
-     (for examples gleffects does not check you have shaders available so it can cause segfault.)
-     (whereas using "gst_gl_display_gen_shader", the check is done)
-
-(DONE) - 18: use a custom debug category in GstGLShader instead of g_debug etc..
-	  fargiolas: GstGLShader is a generic object not a gst_object, when I wrote it I
-	  asked at gstreamer developers which debugging system was better suited and
-	  gst_debug was not the proper choice. Maybe we can disable them is by setting
-	  a print handler (g_set_print_handler) and enabling them with some environment variable.
-	  -> GST_GL_SHADER_DEBUG has to work on win32+vc8, too.
-	  Now it works, I have added:
-	  #else /* _MSC_VER */
-	  /* varargs macros available since msvc8 (vs2005) */
-      #  if _MSC_VER >= 1400
-      #    define G_HAVE_ISO_VARARGS 1
-      #    define __func__ __FUNCTION__
-      #   endif
-      #endif /* not _MSC_VER */
-      in the glibconfig.h file.
-
-
-(DONE) - 19: update authors from the CVS repository
-
-(DONE) - 20: update AG_GST_CHECK_PLUGIN(gl) in configure.ac in order to correctly list
-	  the gl elements that would be built
-
-(DONE) - 21: cap: I got "Validation failed - samplers of different types are bound to the same texture image unit".
-	  when doing gst-launch-0.10 --gst-debug=gldisplay:3 videotestsrc ! glupload ! gleffects effect=9 ! glimagesink.
-	  (on my ATI RADEON X800 GTO) (same for effects 10, 11, 12, 13)
-	  Sometime it can causes to not use the effect then screen is white. (it works every times now)
-	  -> it seems we cannot remove this glsl ATI compiler message.
-
-
-(DONE) - 22: write gtk-doc
+      cg can convert GLSL code to ARB_fp/ARB_vp. (no future too, a lot of improvements have been done in mesa etc...)
