@@ -60,3 +60,6 @@ gst-launch-0.10 videotestsrc ! glupload ! glbumper location=bumpwall.png ! "vide
 
 gst-launch-0.10 videotestsrc ! glupload ! glfilterglass ! glimagesink
 gst-launch-0.10 videotestsrc ! glupload ! "video/x-raw-gl, width=640, height=480" ! glfilterglass ! glimagesink
+
+gst-launch-0.10 videotestsrc ! "video/x-raw-yuv, format=(fourcc)YUY2" ! glupload ! queue ! glmosaic name=m ! glimagesink videotestsrc pattern=12 ! "video/x-raw-yuv, format=(fourcc)I420, framerate=(fraction)5/1, width=100, height=200" ! glupload ! queue ! m. videotestsrc ! "video/x-raw-rgb, framerate=(fraction)15/1, width=1500, height=1500" ! glupload ! gleffects effect=3 ! queue ! m. videotestsrc ! glupload ! gleffects effect=2 ! queue ! m.  videotestsrc ! glupload ! glfiltercube ! queue ! m. videotestsrc ! glupload ! gleffects effect=6 ! queue ! m.
+
