@@ -30,7 +30,8 @@ QGLRenderer::QGLRenderer(const QString &videoLocation,
   : QGLWidget(parent),
     videoLoc(videoLocation),
     gst_thread(NULL),
-    closing(false)
+    closing(false),
+    frame(NULL)
 {
     move(20, 10);
     resize(640, 480);
@@ -97,10 +98,27 @@ QGLRenderer::resizeGL(int width, int height)
 void
 QGLRenderer::newFrame()
 {
+    /* frame may be updated while paintGL is requested */
+    QMutexLocker locker(&mutex);
+
     Pipeline *pipeline = this->gst_thread->getPipeline();
-    pipeline->queue_output_buf.put(this->frame);
+    /* frame is initialized as null */
+    if (this->frame)
+        pipeline->queue_output_buf.put(this->frame);
+
     this->frame = pipeline->queue_input_buf.get();
+
+    /* direct call to paintGL (no queued) */
     this->updateGL();
+}
+
+void
+QGLRenderer::paintEvent ( QPaintEvent * event )
+{
+    Q_UNUSED(event)
+
+    /* frame may be updated while paintGL is requested */
+    QMutexLocker locker(&mutex);
 }
 
 void
@@ -110,76 +128,80 @@ QGLRenderer::paintGL()
     static GLfloat	yrot = 0;
     static GLfloat	zrot = 0;
 
-    GLfloat width = this->frame->width;
-    GLfloat height = this->frame->height;
-
-    if(width < 0 || width > 2000 || height < 0 || height > 2000)
-        return; // just a sanity check
-
-    glEnable(GL_DEPTH_TEST);
-
-    glEnable(GL_TEXTURE_RECTANGLE_ARB);
-    glBindTexture(GL_TEXTURE_RECTANGLE_ARB, this->frame->texture);
-    if(glGetError () != GL_NO_ERROR)
+    if (this->frame)
     {
-      qDebug ("failed to bind texture that comes from gst-gl");
-      emit closeRequested();
-      return;
+
+        GLfloat width = this->frame->width;
+        GLfloat height = this->frame->height;
+
+        glEnable(GL_DEPTH_TEST);
+
+        glEnable(GL_TEXTURE_RECTANGLE_ARB);
+        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, this->frame->texture);
+        if(glGetError () != GL_NO_ERROR)
+        {
+          qDebug ("failed to bind texture that comes from gst-gl");
+          emit closeRequested();
+          return;
+        }
+
+        glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S,
+                      GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T,
+                      GL_CLAMP_TO_EDGE);
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        glTranslatef(0.0f,0.0f,-5.0f);
+
+        glRotatef(xrot,1.0f,0.0f,0.0f);
+        glRotatef(yrot,0.0f,1.0f,0.0f);
+        glRotatef(zrot,0.0f,0.0f,1.0f);
+
+        glBegin(GL_QUADS);
+            // Front Face
+            glTexCoord2f(width, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
+            glTexCoord2f(0.0f, height); glVertex3f( 1.0f,  1.0f,  1.0f);
+            glTexCoord2f(width, height); glVertex3f(-1.0f,  1.0f,  1.0f);
+            // Back Face
+            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+            glTexCoord2f(0.0f, height); glVertex3f(-1.0f,  1.0f, -1.0f);
+            glTexCoord2f(width, height); glVertex3f( 1.0f,  1.0f, -1.0f);
+            glTexCoord2f(width, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
+            // Top Face
+            glTexCoord2f(width, height); glVertex3f(-1.0f,  1.0f, -1.0f);
+            glTexCoord2f(width, 0.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
+            glTexCoord2f(0.0f, height); glVertex3f( 1.0f,  1.0f, -1.0f);
+            // Bottom Face
+            glTexCoord2f(width, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
+            glTexCoord2f(0.0f, height); glVertex3f( 1.0f, -1.0f,  1.0f);
+            glTexCoord2f(width,height); glVertex3f(-1.0f, -1.0f,  1.0f);
+            // Right face
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
+            glTexCoord2f(0.0f, height); glVertex3f( 1.0f,  1.0f, -1.0f);
+            glTexCoord2f(width, height); glVertex3f( 1.0f,  1.0f,  1.0f);
+            glTexCoord2f(width, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
+            // Left Face
+            glTexCoord2f(width, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
+            glTexCoord2f(0.0f, height); glVertex3f(-1.0f,  1.0f,  1.0f);
+            glTexCoord2f(width, height); glVertex3f(-1.0f,  1.0f, -1.0f);
+        glEnd();
+
+        xrot+=0.3f;
+        yrot+=0.2f;
+        zrot+=0.4f;
+
+        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
     }
-    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S,
-                  GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T,
-                  GL_CLAMP_TO_EDGE);
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glTranslatef(0.0f,0.0f,-5.0f);
-
-    glRotatef(xrot,1.0f,0.0f,0.0f);
-    glRotatef(yrot,0.0f,1.0f,0.0f);
-    glRotatef(zrot,0.0f,0.0f,1.0f);
-
-    glBegin(GL_QUADS);
-        // Front Face
-        glTexCoord2f(width, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
-        glTexCoord2f(0.0f, height); glVertex3f( 1.0f,  1.0f,  1.0f);
-        glTexCoord2f(width, height); glVertex3f(-1.0f,  1.0f,  1.0f);
-        // Back Face
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-        glTexCoord2f(0.0f, height); glVertex3f(-1.0f,  1.0f, -1.0f);
-        glTexCoord2f(width, height); glVertex3f( 1.0f,  1.0f, -1.0f);
-        glTexCoord2f(width, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
-        // Top Face
-        glTexCoord2f(width, height); glVertex3f(-1.0f,  1.0f, -1.0f);
-        glTexCoord2f(width, 0.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f,  1.0f,  1.0f);
-        glTexCoord2f(0.0f, height); glVertex3f( 1.0f,  1.0f, -1.0f);
-        // Bottom Face
-        glTexCoord2f(width, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
-        glTexCoord2f(0.0f, height); glVertex3f( 1.0f, -1.0f,  1.0f);
-        glTexCoord2f(width,height); glVertex3f(-1.0f, -1.0f,  1.0f);
-        // Right face
-        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
-        glTexCoord2f(0.0f, height); glVertex3f( 1.0f,  1.0f, -1.0f);
-        glTexCoord2f(width, height); glVertex3f( 1.0f,  1.0f,  1.0f);
-        glTexCoord2f(width, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
-        // Left Face
-        glTexCoord2f(width, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
-        glTexCoord2f(0.0f, height); glVertex3f(-1.0f,  1.0f,  1.0f);
-        glTexCoord2f(width, height); glVertex3f(-1.0f,  1.0f, -1.0f);
-    glEnd();
-
-    xrot+=0.3f;
-    yrot+=0.2f;
-    zrot+=0.4f;
 }
 
 void

@@ -134,18 +134,23 @@ Pipeline::on_gst_buffer(GstElement * element,
                         GstPad * pad,
                         Pipeline* p)
 {
-  Q_UNUSED(pad)
-  Q_UNUSED(element)
+    Q_UNUSED(pad)
+    Q_UNUSED(element)
 
-  /* ref then push buffer to use it in clutter */
-  gst_buffer_ref(buf);
-  p->queue_input_buf.put((GstGLBuffer*)buf);
+    /* ref then push buffer to use it in clutter */
+    gst_buffer_ref(buf);
+    p->queue_input_buf.put((GstGLBuffer*)buf);
 
-  p->notifyNewFrame();
+    if (p->queue_input_buf.size() > 3)
+        p->notifyNewFrame();
 
-  /* pop then unref buffer we have finished to use in clutter */
-  GstBuffer *buf_old = (GstBuffer*)(p->queue_output_buf.get());
-  gst_buffer_unref(buf_old);
+    /* pop then unref buffer we have finished to use in clutter */
+    if (p->queue_output_buf.size() > 3)
+    {
+        GstBuffer *buf_old = (GstBuffer*)(p->queue_output_buf.get());
+        if (buf_old)
+            gst_buffer_unref(buf_old);
+    }
 }
 
 void
