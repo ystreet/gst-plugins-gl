@@ -32,104 +32,100 @@ Pipeline::Pipeline(const GLContextID &ctx,
     m_bus(NULL),
     m_pipeline(NULL)
 {
-  this->configure();
+    this->configure();
 }
-
 
 Pipeline::~Pipeline()
 {
 }
 
-
 void
 Pipeline::configure()
 {
-  gst_init (NULL, NULL);
+    gst_init (NULL, NULL);
 
 #ifdef Q_WS_WIN
-  m_loop = g_main_loop_new (NULL, FALSE);
+    m_loop = g_main_loop_new (NULL, FALSE);
 #endif
 
-  if(m_videoLocation.isEmpty())
+    if(m_videoLocation.isEmpty())
     {
-      qDebug("No video file specified. Using video test source.");
-      m_pipeline =
-        GST_PIPELINE (gst_parse_launch
+        qDebug("No video file specified. Using video test source.");
+        m_pipeline =
+            GST_PIPELINE (gst_parse_launch
                       ("videotestsrc ! "
                        "video/x-raw-yuv, width=640, height=480, "
                        "framerate=(fraction)30/1 ! "
                        "glupload ! fakesink sync=1",
                        NULL));
     }
-  else
+    else
     {
-      qDebug("Loading video: %s", m_videoLocation.toAscii().data());
-      m_pipeline =
-        GST_PIPELINE (gst_parse_launch
+        qDebug("Loading video: %s", m_videoLocation.toAscii().data());
+        m_pipeline =
+            GST_PIPELINE (gst_parse_launch
                       (QString("filesrc location=%1 ! decodebin2 ! glupload ! fakesink sync=1").arg(m_videoLocation).toAscii(),
                        NULL));
     }
 
-  m_bus = gst_pipeline_get_bus(GST_PIPELINE(m_pipeline));
-  gst_bus_add_watch(m_bus, (GstBusFunc) bus_call, this);
-  gst_object_unref(m_bus);
+    m_bus = gst_pipeline_get_bus(GST_PIPELINE(m_pipeline));
+    gst_bus_add_watch(m_bus, (GstBusFunc) bus_call, this);
+    gst_object_unref(m_bus);
 
-  GstElement *glupload = gst_bin_get_by_name(GST_BIN(m_pipeline), "glupload0");
-	if(!glupload)
+    GstElement *glupload = gst_bin_get_by_name(GST_BIN(m_pipeline), "glupload0");
+    if(!glupload)
     {
-      qDebug ("glupload element could not be found");
-      return;
+        qDebug ("glupload element could not be found");
+        return;
     }
-  g_object_set(G_OBJECT (glupload), "external-opengl-context",
+    g_object_set(G_OBJECT (glupload), "external-opengl-context",
                this->glctx.contextId, NULL);
-	g_object_unref(glupload);
+    g_object_unref(glupload);
 
-	gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_PAUSED);
-	GstState state = GST_STATE_PAUSED;
-  if(gst_element_get_state(GST_ELEMENT(this->m_pipeline),
-                           &state, NULL, GST_CLOCK_TIME_NONE)
-     != GST_STATE_CHANGE_SUCCESS)
+    gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_PAUSED);
+    GstState state = GST_STATE_PAUSED;
+    if(gst_element_get_state(GST_ELEMENT(this->m_pipeline),
+            &state, NULL, GST_CLOCK_TIME_NONE)
+            != GST_STATE_CHANGE_SUCCESS)
     {
-      qDebug("failed to pause pipeline");
-      return ;
+        qDebug("failed to pause pipeline");
+        return;
     }
 
-	// set a callback to retrieve the gst gl textures
-  GstElement *fakesink = gst_bin_get_by_name(GST_BIN(this->m_pipeline),
-                                             "fakesink0");
-	g_object_set(G_OBJECT (fakesink), "signal-handoffs", TRUE, NULL);
-	g_signal_connect(fakesink, "handoff", G_CALLBACK (on_gst_buffer), this);
-	g_object_unref(fakesink);
+    // set a callback to retrieve the gst gl textures
+    GstElement *fakesink = gst_bin_get_by_name(GST_BIN(this->m_pipeline),
+        "fakesink0");
+    g_object_set(G_OBJECT (fakesink), "signal-handoffs", TRUE, NULL);
+    g_signal_connect(fakesink, "handoff", G_CALLBACK (on_gst_buffer), this);
+    g_object_unref(fakesink);
 }
-
 
 void
 Pipeline::start()
 {
-  GstStateChangeReturn ret =
+    GstStateChangeReturn ret =
     gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_PLAYING);
-  if (ret == GST_STATE_CHANGE_FAILURE)
+    if (ret == GST_STATE_CHANGE_FAILURE)
     {
-      qDebug("Failed to start up pipeline!");
+        qDebug("Failed to start up pipeline!");
 
-      /* check if there is an error message with details on the bus */
-      GstMessage* msg = gst_bus_poll(this->m_bus, GST_MESSAGE_ERROR, 0);
-      if (msg)
+        /* check if there is an error message with details on the bus */
+        GstMessage* msg = gst_bus_poll(this->m_bus, GST_MESSAGE_ERROR, 0);
+        if (msg)
         {
-          GError *err = NULL;
-          gst_message_parse_error (msg, &err, NULL);
-          qDebug ("ERROR: %s", err->message);
-          g_error_free (err);
-          gst_message_unref (msg);
+            GError *err = NULL;
+            gst_message_parse_error (msg, &err, NULL);
+            qDebug ("ERROR: %s", err->message);
+            g_error_free (err);
+            gst_message_unref (msg);
         }
-      return;
+        return;
     }
 
 #ifdef Q_WS_WIN
-  g_main_loop_run(m_loop);
+    g_main_loop_run(m_loop);
 #endif
 }
-
 
 /* fakesink handoff callback */
 void
@@ -152,70 +148,67 @@ Pipeline::on_gst_buffer(GstElement * element,
   gst_buffer_unref(buf_old);
 }
 
-
 void
 Pipeline::stop()
 {
 #ifdef Q_WS_WIN
-  g_main_loop_quit(m_loop);
+    g_main_loop_quit(m_loop);
 #else
-  emit stopRequested();
+    emit stopRequested();
 #endif
 }
-
 
 void
 Pipeline::unconfigure()
 {
-  gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_NULL);
+    gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_NULL);
 
-  GstBuffer *buf;
-  while(this->queue_input_buf.size())
+    GstBuffer *buf;
+    while(this->queue_input_buf.size())
     {
-      buf = (GstBuffer*)(this->queue_input_buf.get());
-      gst_buffer_unref(buf);
+        buf = (GstBuffer*)(this->queue_input_buf.get());
+        gst_buffer_unref(buf);
     }
-  while(this->queue_output_buf.size())
+    while(this->queue_output_buf.size())
     {
-      buf = (GstBuffer*)(this->queue_output_buf.get());
-      gst_buffer_unref(buf);
+        buf = (GstBuffer*)(this->queue_output_buf.get());
+        gst_buffer_unref(buf);
     }
 
-  gst_object_unref(m_pipeline);
+    gst_object_unref(m_pipeline);
 }
-
 
 gboolean
 Pipeline::bus_call(GstBus *bus, GstMessage *msg, Pipeline* p)
 {
   Q_UNUSED(bus)
 
-  switch(GST_MESSAGE_TYPE(msg))
+    switch(GST_MESSAGE_TYPE(msg))
     {
-    case GST_MESSAGE_EOS:
-      qDebug("End-of-stream received. Stopping.");
-      p->stop();
-      break;
+        case GST_MESSAGE_EOS:
+            qDebug("End-of-stream received. Stopping.");
+            p->stop();
+        break;
 
-    case GST_MESSAGE_ERROR:
-      {
-        gchar *debug = NULL;
-        GError *err = NULL;
-        gst_message_parse_error(msg, &err, &debug);
-        qDebug("Error: %s", err->message);
-        g_error_free (err);
-        if(debug)
-          {
+        case GST_MESSAGE_ERROR:
+        {
+            gchar *debug = NULL;
+            GError *err = NULL;
+            gst_message_parse_error(msg, &err, &debug);
+            qDebug("Error: %s", err->message);
+            g_error_free (err);
+            if(debug)
+            {
             qDebug("Debug deails: %s", debug);
             g_free(debug);
-          }
-        p->stop();
-        break;
-      }
+            }
+            p->stop();
+            break;
+        }
 
-    default:
-      break;
+        default:
+            break;
     }
 
-  return TRUE;
+    return TRUE;
 }

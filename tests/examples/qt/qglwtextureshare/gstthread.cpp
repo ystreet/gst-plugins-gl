@@ -24,15 +24,15 @@
 
 
 GstThread::GstThread(const GLContextID &ctxId,
-		     const QString &videoLocation,
-		     const char *renderer_slot,
-		     QObject *parent):
-  QThread(parent),
-  contextId(ctxId),
-  m_videoLocation(videoLocation)
+        const QString &videoLocation,
+        const char *renderer_slot,
+        QObject *parent):
+    QThread(parent),
+    contextId(ctxId),
+    m_videoLocation(videoLocation)
 {
-  m_pipeline = new Pipeline(this->contextId, m_videoLocation, this);
-  QObject::connect(m_pipeline, SIGNAL(newFrameReady()), this->parent(), renderer_slot, Qt::QueuedConnection);
+    m_pipeline = new Pipeline(this->contextId, m_videoLocation, this);
+    QObject::connect(m_pipeline, SIGNAL(newFrameReady()), this->parent(), renderer_slot, Qt::QueuedConnection);
 }
 
 GstThread::~GstThread()
@@ -41,26 +41,26 @@ GstThread::~GstThread()
 
 void GstThread::stop()
 {
-  if(m_pipeline)
-    m_pipeline->stop();
+    if(m_pipeline)
+      m_pipeline->stop();
 }
 
 void GstThread::run()
 {
-  qDebug("Starting gst pipeline");
-  m_pipeline->start(); //it runs the gmainloop on win32
+    qDebug("Starting gst pipeline");
+    m_pipeline->start(); //it runs the gmainloop on win32
 
 #ifndef Q_WS_WIN
-  //works like the gmainloop on linux (GstEvent are handled)
-  connect(m_pipeline, SIGNAL(stopRequested()), this, SLOT(quit()));
-  exec();
+    //works like the gmainloop on linux (GstEvent are handled)
+    connect(m_pipeline, SIGNAL(stopRequested()), this, SLOT(quit()));
+    exec();
 #endif
 
-  m_pipeline->unconfigure();
+    m_pipeline->unconfigure();
 
-  m_pipeline = NULL;
-  // This is not a memory leak. Pipeline will be deleted
-  // when the parent object (this) will be destroyed.
-  // We set m_pipeline to NULL to prevent further attempts
-  // to stop already stopped pipeline
+    m_pipeline = NULL;
+    // This is not a memory leak. Pipeline will be deleted
+    // when the parent object (this) will be destroyed.
+    // We set m_pipeline to NULL to prevent further attempts
+    // to stop already stopped pipeline
 }

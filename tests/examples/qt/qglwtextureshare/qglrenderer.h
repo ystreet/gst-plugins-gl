@@ -30,30 +30,30 @@ class GstThread;
 
 class QGLRenderer : public QGLWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  QGLRenderer(const QString &videoLocation, QWidget *parent = 0);
-  ~QGLRenderer();
+    QGLRenderer(const QString &videoLocation, QWidget *parent = 0);
+    ~QGLRenderer();
 
-	void closeEvent (QCloseEvent* event);
+    void closeEvent(QCloseEvent* event);
 
 Q_SIGNALS:
-  void closeRequested();
+    void closeRequested();
 
 public Q_SLOTS:
-	void newFrame();
+    void newFrame();
 
 protected:
-	virtual void initializeGL();
-	virtual void resizeGL(int width, int height);
-	virtual void paintGL();
+    virtual void initializeGL();
+    virtual void resizeGL(int width, int height);
+    virtual void paintGL();
 
 private:
-	QString videoLoc;
-  GstThread *gst_thread;
-  bool closing;
-	GstGLBuffer *frame;
+    QString videoLoc;
+    GstThread *gst_thread;
+    bool closing;
+    GstGLBuffer *frame;
 };
 
 #endif // QGLRENDERER_H

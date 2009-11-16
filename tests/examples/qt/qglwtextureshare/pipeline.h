@@ -30,39 +30,39 @@
 
 class Pipeline : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  Pipeline(const GLContextID &ctx,
-           const QString &videoLocation,
-           QObject *parent);
-  ~Pipeline();
+    Pipeline(const GLContextID &ctx,
+        const QString &videoLocation,
+        QObject *parent);
+    ~Pipeline();
 
-  void configure();
-  void start();
-  void notifyNewFrame() {emit newFrameReady();}
-  void stop();
-  void unconfigure();
+    void configure();
+    void start();
+    void notifyNewFrame() {emit newFrameReady();}
+    void stop();
+    void unconfigure();
 
-  AsyncQueue<GstGLBuffer*> queue_input_buf;
-  AsyncQueue<GstGLBuffer*> queue_output_buf;
+    AsyncQueue<GstGLBuffer*> queue_input_buf;
+    AsyncQueue<GstGLBuffer*> queue_output_buf;
 
 Q_SIGNALS:
-  void newFrameReady();
-  void stopRequested();
+    void newFrameReady();
+    void stopRequested();
 
 private:
-  const GLContextID glctx;
-  const QString m_videoLocation;
-  GMainLoop* m_loop;
-  GstBus* m_bus;
-  GstPipeline* m_pipeline;
-  static float m_xrot;
-  static float m_yrot;
-  static float m_zrot;
+    const GLContextID glctx;
+    const QString m_videoLocation;
+    GMainLoop* m_loop;
+    GstBus* m_bus;
+    GstPipeline* m_pipeline;
+    static float m_xrot;
+    static float m_yrot;
+    static float m_zrot;
 
-  static void on_gst_buffer(GstElement * element, GstBuffer * buf, GstPad * pad, Pipeline* p);
-  static gboolean bus_call (GstBus *bus, GstMessage *msg, Pipeline* p);
+    static void on_gst_buffer(GstElement * element, GstBuffer * buf, GstPad * pad, Pipeline* p);
+    static gboolean bus_call (GstBus *bus, GstMessage *msg, Pipeline* p);
 };
 
 #endif

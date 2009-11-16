@@ -28,13 +28,13 @@
 typedef struct _GstGLBuffer GstGLBuffer;
 struct _GstGLBuffer
 {
-  GstBuffer buffer;
+    GstBuffer buffer;
 
-  GObject *obj;
+    GObject *obj;
 
-  gint width;
-  gint height;
-  GLuint texture;
+    gint width;
+    gint height;
+    GLuint texture;
 };
 
 #endif // __GSTGLBUFFERDEF_H

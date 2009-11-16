@@ -23,32 +23,32 @@
 #define __GLCONTEXTID_H
 
 #if defined(Q_OS_WIN32)
-	#define WIN32_LEAN_AND_MEAN
-	#include <windows.h>
-	#include <Wingdi.h>
-  #include <glew.h>
-  #include <gl.h>
+    #define WIN32_LEAN_AND_MEAN
+    #include <windows.h>
+    #include <Wingdi.h>
+    #include <glew.h>
+    #include <gl.h>
 #else
-  #include <X11/Xlib.h>
-  //#include <GL/glxew.h>
-  #include <GL/gl.h>
-  #include <GL/glx.h>
+    #include <X11/Xlib.h>
+    //#include <GL/glxew.h>
+    #include <GL/gl.h>
+    #include <GL/glx.h>
 #endif
 
 
 #if defined(Q_WS_WIN)
-	typedef struct _tagGLContextID
-	{
-		HGLRC contextId;
-		HDC dc;
-	} GLContextID;
+    typedef struct _tagGLContextID
+    {
+        HGLRC contextId;
+        HDC dc;
+    } GLContextID;
 #elif defined(Q_WS_X11) || defined(Q_WS_MAC)
-	typedef struct _tagGLContextID
-	{
-		GLXContext contextId;
-		Display *display;
-		Window wnd;
-	} GLContextID;
+    typedef struct _tagGLContextID
+    {
+        GLXContext contextId;
+        Display *display;
+        Window wnd;
+    } GLContextID;
 #endif
 
 #endif // __GLCONTEXTID_H

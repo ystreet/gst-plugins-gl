@@ -29,28 +29,28 @@ class Pipeline;
 
 class GstThread : public QThread
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  GstThread(const GLContextID &ctxId,
+    GstThread(const GLContextID &ctxId,
             const QString &videoLocation,
             const char *renderer_slot,
             QObject *parent = 0);
 
-  ~GstThread();
+    ~GstThread();
 
-  Pipeline *getPipeline() {return this->m_pipeline;}
+    Pipeline *getPipeline() {return this->m_pipeline;}
 
 public Q_SLOTS:
-  void stop();
+    void stop();
 
 protected:
-  void run();
+    void run();
 
 private:
-  const GLContextID contextId;
-  const QString m_videoLocation;
-  Pipeline* m_pipeline;
+    const GLContextID contextId;
+    const QString m_videoLocation;
+    Pipeline* m_pipeline;
 };
 
 #endif
