@@ -26,8 +26,8 @@
     #define WIN32_LEAN_AND_MEAN
     #include <windows.h>
     #include <Wingdi.h>
-    #include <glew.h>
-    #include <gl.h>
+    #include <GL/glew.h>
+    #include <GL/gl.h>
 #else
     #include <X11/Xlib.h>
     //#include <GL/glxew.h>

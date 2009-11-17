@@ -9,22 +9,20 @@ DEFINES += UNICODE QT_THREAD_SUPPORT QT_CORE_LIB QT_GUI_LIB
 win32 {
 DEFINES += WIN32
 INCLUDEPATH += \
-    ./../../../../../libxml2/include \
+    C:/gstreamer/include/libxml2 \
     ./../../../../../libiconv/include \
     ./../../../../../glib/include/glib-2.0 \
     ./../../../../../glib/lib/glib-2.0/include \
-    ./../../../../../gstreamer/include \
     ./../../../../../glew/include \
-    ./../../../../../gstreamer \
-    ./../../../../../gst-plugins-base/gst-libs \
+    C:/gstreamer/include/gstreamer-0.10 \
     /usr/src/ossbuild/Shared/Build/Windows/Win32/include/glib-2.0 \
     /usr/src/ossbuild/Shared/Build/Windows/Win32/lib/glib-2.0/include \
     /usr/src/ossbuild/Build/Windows/Win32/Release/include/gstreamer-0.10 \
     /usr/src/ossbuild/Shared/Build/Windows/Win32/include/libxml2 \
     /usr/src/ossbuild/Shared/SDKs/MSVCRT/include/gl
-LIBS += \
-    -L"./../../../../../glib/lib" \
-    -L"./../../../../../gstreamer/lib" \
+LIBS += -L"./../../../../../glib/lib" \
+    -L"C:/gstreamer/lib" \
+    -L"C:/gstreamer/bin" \
     -L"./../../../../../glew/lib" \
     -L\usr\src\ossbuild\Build\Windows\Win32\Release\lib\gstreamer \
     -L\usr\src\ossbuild\Shared\Build\Windows\Win32\lib \
