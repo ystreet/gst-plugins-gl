@@ -98,9 +98,6 @@ QGLRenderer::resizeGL(int width, int height)
 void
 QGLRenderer::newFrame()
 {
-    /* frame may be updated while paintGL is requested */
-    QMutexLocker locker(&mutex);
-
     Pipeline *pipeline = this->gst_thread->getPipeline();
     /* frame is initialized as null */
     if (this->frame)
@@ -110,15 +107,6 @@ QGLRenderer::newFrame()
 
     /* direct call to paintGL (no queued) */
     this->updateGL();
-}
-
-void
-QGLRenderer::paintEvent ( QPaintEvent * event )
-{
-    Q_UNUSED(event)
-
-    /* frame may be updated while paintGL is requested */
-    QMutexLocker locker(&mutex);
 }
 
 void

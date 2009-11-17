@@ -23,7 +23,6 @@
 #define QGLRENDERER_H
 
 #include <QGLWidget>
-#include <QMutex>
 #include "GstGLBufferDef.h"
 
 
@@ -48,11 +47,9 @@ public Q_SLOTS:
 protected:
     virtual void initializeGL();
     virtual void resizeGL(int width, int height);
-    void paintEvent ( QPaintEvent * event );
     virtual void paintGL();
 
 private:
-    QMutex mutex;
     QString videoLoc;
     GstThread *gst_thread;
     bool closing;
