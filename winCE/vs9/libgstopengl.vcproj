@@ -213,6 +213,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst\gl\gstgleffects.c"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglfiltercube.c"
 					>
 				</File>
@@ -228,6 +232,26 @@
 					RelativePath="..\..\gst\gl\gstopengl.c"
 					>
 				</File>
+				<Filter
+					Name="effects"
+					>
+					<File
+						RelativePath="..\..\gst\gl\effects\gstgleffectidentity.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\gst\gl\effects\gstgleffectmirror.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\gst\gl\effects\gstgleffectsqueeze.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\gst\gl\effects\gstgleffectssources.c"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -275,6 +299,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst\gl\gstgleffects.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglfiltercube.h"
 					>
 				</File>
@@ -286,6 +314,14 @@
 					RelativePath="..\..\gst\gl\gstglupload.h"
 					>
 				</File>
+				<Filter
+					Name="effects"
+					>
+					<File
+						RelativePath="..\..\gst\gl\effects\gstgleffectssources.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
