@@ -73,7 +73,7 @@ void reshapeCallback (GLuint width, GLuint height)
 
 
 //client draw callback
-gboolean drawCallback (GLuint width, GLuint height, GLuint texture, GLhandleARB shader)
+gboolean drawCallback (GLuint width, GLuint height, GLuint texture, gpointer data)
 {
     static GLfloat	xrot = 0;
     static GLfloat	yrot = 0;				
@@ -215,6 +215,7 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glfilterapp), "client-draw-callback", drawCallback, NULL);
+    g_object_set(G_OBJECT(glfilterapp), "client-data", NULL, NULL);
     g_object_set(G_OBJECT(filesink), "location", "record.avi", NULL);
     
     /* add elements */

@@ -61,7 +61,7 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 }
 
 //client reshape callback
-void reshapeCallback (GLuint width, GLuint height)
+void reshapeCallback (GLuint width, GLuint height, gpointer data)
 {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
@@ -71,7 +71,7 @@ void reshapeCallback (GLuint width, GLuint height)
 }
 
 //client draw callback
-gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
+gboolean drawCallback (GLuint texture, GLuint width, GLuint height, gpointer data)
 {
     static GLfloat	xrot = 0;
     static GLfloat	yrot = 0;
@@ -204,6 +204,7 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
     g_object_set(G_OBJECT(glimagesink), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glimagesink), "client-draw-callback", drawCallback, NULL);
+    g_object_set(G_OBJECT(glimagesink), "client-data", NULL, NULL);
 
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glimagesink, NULL);
