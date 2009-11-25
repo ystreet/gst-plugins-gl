@@ -50,6 +50,7 @@
 			<Add directory="../.." />
 			<Add directory="../../gst-libs" />
 			<Add directory="../../../../../Documents/SDKPackage/Builds/OGLES2/Include" />
+			<Add directory="../../gst/gl/effects" />
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
@@ -86,10 +87,27 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../gst-libs/gst/gst-i18n-plugin.h" />
+		<Unit filename="../../gst/gl/effects/gstgleffectidentity.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/effects/gstgleffectmirror.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/effects/gstgleffectsqueeze.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/effects/gstgleffectssources.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/effects/gstgleffectssources.h" />
 		<Unit filename="../../gst/gl/gstgldownload.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../gst/gl/gstgldownload.h" />
+		<Unit filename="../../gst/gl/gstgleffects.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../gst/gl/gstgleffects.h" />
 		<Unit filename="../../gst/gl/gstglfiltercube.c">
 			<Option compilerVar="CC" />
 		</Unit>
