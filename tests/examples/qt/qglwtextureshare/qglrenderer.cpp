@@ -64,7 +64,8 @@ QGLRenderer::initializeGL()
     // We need to unset Qt context before initializing gst-gl plugin.
     // Otherwise the attempt to share gst-gl context with Qt will fail.
     this->doneCurrent();
-    this->gst_thread = new GstThread(ctx, this->videoLoc, SLOT(newFrame()), this);
+    this->gst_thread = 
+      new GstThread(ctx, this->videoLoc, SLOT(newFrame()), this);
     this->makeCurrent();
 
     QObject::connect(this->gst_thread, SIGNAL(finished()),
@@ -73,7 +74,7 @@ QGLRenderer::initializeGL()
                    this->gst_thread, SLOT(stop()), Qt::QueuedConnection);
 
     qglClearColor(QApplication::palette().color(QPalette::Active,
-                                              QPalette::Window));
+                                                QPalette::Window));
     //glShadeModel(GL_FLAT);
     //glEnable(GL_DEPTH_TEST);
     //glEnable(GL_CULL_FACE);
@@ -99,6 +100,9 @@ void
 QGLRenderer::newFrame()
 {
     Pipeline *pipeline = this->gst_thread->getPipeline();
+    if(!pipeline)
+      return;
+
     /* frame is initialized as null */
     if (this->frame)
         pipeline->queue_output_buf.put(this->frame);

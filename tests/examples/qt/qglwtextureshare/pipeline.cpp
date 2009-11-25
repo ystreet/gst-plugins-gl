@@ -91,18 +91,18 @@ Pipeline::configure()
         qDebug("failed to pause pipeline");
         return;
     }
+}
 
+void
+Pipeline::start()
+{
     // set a callback to retrieve the gst gl textures
     GstElement *fakesink = gst_bin_get_by_name(GST_BIN(this->m_pipeline),
         "fakesink0");
     g_object_set(G_OBJECT (fakesink), "signal-handoffs", TRUE, NULL);
     g_signal_connect(fakesink, "handoff", G_CALLBACK (on_gst_buffer), this);
     g_object_unref(fakesink);
-}
 
-void
-Pipeline::start()
-{
     GstStateChangeReturn ret =
     gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_PLAYING);
     if (ret == GST_STATE_CHANGE_FAILURE)
@@ -137,14 +137,14 @@ Pipeline::on_gst_buffer(GstElement * element,
     Q_UNUSED(pad)
     Q_UNUSED(element)
 
-    /* ref then push buffer to use it in clutter */
+    /* ref then push buffer to use it in qt */
     gst_buffer_ref(buf);
     p->queue_input_buf.put((GstGLBuffer*)buf);
 
     if (p->queue_input_buf.size() > 3)
         p->notifyNewFrame();
 
-    /* pop then unref buffer we have finished to use in clutter */
+    /* pop then unref buffer we have finished to use in qt */
     if (p->queue_output_buf.size() > 3)
     {
         GstBuffer *buf_old = (GstBuffer*)(p->queue_output_buf.get());
