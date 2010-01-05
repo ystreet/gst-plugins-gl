@@ -8,22 +8,23 @@ videoxoverlay_OBJC_FILES = main.m
 
 ifeq ($(GNUSTEP_TARGET_OS), mingw32)
 videoxoverlay_INCLUDE_DIRS = \
-  -ID:/workspace/glib/include/glib-2.0 \
-  -ID:/workspace/gstreamer/include \
-  -ID:/workspace/glib/lib/glib-2.0/include
+  -IC:/gstreamer/include/libxml2 \
+  -IC:/gstreamer/include/glib-2.0 \
+  -IC:/gstreamer/lib/glib-2.0/include \
+  -IC:/gstreamer/include \
+  -IC:/gstreamer/include/gstreamer-0.10
 endif
 
 ifeq ($(GNUSTEP_TARGET_OS), mingw32)
   videoxoverlay_LIB_DIRS += \
-    -LD:/workspace/glib/lib \
     -LC:/gstreamer/bin
 endif
 
 videoxoverlay_TOOL_LIBS = \
-  -lglib-2.0 \
-	-lgobject-2.0 \
-	-lgmodule-2.0 \
-	-lgthread-2.0 \
+  -lglib-2.0-0 \
+	-lgobject-2.0-0 \
+	-lgmodule-2.0-0 \
+	-lgthread-2.0-0 \
 	-lgstreamer-0.10 \
 	-lgstbase-0.10 \
 	-lgstvideo-0.10 \
