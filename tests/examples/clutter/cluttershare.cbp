@@ -34,13 +34,13 @@
 			<Add option="-std=c89" />
 			<Add option="-DWIN32" />
 			<Add directory="..\..\..\..\clutter\include\clutter-0.8" />
-			<Add directory="..\..\..\..\glib\include\glib-2.0" />
-			<Add directory="..\..\..\..\glib\lib\glib-2.0\include" />
+			<Add directory="C:\gstreamer\include\glib-2.0" />
+			<Add directory="C:\gstreamer\lib\glib-2.0\include" />
 			<Add directory="C:\gstreamer\include\gstreamer-0.10" />
 			<Add directory="C:\gstreamer\include\pango-1.0" />
 			<Add directory="C:\gstreamer\include\cairo" />
-			<Add directory="..\..\..\..\glew\include" />
 			<Add directory="C:\gstreamer\include\libxml2" />
+			<Add directory="C:\gstreamer\include" />
 		</Compiler>
 		<Linker>
 			<Add library="clutter-win32-0.8" />
@@ -61,8 +61,6 @@
 			<Add library="opengl32" />
 			<Add library="gdi32" />
 			<Add library="winmm" />
-			<Add directory="..\..\..\..\glib\lib" />
-			<Add directory="..\..\..\..\glew\bin" />
 			<Add directory="..\..\..\..\clutter\lib" />
 			<Add directory="C:\gstreamer\lib" />
 			<Add directory="C:\gstreamer\bin" />

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\..\glib\lib\glib-2.0\include&quot;;C:\gstreamer\include\libxml2;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include"
+				AdditionalIncludeDirectories="&quot;C:\gstreamer\include\glib-2.0&quot;;&quot;C:\gstreamer\lib\glib-2.0\include&quot;;C:\gstreamer\include\libxml2;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gstreamer.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib sdl.lib sdlmain.lib opengl32.lib glu32.lib"
+				AdditionalDependencies="gstreamer-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib sdl.lib sdlmain.lib opengl32.lib glu32.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\glib\lib;C:\gstreamer\lib"
+				AdditionalLibraryDirectories="C:\gstreamer\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;..\..\..\..\glib\include\glib-2.0&quot;;&quot;..\..\..\..\glib\lib\glib-2.0\include&quot;;C:\gstreamer\include\libxml2;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include"
+				AdditionalIncludeDirectories="&quot;C:\gstreamer\include\glib-2.0&quot;;&quot;C:\gstreamer\lib\glib-2.0\include&quot;;C:\gstreamer\include\libxml2;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -136,9 +136,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gstreamer.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib sdl.lib sdlmain.lib opengl32.lib glu32.lib"
+				AdditionalDependencies="gstreamer-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib sdl.lib sdlmain.lib opengl32.lib glu32.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\glib\lib;C:\gstreamer\lib"
+				AdditionalLibraryDirectories="C:\gstreamer\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"

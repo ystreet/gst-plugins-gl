@@ -9,33 +9,22 @@ DEFINES += UNICODE QT_THREAD_SUPPORT QT_CORE_LIB QT_GUI_LIB
 win32 {
 DEFINES += WIN32
 INCLUDEPATH += \
+    C:/gstreamer/include \
     C:/gstreamer/include/libxml2 \
-    ./../../../../../libiconv/include \
-    ./../../../../../glib/include/glib-2.0 \
-    ./../../../../../glib/lib/glib-2.0/include \
-    ./../../../../../glew/include \
-    C:/gstreamer/include/gstreamer-0.10 \
-    /usr/src/ossbuild/Shared/Build/Windows/Win32/include/glib-2.0 \
-    /usr/src/ossbuild/Shared/Build/Windows/Win32/lib/glib-2.0/include \
-    /usr/src/ossbuild/Build/Windows/Win32/Release/include/gstreamer-0.10 \
-    /usr/src/ossbuild/Shared/Build/Windows/Win32/include/libxml2 \
-    /usr/src/ossbuild/Shared/SDKs/MSVCRT/include/gl
-LIBS += -L"./../../../../../glib/lib" \
-    -L"C:/gstreamer/lib" \
+    C:/gstreamer/include/glib-2.0 \
+    C:/gstreamer/lib/glib-2.0/include \
+    C:/gstreamer/include/gstreamer-0.10
+LIBS += -L"C:/gstreamer/lib" \
     -L"C:/gstreamer/bin" \
-    -L"./../../../../../glew/lib" \
-    -L\usr\src\ossbuild\Build\Windows\Win32\Release\lib\gstreamer \
-    -L\usr\src\ossbuild\Shared\Build\Windows\Win32\lib \
-    -lgstreamer \
+    -lgstreamer-0.10 \
     -lglib-2.0 \
     -lgmodule-2.0 \
     -lgobject-2.0 \
     -lgthread-2.0 \
-    -lgstinterfaces \
+    -lgstinterfaces-0.10 \
     -lopengl32 \
     -lglu32 \
-    -lglew32 \
-    -lglew32s
+    -lglew32
 }
 
 unix {

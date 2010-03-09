@@ -8,20 +8,19 @@ win32 {
 DEFINES += WIN32
 INCLUDEPATH += ./GeneratedFiles \
     ./GeneratedFiles/Debug \
+    C:/gstreamer/include \
     C:/gstreamer/include/libxml2 \
-    ./../../../../../libiconv/include \
-    ./../../../../../glib/include/glib-2.0 \
-    ./../../../../../glib/lib/glib-2.0/include \
-    C:/gstreamer/include/gstreamer-0.10 \
-LIBS += -L"./../../../../../glib/lib" \
+    C:/gstreamer/include/glib-2.0 \
+    C:/gstreamer/lib/glib-2.0/include \
+    C:/gstreamer/include/gstreamer-0.10
+LIBS += -L"C:/gstreamer/bin" \
     -L"C:/gstreamer/lib" \
-    -L"C:/gstreamer/bin" \
+    -lgstinterfaces-0.10 \
     -lgstreamer-0.10 \
     -lglib-2.0 \
     -lgmodule-2.0 \
     -lgobject-2.0 \
-    -lgthread-2.0 \
-    -llibgstinterfaces-0.10
+    -lgthread-2.0
 }
 
 unix {

@@ -1,15 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "videoxoverlay", "videoxoverlay.vcproj", "{7B8654F9-23A9-4C88-A751-6BBE09ED4CAF}"
-	GlobalSection(Qt) = preSolution
-		Integration = True
-	EndGlobalSection
 EndProject
 Global
-	GlobalSection(Qt) = preSolution
-		Integration = True
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Release|Win32 = Release|Win32
@@ -22,5 +16,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
+	GlobalSection(Qt) = preSolution
+		Integration = True
 	EndGlobalSection
 EndGlobal
