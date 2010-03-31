@@ -253,9 +253,9 @@ AC_SUBST(GSTPB_PREFIX)
 
 
 dnl libpng is required
-PKG_CHECK_MODULES(LIBPNG, libpng12 >= 1.0, HAVE_LIBPNG=yes, HAVE_LIBPNG=no)
+PKG_CHECK_MODULES(LIBPNG, libpng >= 1.0, HAVE_LIBPNG=yes, HAVE_LIBPNG=no)
 if test "x${HAVE_LIBPNG}" != xyes ; then
-  AC_ERROR([libpng12 is required])
+  AC_ERROR([libpng 1.0 or newer is required])
 fi
 AC_SUBST(LIBPNG_LIBS)
 AC_SUBST(LIBPNG_CFLAGS)
