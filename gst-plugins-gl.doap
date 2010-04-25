@@ -27,11 +27,10 @@ that use OpenGL.
  <download-page rdf:resource="http://gstreamer.freedesktop.org/download/" />
 
  <repository>
-   <CVSRepository>
-     <anon-root>:pserver:anonymous@cvs.freedesktop.org:/cvs/gstreamer</anon-root>
-     <module>gst-plugins-gl</module>
-     <browse rdf:resource="http://webcvs.freedesktop.org/gstreamer/gst-plugins-gl/" />
-   </CVSRepository>
+   <GitRepository>
+     <location rdf:resource="git://anongit.freedesktop.org/gstreamer/gst-plugins-gl"/>
+     <browse rdf:resource="http://cgit.freedesktop.org/gstreamer/gst-plugins-gl"/>
+   </GitRepository>
  </repository> 
 
  <release>
