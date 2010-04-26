@@ -183,6 +183,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglfilterlaplacian.h" />
+		<Unit filename="../../../gst/gl/gstglfilterreflectedscreen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglfilterreflectedscreen.h" />
 		<Unit filename="../../../gst/gl/gstglfiltersobel.c">
 			<Option compilerVar="CC" />
 		</Unit>
