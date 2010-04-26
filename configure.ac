@@ -185,11 +185,16 @@ case $host in
       GL_BACKEND=x11
       GL_TYPE=gl
     else
-      AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h,, AC_MSG_ERROR([EGL is required]))
-      AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h,, AC_MSG_ERROR([OpenGLES2 is required]))
-      GL_LIBS="$LIBS $X_LIBS -lEGL -lGLESv2"
-      GL_BACKEND=x11ES2
-      GL_TYPE=gles
+      AC_CHECK_HEADERS([EGL/egl.h], [HAVE_EGL=yes], [HAVE_EGL=no])
+      if test "x$HAVE_EGL" = "xyes"; then
+        AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h,, AC_MSG_ERROR([EGL is required]))
+        AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h,, AC_MSG_ERROR([OpenGLES2 is required]))
+        GL_LIBS="$LIBS $X_LIBS -lEGL -lGLESv2"
+        GL_BACKEND=x11ES2
+        GL_TYPE=gles
+      else
+        AC_MSG_ERROR([GL or EGL is required, consider installing libgl1-mesa-dev])
+      fi
     fi
     CPPFLAGS="$save_CPPFLAGS"
     LIBS="$save_LIBS"
