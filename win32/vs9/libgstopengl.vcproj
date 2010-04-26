@@ -261,6 +261,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst\gl\gstglfilterreflectedscreen.c"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst\gl\gstglfiltersobel.c"
 					>
 				</File>
@@ -436,6 +440,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglfilterlaplacian.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglfilterreflectedscreen.h"
 					>
 				</File>
 				<File
