@@ -65,3 +65,7 @@ gst-launch-0.10 videotestsrc ! "video/x-raw-yuv, format=(fourcc)YUY2" ! glupload
 
 gst-launch-0.10 -v videotestsrc ! glupload ! gloverlay location=image.png proportion-png=40 proportion-video=40 xpos-png=75 ypos-png=50 xpos-video=30 ypos-video=50 rotate-png=2 rotate-video=2 angle-png=-15 angle-video=15 ! glimagesink
 
+gst-launch-0.10 videotestsrc ! "video/x-raw-yuv, pixel-aspect-ratio=(fraction)5/2" ! glimagesink
+
+gst-launch-0.10 videotestsrc ! "video/x-raw-yuv,format=(fourcc)I420,width=720,height=576,pixel-aspect-ratio=(fraction)64/45" ! glupload ! glimagesink
+
