@@ -159,13 +159,6 @@ dnl *** checks for dependency libraries ***
 dnl GLib is required
 AG_GST_GLIB_CHECK([2.6])
 
-dnl liboil is required
-PKG_CHECK_MODULES(LIBOIL, liboil-0.3 >= 0.3.8, HAVE_LIBOIL=yes, HAVE_LIBOIL=no)
-if test "x$HAVE_LIBOIL" != "xyes"
-then
-  AC_ERROR([liboil-0.3.8 or later is required])
-fi
-
 #dnl Check for OpenGL, GLU and GLEW
 echo host is $host
 case $host in
