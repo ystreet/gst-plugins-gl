@@ -62,6 +62,21 @@ static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* 
 }
 
 
+static void area_realize_cb(GtkWidget* widget, GstElement* pipeline)
+{
+#if GTK_CHECK_VERSION(2,18,0)
+    if (!gdk_window_ensure_native (widget->window))
+        g_error ("Failed to create native window!");
+#endif
+
+    //avoid flickering when resizing or obscuring the main window
+    gdk_window_set_back_pixmap(widget->window, NULL, FALSE);
+    gtk_widget_set_app_paintable(widget,TRUE);
+
+    gst_element_set_state (pipeline, GST_STATE_PLAYING);
+}
+
+
 static gboolean on_click_drawing_area(GtkWidget* widget, GdkEventButton* event, GstElement* videosink)
 {
     g_print ("switch the drawing area\n");
@@ -205,14 +220,6 @@ gint main (gint argc, gchar *argv[])
     gtk_widget_set_events(area_top_right, GDK_BUTTON_PRESS_MASK);
     gtk_table_attach_defaults (GTK_TABLE (table_areas), area_top_right, 1, 2, 0, 1);
 
-    //avoid flickering when resizing or obscuring the main window
-    gtk_widget_realize(area_top_left);
-    gdk_window_set_back_pixmap(area_top_left->window, NULL, FALSE);
-    gtk_widget_set_app_paintable(area_top_left, TRUE);
-    gtk_widget_realize(area_top_right);
-    gdk_window_set_back_pixmap(area_top_right->window, NULL, FALSE);
-    gtk_widget_set_app_paintable(area_top_right, TRUE);
-
     //set window id on this event
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
     gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area_top_right);
@@ -231,13 +238,8 @@ gint main (gint argc, gchar *argv[])
     g_signal_connect(area_top_left, "button-press-event", G_CALLBACK(on_click_drawing_area), videosink);
     g_signal_connect(area_top_right, "button-press-event", G_CALLBACK(on_click_drawing_area), videosink);
 
-    //start
-    GstStateChangeReturn ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
-    if (ret == GST_STATE_CHANGE_FAILURE)
-    {
-        g_print ("Failed to start up pipeline!\n");
-        return -1;
-    }
+    g_signal_connect (area_top_left, "realize", G_CALLBACK (area_realize_cb), pipeline);
+    g_signal_connect (area_top_right, "realize", G_CALLBACK (area_realize_cb), pipeline);
 
     gtk_widget_show_all (window);
 
