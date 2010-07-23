@@ -28,6 +28,9 @@
     #include <Wingdi.h>
     #include <GL/glew.h>
     #include <GL/gl.h>
+#elif defined (Q_OS_MAC)
+    #include <OpenGL/OpenGL.h>
+    class NSOpenGLContext;
 #else
     #include <X11/Xlib.h>
     //#include <GL/glxew.h>
@@ -42,7 +45,12 @@
         HGLRC contextId;
         HDC dc;
     } GLContextID;
-#elif defined(Q_WS_X11) || defined(Q_WS_MAC)
+#elif  defined(Q_WS_MAC)
+    typedef struct _tagGLContextID
+    {
+        NSOpenGLContext* contextId;
+    } GLContextID;
+#elif defined(Q_WS_X11)
     typedef struct _tagGLContextID
     {
         GLXContext contextId;

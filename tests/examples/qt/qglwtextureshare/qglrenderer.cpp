@@ -24,6 +24,9 @@
 #include "qglrenderer.h"
 #include "pipeline.h"
 
+#if defined(Q_WS_MAC)
+extern void *qt_current_nsopengl_context();
+#endif
 
 QGLRenderer::QGLRenderer(const QString &videoLocation,
                          QWidget *parent)
@@ -49,7 +52,9 @@ QGLRenderer::initializeGL()
 #if defined(Q_WS_WIN)
     ctx.contextId = wglGetCurrentContext();
     ctx.dc = wglGetCurrentDC();
-#elif defined(Q_WS_X11) || defined(Q_WS_MAC)
+#elif defined (Q_WS_MAC)
+    ctx.contextId = (NSOpenGLContext*) qt_current_nsopengl_context();
+#elif defined(Q_WS_X11)
     ctx.contextId = glXGetCurrentContext();
     const char *display_name = getenv("DISPLAY");
     if(display_name == NULL)
