@@ -2,6 +2,7 @@
  * GStreamer
  * Copyright (C) 2009 Julien Isorce <julien.isorce@gmail.com>
  * Copyright (C) 2009 Andrey Nechypurenko <andreynech@gmail.com>
+ * Copyright (C) 2010 Nuno Santos <nunosantos@imaginando.net>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
