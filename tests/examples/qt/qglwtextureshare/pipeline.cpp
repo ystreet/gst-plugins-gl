@@ -56,7 +56,7 @@ Pipeline::configure()
                       ("videotestsrc ! "
                        "video/x-raw-yuv, width=640, height=480, "
                        "framerate=(fraction)30/1 ! "
-                       "glupload ! fakesink sync=1",
+                       "glupload ! gleffects effect=5 ! fakesink sync=1",
                        NULL));
     }
     else
@@ -64,7 +64,9 @@ Pipeline::configure()
         qDebug("Loading video: %s", m_videoLocation.toAscii().data());
         m_pipeline =
             GST_PIPELINE (gst_parse_launch
-                      (QString("filesrc location=%1 ! decodebin2 ! glupload ! fakesink sync=1").arg(m_videoLocation).toAscii(),
+                      (QString("filesrc location=%1 ! decodebin2 ! "
+                               "glupload ! gleffects effect=5 ! "
+                               "fakesink sync=1").arg(m_videoLocation).toAscii(),
                        NULL));
     }
 
@@ -72,15 +74,16 @@ Pipeline::configure()
     gst_bus_add_watch(m_bus, (GstBusFunc) bus_call, this);
     gst_object_unref(m_bus);
 
-    GstElement *glupload = gst_bin_get_by_name(GST_BIN(m_pipeline), "glupload0");
-    if(!glupload)
+    /* Retrieve the last gl element */
+    GstElement *gl_element = gst_bin_get_by_name(GST_BIN(m_pipeline), "gleffects0");
+    if(!gl_element)
     {
-        qDebug ("glupload element could not be found");
+        qDebug ("gl element could not be found");
         return;
     }
-    g_object_set(G_OBJECT (glupload), "external-opengl-context",
+    g_object_set(G_OBJECT (gl_element), "external-opengl-context",
                this->glctx.contextId, NULL);
-    g_object_unref(glupload);
+    g_object_unref(gl_element);
 
     gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_PAUSED);
     GstState state = GST_STATE_PAUSED;
