@@ -95,7 +95,7 @@
 <FLAGS>w</FLAGS>
 <NICK>Znear</NICK>
 <BLURB>Specifies the distance from the viewer to the near clipping plane.</BLURB>
-<DEFAULT>0,1</DEFAULT>
+<DEFAULT>0.1</DEFAULT>
 </ARG>
 
 <ARG>
@@ -169,6 +169,16 @@
 </ARG>
 
 <ARG>
+<NAME>GstGLFilterApp::client-data</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client data</NICK>
+<BLURB>Pass data to the draw and reshape callbacks.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
 <NAME>GstGLImageSink::client-draw-callback</NAME>
 <TYPE>gpointer</TYPE>
 <RANGE></RANGE>
@@ -206,6 +216,26 @@
 <NICK>Force aspect ratio</NICK>
 <BLURB>When enabled, scaling will respect original aspect ratio.</BLURB>
 <DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::client-data</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client data</NICK>
+<BLURB>Pass data to the draw and reshape callbacks.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::pixel-aspect-ratio</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Pixel Aspect Ratio</NICK>
+<BLURB>The pixel aspect ratio of the device.</BLURB>
+<DEFAULT>"1/1"</DEFAULT>
 </ARG>
 
 <ARG>
@@ -259,6 +289,116 @@
 </ARG>
 
 <ARG>
+<NAME>GstGLOverlay::angle-png</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[-90,90]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>choose angle in axis to choosen between -90 and 90</NICK>
+<BLURB>choose angle in axis to choosen between -90 and 90.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::angle-video</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[-90,90]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>choose angle in axis to choosen between -90 and 90</NICK>
+<BLURB>choose angle in axis to choosen between -90 and 90.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::proportion-png</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Relative size of overlay image, in percents</NICK>
+<BLURB>Relative size of iverlay image, in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::proportion-video</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Relative size of overlay video, in percents</NICK>
+<BLURB>Relative size of iverlay video, in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::rotate-png</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,3]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>choose rotation axis for the moment only Y axis is implemented</NICK>
+<BLURB>choose rotation axis for the moment only Y axis is implemented.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::rotate-video</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,3]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>choose rotation axis for the moment only Y axis is implemented</NICK>
+<BLURB>choose rotation axis for the moment only Y axis is implemented.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::video-top</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Video-top</NICK>
+<BLURB>Video is over png image.</BLURB>
+<DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::xpos-png</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>X position of overlay image in percents</NICK>
+<BLURB>X position of overlay image in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::xpos-video</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>X position of overlay video in percents</NICK>
+<BLURB>X position of overlay video in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::ypos-png</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Y position of overlay image in percents</NICK>
+<BLURB>Y position of overlay image in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::ypos-video</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Y position of overlay video in percents</NICK>
+<BLURB>Y position of overlay video in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
 <NAME>GstGLUpload::external-opengl-context</NAME>
 <TYPE>gulong</TYPE>
 <RANGE></RANGE>
@@ -266,5 +406,75 @@
 <NICK>External OpenGL context</NICK>
 <BLURB>Give an external OpenGL context with which to share textures.</BLURB>
 <DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterReflectedScreen::active-graphic-mode</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Activate graphic mode</NICK>
+<BLURB>Allow user to activate stencil buffer and blending.</BLURB>
+<DEFAULT>TRUE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterReflectedScreen::aspect</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Aspect</NICK>
+<BLURB>Field of view in the x direction.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterReflectedScreen::fovy</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,180]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Fovy</NICK>
+<BLURB>Field of view angle in degrees.</BLURB>
+<DEFAULT>60</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterReflectedScreen::separated-screen</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Create a separation space</NICK>
+<BLURB>Allow to insert a space between the two screen. Will cancel 'show floor' if active. Value are TRUE or FALSE(default).</BLURB>
+<DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterReflectedScreen::show-floor</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Show the support</NICK>
+<BLURB>Allow the user to show the supportive floor. Will cancel 'separated screen' if active. Value are TRUE(default) or FALSE.</BLURB>
+<DEFAULT>TRUE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterReflectedScreen::zfar</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,1000]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Zfar</NICK>
+<BLURB>Specifies the distance from the viewer to the far clipping plane.</BLURB>
+<DEFAULT>100</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterReflectedScreen::znear</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Znear</NICK>
+<BLURB>Specifies the distance from the viewer to the near clipping plane.</BLURB>
+<DEFAULT>0.1</DEFAULT>
 </ARG>
 

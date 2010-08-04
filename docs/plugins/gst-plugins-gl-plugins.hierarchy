@@ -1,6 +1,7 @@
 GObject
   GstObject
     GstPad
+      GstGLMixerPad
     GstPadTemplate
     GstPluginFeature
       GstElementFactory
@@ -14,15 +15,16 @@ GObject
         GstGLDownload
         GstGLFilter
           GstGLFilterCube
+          GstGLEffects
           GstGLOverlay
           GstGLDifferenceMatte
           GstGLBumper
-          GstGLEffects
           GstGLFilterBlur
           GstGLFilterSobel
           GstGLFilterLaplacian
           GstGLFilterGlass
           GstGLFilterApp
+          GstGLFilterReflectedScreen
           GstGLDeinterlace
         GstGLColorscale
       GstBaseSink
@@ -31,8 +33,11 @@ GObject
       GstBaseSrc
         GstPushSrc
           GstGLTestSrc
+      GstGLMixer
+        GstGLMosaic
     GstBus
     GstTask
+    GstTaskPool
     GstClock
     GstPlugin
     GstRegistry
