@@ -25,7 +25,7 @@ include $(top_srcdir)/common/win32.mak
 
 EXTRA_DIST = \
 	gst-plugins-gl.spec depcomp \
-	AUTHORS COPYING COPYING.LIB NEWS README RELEASE REQUIREMENTS \
+	AUTHORS COPYING NEWS README RELEASE REQUIREMENTS \
 	ChangeLog gst-plugins-gl.doap autogen.sh $(win32)
 
 DISTCLEANFILES = _stdint.h
