@@ -1,50 +1,50 @@
 GObject
   GstObject
-    GstPad
-      GstGLMixerPad
-    GstPadTemplate
-    GstPluginFeature
-      GstElementFactory
-      GstTypeFindFactory
-      GstIndexFactory
+    GstBus
+    GstClock
     GstElement
-      GstBin
-        GstPipeline
-      GstBaseTransform
-        GstGLUpload
-        GstGLDownload
-        GstGLFilter
-          GstGLFilterCube
-          GstGLEffects
-          GstGLOverlay
-          GstGLDifferenceMatte
-          GstGLBumper
-          GstGLFilterBlur
-          GstGLFilterSobel
-          GstGLFilterLaplacian
-          GstGLFilterGlass
-          GstGLFilterApp
-          GstGLFilterReflectedScreen
-          GstGLDeinterlace
-        GstGLColorscale
       GstBaseSink
         GstVideoSink
           GstGLImageSink
       GstBaseSrc
         GstPushSrc
           GstGLTestSrc
+      GstBaseTransform
+        GstGLColorscale
+        GstGLDownload
+        GstGLFilter
+          GstGLBumper
+          GstGLDeinterlace
+          GstGLDifferenceMatte
+          GstGLEffects
+          GstGLFilterApp
+          GstGLFilterBlur
+          GstGLFilterCube
+          GstGLFilterGlass
+          GstGLFilterLaplacian
+          GstGLFilterReflectedScreen
+          GstGLFilterSobel
+          GstGLOverlay
+        GstGLUpload
+      GstBin
+        GstPipeline
       GstGLMixer
         GstGLMosaic
-    GstBus
+    GstPad
+      GstGLMixerPad
+    GstPadTemplate
+    GstPlugin
+    GstPluginFeature
+      GstElementFactory
+      GstIndexFactory
+      GstTypeFindFactory
+    GstRegistry
     GstTask
     GstTaskPool
-    GstClock
-    GstPlugin
-    GstRegistry
   GstSignalObject
 GInterface
   GTypePlugin
   GstChildProxy
-  GstURIHandler
   GstImplementsInterface
+  GstURIHandler
   GstXOverlay
