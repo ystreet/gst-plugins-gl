@@ -11,10 +11,10 @@ Required tools:
 An extra set of tools is required if you wish to build GStreamer out of
 CVS (using autogen.sh):
 
-autoconf 2.52 or better
-automake 1.5
-gettext 0.11.5
-libtool v1.4 or better
+autoconf 2.60 or better
+automake 1.10
+gettext 0.17
+libtool v1.5 or better
 pkgconfig 0.9.0 or better (http://www.freedesktop.org/software/pkgconfig/)
 
 Required libraries:
@@ -31,12 +31,6 @@ DebianPackage:	libgstreamer0.10-dev
 Notes:		The required version is updated frequently, so the version
 	listed in this file is often wrong.  If you are compiling from CVS,
 	the required version is often the latest GStreamer CVS.
-
-Package:	liboil
-Version:	>= 0.3.8
-Recommended:	0.3.latest
-URL:		http://liboil.freedesktop.org/
-DebianPackage:	liboil0.3-dev
 
 Package:	glew
 Version:	>= 1.4.0

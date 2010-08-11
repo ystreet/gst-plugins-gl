@@ -35,12 +35,12 @@ autogen_options $@
 
 echo -n "+ check for build tools"
 if test ! -z "$NOCHECK"; then echo " skipped"; else  echo; fi
-version_check "autoconf" "$AUTOCONF autoconf autoconf259 autoconf257 autoconf-2.54 autoconf-2.53 autoconf-2.52" \
-              "ftp://ftp.gnu.org/pub/gnu/autoconf/" 2 52 || DIE=1
-version_check "automake" "$AUTOMAKE automake automake-1.9 automake19 automake-1.7 automake-1.6 automake-1.5" \
-              "ftp://ftp.gnu.org/pub/gnu/automake/" 1 7 || DIE=1
+version_check "autoconf" "$AUTOCONF autoconf autoconf2.65 autoconf2.64 autoconf2.63 autoconf2.62 autoconf2.61 autoconf2.60" \
+              "ftp://ftp.gnu.org/pub/gnu/autoconf/" 2 60 || DIE=1
+version_check "automake" "$AUTOMAKE automake automake-1.12 automake-1.11 automake-1.10" \
+              "ftp://ftp.gnu.org/pub/gnu/automake/" 1 10 || DIE=1
 version_check "gettext" "gettext" \
-              "ftp://ftp.gnu.org/pub/gnu/gettext/" 0 11 5 || DIE=1
+              "ftp://ftp.gnu.org/pub/gnu/gettext/" 0 17 || DIE=1
 version_check "autopoint" "autopoint" \
               "ftp://ftp.gnu.org/pub/gnu/gettext/" 0 11 5 || DIE=1
 version_check "libtoolize" "$LIBTOOLIZE libtoolize glibtoolize" \
@@ -50,7 +50,6 @@ version_check "pkg-config" "" \
 
 die_check $DIE
 
-autoconf_2_52d_check || DIE=1
 aclocal_check || DIE=1
 autoheader_check || DIE=1
 
