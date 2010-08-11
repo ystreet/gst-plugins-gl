@@ -37,7 +37,7 @@ gst*.pc
 .libs
 .deps
 .dirstamp
-/m4
+/m4/*.m4
 
 *-decl.txt
 *-decl-list.txt
