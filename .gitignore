@@ -50,15 +50,17 @@ gst*.pc
 *.ncb
 *.suo
 
-docs/libs/doc-registry.*
+docs/libs/*-registry.*
 docs/libs/html
 docs/libs/tmpl
 docs/libs/xml
 docs/libs/*bak
+docs/plugins/*-registry.*
 docs/plugins/html
 docs/plugins/tmpl
 docs/plugins/xml
 docs/plugins/*bak
+docs/version.entities
 
 # You might want to consider simplifying the ignores here...
 sh.exe.stackdump
@@ -108,6 +110,7 @@ tests/examples/qt/qglwidgetxoverlay/generatedfiles/
 tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.ncb
 tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.suo
 tests/examples/qt/qglwidgetxoverlay/qglwidgetxoverlay.vcproj.BOWOB.Julien.user
+tests/examples/sdl/sdlshare
 win32/codeblock/Debug/
 win32/codeblock/Release/
 win32/codeblock/gstopengl.depend
