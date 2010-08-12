@@ -163,7 +163,7 @@ AG_GST_GLIB_CHECK([2.6])
 #dnl Check for OpenGL, GLU and GLEW
 echo host is $host
 case $host in
-  *-linux* | *-cygwin*)
+  *-linux* | *-cygwin* | *-solaris* | *-netbsd* | *-freebsd* | *-openbsd* | *-kfreebsd* | *-dragonflybsd* | *-gnu* )
     AG_GST_CHECK_X
     save_CPPFLAGS="$CPPFLAGS"
     save_LIBS="$LIBS"
