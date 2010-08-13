@@ -74,9 +74,9 @@ GST_GL_DOWNLOAD_GET_CLASS
 
 <SECTION>
 <FILE>element-gleffects</FILE>
+<TITLE>gleffects</TITLE>
 GstGLEffectProcessFunc
 NEEDED_TEXTURES
-<TITLE>gleffects</TITLE>
 GstGLEffects
 GstGLEffectsClass
 gst_gl_effects_draw_texture
@@ -226,8 +226,8 @@ GST_GL_OVERLAY_GET_CLASS
 
 <SECTION>
 <FILE>element-gltestsrc</FILE>
-GstGLTestSrcPattern
 <TITLE>gltestsrc</TITLE>
+GstGLTestSrcPattern
 GstGLTestSrc
 <SUBSECTION Standard>
 GstGLTestSrcClass
