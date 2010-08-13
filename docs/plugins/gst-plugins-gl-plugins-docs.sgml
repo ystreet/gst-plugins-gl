@@ -29,6 +29,7 @@
     <xi:include href="xml/element-glfiltercube.xml"/>
     <xi:include href="xml/element-glfilterglass.xml"/>
     <xi:include href="xml/element-glfilterlaplacian.xml"/>
+    <xi:include href="xml/element-glfilterreflectedscreen.xml"/>
     <xi:include href="xml/element-glfiltersobel.xml"/>
     <xi:include href="xml/element-glimagesink.xml"/>
     <xi:include href="xml/element-gloverlay.xml"/>

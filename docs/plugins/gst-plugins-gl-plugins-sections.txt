@@ -182,6 +182,21 @@ GST_GL_FILTER_LAPLACIAN_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>element-glfilterreflectedscreen</FILE>
+<TITLE>glfilterreflectedscreen</TITLE>
+GstGLFilterReflectedScreen
+<SUBSECTION Standard>
+GstGLFilterReflectedScreenlClass
+GST_GL_FILTER_REFLECTED_SCREEN
+GST_IS_GL_FILTER_REFLECTED_SCREEN
+GST_TYPE_GL_FILTER_REFLECTED_SCREEN
+gst_gl_filter_reflected_screen_get_type
+GST_GL_FILTER_REFLECTED_SCREEN_CLASS
+GST_IS_GL_FILTER_REFLECTED_SCREEN_CLASS
+GST_GL_FILTER_REFLECTED_SCREEN_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>element-glfiltersobel</FILE>
 <TITLE>glfiltersobel</TITLE>
 GstGLFilterSobel

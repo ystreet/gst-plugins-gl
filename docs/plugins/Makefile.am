@@ -86,6 +86,7 @@ EXTRA_HFILES = \
 	$(top_srcdir)/gst/gl/gstglfiltercube.h \
 	$(top_srcdir)/gst/gl/gstglfilterglass.h \
 	$(top_srcdir)/gst/gl/gstglfilterlaplacian.h \
+	$(top_srcdir)/gst/gl/gstglfilterreflectedscreen.h \
 	$(top_srcdir)/gst/gl/gstglfiltersobel.h \
 	$(top_srcdir)/gst/gl/gstglimagesink.h \
 	$(top_srcdir)/gst/gl/gstgloverlay.h \
