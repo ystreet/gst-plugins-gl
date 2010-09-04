@@ -1,4 +1,52 @@
-This is GStreamer OpengGL Plug-ins 0.10.1 "Le Fromage De La Belle France"
+This is GStreamer OpengGL Plug-ins 0.10.2 "Long forgotten rules"
+
+Changes since 0.10.1:
+
+      * New elements and examples
+      * Internal changes to GL context management
+      * Support RGB format in gloverlay
+      * Many fixes and improvements
+      * Cocoa backend for OS/X
+      * Dependency on libpng instead of gdkpixbuf
+
+Bugs fixed since 0.10.1:
+     
+      * 591591 : Gloverlay makes it hard to manipulate the position of the image
+      * 595303 : Plugin gloverlay to put video over png image
+      * 601277 : patch for gloverlay
+      * 559135 : Add five more opengl elements to plugin docs
+      * 562699 : configure.ac doesn't find opengl on os x
+      * 578811 : crash with cocoa backend
+      * 588510 : No copyright/license information in a lot of files
+      * 590351 : Compile issue on GLEW version.
+      * 593786 : support OpenGL es in autofoo
+      * 597253 : [gst-plugins-gl] rewrite the way a gstgldisplay is forwarded
+      * 599883 : [differencematte] regressions after gdkpixbuf to libpng migration
+      * 599885 : [gtk examples] unstable behaviour with recent gtk (post csw merge)
+      * 600630 : gldownload not working anymore
+      * 600797 : New example illustrates texture sharing between glupload and Qt
+      * 602153 : gstglmixer prints warnings when it has no parent
+      * 602771 : qglwtextureshare example crashes sometimes on startup
+      * 605121 : Bug when you configure gst-plugins-gl
+      * 608643 : libpng 1.4.x incompatibilities
+      * 611067 : Shared opengl context not shared correctly
+      * 612157 : [gst-plugins-gl]enable stencil buffer's use
+      * 612159 : [gst-plugins-gl]enable global stencil buffer use
+      * 612163 : [gst-plugins-gl]new gl filter: gstglfilterreflectedscreen
+      * 613186 : -gl can't be built against libpng 1.4.x
+      * 613371 : gst_element_class_set_details = > gst_element_class_set_details_simple
+      * 615696 : Shaders using GLSL 1.20 without #version.
+      * 616748 : multiply_fragment_source shader compilation error with Apple GLSL compiler
+      * 625144 : [gst-plugins-gl] fixed qglwtextureshare example to work on a Mac
+      * 626708 : Add OpenGL checks for Solaris, *BSD and GNU Hurd
+      * 559131 : Have client-draw-callback accept a gpointer of user data
+      * 588454 : Cygwin also uses GLX
+      * 588653 : glimagesink fails to render I420 and YV12 frames properly
+      * 593165 : glimagesink bug decoding from ts
+      * 593486 : sdlshare example test on linux
+      * 595588 : Added patch to manage RGB or RGBA
+
+Features of 0.10.1:
 
       * Initial release of gst-plugins-gl
       * Integration with standard GStreamer video buffers

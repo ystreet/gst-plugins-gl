@@ -35,6 +35,17 @@ that use OpenGL.
 
  <release>
   <Version>
+   <revision>0.10.2</revision>
+   <branch>0.10</branch>
+   <name>Long forgotten rules</name>
+   <created>2010-09-04</created>
+   <file-release rdf:resource="http://gstreamer.freedesktop.org/src/gst-plugins-gl/gst-plugins-gl-0.10.2.tar.bz2" />
+   <file-release rdf:resource="http://gstreamer.freedesktop.org/src/gst-plugins-gl/gst-plugins-gl-0.10.2.tar.gz" />
+  </Version>
+ </release>
+
+ <release>
+  <Version>
    <revision>0.10.1</revision>
    <branch>0.10</branch>
    <name>Le Fromage De La Belle France</name>
