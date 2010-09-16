@@ -31,7 +31,7 @@
 static GList *elements = NULL;
 
 static void
-setup ()
+setup (void)
 {
   GList *features, *f;
   GList *plugins, *p;
@@ -39,8 +39,8 @@ setup ()
   const gchar *STATE_IGNORE_ELEMENTS = NULL;
 
   GST_DEBUG ("getting elements for package %s", PACKAGE);
-  STATE_IGNORE_ELEMENTS = g_getenv ("STATE_IGNORE_ELEMENTS");
-  if (STATE_IGNORE_ELEMENTS) {
+  STATE_IGNORE_ELEMENTS = g_getenv ("GST_STATE_IGNORE_ELEMENTS");
+  if (!g_getenv ("GST_NO_STATE_IGNORE_ELEMENTS") && STATE_IGNORE_ELEMENTS) {
     GST_DEBUG ("Will ignore element factories: '%s'", STATE_IGNORE_ELEMENTS);
     ignorelist = g_strsplit (STATE_IGNORE_ELEMENTS, " ", 0);
   }
@@ -88,7 +88,7 @@ setup ()
 }
 
 static void
-teardown ()
+teardown (void)
 {
   GList *e;
 
