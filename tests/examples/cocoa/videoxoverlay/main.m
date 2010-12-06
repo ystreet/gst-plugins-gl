@@ -91,7 +91,7 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, MainWind
 
   g_print ("setting xwindow id %lud\n", (gulong) window);
 
-  gst_x_overlay_set_xwindow_id (GST_X_OVERLAY (GST_MESSAGE_SRC (message)), (gulong) window);
+  gst_x_overlay_set_window_handle (GST_X_OVERLAY (GST_MESSAGE_SRC (message)), (gulong) window);
 
   gst_message_unref (message);
 

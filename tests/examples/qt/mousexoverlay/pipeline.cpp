@@ -325,8 +325,8 @@ GstBusSyncReply Pipeline::create_window (GstBus* bus, GstMessage* message, const
     qDebug ("setting xwindow id");
 
     //Passing 0 as the xwindow_id will tell the overlay to stop using that window and create an internal one.
-    //In the directdrawsink's gst_x_overlay_set_xwindow_id implementation, xwindow_id (parameter 2) is casted to HWND before it used.
-    gst_x_overlay_set_xwindow_id (GST_X_OVERLAY (GST_MESSAGE_SRC (message)), (ulong)p->winId());
+    //In the directdrawsink's gst_x_overlay_set_window_handle implementation, xwindow_id (parameter 2) is casted to HWND before it used.
+    gst_x_overlay_set_window_handle (GST_X_OVERLAY (GST_MESSAGE_SRC (message)), (ulong)p->winId());
 
     gst_message_unref (message);
 
