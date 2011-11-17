@@ -49,6 +49,7 @@
 			<Add directory="../../.." />
 			<Add directory="../../../gst/gl/effects" />
 			<Add directory="../../../gst-libs" />
+			<Add directory="/usr/lib/i386-linux-gnu/glib-2.0/include" />
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
@@ -63,6 +64,7 @@
 			<Add library="GLEW" />
 			<Add library="GLU" />
 			<Add library="GL" />
+			<Add library="jpeg" />
 		</Linker>
 		<Unit filename="../../../gst-libs/gst/gettext.h" />
 		<Unit filename="../../../gst-libs/gst/gl/gstglbuffer.c">
@@ -85,6 +87,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst-libs/gst/gl/gstglshader.h" />
+		<Unit filename="../../../gst-libs/gst/gl/gstglshadervariables.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst-libs/gst/gl/gstglshadervariables.h" />
 		<Unit filename="../../../gst-libs/gst/gl/gstglwindow.h" />
 		<Unit filename="../../../gst-libs/gst/gl/gstglwindow_x11.c">
 			<Option compilerVar="CC" />
@@ -187,6 +193,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../../../gst/gl/gstglfilterreflectedscreen.h" />
+		<Unit filename="../../../gst/gl/gstglfiltershader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../gst/gl/gstglfiltershader.h" />
 		<Unit filename="../../../gst/gl/gstglfiltersobel.c">
 			<Option compilerVar="CC" />
 		</Unit>
