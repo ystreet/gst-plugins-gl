@@ -261,24 +261,20 @@ AC_SUBST(LIBPNG_CFLAGS)
 
 
 dnl *** jpeg ***
-dnl FIXME: we could use header checks here as well IMO
-translit(dnm, m, l) AM_CONDITIONAL(USE_JPEG, true)
-AG_GST_CHECK_FEATURE(JPEG, [jpeg library], jpeg, [
-  AC_ARG_WITH(jpeg-mmx,
-    [  --with-jpeg-mmx, path to MMX'ified JPEG library])
-  OLD_LIBS="$LIBS"
-  if test x$with_jpeg_mmx != x; then
-    LIBS="$LIBS -L$with_jpeg_mmx"
-  fi
-  AC_CHECK_LIB(jpeg-mmx, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
-  JPEG_LIBS="$LIBS -ljpeg-mmx"
-  LIBS="$OLD_LIBS"
-  if test x$HAVE_JPEG != xyes; then
-    AC_CHECK_LIB(jpeg, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
-    JPEG_LIBS="-ljpeg"
-  fi
-  AC_SUBST(JPEG_LIBS)
-])
+AC_ARG_WITH(jpeg-mmx, [  --with-jpeg-mmx, path to MMX'ified JPEG library])
+OLD_LIBS="$LIBS"
+if test x$with_jpeg_mmx != x; then
+LIBS="$LIBS -L$with_jpeg_mmx"
+fi
+AC_CHECK_LIB(jpeg-mmx, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
+JPEG_LIBS="$LIBS -ljpeg-mmx"
+LIBS="$OLD_LIBS"
+if test x$HAVE_JPEG != xyes; then
+AC_CHECK_LIB(jpeg, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
+JPEG_LIBS="-ljpeg"
+fi
+AC_SUBST(JPEG_LIBS)
+
 
 
 dnl GTK is optional and used in examples
