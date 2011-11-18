@@ -252,13 +252,14 @@ AC_SUBST(GSTPB_PREFIX)
 
 
 dnl libpng is required
-PKG_CHECK_MODULES(LIBPNG, libpng >= 1.0, HAVE_LIBPNG=yes, HAVE_LIBPNG=no)
-if test "x${HAVE_LIBPNG}" != xyes ; then
-  AC_ERROR([libpng 1.0 or newer is required])
+PKG_CHECK_MODULES(LIBPNG, libpng >= 1.0, HAVE_PNG=yes, HAVE_PNG=no)
+if test "x$HAVE_PNG" = "xyes"; then
+  AC_DEFINE(HAVE_PNG, [1] , [Use libpng])
 fi
+AC_SUBST(HAVE_PNG)
 AC_SUBST(LIBPNG_LIBS)
 AC_SUBST(LIBPNG_CFLAGS)
-
+AM_CONDITIONAL(HAVE_PNG, test "x$HAVE_PNG" = "xyes")
 
 dnl *** jpeg ***
 AC_ARG_WITH(jpeg-mmx, [  --with-jpeg-mmx, path to MMX'ified JPEG library])
