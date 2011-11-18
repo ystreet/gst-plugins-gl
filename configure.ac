@@ -251,7 +251,7 @@ AC_SUBST(GST_PREFIX)
 AC_SUBST(GSTPB_PREFIX)
 
 
-dnl libpng is required
+dnl libpng is optional
 PKG_CHECK_MODULES(LIBPNG, libpng >= 1.0, HAVE_PNG=yes, HAVE_PNG=no)
 if test "x$HAVE_PNG" = "xyes"; then
   AC_DEFINE(HAVE_PNG, [1] , [Use libpng])
@@ -261,21 +261,23 @@ AC_SUBST(LIBPNG_LIBS)
 AC_SUBST(LIBPNG_CFLAGS)
 AM_CONDITIONAL(HAVE_PNG, test "x$HAVE_PNG" = "xyes")
 
-dnl *** jpeg ***
+dnl libjpeg is optional
 AC_ARG_WITH(jpeg-mmx, [  --with-jpeg-mmx, path to MMX'ified JPEG library])
 OLD_LIBS="$LIBS"
 if test x$with_jpeg_mmx != x; then
-LIBS="$LIBS -L$with_jpeg_mmx"
+  LIBS="$LIBS -L$with_jpeg_mmx"
 fi
 AC_CHECK_LIB(jpeg-mmx, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
 JPEG_LIBS="$LIBS -ljpeg-mmx"
 LIBS="$OLD_LIBS"
 if test x$HAVE_JPEG != xyes; then
-AC_CHECK_LIB(jpeg, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
-JPEG_LIBS="-ljpeg"
+  AC_CHECK_LIB(jpeg, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
+  JPEG_LIBS="-ljpeg"
+  AC_DEFINE(HAVE_JPEG, [1] , [Use libjpeg])
 fi
+AC_SUBST(HAVE_JPEG)
 AC_SUBST(JPEG_LIBS)
-
+AM_CONDITIONAL(HAVE_JPEG, test "x$HAVE_JPEG" = "xyes")
 
 
 dnl GTK is optional and used in examples
