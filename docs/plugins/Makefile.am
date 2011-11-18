@@ -62,10 +62,12 @@ EXTRA_HFILES = \
 	$(top_srcdir)/gst/gl/gstglfilterlaplacian.h \
 	$(top_srcdir)/gst/gl/gstglfilterreflectedscreen.h \
 	$(top_srcdir)/gst/gl/gstglfiltersobel.h \
+	$(top_srcdir)/gst/gl/gstglfiltershader.h
 	$(top_srcdir)/gst/gl/gstglimagesink.h \
 	$(top_srcdir)/gst/gl/gstgloverlay.h \
 	$(top_srcdir)/gst/gl/gstgltestsrc.h \
-	$(top_srcdir)/gst/gl/gstglupload.h
+	$(top_srcdir)/gst/gl/gstglupload.h \
+	$(top_srcdir)/gst/gl/gstglmosaic.h
 
 
 

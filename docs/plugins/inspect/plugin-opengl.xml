@@ -283,6 +283,27 @@
       </pads>
     </element>
     <element>
+      <name>glshader</name>
+      <longname>Gstreamer OpenGL Dynamic shader parser</longname>
+      <class>Filter/Effect</class>
+      <description>Shader parser and loader</description>
+      <author>Luc Deschenaux &lt;luc.deschenaux@freesurf.ch&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
       <name>glimagesink</name>
       <longname>OpenGL video sink</longname>
       <class>Sink/Video</class>
