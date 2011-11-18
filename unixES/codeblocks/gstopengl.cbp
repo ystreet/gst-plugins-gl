@@ -49,8 +49,9 @@
 			<Add directory="../../gst/gl" />
 			<Add directory="../.." />
 			<Add directory="../../gst-libs" />
-			<Add directory="../../../../../Documents/SDKPackage/Builds/OGLES2/Include" />
+			<Add directory="../../../../SDKPackage_OGLES2/Builds/OGLES2/Include" />
 			<Add directory="../../gst/gl/effects" />
+			<Add directory="/usr/lib/i386-linux-gnu/glib-2.0/include" />
 		</Compiler>
 		<Linker>
 			<Add library="glib-2.0" />
@@ -62,7 +63,7 @@
 			<Add library="gstinterfaces-0.10" />
 			<Add library="EGL" />
 			<Add library="GLESv2" />
-			<Add directory="../../../../../Documents/SDKPackage/Builds/OGLES2/LinuxPC/Lib" />
+			<Add directory="../../../../SDKPackage_OGLES2/Builds/OGLES2/LinuxX86/Lib" />
 		</Linker>
 		<Unit filename="../../gst-libs/gst/gettext.h" />
 		<Unit filename="../../gst-libs/gst/gl/gstglbuffer.c">

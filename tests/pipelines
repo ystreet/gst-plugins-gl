@@ -69,3 +69,5 @@ gst-launch-0.10 videotestsrc ! "video/x-raw-yuv, pixel-aspect-ratio=(fraction)5/
 
 gst-launch-0.10 videotestsrc ! "video/x-raw-yuv,format=(fourcc)I420,width=720,height=576,pixel-aspect-ratio=(fraction)64/45" ! glupload ! glimagesink
 
+// OPENGL ES 2.0
+LD_LIBRARY_PATH=/home/julien/dev/SDKPackage_OGLES2/Builds/OGLES2/LinuxX86/Lib/:/usr/lib/nvidia-current  gst-launch-0.10 videotestsrc ! glupload ! gleffects effect=2 ! glimagesink
