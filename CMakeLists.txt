@@ -1,18 +1,22 @@
-cmake_minimum_required(VERSION "2.6.0")
+cmake_minimum_required(VERSION "2.8.0")
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 
 project (GST-PLUGINS-GL)
 
+# built-in
+find_package(JPEG REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(GTK2 REQUIRED)
+
+# home made
 find_package(Glib2 REQUIRED)
 find_package(Gstreamer REQUIRED)
-find_package(OpenGL REQUIRED)
 find_package(Glew REQUIRED)
 find_package(Libpng REQUIRED)
 find_package(Zlib REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibIconv REQUIRED)
-find_package(GTK2 REQUIRED)
 find_package(ATK REQUIRED)
 find_package(Cairo REQUIRED)
 
@@ -74,7 +78,6 @@ check_package(CAIRO 0)
 
 add_subdirectory (gst-libs)
 add_subdirectory (gst)
-add_subdirectory (tests)
 
 #add_dependencies(gstgl)
 
