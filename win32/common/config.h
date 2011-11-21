@@ -111,6 +111,12 @@
 /* defined if we have makecontext () */
 #undef HAVE_MAKECONTEXT
 
+/* Use libjpeg */
+#define HAVE_JPEG 1
+
+/* Use libpng */
+#define HAVE_PNG 1
+
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 

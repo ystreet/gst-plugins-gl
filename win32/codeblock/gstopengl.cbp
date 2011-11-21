@@ -17,7 +17,7 @@
 					<Add option="-g" />
 				</Compiler>
 				<ExtraCommands>
-					<Add after="copy /Y Debug\libgstopengl.dll C:\gstreamer\lib\gstreamer-0.10" />
+					<Add after='cp Debug/libgstopengl.dll &quot;$(OSSBUILD_GSTREAMER_DIR)/lib/gstreamer-0.10&quot;' />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -35,7 +35,7 @@
 					<Add option="-s" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="copy /Y Release\libgstopengl.dll C:\gstreamer\lib\gstreamer-0.10" />
+					<Add after='cp Release/libgstopengl.dll &quot;$(OSSBUILD_GSTREAMER_DIR)/lib/gstreamer-0.10&quot;' />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -45,11 +45,10 @@
 			<Add option="-Wall" />
 			<Add option="-DWIN32" />
 			<Add option="-DHAVE_CONFIG_H" />
-			<Add directory="C:\gstreamer\include\gstreamer-0.10" />
-			<Add directory="C:\gstreamer\include\libxml2" />
-			<Add directory="C:\gstreamer\include\glib-2.0" />
-			<Add directory="C:\gstreamer\lib\glib-2.0\include" />
-			<Add directory="C:\gstreamer\include" />
+			<Add directory="$(OSSBUILD_GSTREAMER_SDK_DIR)\include\gstreamer-0.10" />
+			<Add directory="$(OSSBUILD_GSTREAMER_SDK_DIR)\include\libxml2" />
+			<Add directory="$(OSSBUILD_GSTREAMER_SDK_DIR)\include\glib-2.0" />
+			<Add directory="$(OSSBUILD_GSTREAMER_SDK_DIR)\include" />
 			<Add directory="..\common" />
 			<Add directory="..\..\gst-libs" />
 			<Add directory="..\..\gst-libs\gst\gl" />
@@ -57,10 +56,10 @@
 			<Add directory="..\..\gst\gl\effects" />
 		</Compiler>
 		<Linker>
-			<Add library="glib-2.0" />
-			<Add library="gobject-2.0" />
-			<Add library="gmodule-2.0" />
-			<Add library="gthread-2.0" />
+			<Add library="glib-2.0-0" />
+			<Add library="gobject-2.0-0" />
+			<Add library="gmodule-2.0-0" />
+			<Add library="gthread-2.0-0" />
 			<Add library="gstreamer-0.10" />
 			<Add library="gstbase-0.10" />
 			<Add library="gstvideo-0.10" />
@@ -70,11 +69,11 @@
 			<Add library="glu32" />
 			<Add library="opengl32" />
 			<Add library="gdi32" />
-			<Add library="png12" />
+			<Add library="png14-14" />
 			<Add library="z" />
+			<Add library="jpeg-8" />
 			<Add library="winmm" />
-			<Add directory="C:\gstreamer\bin" />
-			<Add directory="C:\gstreamer\lib" />
+			<Add directory="$(OSSBUILD_GSTREAMER_DIR)\bin" />
 		</Linker>
 		<Unit filename="..\..\gst-libs\gst\gettext.h" />
 		<Unit filename="..\..\gst-libs\gst\gl\gstglbuffer.c">
@@ -97,6 +96,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst-libs\gst\gl\gstglshader.h" />
+		<Unit filename="..\..\gst-libs\gst\gl\gstglshadervariables.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst-libs\gst\gl\gstglshadervariables.h" />
 		<Unit filename="..\..\gst-libs\gst\gl\gstglwindow.h" />
 		<Unit filename="..\..\gst-libs\gst\gl\gstglwindow_win32.c">
 			<Option compilerVar="CC" />
@@ -200,6 +203,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="..\..\gst\gl\gstglfilterreflectedscreen.h" />
+		<Unit filename="..\..\gst\gl\gstglfiltershader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\gst\gl\gstglfiltershader.h" />
 		<Unit filename="..\..\gst\gl\gstglfiltersobel.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -214,6 +221,7 @@
 		<Unit filename="..\..\gst\gl\gstgloverlay.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="..\..\gst\gl\gstgloverlay.h" />
 		<Unit filename="..\..\gst\gl\gstgltestsrc.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -225,6 +233,7 @@
 		<Unit filename="..\..\gst\gl\gstopengl.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="..\common\config.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

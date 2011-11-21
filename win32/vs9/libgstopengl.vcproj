@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\gstreamer\include\glib-2.0&quot;;&quot;C:\gstreamer\lib\glib-2.0\include&quot;;C:\gstreamer\include\libxml2;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE"
+				AdditionalIncludeDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\glib-2.0&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\libxml2&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\gstreamer-0.10&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include&quot;;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -62,9 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png12.lib z.lib opengl32.lib glu32.lib glew32.lib winmm.lib"
+				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png14.lib z.lib jpeg.lib opengl32.lib glu32.lib glew32.lib winmm.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="C:\gstreamer\lib"
+				AdditionalLibraryDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y Debug\libgstopengl.dll C:\gstreamer\lib\gstreamer-0.10"
+				CommandLine="copy /Y $(OutDir)\$(ProjectName).dll &quot;$(OSSBUILD_GSTREAMER_DIR)\lib\gstreamer-0.10&quot;"
 			/>
 		</Configuration>
 		<Configuration
@@ -119,8 +119,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;C:\gstreamer\include\glib-2.0&quot;;&quot;C:\gstreamer\lib\glib-2.0\include&quot;;C:\gstreamer\include\libxml2;&quot;C:\gstreamer\include\gstreamer-0.10&quot;;C:\gstreamer\include;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE"
+				AdditionalIncludeDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\glib-2.0&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\libxml2&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\gstreamer-0.10&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include&quot;;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;HAVE_CONFIG_H"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -138,9 +138,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png12.lib z.lib opengl32.lib glu32.lib glew32.lib winmm.lib"
+				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png14.lib z.lib jpeg.lib opengl32.lib glu32.lib glew32.lib winmm.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="C:\gstreamer\lib"
+				AdditionalLibraryDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -169,7 +169,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /Y Release\libgstopengl.dll C:\gstreamer\lib\gstreamer-0.10"
+				CommandLine="copy /Y $(OutDir)\$(ProjectName).dll &quot;$(OSSBUILD_GSTREAMER_DIR)\lib\gstreamer-0.10&quot;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -206,6 +206,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstglshader.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglshadervariables.c"
 					>
 				</File>
 				<File
@@ -262,6 +266,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglfilterreflectedscreen.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglfiltershader.c"
 					>
 				</File>
 				<File
@@ -399,6 +407,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\gst-libs\gst\gl\gstglshadervariables.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\gst-libs\gst\gl\gstglwindow.h"
 					>
 				</File>
@@ -444,6 +456,10 @@
 				</File>
 				<File
 					RelativePath="..\..\gst\gl\gstglfilterreflectedscreen.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\gst\gl\gstglfiltershader.h"
 					>
 				</File>
 				<File
