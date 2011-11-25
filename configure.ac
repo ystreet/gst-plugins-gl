@@ -95,6 +95,8 @@ AG_GST_ARG_WITH_PACKAGE_NAME
 AG_GST_ARG_WITH_PACKAGE_ORIGIN
 AG_GST_ARG_WITH_PLUGINS
 
+AG_GST_ARG_ENABLE_EXTERNAL
+
 dnl *** checks for platform ***
 
 dnl * hardware/architecture *
@@ -395,11 +397,26 @@ echo
 AC_MSG_NOTICE([Checking libraries for plugins in ext/])
 echo
 
+dnl *** libvisual ***
+translit(dnm, m, l) AM_CONDITIONAL(USE_LIBVISUAL, true)
+AG_GST_CHECK_FEATURE(LIBVISUAL, [libvisual visualization library], libvisual, [
+  AG_GST_PKG_CHECK_MODULES(LIBVISUAL, libvisual-0.4 >= 0.4.0)
+  if test x$HAVE_LIBVISUAL = xyes; then
+    LIBVIS_PLUGINSDIR="`$PKG_CONFIG --variable=pluginsbasedir libvisual-0.4`"
+  fi
+  AC_MSG_NOTICE([libvisual pluginsdir: $LIBVIS_PLUGINSDIR])
+  if test x$LIBVIS_PLUGINSDIR != x; then
+    AC_DEFINE_UNQUOTED(LIBVISUAL_PLUGINSBASEDIR,
+        "$LIBVIS_PLUGINSDIR",
+        [directory in which the detected libvisual's plugins are located])
+  fi
+])
+
 else
 
 dnl not building plugins with external dependencies,
 dnl but we still need to set the conditionals
-true
+AM_CONDITIONAL(USE_LIBVISUAL, false)
 
 fi dnl of EXT plugins
 
@@ -479,6 +496,8 @@ gst/gl/Makefile
 gst-libs/Makefile
 gst-libs/gst/Makefile
 gst-libs/gst/gl/Makefile
+ext/Makefile
+ext/libvisual/Makefile
 win32/common/config.h
 pkgconfig/Makefile
 pkgconfig/gstreamer-gl.pc

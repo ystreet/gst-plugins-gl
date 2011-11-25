@@ -1,0 +1,12 @@
+if USE_LIBVISUAL
+LIBVISUAL_DIR=libvisual
+else
+LIBVISUAL_DIR=
+endif
+
+SUBDIRS = \
+  $(LIBVISUAL_DIR)
+
+DIST_SUBDIRS = \
+  libvisual
+
