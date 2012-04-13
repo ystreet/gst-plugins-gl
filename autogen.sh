@@ -33,20 +33,18 @@ fi
 # https://bugzilla.gnome.org/show_bug.cgi?id=661128
 touch -t 200001010000 po/$package-0.10.pot
 
-CONFIGURE_DEF_OPT='--enable-maintainer-mode --enable-gtk-doc --enable-plugin-docs'
+CONFIGURE_DEF_OPT='--enable-maintainer-mode --enable-gtk-doc'
 
 autogen_options $@
 
-echo -n "+ check for build tools"
+printf "+ check for build tools"
 if test ! -z "$NOCHECK"; then echo " skipped"; else  echo; fi
-version_check "autoconf" "$AUTOCONF autoconf autoconf2.65 autoconf2.64 autoconf2.63 autoconf2.62 autoconf2.61 autoconf2.60" \
+version_check "autoconf" "$AUTOCONF autoconf autoconf270 autoconf269 autoconf268 autoconf267 autoconf266 autoconf265 autoconf264 autoconf263 autoconf262 autoconf261 autoconf260" \
               "ftp://ftp.gnu.org/pub/gnu/autoconf/" 2 60 || DIE=1
-version_check "automake" "$AUTOMAKE automake automake-1.12 automake-1.11 automake-1.10" \
+version_check "automake" "$AUTOMAKE automake automake-1.11 automake-1.10" \
               "ftp://ftp.gnu.org/pub/gnu/automake/" 1 10 || DIE=1
-version_check "gettext" "gettext" \
-              "ftp://ftp.gnu.org/pub/gnu/gettext/" 0 17 || DIE=1
 version_check "autopoint" "autopoint" \
-              "ftp://ftp.gnu.org/pub/gnu/gettext/" 0 11 5 || DIE=1
+              "ftp://ftp.gnu.org/pub/gnu/gettext/" 0 17 || DIE=1
 version_check "libtoolize" "$LIBTOOLIZE libtoolize glibtoolize" \
               "ftp://ftp.gnu.org/pub/gnu/libtool/" 1 5 0 || DIE=1
 version_check "pkg-config" "" \
@@ -89,7 +87,7 @@ tool_run "$autoheader"
 echo timestamp > stamp-h.in 2> /dev/null
 
 tool_run "$autoconf"
-tool_run "$automake" "-a -c -Wno-portability"
+tool_run "$automake" "-a -c"
 
 # if enable exists, add an -enable option for each of the lines in that file
 if test -f enable; then
