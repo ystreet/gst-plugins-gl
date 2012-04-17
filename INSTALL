@@ -30,14 +30,14 @@ mkdir mingw32
 cd mingw32
 cmake -G "MinGW Makefiles" ..\gst-plugins-gl
 mingw32-make
-result is gst\gl\libgstopengl.dll 
+result is gst\gl\libgstopengl.dll
 
 -vs8:
 cd gst-plugins-gl
 cd ..
 mkdir vs8
 cd vs8
-cmake -G "Visual Studio 8 2005" ..\gst-plugins-gl 
+cmake -G "Visual Studio 8 2005" ..\gst-plugins-gl
 Open GST-PLUGINS-GL.sln and press F7 to build the project
 result is gst\gl\debug\gstopengl.dll (or in release if you selected it)
 
@@ -62,19 +62,16 @@ BUT IT IS NOT AN OBLIGATION
 This file contains:
 
 rem ########################################################################
-set GSTREAMER_DIR=D:\workspace\gstreamer
-set GLEW_DIR=D:\workspace\glew
-set PNG_DIR=D:\workspace\png
-set ZLIB_DIR=D:\workspace\zlib
-set LIBXML2_DIR=D:\workspace\libxml
-set LIBICONV_DIR=D:\workspace\libiconv
-set GLIB2_DIR=D:\workspace\glib
-set GTK2_DIR=D:\workspace\gtk+
-set ATK_DIR=D:\workspace\atk
-set CAIRO_DIR=D:\workspace\cairo
+Install gstreamer from http://code.google.com/p/ossbuild/
+Then you should have the following system env variables:
+OSSBUILD_GSTREAMER_DIR=C:\Program Files\OSSBuild\GStreamer\v0.10.7\
+OSSBUILD_GSTREAMER_SDK_DIR=C:\Program Files\OSSBuild\GStreamer\v0.10.7\sdk\
+GST_PLUGIN_PATH=C:\Program Files\OSSBuild\GStreamer\v0.10.7\lib\gstreamer-0.10
 
 cd mingw32
 del *ache* && cmake -G "MinGW Makefiles" ..\gst-plugins-gl
+mingw32-make
+copy /Y gst\gl\libgstopengl.dll "%GST_PLUGIN_PATH%"
 
 rem cd vs8
 rem del *ache* && cmake -G "Visual Studio 8 2005" ..\gst-plugins-gl
@@ -180,8 +177,11 @@ Simple test:
 ============
 
 -From the command line:
-export GST_GL_SHADER_DEBUG=1 
+export GST_GL_WINDOW_DEBUG=1
+(or set GST_GL_WINDOW_DEBUG=1 on win32)
+export GST_GL_SHADER_DEBUG=1
 (or set GST_GL_SHADER_DEBUG=1 on win32)
+export LIBGL_DEBUG=verbose
 gst-launch-0.10 --gst-debug=gldisplay:3 videotestsrc ! glimagesink
 
 see gst-plugins-gl/tests/pipelines for other simple cmd examples.

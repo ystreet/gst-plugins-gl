@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION "2.8.0")
 
+# TODO: use pkg-config
+# ---
+# INCLUDE(FindPkgConfig)
+# pkg_check_modules(GLIB2 glib-2.0)
+# pkg_check_modules(GSTREAMER gstreamer-0.10)
+# ---
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 
 project (GST-PLUGINS-GL)
