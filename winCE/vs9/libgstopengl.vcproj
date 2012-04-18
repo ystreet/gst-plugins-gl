@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.4\include&quot;;&quot;C:\Imagination Technologies\POWERVR SDK\OGLES2_WINDOWS_X86EMULATION_2.09.29.0649\Builds\OGLES2\Include&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\glib-2.0&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\libxml2&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\gstreamer-0.10&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include&quot;;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.4\include&quot;;&quot;C:\Imagination Technologies\POWERVR SDK\OGLES2_WINDOWS_X86EMULATION_2.09.29.0649\Builds\OGLES2\Include&quot;;&quot;C:\Imagination Technologies\PowerVR Insider SDK\OGLES2_WINDOWS_X86EMULATION_2.10\Builds\OGLES2\Include&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\glib-2.0&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\libxml2&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\gstreamer-0.10&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include&quot;;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;OPENGL_ES2"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,7 +64,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libEGL.lib libGLESv2.lib winmm.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\lib&quot;;&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.4\lib&quot;;&quot;C:\Imagination Technologies\POWERVR SDK\OGLES2_WINDOWS_X86EMULATION_2.09.29.0649\Builds\OGLES2\WindowsX86\Lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\lib&quot;;&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.4\lib&quot;;&quot;C:\Imagination Technologies\POWERVR SDK\OGLES2_WINDOWS_X86EMULATION_2.09.29.0649\Builds\OGLES2\WindowsX86\Lib&quot;;&quot;C:\Imagination Technologies\PowerVR Insider SDK\OGLES2_WINDOWS_X86EMULATION_2.10\Builds\OGLES2\WindowsX86\Lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.4\include&quot;;&quot;C:\Imagination Technologies\POWERVR SDK\OGLES2_WINDOWS_X86EMULATION_2.09.29.0649\Builds\OGLES2\Include&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\glib-2.0&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\libxml2&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\gstreamer-0.10&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include&quot;;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.4\include&quot;;&quot;C:\Imagination Technologies\POWERVR SDK\OGLES2_WINDOWS_X86EMULATION_2.09.29.0649\Builds\OGLES2\Include&quot;;&quot;C:\Imagination Technologies\PowerVR Insider SDK\OGLES2_WINDOWS_X86EMULATION_2.10\Builds\OGLES2\Include&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\glib-2.0&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\libxml2&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include\gstreamer-0.10&quot;;&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\include&quot;;..\common;&quot;..\..\gst-libs\gst\gl&quot;;..\..\gst\gl;..\..\gst\gl\effects;&quot;..\..\gst-libs&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBGSTGL_EXPORTS;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;OPENGL_ES2"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -140,7 +140,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib libEGL.lib libGLESv2.lib winmm.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\lib&quot;;&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.4\lib&quot;;&quot;C:\Imagination Technologies\POWERVR SDK\OGLES2_WINDOWS_X86EMULATION_2.09.29.0649\Builds\OGLES2\WindowsX86\Lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\lib&quot;;&quot;C:\Program Files\AMD\OpenGL ES 2.0 Emulator v1.4\lib&quot;;&quot;C:\Imagination Technologies\POWERVR SDK\OGLES2_WINDOWS_X86EMULATION_2.09.29.0649\Builds\OGLES2\WindowsX86\Lib&quot;;&quot;C:\Imagination Technologies\PowerVR Insider SDK\OGLES2_WINDOWS_X86EMULATION_2.10\Builds\OGLES2\WindowsX86\Lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"

@@ -71,5 +71,9 @@ gst-launch-0.10 videotestsrc ! "video/x-raw-yuv,format=(fourcc)I420,width=720,he
 
 gst-launch-0.10 audiotestsrc ! libvisual_gl_projectM ! "video/x-raw-gl,width=800, height=600" ! gleffects effect=tunnel ! glimagesink
 
+gst-launch-0.10  audiotestsrc ! libvisual_gl_lv_gltest ! gldownload ! glimagesink
+
+gst-launch-0.10 audiotestsrc ! libvisual_gl_lv_gltest ! gldownload ! ximagesink
+
 // OPENGL ES 2.0
 LD_LIBRARY_PATH=/home/julien/dev/SDKPackage_OGLES2/Builds/OGLES2/LinuxX86/Lib/:/usr/lib/nvidia-current-updates/  gst-launch-0.10 videotestsrc ! glupload ! gleffects effect=2 ! glimagesink
