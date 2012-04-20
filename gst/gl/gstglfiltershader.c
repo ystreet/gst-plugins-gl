@@ -277,21 +277,21 @@ gst_gl_filtershader_load_file (char *filename, char **storage)
   count = fseek (f, 0, SEEK_END);
   *storage = g_malloc (count + 1);
   if (!*storage) {
-    GST_ERROR ("g_malloc failed: %u", count);
+    GST_ERROR ("g_malloc failed: %lud", (gulong) count);
     return -1;
   }
 
   fseek (f, 0, SEEK_SET);
   bytes = fread ((void *) *storage, sizeof (char), count, f);
   if (bytes != count) {
-    GST_ERROR ("read failed: %u/%u", bytes, count);
+    GST_ERROR ("read failed: %lud/%lud", (gulong) bytes, (gulong) count);
     return -1;
   }
   ((char *) *storage)[count] = 0;
 
   if (f)
     fclose (f);
-  GST_INFO ("read: %u", bytes);
+  GST_INFO ("read: %lud", (gulong) bytes);
   return 0;
 }
 
