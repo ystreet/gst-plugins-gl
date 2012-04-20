@@ -103,6 +103,8 @@ static void end_stream_cb(GstBus* bus, GstMessage* message, MainWindow* window)
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
+  g_print ("end of stream\n");
+
   gst_element_set_state ([window pipeline], GST_STATE_NULL);
   g_object_unref ([window pipeline]);
   g_main_loop_quit ([window loop]);
@@ -225,8 +227,6 @@ int main(int argc, char **argv)
   [window release];
 
   [pool release];
-
-  gst_element_set_state (pipeline, GST_STATE_NULL);
 
 #ifdef GNUSTEP
   GSUnregisterCurrentThread();
