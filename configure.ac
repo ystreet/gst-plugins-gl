@@ -529,7 +529,6 @@ tests/examples/gtk/fxtest/Makefile
 tests/examples/gtk/switchxoverlay/Makefile
 tests/examples/qt/Makefile
 tests/examples/sdl/Makefile
-tests/examples/wx/Makefile
 tests/icles/Makefile
 docs/Makefile
 docs/libs/Makefile
