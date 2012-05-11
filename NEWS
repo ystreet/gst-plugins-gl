@@ -1,4 +1,28 @@
-This is GStreamer OpengGL Plug-ins 0.10.2 "Long forgotten rules"
+This is GStreamer OpengGL Plug-ins 0.10.3 "Definitely Photoshopped"
+
+Changes since 0.10.2:
+
+      * fix build and cocoa examples on MacOSX
+      * more OpenGL ES 2.0 friendly
+      * error out instead of doing nothing if an OpenGL feature is not present
+      * gloverlay: add support to manage texture ratio and can load jpeg files
+      * glshader: new element that load shader from files
+      * glimagesink: Totem compatibility, fix pixel-aspect-ratio property
+      * libvisual-gl: new plugin libvisual-gl, new element libvisual_gl_projectM
+
+Bugs fixed since 0.10.2:
+
+      * 310775 : libvisual element needs to support opengl
+      * 572767 : Should error out instead of doing nothing if an OpenGL feature is not present
+      * 600195 : dynamic fragment shader filter and variables parser/loader
+      * 630525 : gloverlay: manage ratio for each texture, texture positioning fix
+      * 631019 : Gst Plugins GL no longer OpenGL ES 2.0 friendly
+      * 636070 : gloverlay: add jpeg support
+      * 637260 : G_BEGIN_DECLS and G_END_DECLS missing in a number of include files
+      * 651035 : In glimagesink  ,Interface query should return FALSE if the supplied interface is not  GST_TYPE_X_OVERLAY
+      * 664367 : gstglshadervariables: strtok_r is not multiplatform
+      * 665102 : Wrong subdir order in -gl
+      * 671734 : Video in totem has half the width it should have
 
 Changes since 0.10.1:
 

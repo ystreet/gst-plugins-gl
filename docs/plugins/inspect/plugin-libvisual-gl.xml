@@ -1,0 +1,118 @@
+<plugin>
+  <name>libvisual-gl</name>
+  <description>libvisual-gl visualization plugins</description>
+  <filename>../../ext/libvisual/.libs/libgstlibvisualgl.so</filename>
+  <basename>libgstlibvisualgl.so</basename>
+  <version>0.10.3</version>
+  <license>LGPL</license>
+  <source>gst-plugins-gl</source>
+  <package>GStreamer OpenGL Plug-ins source release</package>
+  <origin>Unknown package origin</origin>
+  <elements>
+    <element>
+      <name>libvisual_gl_lv_flower</name>
+      <longname>libvisual libvisual Pseudotoad flower, yellow rose of texas plugin v.0.1</longname>
+      <class>Visualization</class>
+      <description>Libvisual yellow rose of texas port</description>
+      <author>Benjamin Otte &lt;otte@gnome.org&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>libvisual_gl_lv_gltest</name>
+      <longname>libvisual libvisual GL analyser plugin v.0.1</longname>
+      <class>Visualization</class>
+      <description>Libvisual GL analyzer plugin</description>
+      <author>Benjamin Otte &lt;otte@gnome.org&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>libvisual_gl_madspin</name>
+      <longname>libvisual libvisual madspin port plugin v.0.1</longname>
+      <class>Visualization</class>
+      <description>Libvisual madspin plugin</description>
+      <author>Benjamin Otte &lt;otte@gnome.org&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>libvisual_gl_nastyfft</name>
+      <longname>libvisual Libvisual NastyFFT plugin plugin v.0.5</longname>
+      <class>Visualization</class>
+      <description>The Libvisual NastyFFT plugin</description>
+      <author>Benjamin Otte &lt;otte@gnome.org&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+    <element>
+      <name>libvisual_gl_projectM</name>
+      <longname>libvisual libvisual projectM plugin v.1.1</longname>
+      <class>Visualization</class>
+      <description>projectM</description>
+      <author>Benjamin Otte &lt;otte@gnome.org&gt;</author>
+      <pads>
+        <caps>
+          <name>sink</name>
+          <direction>sink</direction>
+          <presence>always</presence>
+          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+        </caps>
+        <caps>
+          <name>src</name>
+          <direction>source</direction>
+          <presence>always</presence>
+          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+        </caps>
+      </pads>
+    </element>
+  </elements>
+</plugin>
