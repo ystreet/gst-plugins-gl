@@ -5,7 +5,7 @@ dnl please read gstreamer/docs/random/autotools before changing this file
 dnl initialize autoconf
 dnl releases only do -Wall, git and prerelease does -Werror too
 dnl use a three digit version number for releases, and four for git/prerelease
-AC_INIT(GStreamer OpenGL Plug-ins, 0.10.3.1,
+AC_INIT(GStreamer OpenGL Plug-ins, 0.11.0.1,
     http://bugzilla.gnome.org/enter_bug.cgi?product=GStreamer,
     gst-plugins-gl)
 
@@ -40,11 +40,12 @@ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])],
   [AM_DEFAULT_VERBOSITY=1
    AC_SUBST(AM_DEFAULT_VERBOSITY)])
 
-dnl our libraries and install dirs use major.minor as a version
-GST_MAJORMINOR=$PACKAGE_VERSION_MAJOR.$PACKAGE_VERSION_MINOR
-dnl we override it here if we need to for the release candidate of new series
-GST_MAJORMINOR=0.10
-AC_SUBST(GST_MAJORMINOR)
+dnl our libraries and install dirs use GST_API_VERSION in the filename
+dnl to allow side-by-side installation of different API versions
+GST_API_VERSION=1.0
+AC_SUBST(GST_API_VERSION)
+AC_DEFINE_UNQUOTED(GST_API_VERSION, "$GST_API_VERSION",
+  [GStreamer API Version])
 
 dnl CURRENT, REVISION, AGE
 dnl - library source changed -> increment REVISION
@@ -64,8 +65,8 @@ AM_PROG_LIBTOOL
 AC_PROG_OBJC
 
 dnl *** required versions of GStreamer stuff ***
-GST_REQ=0.10.35
-GSTPB_REQ=0.10.35
+GST_REQ=0.11.90
+GSTPB_REQ=0.11.90
 
 dnl *** autotools stuff ****
 
@@ -79,7 +80,7 @@ dnl set up gettext
 dnl the version check needs to stay here because autopoint greps for it
 AM_GNU_GETTEXT_VERSION([0.17])
 AM_GNU_GETTEXT([external])
-AG_GST_GETTEXT([gst-plugins-gl-$GST_MAJORMINOR])
+AG_GST_GETTEXT([gst-plugins-gl-$GST_API_VERSION])
 
 dnl *** check for arguments to configure ***
 
@@ -238,17 +239,17 @@ AM_CONDITIONAL(GL_IS_OPENGL, test "x$GL_TYPE" = "xgl")
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
-AG_GST_CHECK_GST($GST_MAJORMINOR, [$GST_REQ], yes)
-AG_GST_CHECK_GST_BASE($GST_MAJORMINOR, [$GST_REQ], yes)
-AG_GST_CHECK_GST_CONTROLLER($GST_MAJORMINOR, [$GST_REQ], yes)
-AG_GST_CHECK_GST_CHECK($GST_MAJORMINOR, [$GST_REQ], no)
-AG_GST_CHECK_GST_PLUGINS_BASE($GST_MAJORMINOR, [$GSTPB_REQ], yes)
+AG_GST_CHECK_GST($GST_API_VERSION, [$GST_REQ], yes)
+AG_GST_CHECK_GST_BASE($GST_API_VERSION, [$GST_REQ], yes)
+AG_GST_CHECK_GST_CONTROLLER($GST_API_VERSION, [$GST_REQ], yes)
+AG_GST_CHECK_GST_CHECK($GST_API_VERSION, [$GST_REQ], no)
+AG_GST_CHECK_GST_PLUGINS_BASE($GST_API_VERSION, [$GSTPB_REQ], yes)
 AM_CONDITIONAL(HAVE_GST_CHECK, test "x$HAVE_GST_CHECK" = "xyes")
 
 dnl Check for documentation xrefs
 GLIB_PREFIX="`$PKG_CONFIG --variable=prefix glib-2.0`"
-GST_PREFIX="`$PKG_CONFIG --variable=prefix gstreamer-$GST_MAJORMINOR`"
-GSTPB_PREFIX="`$PKG_CONFIG --variable=prefix gstreamer-plugins-base-$GST_MAJORMINOR`"
+GST_PREFIX="`$PKG_CONFIG --variable=prefix gstreamer-$GST_API_VERSION`"
+GSTPB_PREFIX="`$PKG_CONFIG --variable=prefix gstreamer-plugins-base-$GST_API_VERSION`"
 AC_SUBST(GLIB_PREFIX)
 AC_SUBST(GST_PREFIX)
 AC_SUBST(GSTPB_PREFIX)
@@ -458,7 +459,7 @@ if test "x$USE_DEBUG" = xyes; then
 fi
 AC_SUBST(PROFILE_CFLAGS)
 
-if test "x$GST_GIT" = "xyes"; then
+if test "x$PACKAGE_VERSION_NANO" = "x1"; then
   DEPRECATED_CFLAGS="-DGST_DISABLE_DEPRECATED"
 else
   DEPRECATED_CFLAGS=""
@@ -469,6 +470,8 @@ dnl every flag in GST_OPTION_CFLAGS can be overridden at make time
 GST_OPTION_CFLAGS="\$(WARNING_CFLAGS) \$(ERROR_CFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
 GST_OPTION_CXXFLAGS="\$(WARNING_CXXFLAGS) \$(ERROR_CXXFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
 GST_OPTION_OBJCFLAGS="\$(WARNING_OBJCFLAGS) \$(ERROR_OBJCFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
+GST_OPTION_CFLAGS="$GST_OPTION_CFLAGS -DGST_USE_UNSTABLE_API"
+GST_OPTION_CXXFLAGS="$GST_OPTION_CXXFLAGS -DGST_USE_UNSTABLE_API"
 AC_SUBST(GST_OPTION_CFLAGS)
 AC_SUBST(GST_OPTION_CXXFLAGS)
 AC_SUBST(GST_OPTION_OBJCFLAGS)

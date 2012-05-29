@@ -4,7 +4,7 @@
 DOCS_ARE_INCOMPLETE_PLEASE_FIXME=yespleasedo
 
 # The name of the module, e.g. 'glib'.
-#DOC_MODULE=gst-plugins-libs-@GST_MAJORMINOR@
+#DOC_MODULE=gst-plugins-libs-@GST_API_VERSION@
 DOC_MODULE=gst-plugins-gl-libs
 
 # for upload-doc.mak
@@ -52,7 +52,7 @@ extra_files =
 GTKDOC_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) \
 	-I$(top_srcdir)/gst-libs/gst/gl
 GTKDOC_LIBS = \
-	$(top_builddir)/gst-libs/gst/gl/libgstgl-@GST_MAJORMINOR@.la \
+	$(top_builddir)/gst-libs/gst/gl/libgstgl-@GST_API_VERSION@.la \
   $(GST_BASE_LIBS)
 
 GTKDOC_CC=$(LIBTOOL) --tag=CC --mode=compile $(CC)

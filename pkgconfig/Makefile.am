@@ -1,14 +1,14 @@
 
-pcverfiles = gstreamer-gl-@GST_MAJORMINOR@.pc
+pcverfiles = gstreamer-gl-@GST_API_VERSION@.pc
 
-pcverfiles_uninstalled = gstreamer-gl-@GST_MAJORMINOR@-uninstalled.pc
+pcverfiles_uninstalled = gstreamer-gl-@GST_API_VERSION@-uninstalled.pc
 
 all-local: $(pcverfiles) $(pcverfiles_uninstalled)
 
 ### how to generate versioned .pc files from .pc files in this dir
-%-@GST_MAJORMINOR@.pc: %.pc
+%-@GST_API_VERSION@.pc: %.pc
 	cp $< $@
-%-@GST_MAJORMINOR@-uninstalled.pc: %-uninstalled.pc
+%-@GST_API_VERSION@-uninstalled.pc: %-uninstalled.pc
 	cp $< $@
 
 pkgconfigdir = $(libdir)/pkgconfig

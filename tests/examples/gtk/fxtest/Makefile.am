@@ -7,7 +7,7 @@ fxtest_CFLAGS=$(GST_PLUGINS_GL_CFLAGS) $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS) 
 	$(GL_CFLAGS) $(GTK_CFLAGS)
 fxtest_LDADD=../libgstgtkhelper.la \
 	$(GTK_LIBS) $(GST_PLUGINS_GL_LIBS) $(GST_PLUGINS_BASE_LIBS) $(GST_LIBS)  \
-	$(GL_LIBS) -lgstinterfaces-$(GST_MAJORMINOR)
+	$(GL_LIBS)
 
 pixbufdrop_SOURCES = pixbufdrop.c
 
@@ -15,4 +15,4 @@ pixbufdrop_CFLAGS=$(GST_PLUGINS_GL_CFLAGS) $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLA
 	$(GL_CFLAGS) $(GTK_CFLAGS)
 pixbufdrop_LDADD=../libgstgtkhelper.la \
 	$(GTK_LIBS) $(GST_PLUGINS_GL_LIBS) $(GST_PLUGINS_BASE_LIBS) $(GST_LIBS) \
-	$(GL_LIBS) -lgstinterfaces-$(GST_MAJORMINOR)
+	$(GL_LIBS)

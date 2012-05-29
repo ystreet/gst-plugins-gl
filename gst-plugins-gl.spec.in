@@ -1,7 +1,7 @@
-%define majorminor  @GST_MAJORMINOR@
+%define api_version  @GST_API_VERSION@
 %define gstreamer   gstreamer
 
-%define gst_minver  0.10.0
+%define gst_minver  0.11.90
 
 Name: 		%{gstreamer}-plugins-gl
 Version: 	@VERSION@
@@ -42,8 +42,8 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 # Clean out files that should not be part of the rpm.
-rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{api_version}/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{api_version}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
@@ -53,9 +53,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-, root, root)
 %doc AUTHORS COPYING README
-%{_libdir}/gstreamer-%{majorminor}/libgstopengl.so
-%{_libdir}/libgstgl-%{majorminor}.so.*
-%{_datadir}/locale/en/LC_MESSAGES/gst-plugins-gl-0.10.mo
+%{_libdir}/gstreamer-%{api_version}/libgstopengl.so
+%{_libdir}/libgstgl-%{api_version}.so.*
+%{_datadir}/locale/en/LC_MESSAGES/gst-plugins-gl-%{api_version}.mo
 
 %package devel
 Summary:        GStreamer Plugin Library Headers
@@ -68,9 +68,9 @@ GStreamer Plugins Base library development and header files.
 %files devel
 %defattr(-, root, root)
 # plugin helper library headers
-%{_includedir}/gstreamer-%{majorminor}/gst/gl/*.h
-%{_libdir}/libgstgl-%{majorminor}.so
-%{_libdir}/pkgconfig/gstreamer-gl-%{majorminor}.pc
+%{_includedir}/gstreamer-%{api_version}/gst/gl/*.h
+%{_libdir}/libgstgl-%{api_version}.so
+%{_libdir}/pkgconfig/gstreamer-gl-%{api_version}.pc
 %{_datadir}/gtk-doc
 
 %changelog
