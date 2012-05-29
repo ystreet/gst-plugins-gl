@@ -24,10 +24,10 @@ The core GStreamer libraries. See the gstreamer/ module in GStreamer cvs, or
 the version that corresponds to this plugin release.
 
 Package:	GStreamer
-Version:	0.10.0
-Recommended:	0.10.latest
+Version:	0.11.90
+Recommended:	0.11.latest
 URL:		http://gstreamer.freedesktop.org/
-DebianPackage:	libgstreamer0.10-dev
+DebianPackage:	libgstreamer1.0-dev
 Notes:		The required version is updated frequently, so the version
 	listed in this file is often wrong.  If you are compiling from CVS,
 	the required version is often the latest GStreamer CVS.
