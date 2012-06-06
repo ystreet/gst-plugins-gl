@@ -1,2 +1,2 @@
 
-#SUBDIRS = videoxoverlay qglwidgetxoverlay mousexoverlay
+#SUBDIRS = videooverlay qglwidgetvideooverlay mousevideooverlay
