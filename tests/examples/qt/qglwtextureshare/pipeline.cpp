@@ -54,7 +54,7 @@ Pipeline::configure()
         m_pipeline =
             GST_PIPELINE (gst_parse_launch
                       ("videotestsrc ! "
-                       "video/x-raw-yuv, width=640, height=480, "
+                       "video/x-raw, width=640, height=480, "
                        "framerate=(fraction)30/1 ! "
                        "glupload ! gleffects effect=5 ! fakesink sync=1",
                        NULL));

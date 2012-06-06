@@ -1,16 +1,16 @@
 --- Description of the GTK examples ---
 
-- gtkxoverlay:
-Show how to use the xoverlay interface through GTK.
+- gtkvideooverlay:
+Show how to use the videooverlay interface through GTK.
 It's possible to switch bettween GST_STATE through four buttons.
 
--filternoxoverlay:
+-filternovideooverlay:
 A more complex pipeline is switched bettween the GST states
-without using the xoverlay interface.
+without using the videooverlay interface.
 
--filterxoverlay:
+-filtervideooverlay:
 A more complex pipeline is switched bettween the GST states.
-using the xoverlay interface.
+using the videooverlay interface.
 
 -fxtest:
 switch bettween effects of the gleffects filter.
@@ -19,8 +19,8 @@ switch bettween effects of the gleffects filter.
 drag and drop a png file and overlay it using alpha channel.
 It uses gloverlay filter.
 
--switchxoverlay:
-change the xoverlay window while the stream is playing.
+-switchvideooverlay:
+change the videooverlay window while the stream is playing.
 
 --- How to build the GTK examples ---
 

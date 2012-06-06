@@ -196,7 +196,7 @@ static void cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, GstEl
         return;
     }
 
-    GstCaps* caps = gst_pad_get_caps (pad);
+    GstCaps* caps = gst_pad_get_current_caps (pad);
     GstStructure* str = gst_caps_get_structure (caps, 0);
     if (!g_strrstr (gst_structure_get_name (str), "video")) 
     {
@@ -251,10 +251,10 @@ gint main (gint argc, gchar *argv[])
         return -1;
     }
 
-    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-gl",
+    GstCaps *outcaps = gst_caps_new_simple("video/x-raw",
                                            "width", G_TYPE_INT, 640,
                                            "height", G_TYPE_INT, 480,
-                                           NULL) ;
+                                           NULL);
 
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 800, NULL);

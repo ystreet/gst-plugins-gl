@@ -1,7 +1,7 @@
 --- Description of the Cocoa examples ---
 
-- videoxoverlay:
-Show how to use the xoverlay interface through Cocoa.
+- videooverlay:
+Show how to use the videooverlay interface through Cocoa.
 For now, the source is videotestsrc. (not yet a video file)
 
 --- How to build the Cocoa examples on GNUstep environnements ---

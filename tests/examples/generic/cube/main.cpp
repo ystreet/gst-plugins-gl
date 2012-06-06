@@ -152,8 +152,8 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height, gpointer dat
 }
 
 
-//gst-launch-0.10 videotestsrc num_buffers=400 ! video/x-raw-rgb, width=320, height=240 !
-//glgraphicmaker ! glfiltercube ! video/x-raw-gl, width=800, height=600 ! glimagesink
+//gst-launch-1.0 videotestsrc num_buffers=400 ! video/x-raw, width=320, height=240 !
+//glgraphicmaker ! glfiltercube ! video/x-raw, width=800, height=600 ! glimagesink
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
@@ -188,14 +188,15 @@ gint main (gint argc, gchar *argv[])
     }
 
     /* change video source caps */
-    GstCaps *caps = gst_caps_new_simple("video/x-raw-rgb",
+    GstCaps *caps = gst_caps_new_simple("video/x-raw",
+                                        "format", G_TYPE_STRING, "RGB",
                                         "width", G_TYPE_INT, 320,
                                         "height", G_TYPE_INT, 240,
                                         "framerate", GST_TYPE_FRACTION, 25, 1,
                                         NULL) ;
 
 
-    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-gl",
+    GstCaps *outcaps = gst_caps_new_simple("video/x-raw",
                                         "width", G_TYPE_INT, 800,
                                         "height", G_TYPE_INT, 600,
                                         NULL) ;

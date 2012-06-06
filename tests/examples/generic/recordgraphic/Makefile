@@ -5,7 +5,7 @@ EXE=recordgraphic
 CPP=g++
 CPPFLAGS=-Wall -Werror -O3 -march=i686 -msse2 -mfpmath=sse
 LDFLAGS=
-LIBS=-lgstreamer-0.10
+LIBS=-lgstreamer-1.0
 RM=rm
 
 ifeq ($(OS),Windows_NT)

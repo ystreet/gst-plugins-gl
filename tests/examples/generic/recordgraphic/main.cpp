@@ -156,10 +156,10 @@ gboolean drawCallback (GLuint width, GLuint height, GLuint texture, gpointer dat
 
 
 //equivalent command line: 
-//gst-launch-0.10 videotestsrc num_buffers=400 ! glupload ! gldownload ! 
+//gst-launch-1.0 videotestsrc num_buffers=400 ! glupload ! gldownload ! 
 //ffenc_mpeg4 ! avimux ! filesink location="record.avi"
 // or
-//gst-launch-0.10 videotestsrc num_buffers=400 ! glupload !  video/x-raw-gl, width=320, height=240 ! glfiltercube ! video/x-raw-gl, width=720, height=576 ! 
+//gst-launch-1.0 videotestsrc num_buffers=400 ! glupload ! "video/x-raw, width=320, height=240" ! glfiltercube ! "video/x-raw, width=720, height=576" ! 
 //gldownload ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
 gint main (gint argc, gchar *argv[])
 {
@@ -198,18 +198,18 @@ gint main (gint argc, gchar *argv[])
     }
 
     /* change video source caps */
-    GstCaps *caps = gst_caps_new_simple("video/x-raw-yuv",
-                                        "format", GST_TYPE_FOURCC, GST_MAKE_FOURCC ('U', 'Y', 'V', 'Y'),
+    GstCaps *caps = gst_caps_new_simple("video/x-raw",
+                                        "format", G_TYPE_STRING, "UYVY",
                                         "width", G_TYPE_INT, 320,
                                         "height", G_TYPE_INT, 240,
                                         "framerate", GST_TYPE_FRACTION, 25, 1,
-                                        NULL) ;
+                                        NULL);
 
     /* change video source caps */
-    GstCaps *outcaps = gst_caps_new_simple("video/x-raw-yuv",
+    GstCaps *outcaps = gst_caps_new_simple("video/x-raw",
                                            "width", G_TYPE_INT, 640,
                                            "height", G_TYPE_INT, 480,
-                                           NULL) ;
+                                           NULL);
 
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);

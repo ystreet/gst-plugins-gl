@@ -36,7 +36,7 @@
 			<Add directory="..\..\..\..\clutter\include\clutter-0.8" />
 			<Add directory="C:\gstreamer\include\glib-2.0" />
 			<Add directory="C:\gstreamer\lib\glib-2.0\include" />
-			<Add directory="C:\gstreamer\include\gstreamer-0.10" />
+			<Add directory="C:\gstreamer\include\gstreamer-1.0" />
 			<Add directory="C:\gstreamer\include\pango-1.0" />
 			<Add directory="C:\gstreamer\include\cairo" />
 			<Add directory="C:\gstreamer\include\libxml2" />
@@ -47,9 +47,9 @@
 			<Add library="gio-2.0" />
 			<Add library="gthread-2.0" />
 			<Add library="gobject-2.0" />
-			<Add library="gstreamer-0.10" />
+			<Add library="gstreamer-1.0" />
 			<Add library="gmodule-2.0" />
-			<Add library="gstinterfaces-0.10" />
+			<Add library="gstvideo-1.0" />
 			<Add library="glib-2.0" />
 			<Add library="pangocairo-1.0" />
 			<Add library="pangowin32-1.0" />

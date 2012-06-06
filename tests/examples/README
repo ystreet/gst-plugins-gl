@@ -2,7 +2,7 @@
 
 - generic: the video is loaded from the command line.
 
-- gui: use the xoverlay interface through an user interface,
+- gui: use the videooverlay interface through an user interface,
        and using cross-platform framework (gtk, qt or wx).
        the video is loaded from the gui.
        Cocoa can be considered as a multi-platform gui too
