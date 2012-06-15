@@ -61,7 +61,7 @@ dnl AS_LIBTOOL_TAGS
 
 AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
-AS_PROG_OBJC
+AC_PROG_OBJC
 
 dnl *** required versions of GStreamer stuff ***
 GST_REQ=0.10.35
