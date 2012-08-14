@@ -402,7 +402,8 @@ dnl used in examples
 AG_GST_DEFAULT_ELEMENTS
 
 dnl *** plugins to includes ***
-
+GST_PLUGINS_NONPORTED="libvisual "
+AC_SUBST(GST_PLUGINS_NONPORTED)
 AG_GST_CHECK_PLUGIN(gl)
 
 dnl *** sys plug-ins ***
