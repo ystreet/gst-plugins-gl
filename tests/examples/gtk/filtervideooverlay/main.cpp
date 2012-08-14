@@ -232,7 +232,7 @@ gint main (gint argc, gchar *argv[])
 
     //set window id on this event
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
-    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area);
+    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area, NULL);
     gst_bus_add_signal_watch (bus);
     g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), pipeline);
     g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), pipeline);

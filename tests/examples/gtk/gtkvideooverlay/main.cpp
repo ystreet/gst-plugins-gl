@@ -212,21 +212,14 @@ gint main (gint argc, gchar *argv[])
 
     GstElement* videosrc  = gst_element_factory_make ("videotestsrc", "videotestsrc");
     GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
+    GstElement* upload = gst_element_factory_make ("glupload", "glupload");
 
-    GstCaps *caps = gst_caps_new_simple("video/x-raw",
-                                        "width", G_TYPE_INT, 640,
-                                        "height", G_TYPE_INT, 480,
-                                        "framerate", GST_TYPE_FRACTION, 25, 1,
-                                        "format", G_TYPE_STRING, "YUY2",
-                                        NULL) ;
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, upload, videosink, NULL);
 
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, videosink, NULL);
-
-    gboolean link_ok = gst_element_link_filtered(videosrc, videosink, caps) ;
-    gst_caps_unref(caps) ;
+    gboolean link_ok = gst_element_link_many(videosrc, upload, videosink, NULL) ;
     if(!link_ok)
     {
-        g_warning("Failed to link videosrc to videosink!\n") ;
+        g_warning("Failed to link an element!\n") ;
         return -1;
     }
 
@@ -238,7 +231,7 @@ gint main (gint argc, gchar *argv[])
 
     //set window id on this event
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
-    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area);
+    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area, NULL);
     gst_bus_add_signal_watch (bus);
     g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), pipeline);
     g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), pipeline);
