@@ -96,6 +96,7 @@ gst_gl_effects_xray
 gst_gl_effects_luma_xpro
 gst_gl_effects_sin
 gst_gl_effects_glow
+gst_gl_effects_luma_to_curve
 <SUBSECTION Standard>
 GST_GL_EFFECTS
 GST_IS_GL_EFFECTS
@@ -104,6 +105,33 @@ gst_gl_effects_get_type
 GST_GL_EFFECTS_CLASS
 GST_IS_GL_EFFECTS_CLASS
 GST_GL_EFFECTS_GET_CLASS
+<SUBSECTION Private>
+bulge_fragment_source
+desaturate_fragment_source
+difference_fragment_source
+fill_gaussian_kernel
+fisheye_fragment_source
+hconv7_fragment_source
+identity_fragment_source
+interpolate_fragment_source
+luma_threshold_fragment_source
+luma_to_curve_fragment_source
+mirror_fragment_source
+multiply_fragment_source
+rgb_to_curve_fragment_source
+sep_sobel_hconv3_fragment_source
+sep_sobel_length_fragment_source
+sep_sobel_vconv3_fragment_source
+sin_fragment_source
+square_fragment_source
+squeeze_fragment_source
+stretch_fragment_source
+sum_fragment_source
+texture_interp_fragment_source
+tunnel_fragment_source
+twirl_fragment_source
+vconv7_fragment_source
+vertex_shader_source
 </SECTION>
 
 <SECTION>
@@ -186,14 +214,14 @@ GST_GL_FILTER_LAPLACIAN_GET_CLASS
 <TITLE>glfilterreflectedscreen</TITLE>
 GstGLFilterReflectedScreen
 <SUBSECTION Standard>
-GstGLFilterReflectedScreenlClass
+GstGLFilterReflectedScreenClass
 GST_GL_FILTER_REFLECTED_SCREEN
 GST_IS_GL_FILTER_REFLECTED_SCREEN
 GST_TYPE_GL_FILTER_REFLECTED_SCREEN
-gst_gl_filter_reflected_screen_get_type
 GST_GL_FILTER_REFLECTED_SCREEN_CLASS
 GST_IS_GL_FILTER_REFLECTED_SCREEN_CLASS
 GST_GL_FILTER_REFLECTED_SCREEN_GET_CLASS
+gst_gl_glfilterreflectedscreen_get_type
 </SECTION>
 
 <SECTION>
@@ -267,6 +295,19 @@ GST_TYPE_GL_TEST_SRC
 gst_gl_test_src_get_type
 GST_GL_TEST_SRC_CLASS
 GST_IS_GL_TEST_SRC_CLASS
+<SUBSECTION Private>
+gst_gl_test_src_black
+gst_gl_test_src_blue
+gst_gl_test_src_checkers1
+gst_gl_test_src_checkers2
+gst_gl_test_src_checkers4
+gst_gl_test_src_checkers8
+gst_gl_test_src_circular
+gst_gl_test_src_green
+gst_gl_test_src_red
+gst_gl_test_src_smpte
+gst_gl_test_src_snow
+gst_gl_test_src_white
 </SECTION>
 
 <SECTION>

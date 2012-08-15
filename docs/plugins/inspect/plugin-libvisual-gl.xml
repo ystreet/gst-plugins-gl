@@ -3,7 +3,7 @@
   <description>libvisual-gl visualization plugins</description>
   <filename>../../ext/libvisual/.libs/libgstlibvisualgl.so</filename>
   <basename>libgstlibvisualgl.so</basename>
-  <version>0.10.3.1</version>
+  <version>0.11.0.1</version>
   <license>LGPL</license>
   <source>gst-plugins-gl</source>
   <package>GStreamer OpenGL Plug-ins git</package>
@@ -20,13 +20,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+          <details>audio/x-raw, format=(string)S16, layout=(string)interleaved, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+          <details>video/x-raw, format=(string)RGBA, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -41,13 +41,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+          <details>audio/x-raw, format=(string)S16, layout=(string)interleaved, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+          <details>video/x-raw, format=(string)RGBA, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -62,13 +62,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+          <details>audio/x-raw, format=(string)S16, layout=(string)interleaved, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+          <details>video/x-raw, format=(string)RGBA, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -83,13 +83,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+          <details>audio/x-raw, format=(string)S16, layout=(string)interleaved, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+          <details>video/x-raw, format=(string)RGBA, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -104,13 +104,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>audio/x-raw-int, width=(int)16, depth=(int)16, endianness=(int)1234, signed=(boolean)true, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
+          <details>audio/x-raw, format=(string)S16, layout=(string)interleaved, channels=(int){ 1, 2 }, rate=(int){ 8000, 11250, 22500, 32000, 44100, 48000, 96000 }</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw-gl, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
+          <details>video/x-raw, format=(string)RGBA, width=(int)[ 1, 8000 ], height=(int)[ 1, 6000 ], pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)[ 0/1, 100/1 ]</details>
         </caps>
       </pads>
     </element>
