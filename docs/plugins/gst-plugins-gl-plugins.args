@@ -1,4 +1,14 @@
 <ARG>
+<NAME>GstGLUpload::external-opengl-context</NAME>
+<TYPE>gulong</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>External OpenGL context</NICK>
+<BLURB>Give an external OpenGL context with which to share textures.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
 <NAME>GstGLTestSrc::is-live</NAME>
 <TYPE>gboolean</TYPE>
 <RANGE></RANGE>
@@ -29,263 +39,33 @@
 </ARG>
 
 <ARG>
-<NAME>GstGLFilterCube::aspect</NAME>
-<TYPE>gdouble</TYPE>
-<RANGE>[0,100]</RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Aspect</NICK>
-<BLURB>Field of view in the x direction.</BLURB>
-<DEFAULT>0</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterCube::blue</NAME>
-<TYPE>gfloat</TYPE>
-<RANGE>[0,1]</RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Blue</NICK>
-<BLURB>Background blue color.</BLURB>
-<DEFAULT>0</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterCube::fovy</NAME>
-<TYPE>gdouble</TYPE>
-<RANGE>[0,180]</RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Fovy</NICK>
-<BLURB>Field of view angle in degrees.</BLURB>
-<DEFAULT>45</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterCube::green</NAME>
-<TYPE>gfloat</TYPE>
-<RANGE>[0,1]</RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Green</NICK>
-<BLURB>Background reen color.</BLURB>
-<DEFAULT>0</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterCube::red</NAME>
-<TYPE>gfloat</TYPE>
-<RANGE>[0,1]</RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Red</NICK>
-<BLURB>Background red color.</BLURB>
-<DEFAULT>0</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterCube::zfar</NAME>
-<TYPE>gdouble</TYPE>
-<RANGE>[0,1000]</RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Zfar</NICK>
-<BLURB>Specifies the distance from the viewer to the far clipping plane.</BLURB>
-<DEFAULT>100</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterCube::znear</NAME>
-<TYPE>gdouble</TYPE>
-<RANGE>[0,100]</RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Znear</NICK>
-<BLURB>Specifies the distance from the viewer to the near clipping plane.</BLURB>
-<DEFAULT>0.1</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLPixbufOverlay::location</NAME>
+<NAME>GstGLFilterShader::location</NAME>
 <TYPE>gchar*</TYPE>
 <RANGE></RANGE>
 <FLAGS>rw</FLAGS>
-<NICK>Location of the image</NICK>
-<BLURB>Location of the image.</BLURB>
+<NICK>File Location</NICK>
+<BLURB>Location of the GLSL file to load.</BLURB>
 <DEFAULT>NULL</DEFAULT>
 </ARG>
 
 <ARG>
-<NAME>GstGLDifferenceMatte::location</NAME>
+<NAME>GstGLFilterShader::preset</NAME>
 <TYPE>gchar*</TYPE>
 <RANGE></RANGE>
 <FLAGS>rw</FLAGS>
-<NICK>Background image location</NICK>
-<BLURB>Background image location.</BLURB>
+<NICK>Preset File Location</NICK>
+<BLURB>Location of the shader uniform variables preset file.</BLURB>
 <DEFAULT>NULL</DEFAULT>
 </ARG>
 
 <ARG>
-<NAME>GstGLBumper::location</NAME>
+<NAME>GstGLFilterShader::vars</NAME>
 <TYPE>gchar*</TYPE>
 <RANGE></RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Normal map location</NICK>
-<BLURB>Normal map location.</BLURB>
+<FLAGS>w</FLAGS>
+<NICK>Uniform variables</NICK>
+<BLURB>Set the shader uniform variables.</BLURB>
 <DEFAULT>NULL</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLEffects::effect</NAME>
-<TYPE>GstGLEffectsEffect</TYPE>
-<RANGE></RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Effect</NICK>
-<BLURB>Select which effect apply to GL video texture.</BLURB>
-<DEFAULT>Do nothing Effect</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLEffects::hswap</NAME>
-<TYPE>gboolean</TYPE>
-<RANGE></RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Horizontal Swap</NICK>
-<BLURB>Switch video texture left to right, useful with webcams.</BLURB>
-<DEFAULT>FALSE</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterApp::client-draw-callback</NAME>
-<TYPE>gpointer</TYPE>
-<RANGE></RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Client draw callback</NICK>
-<BLURB>Define a custom draw callback in a client code.</BLURB>
-<DEFAULT></DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterApp::client-reshape-callback</NAME>
-<TYPE>gpointer</TYPE>
-<RANGE></RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Client reshape callback</NICK>
-<BLURB>Define a custom reshape callback in a client code.</BLURB>
-<DEFAULT></DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterApp::client-data</NAME>
-<TYPE>gpointer</TYPE>
-<RANGE></RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Client data</NICK>
-<BLURB>Pass data to the draw and reshape callbacks.</BLURB>
-<DEFAULT></DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLImageSink::client-draw-callback</NAME>
-<TYPE>gpointer</TYPE>
-<RANGE></RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Client draw callback</NICK>
-<BLURB>Define a custom draw callback in a client code.</BLURB>
-<DEFAULT></DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLImageSink::client-reshape-callback</NAME>
-<TYPE>gpointer</TYPE>
-<RANGE></RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Client reshape callback</NICK>
-<BLURB>Define a custom reshape callback in a client code.</BLURB>
-<DEFAULT></DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLImageSink::display</NAME>
-<TYPE>gchar*</TYPE>
-<RANGE></RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Display</NICK>
-<BLURB>Display name.</BLURB>
-<DEFAULT>NULL</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLImageSink::force-aspect-ratio</NAME>
-<TYPE>gboolean</TYPE>
-<RANGE></RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Force aspect ratio</NICK>
-<BLURB>When enabled, scaling will respect original aspect ratio.</BLURB>
-<DEFAULT>FALSE</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLImageSink::client-data</NAME>
-<TYPE>gpointer</TYPE>
-<RANGE></RANGE>
-<FLAGS>w</FLAGS>
-<NICK>Client data</NICK>
-<BLURB>Pass data to the draw and reshape callbacks.</BLURB>
-<DEFAULT></DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLImageSink::pixel-aspect-ratio</NAME>
-<TYPE>gchar*</TYPE>
-<RANGE></RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Pixel Aspect Ratio</NICK>
-<BLURB>The pixel aspect ratio of the device.</BLURB>
-<DEFAULT>"1/1"</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLFilterSobel::invert</NAME>
-<TYPE>gboolean</TYPE>
-<RANGE></RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Invert the colors</NICK>
-<BLURB>Invert colors to get dark edges on bright background.</BLURB>
-<DEFAULT>FALSE</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLOverlay::location</NAME>
-<TYPE>gchar*</TYPE>
-<RANGE></RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Location of the image</NICK>
-<BLURB>Location of the image.</BLURB>
-<DEFAULT>NULL</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLOverlay::proportion</NAME>
-<TYPE>gint</TYPE>
-<RANGE>[0,100]</RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Relative size of overlay image, in percents</NICK>
-<BLURB>Relative size of iverlay image, in percents.</BLURB>
-<DEFAULT>0</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLOverlay::xpos</NAME>
-<TYPE>gint</TYPE>
-<RANGE>[0,100]</RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>X position of overlay image in percents</NICK>
-<BLURB>X position of overlay image in percents.</BLURB>
-<DEFAULT>0</DEFAULT>
-</ARG>
-
-<ARG>
-<NAME>GstGLOverlay::ypos</NAME>
-<TYPE>gint</TYPE>
-<RANGE>[0,100]</RANGE>
-<FLAGS>rw</FLAGS>
-<NICK>Y position of overlay image in percents</NICK>
-<BLURB>Y position of overlay image in percents.</BLURB>
-<DEFAULT>0</DEFAULT>
 </ARG>
 
 <ARG>
@@ -309,6 +89,16 @@
 </ARG>
 
 <ARG>
+<NAME>GstGLOverlay::location</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Location of the image</NICK>
+<BLURB>Location of the image.</BLURB>
+<DEFAULT>NULL</DEFAULT>
+</ARG>
+
+<ARG>
 <NAME>GstGLOverlay::proportion-png</NAME>
 <TYPE>gint</TYPE>
 <RANGE>[0,100]</RANGE>
@@ -325,6 +115,24 @@
 <FLAGS>rw</FLAGS>
 <NICK>Relative size of overlay video, in percents</NICK>
 <BLURB>Relative size of iverlay video, in percents.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLOverlay::ratio-video</NAME>
+<TYPE>gint</TYPE>
+<RANGE>[0,3]</RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>choose ratio video between 0 and 3
+ 			0 : Default ratio
+			1 : 4 / 3
+			2 : 16 / 9
+			3 : 16 / 10</NICK>
+<BLURB>choose ratio video between 0 and 3
+ 			0 : Default ratio
+			1 : 4 / 3
+			2 : 16 / 9
+			3 : 16 / 10.</BLURB>
 <DEFAULT>0</DEFAULT>
 </ARG>
 
@@ -399,13 +207,73 @@
 </ARG>
 
 <ARG>
-<NAME>GstGLUpload::external-opengl-context</NAME>
-<TYPE>gulong</TYPE>
+<NAME>GstGLImageSink::client-data</NAME>
+<TYPE>gpointer</TYPE>
 <RANGE></RANGE>
 <FLAGS>w</FLAGS>
-<NICK>External OpenGL context</NICK>
-<BLURB>Give an external OpenGL context with which to share textures.</BLURB>
+<NICK>Client data</NICK>
+<BLURB>Pass data to the draw and reshape callbacks.</BLURB>
 <DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::client-draw-callback</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client draw callback</NICK>
+<BLURB>Define a custom draw callback in a client code.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::client-reshape-callback</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client reshape callback</NICK>
+<BLURB>Define a custom reshape callback in a client code.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::display</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Display</NICK>
+<BLURB>Display name.</BLURB>
+<DEFAULT>NULL</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::force-aspect-ratio</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Force aspect ratio</NICK>
+<BLURB>When enabled, scaling will respect original aspect ratio.</BLURB>
+<DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLImageSink::pixel-aspect-ratio</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Pixel Aspect Ratio</NICK>
+<BLURB>The pixel aspect ratio of the device.</BLURB>
+<DEFAULT>"1/1"</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterSobel::invert</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Invert the colors</NICK>
+<BLURB>Invert colors to get dark edges on bright background.</BLURB>
+<DEFAULT>FALSE</DEFAULT>
 </ARG>
 
 <ARG>
@@ -476,5 +344,145 @@
 <NICK>Znear</NICK>
 <BLURB>Specifies the distance from the viewer to the near clipping plane.</BLURB>
 <DEFAULT>0.1</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::aspect</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Aspect</NICK>
+<BLURB>Field of view in the x direction.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::blue</NAME>
+<TYPE>gfloat</TYPE>
+<RANGE>[0,1]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Blue</NICK>
+<BLURB>Background blue color.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::fovy</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,180]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Fovy</NICK>
+<BLURB>Field of view angle in degrees.</BLURB>
+<DEFAULT>45</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::green</NAME>
+<TYPE>gfloat</TYPE>
+<RANGE>[0,1]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Green</NICK>
+<BLURB>Background reen color.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::red</NAME>
+<TYPE>gfloat</TYPE>
+<RANGE>[0,1]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Red</NICK>
+<BLURB>Background red color.</BLURB>
+<DEFAULT>0</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::zfar</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,1000]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Zfar</NICK>
+<BLURB>Specifies the distance from the viewer to the far clipping plane.</BLURB>
+<DEFAULT>100</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterCube::znear</NAME>
+<TYPE>gdouble</TYPE>
+<RANGE>[0,100]</RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Znear</NICK>
+<BLURB>Specifies the distance from the viewer to the near clipping plane.</BLURB>
+<DEFAULT>0.1</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterApp::client-data</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client data</NICK>
+<BLURB>Pass data to the draw and reshape callbacks.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterApp::client-draw-callback</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client draw callback</NICK>
+<BLURB>Define a custom draw callback in a client code.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLFilterApp::client-reshape-callback</NAME>
+<TYPE>gpointer</TYPE>
+<RANGE></RANGE>
+<FLAGS>w</FLAGS>
+<NICK>Client reshape callback</NICK>
+<BLURB>Define a custom reshape callback in a client code.</BLURB>
+<DEFAULT></DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLEffects::effect</NAME>
+<TYPE>GstGLEffectsEffect</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Effect</NICK>
+<BLURB>Select which effect apply to GL video texture.</BLURB>
+<DEFAULT>Do nothing Effect</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLEffects::hswap</NAME>
+<TYPE>gboolean</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Horizontal Swap</NICK>
+<BLURB>Switch video texture left to right, useful with webcams.</BLURB>
+<DEFAULT>FALSE</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLDifferenceMatte::location</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Background image location</NICK>
+<BLURB>Background image location.</BLURB>
+<DEFAULT>NULL</DEFAULT>
+</ARG>
+
+<ARG>
+<NAME>GstGLBumper::location</NAME>
+<TYPE>gchar*</TYPE>
+<RANGE></RANGE>
+<FLAGS>rw</FLAGS>
+<NICK>Normal map location</NICK>
+<BLURB>Normal map location.</BLURB>
+<DEFAULT>NULL</DEFAULT>
 </ARG>
 
