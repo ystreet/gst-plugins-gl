@@ -1,5 +1,6 @@
-#include "gstglmeta.h"
+#include "../../config.h"
 #include "gstgldisplay.h"
+#include "gstglmeta.h"
 #include "gstglfilter.h"
 #include "gstglshader.h"
 #include "gstglmixer.h"
