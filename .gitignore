@@ -49,6 +49,8 @@ gst*.pc
 *.user
 *.ncb
 *.suo
+*.gcno
+*.gcda
 
 docs/libs/*-registry.*
 docs/libs/html
@@ -61,3 +63,4 @@ docs/plugins/tmpl
 docs/plugins/xml
 docs/plugins/*bak
 
+lcov/

@@ -19,3 +19,5 @@ doc-registry.xml
 
 *-unused.sgml
 *.bak
+
+gst-plugins-gl-libs-scan*
