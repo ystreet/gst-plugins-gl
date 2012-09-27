@@ -18,14 +18,15 @@
 
   <chapter>
     <title>GStreamer OpenGL Plugin Libraries</title>
-    <xi:include href="xml/gstglfilter.xml"/>
-    <xi:include href="xml/gstglmeta.xml"/>
-    <xi:include href="xml/gstglshader.xml"/>
-    <xi:include href="xml/gstgldisplay.xml"/>
-    <xi:include href="xml/gstglmixer.xml"/>
-    <xi:include href="xml/gstglbufferpool.xml"/>
     <xi:include href="xml/gstglmemory.xml"/>
+    <xi:include href="xml/gstglbufferpool.xml"/>
+    <xi:include href="xml/gstgldisplay.xml"/>
     <xi:include href="xml/gstglwindow.xml"/>
+    <xi:include href="xml/gstglshader.xml"/>
+    <xi:include href="xml/gstglupload.xml"/>
+    <xi:include href="xml/gstgldownload.xml"/>
+    <xi:include href="xml/gstglfilter.xml"/>
+    <xi:include href="xml/gstglmixer.xml"/>
   </chapter>
 
   <part id="gstreamer-libs-hierarchy">
@@ -36,4 +37,6 @@
   <index id="api-index">
     <title>Index</title>
   </index>
+  
+  <xi:include href="xml/annotation-glossary.xml"><xi:fallback /></xi:include>
 </book>

@@ -58,21 +58,6 @@ GST_GL_DIFFERENCEMATTE_GET_CLASS
 </SECTION>
 
 <SECTION>
-<FILE>element-gldownload</FILE>
-<TITLE>gldownload</TITLE>
-GstGLDownload
-<SUBSECTION Standard>
-GstGLDownloadClass
-GST_GL_DOWNLOAD
-GST_IS_GL_DOWNLOAD
-GST_TYPE_GL_DOWNLOAD
-gst_gl_download_get_type
-GST_GL_DOWNLOAD_CLASS
-GST_IS_GL_DOWNLOAD_CLASS
-GST_GL_DOWNLOAD_GET_CLASS
-</SECTION>
-
-<SECTION>
 <FILE>element-gleffects</FILE>
 <TITLE>gleffects</TITLE>
 GstGLEffectProcessFunc
@@ -308,21 +293,6 @@ gst_gl_test_src_red
 gst_gl_test_src_smpte
 gst_gl_test_src_snow
 gst_gl_test_src_white
-</SECTION>
-
-<SECTION>
-<FILE>element-glupload</FILE>
-<TITLE>glupload</TITLE>
-GstGLUpload
-<SUBSECTION Standard>
-GstGLUploadClass
-GST_GL_UPLOAD
-GST_IS_GL_UPLOAD
-GST_TYPE_GL_UPLOAD
-gst_gl_upload_get_type
-GST_GL_UPLOAD_CLASS
-GST_IS_GL_UPLOAD_CLASS
-GST_GL_UPLOAD_GET_CLASS
 </SECTION>
 
 <SECTION>
