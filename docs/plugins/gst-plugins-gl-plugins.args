@@ -289,11 +289,11 @@
 <ARG>
 <NAME>GstGLFilterReflectedScreen::aspect</NAME>
 <TYPE>gdouble</TYPE>
-<RANGE>[0,100]</RANGE>
+<RANGE>[1,100]</RANGE>
 <FLAGS>w</FLAGS>
 <NICK>Aspect</NICK>
 <BLURB>Field of view in the x direction.</BLURB>
-<DEFAULT>0</DEFAULT>
+<DEFAULT>1</DEFAULT>
 </ARG>
 
 <ARG>
@@ -339,7 +339,7 @@
 <ARG>
 <NAME>GstGLFilterReflectedScreen::znear</NAME>
 <TYPE>gdouble</TYPE>
-<RANGE>[0,100]</RANGE>
+<RANGE>[1e-10,100]</RANGE>
 <FLAGS>w</FLAGS>
 <NICK>Znear</NICK>
 <BLURB>Specifies the distance from the viewer to the near clipping plane.</BLURB>
