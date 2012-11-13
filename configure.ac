@@ -165,77 +165,198 @@ dnl *** checks for dependency libraries ***
 dnl GLib is required
 AG_GST_GLIB_CHECK([2.22])
 
-#dnl Check for OpenGL, GLU and GLEW
-echo host is $host
+AC_ARG_ENABLE([gl],
+     [  --enable-gl    Enable Desktop OpenGL support],
+     [case "${enableval}" in
+       yes) NEED_GL=yes ;;
+       no)  NEED_GL=no ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-gl]) ;;
+     esac],[NEED_GL=maybe])
+
+AC_ARG_ENABLE([gles2],
+     [  --enable-gles2    Enable OpenGL|ES 2.0 support],
+     [case "${enableval}" in
+       yes) NEED_GLES2=yes ;;
+       no)  NEED_GLES2=no ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-gles2]) ;;
+     esac],[NEED_GLES2=maybe])
+
+AC_ARG_ENABLE([egl],
+     [  --enable-egl    Enable EGL support],
+     [case "${enableval}" in
+       yes) NEED_EGL=yes ;;
+       no)  NEED_EGL=no ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-egl]) ;;
+     esac],[NEED_EGL=maybe])
+
+AC_ARG_ENABLE([wgl],
+     [  --enable-wgl    Enable WGL support],
+     [case "${enableval}" in
+       yes) NEED_WGL=yes ;;
+       no)  NEED_WGL=no ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-wgl]) ;;
+     esac],[NEED_WGL=maybe])
+
+AC_ARG_ENABLE([glx],
+     [  --enable-glx    Enable GLX support],
+     [case "${enableval}" in
+       yes) NEED_GLX=yes ;;
+       no)  NEED_GLX=no ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-glx]) ;;
+     esac],[NEED_GLX=maybe])
+
+AC_ARG_ENABLE([cgl],
+     [  --enable-cgl    Enable CGL support],
+     [case "${enableval}" in
+       yes) NEED_CGL=yes ;;
+       no)  NEED_CGL=no ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-cgl]) ;;
+     esac],[NEED_CGL=maybe])
+
+AG_GST_CHECK_X
+save_CPPFLAGS="$CPPFLAGS"
+save_LIBS="$LIBS"
+CPPFLAGS="$CPPFLAGS $X_CFLAGS"
+LIBS="$LIBS $X_LIBS"
+HAVE_GL=no
+HAVE_GLES2=no
+HAVE_EGL=no
+HAVE_GLU=no
+HAVE_GLEW=no
+
 case $host in
-  *-linux* | *-cygwin* | *-solaris* | *-netbsd* | *-freebsd* | *-openbsd* | *-kfreebsd* | *-dragonflybsd* | *-gnu* )
-    AG_GST_CHECK_X
-    save_CPPFLAGS="$CPPFLAGS"
-    save_LIBS="$LIBS"
-    CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-    LIBS="$LIBS $X_LIBS"
-    #PKG_CHECK_MODULES(GL, gl, HAVE_GL=yes, HAVE_GL=no)
-    AC_CHECK_HEADERS([GL/gl.h], [HAVE_GL=yes], [HAVE_GL=no])
-    if test "x$HAVE_GL" = "xyes"; then
-      AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h,, AC_MSG_ERROR([OpenGL is required]))
-      AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h,, AC_MSG_ERROR([GLU is required]))
-      AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h,, AC_MSG_ERROR([GLEW is required]))
-      GL_LIBS="$LIBS $X_LIBS -lGL -lGLU -lGLEW"
-      GL_BACKEND=x11
-      GL_TYPE=gl
-    else
-      AC_CHECK_HEADERS([EGL/egl.h], [HAVE_EGL=yes], [HAVE_EGL=no])
-      if test "x$HAVE_EGL" = "xyes"; then
-        AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h,, AC_MSG_ERROR([EGL is required]))
-        AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h,, AC_MSG_ERROR([OpenGLES2 is required]))
-        GL_LIBS="$LIBS $X_LIBS -lEGL -lGLESv2"
-        GL_BACKEND=x11ES2
-        GL_TYPE=gles
-      else
-        AC_MSG_ERROR([GL or EGL is required, consider installing libgl1-mesa-dev])
-      fi
-    fi
-    CPPFLAGS="$save_CPPFLAGS"
-    LIBS="$save_LIBS"
-    ;;
-  *-darwin*)
-    save_CPPFLAGS="$CPPFLAGS"
-    save_LIBS="$LIBS"
-    AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h,, AC_MSG_ERROR([GLEW is required]))
-    GL_LIBS="$LIBS -lGLEW -framework OpenGL -framework Cocoa"
-    CPPFLAGS="$save_CPPFLAGS -framework OpenGL"
-    LIBS="$save_LIBS"
-    GL_BACKEND=cocoa
-    GL_TYPE=gl
-    ;;
-  *-mingw32*)
-    save_CPPFLAGS="$CPPFLAGS"
-    save_LIBS="$LIBS"
+  *-mingw* )
     LIBS="$LIBS -lgdi32"
     AG_GST_CHECK_LIBHEADER(GL, opengl32, glTexImage2D,, GL/gl.h)
     AG_GST_CHECK_LIBHEADER(GLU, glu32, gluSphere,, GL/glu.h)
     AG_GST_CHECK_LIBHEADER(GLEW, glew32, glewInit,, GL/glew.h)
+  ;;
+  *)
+    AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h,[],[])
+    AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h,[],[])
+    AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h,[],[])
+    AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h,[],[])
+    AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h,[],[])
+  ;;
+esac
+
+CPPFLAGS="$save_CPPFLAGS"
+LIBS="$save_LIBS"
+
+AC_SUBST(HAVE_GL)
+AC_SUBST(HAVE_GLU)
+AC_SUBST(HAVE_GLEW)
+AC_SUBST(HAVE_EGL)
+AC_SUBST(HAVE_GLES2)
+
+USE_GL=no
+USE_GLES2=no
+USE_EGL=no
+USE_GLX=no
+USE_CGL=no
+USE_WGL=no
+
+#dnl Check for OpenGL, GLU and GLEW
+echo host is $host
+case $host in
+  *-linux* | *-cygwin* | *-solaris* | *-netbsd* | *-freebsd* | *-openbsd* | *-kfreebsd* | *-dragonflybsd* | *-gnu* )
+    if test "x$HAVE_X" = "xno"; then
+      AC_MSG_ERROR([X is required])
+    fi
+    GL_LIBS="$LIBS $X_LIBS"
+    dnl check Desktop OpenGL
+    if test "x$HAVE_GL" = "xyes"; then
+      if test "x$HAVE_GLU" = "xno"; then
+        AC_MSG_ERROR([GLU is required with OpenGL support])
+      fi
+      if test "x$HAVE_GLEW" = "xno"; then
+        AC_MSG_ERROR([GLEW is required with OpenGL support])
+      fi
+      if test "x$NEED_GL" != "xno"; then
+        GL_LIBS="$GL_LIBS -lGL -lGLU -lGLEW"
+        AC_DEFINE(HAVE_GL, [], [Have Desktop OpenGL libraries])
+        AM_CONDITIONAL(HAVE_GL, test "x" = "x")
+        AM_CONDITIONAL(GL_IS_OPENGL, test "x" = "x")
+        AC_DEFINE(HAVE_GLX, [], [Have GLX])
+        AM_CONDITIONAL(HAVE_GLX, test "x" = "x")
+        USE_GL=yes
+        USE_GLX=yes
+      fi
+    else dnl no Desktop OpenGL
+      if test "x$NEED_GLX" = "xyes"; then
+        AC_MSG_ERROR([Building the GLX backend without the OpenGL backend is unsupported])
+      fi
+    fi
+
+    dnl OpenGL|ES 2.0
+    if test "$HAVE_GLES2" = "xno"; then
+      if test "x$HAVE_GL" = "xno"; then
+        AC_MSG_ERROR([Either OpenGL or OpenGL|ES is required])
+      fi
+      if test "x$NEED_GLES2" = "xyes"; then
+        AC_MSG_ERROR([Could not find the required OpenGL|ES 2.0 libraries])
+      fi
+    else
+      if test "x$NEED_GLES2" != "xyes"; then
+        GL_LIBS="$GL_LIBS -lGLESv2"
+        USE_GLES2=yes
+      fi
+    fi
+
+    dnl EGL
+    if test "x$HAVE_EGL" = "xno"; then
+      if test "x$NEED_EGL" = "xyes"; then
+        AC_MSG_ERROR([Could not find the required EGL libraries])
+      fi
+      if test "x$HAVE_GL" = "xno"; then
+        AC_MSG_ERROR([Building requires either EGL or GLX])
+      fi
+    else
+      if test "x$NEED_EGL" != "xyes"; then
+        GL_LIBS="$GL_LIBS -lEGL"
+        AC_DEFINE(HAVE_EGL, [], [Have EGL libraries])
+        AM_CONDITIONAL(HAVE_EGL, test "x" = "x")
+        USE_EGL=yes
+      fi
+    fi
+    
+    HAVE_WINDOW_X11=yes
+    AC_DEFINE(HAVE_WINDOW_X11, [], [Have X11 window libraries])
+    AM_CONDITIONAL(HAVE_WINDOW_X11, test "x" = "x")
+    ;;
+  *-darwin*)
+    if test "x$HAVE_GLEW" = "xno"; then
+      AC_MSG_ERROR([GLEW is required])
+    fi
+    GL_LIBS="$LIBS -framework OpenGL -framework Cocoa"
+    CPPFLAGS="$CPPFLAGS -framework OpenGL"
+    HAVE_WINDOW_COCOA=yes
+    USE_GL=yes
+    USE_CGL=yes
+    ;;
+  *-mingw32*)
     GL_LIBS="$LIBS -lgdi32 -lopengl32 -lglu32 -lglew32"
-    CPPFLAGS="$save_CPPFLAGS"
-    LIBS="$save_LIBS"
-    GL_BACKEND=win32
-    GL_TYPE=gl
+    HAVE_WINDOW_WIN32=yes
+    USE_GL=yes
     ;;
   *)
     exit 1
     ;;
 esac
-if test "x$GL_TYPE" = "xgles"; then
+if test "x$USE_GLES2" = "xno"; then
   AC_DEFINE(OPENGL_ES2, [1] , [Use OpenGLES2])
 fi
 AC_SUBST(GL_LIBS)
-AC_SUBST(GL_BACKEND)
-AC_SUBST(OPENGL_ES2)
-AM_CONDITIONAL(GL_BACKEND_X11, test "x$GL_BACKEND" = "xx11")
-AM_CONDITIONAL(GL_BACKEND_X11ES2, test "x$GL_BACKEND" = "xx11ES2")
-AM_CONDITIONAL(GL_BACKEND_COCOA, test "x$GL_BACKEND" = "xcocoa")
-AM_CONDITIONAL(GL_BACKEND_WIN32, test "x$GL_BACKEND" = "xwin32")
-AM_CONDITIONAL(GL_IS_OPENGL, test "x$GL_TYPE" = "xgl")
+
+AM_CONDITIONAL(HAVE_WINDOW_X11, test "x$HAVE_WINDOW_X11" = "xyes")
+AM_CONDITIONAL(HAVE_WINDOW_X11ES2, test "x$HAVE_WINDOW_X11ES2" = "xyes")
+AM_CONDITIONAL(HAVE_WINDOW_COCOA, test "x$HAVE_WINDOW_COCOA" = "xyes")
+AM_CONDITIONAL(HAVE_WINDOW_WIN32, test "x$HAVE_WINDOW_WIN32" = "xyes")
+
+AM_CONDITIONAL(USE_GL, test "x$USE_GL" = "xyes")
+AM_CONDITIONAL(USE_GLES2, test "x$USE_GLES2" = "xyes")
+AM_CONDITIONAL(USE_EGL, test "x$USE_EGL" = "xyes")
+AM_CONDITIONAL(USE_GLX, test "x$USE_GLX" = "xyes")
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
