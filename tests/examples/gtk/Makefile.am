@@ -8,7 +8,7 @@ libgstgtkhelper_la_SOURCES = gstgtk.c gstgtk.h
 libgstgtkhelper_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS) $(GTK_CFLAGS) \
     -lgstvideo-$(GST_API_VERSION)
 
-if GL_BACKEND_COCOA
+if HAVE_WINDOW_COCOA
 libgstgtkhelper_la_CFLAGS += -x objective-c
 endif
 
