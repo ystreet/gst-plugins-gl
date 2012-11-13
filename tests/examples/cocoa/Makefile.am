@@ -1,4 +1,4 @@
 
-if GL_BACKEND_COCOA
+if HAVE_WINDOW_COCOA
 SUBDIRS = videooverlay
 endif

@@ -1,9 +1,9 @@
 
 SUBDIRS =
 
-if GL_IS_OPENGL
+if USE_GL
 
-if GL_BACKEND_COCOA
+if HAVE_WINDOW_COCOA
 SUBDIRS += cocoa
 else
 
