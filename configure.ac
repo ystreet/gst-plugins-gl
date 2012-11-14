@@ -218,6 +218,7 @@ save_CPPFLAGS="$CPPFLAGS"
 save_LIBS="$LIBS"
 CPPFLAGS="$CPPFLAGS $X_CFLAGS"
 LIBS="$LIBS $X_LIBS"
+
 HAVE_GL=no
 HAVE_GLES2=no
 HAVE_EGL=no
@@ -225,18 +226,21 @@ HAVE_GLU=no
 HAVE_GLEW=no
 
 case $host in
-  *-mingw* )
+  *-mingw32* )
     LIBS="$LIBS -lgdi32"
     AG_GST_CHECK_LIBHEADER(GL, opengl32, glTexImage2D,, GL/gl.h)
     AG_GST_CHECK_LIBHEADER(GLU, glu32, gluSphere,, GL/glu.h)
     AG_GST_CHECK_LIBHEADER(GLEW, glew32, glewInit,, GL/glew.h)
+    HAVE_GL=yes
+    HAVE_GLU=yes
+    HAVE_GLEW=yes
   ;;
   *)
-    AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h,[],[])
-    AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h,[],[])
-    AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h,[],[])
-    AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h,[],[])
-    AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h,[],[])
+    AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h)
+    AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h)
+    AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h)
+    AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h)
+    AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h)
   ;;
 esac
 
@@ -275,10 +279,7 @@ case $host in
       if test "x$NEED_GL" != "xno"; then
         GL_LIBS="$GL_LIBS -lGL -lGLU -lGLEW"
         AC_DEFINE(HAVE_GL, [], [Have Desktop OpenGL libraries])
-        AM_CONDITIONAL(HAVE_GL, test "x" = "x")
-        AM_CONDITIONAL(GL_IS_OPENGL, test "x" = "x")
         AC_DEFINE(HAVE_GLX, [], [Have GLX])
-        AM_CONDITIONAL(HAVE_GLX, test "x" = "x")
         USE_GL=yes
         USE_GLX=yes
       fi
@@ -315,14 +316,12 @@ case $host in
       if test "x$NEED_EGL" != "xyes"; then
         GL_LIBS="$GL_LIBS -lEGL"
         AC_DEFINE(HAVE_EGL, [], [Have EGL libraries])
-        AM_CONDITIONAL(HAVE_EGL, test "x" = "x")
         USE_EGL=yes
       fi
     fi
     
     HAVE_WINDOW_X11=yes
     AC_DEFINE(HAVE_WINDOW_X11, [], [Have X11 window libraries])
-    AM_CONDITIONAL(HAVE_WINDOW_X11, test "x" = "x")
     ;;
   *-darwin*)
     if test "x$HAVE_GLEW" = "xno"; then
@@ -338,12 +337,14 @@ case $host in
     GL_LIBS="$LIBS -lgdi32 -lopengl32 -lglu32 -lglew32"
     HAVE_WINDOW_WIN32=yes
     USE_GL=yes
+    USE_WGL=yes
     ;;
   *)
+    AC_MSG_ERROR([Don't know how to check for OpenGL on your platform.])
     exit 1
     ;;
 esac
-if test "x$USE_GLES2" = "xno"; then
+if test "x$USE_GLES2" = "xyes"; then
   AC_DEFINE(OPENGL_ES2, [1] , [Use OpenGLES2])
 fi
 AC_SUBST(GL_LIBS)
@@ -357,6 +358,9 @@ AM_CONDITIONAL(USE_GL, test "x$USE_GL" = "xyes")
 AM_CONDITIONAL(USE_GLES2, test "x$USE_GLES2" = "xyes")
 AM_CONDITIONAL(USE_EGL, test "x$USE_EGL" = "xyes")
 AM_CONDITIONAL(USE_GLX, test "x$USE_GLX" = "xyes")
+AM_CONDITIONAL(USE_WGL, test "x$USE_WGL" = "xyes")
+
+AM_CONDITIONAL(GL_IS_OPENGL, test "x$USE_GL" = "xyes")
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
