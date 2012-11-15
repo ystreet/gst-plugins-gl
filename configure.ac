@@ -330,12 +330,14 @@ case $host in
     GL_LIBS="$LIBS -framework OpenGL -framework Cocoa"
     CPPFLAGS="$CPPFLAGS -framework OpenGL"
     HAVE_WINDOW_COCOA=yes
+    AC_DEFINE(HAVE_WINDOW_COCOA, [], [Have Cocoa window libraries])
     USE_GL=yes
     USE_CGL=yes
     ;;
   *-mingw32*)
     GL_LIBS="$LIBS -lgdi32 -lopengl32 -lglu32 -lglew32"
     HAVE_WINDOW_WIN32=yes
+    AC_DEFINE(HAVE_WINDOW_WIN32, [], [Have Win32 window libraries])
     USE_GL=yes
     USE_WGL=yes
     ;;
