@@ -152,6 +152,7 @@ int main(int argc, char **argv)
   NSAutoreleasePool *pool=nil;
   NSRect rect;
   MainWindow *window=nil;
+  GstState state;
 
   g_print("app created\n");
 
@@ -171,8 +172,8 @@ int main(int argc, char **argv)
     "width", G_TYPE_INT, width,
     "height", G_TYPE_INT, height,
     "framerate", GST_TYPE_FRACTION, 25, 1,
-    "format", G_TYPE_STRING, "I420"),
-    );
+    "format", G_TYPE_STRING, "I420",
+    NULL);
 
   ok = gst_element_link_filtered(videosrc, videosink, caps);
   gst_caps_unref(caps);
@@ -181,7 +182,7 @@ int main(int argc, char **argv)
 
 #ifdef GNUSTEP
   gst_element_set_state (pipeline, GST_STATE_PAUSED);
-  GstState state = GST_STATE_PAUSED;
+  state = GST_STATE_PAUSED;
   gst_element_get_state (pipeline, &state, &state, GST_CLOCK_TIME_NONE);
   g_print("pipeline paused\n");
   GSRegisterCurrentThread();
@@ -202,11 +203,11 @@ int main(int argc, char **argv)
   g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), window);
   g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), window);
   g_signal_connect(bus, "message::eos", G_CALLBACK(end_stream_cb), window);
-  gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, window);
+  gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, window, NULL);
   gst_object_unref (bus);
 
-  loop_thread = g_thread_create (
-      (GThreadFunc) thread_func, window, TRUE, NULL);
+  loop_thread = g_thread_new (NULL,
+      (GThreadFunc) thread_func, window);
 
   gst_element_set_state (pipeline, GST_STATE_PLAYING);
 
