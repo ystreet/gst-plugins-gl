@@ -62,7 +62,6 @@ dnl AS_LIBTOOL_TAGS
 
 AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
-AC_PROG_OBJC
 
 dnl *** required versions of GStreamer stuff ***
 GST_REQ=1.0.0
@@ -119,6 +118,7 @@ dnl find a compiler
 AC_PROG_CC
 AC_PROG_CC_STDC
 AC_PROG_CXX
+AC_PROG_OBJC
 
 dnl check if the compiler supports '-c' and '-o' options
 AM_PROG_CC_C_O
@@ -205,13 +205,13 @@ AC_ARG_ENABLE([glx],
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-glx]) ;;
      esac],[NEED_GLX=maybe])
 
-AC_ARG_ENABLE([cgl],
-     [  --enable-cgl    Enable CGL support],
+AC_ARG_ENABLE([cocoa],
+     [  --enable-cocoa    Enable Cocoa support (using GNUstep on non OS X platforms)],
      [case "${enableval}" in
-       yes) NEED_CGL=yes ;;
-       no)  NEED_CGL=no ;;
-       *) AC_MSG_ERROR([bad value ${enableval} for --enable-cgl]) ;;
-     esac],[NEED_CGL=maybe])
+       yes) NEED_COCOA=yes ;;
+       no)  NEED_COCOA=no ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-cocoa]) ;;
+     esac],[NEED_COCOA=maybe])
 
 AG_GST_CHECK_X
 save_CPPFLAGS="$CPPFLAGS"
@@ -224,6 +224,7 @@ HAVE_GLES2=no
 HAVE_EGL=no
 HAVE_GLU=no
 HAVE_GLEW=no
+HAVE_GNUSTEP_COCOA=no
 
 case $host in
   *-mingw32* )
@@ -244,6 +245,24 @@ case $host in
   ;;
 esac
 
+case $host in
+  *-darwin* )
+  ;;
+  *)
+    AC_PATH_PROG([GNUSTEP_CONFIG],[gnustep-config])
+    if test "x$GNUSTEP_CONFIG" != "x"; then
+      HAVE_GNUSTEP_COCOA=yes
+    fi
+  ;;
+esac
+
+AC_MSG_CHECKING([for GNUstep])
+if test "x$HAVE_GNUSTEP_COCOA" = "xyes" ; then
+  AC_MSG_RESULT([yes])
+else
+  AC_MSG_RESULT([no])
+fi
+
 CPPFLAGS="$save_CPPFLAGS"
 LIBS="$save_LIBS"
 
@@ -257,31 +276,84 @@ USE_GL=no
 USE_GLES2=no
 USE_EGL=no
 USE_GLX=no
-USE_CGL=no
+USE_COCOA=no
 USE_WGL=no
+
+dnl Check for what the user asked for and what we could find
+if test "x$HAVE_EGL" = "xno"; then
+  if test "x$NEED_EGL" = "xyes"; then
+    AC_MSG_ERROR([Could not find the required EGL libraries])
+  fi
+fi
+
+if test "x$HAVE_GL" = "xno"; then
+  if test "x$NEED_GL" = "xyes"; then
+    AC_MSG_ERROR([Could not find the required OpenGL libraries])
+  fi
+fi
+
+if test "x$HAVE_GLES2" = "xno"; then
+  if test "x$HAVE_GL" = "xno"; then
+    AC_MSG_ERROR([Either OpenGL or OpenGL|ES is required])
+  fi
+  if test "x$NEED_GLES2" = "xyes"; then
+    AC_MSG_ERROR([Could not find the required OpenGL|ES 2.0 libraries])
+  fi
+fi
+
+dnl X, GLX and OpenGL
+if test "x$HAVE_X" = "xno"; then
+  if test "x$NEED_GLX" = "xyes"; then
+    AC_MSG_ERROR([Building the GLX backend without X11 is unsupported])
+  fi
+else
+  if test "x$NEED_GL" != "xno"; then
+    if test "x$HAVE_GL" != "xyes"; then
+      if test "x$NEED_GLX" = "xyes"; then
+        AC_MSG_ERROR([Building the GLX backend without the OpenGL backend is unsupported])
+      fi
+    else dnl HAVE_GL=yes
+      if test "x$HAVE_GLU" = "xno"; then
+        if test "x$NEED_GL" = "xyes"; then
+          AC_MSG_ERROR([GLU is required with OpenGL support])
+        else
+          AC_MSG_WARN([GLU is required with OpenGL support])
+        fi
+      else dnl HAVE_GLU=yes
+        if test "x$HAVE_GLEW" = "xno"; then
+          if test "x$NEED_GL" = "xyes"; then
+            AC_MSG_ERROR([GLEW is required with OpenGL support])
+          else
+            AC_MSG_WARN([GLEW is required with OpenGL support])
+          fi
+        else dnl HAVE_GLEW=yes
+          AC_DEFINE(HAVE_GL, [1], [Have Desktop OpenGL libraries])
+          AC_DEFINE(HAVE_GLX, [1], [Have GLX])
+          USE_GL=yes
+          USE_GLX=yes
+        fi
+      fi
+    fi
+  fi
+fi
 
 #dnl Check for OpenGL, GLU and GLEW
 echo host is $host
 case $host in
   *-linux* | *-cygwin* | *-solaris* | *-netbsd* | *-freebsd* | *-openbsd* | *-kfreebsd* | *-dragonflybsd* | *-gnu* )
+    if test "x$NEED_WGL" = "xyes"; then
+      AC_MSG_ERROR([WGL is not available on unix])
+    fi
+
     if test "x$HAVE_X" = "xno"; then
       AC_MSG_ERROR([X is required])
     fi
     GL_LIBS="$LIBS $X_LIBS"
+
     dnl check Desktop OpenGL
     if test "x$HAVE_GL" = "xyes"; then
-      if test "x$HAVE_GLU" = "xno"; then
-        AC_MSG_ERROR([GLU is required with OpenGL support])
-      fi
-      if test "x$HAVE_GLEW" = "xno"; then
-        AC_MSG_ERROR([GLEW is required with OpenGL support])
-      fi
       if test "x$NEED_GL" != "xno"; then
         GL_LIBS="$GL_LIBS -lGL -lGLU -lGLEW"
-        AC_DEFINE(HAVE_GL, [], [Have Desktop OpenGL libraries])
-        AC_DEFINE(HAVE_GLX, [], [Have GLX])
-        USE_GL=yes
-        USE_GLX=yes
       fi
     else dnl no Desktop OpenGL
       if test "x$NEED_GLX" = "xyes"; then
@@ -290,16 +362,10 @@ case $host in
     fi
 
     dnl OpenGL|ES 2.0
-    if test "$HAVE_GLES2" = "xno"; then
-      if test "x$HAVE_GL" = "xno"; then
-        AC_MSG_ERROR([Either OpenGL or OpenGL|ES is required])
-      fi
-      if test "x$NEED_GLES2" = "xyes"; then
-        AC_MSG_ERROR([Could not find the required OpenGL|ES 2.0 libraries])
-      fi
-    else
-      if test "x$NEED_GLES2" != "xyes"; then
+    if test "x$HAVE_GLES2" = "xyes"; then
+      if test "x$NEED_GLES2" != "xno"; then
         GL_LIBS="$GL_LIBS -lGLESv2"
+        AC_DEFINE(HAVE_GLES2, [1], [Have OpenGL|ES 2.0 libraries])
         USE_GLES2=yes
       fi
     fi
@@ -313,40 +379,133 @@ case $host in
         AC_MSG_ERROR([Building requires either EGL or GLX])
       fi
     else
-      if test "x$NEED_EGL" != "xyes"; then
+      if test "x$NEED_EGL" != "xno"; then
         GL_LIBS="$GL_LIBS -lEGL"
-        AC_DEFINE(HAVE_EGL, [], [Have EGL libraries])
+        AC_DEFINE(HAVE_EGL, [1], [Have EGL libraries])
         USE_EGL=yes
       fi
     fi
     
     HAVE_WINDOW_X11=yes
-    AC_DEFINE(HAVE_WINDOW_X11, [], [Have X11 window libraries])
+    AC_DEFINE(HAVE_WINDOW_X11, [1], [Have X11 window libraries])
+
+    dnl GNUstep provides the Cocoa API on unix
+    if test "x$HAVE_GNUSTEP_COCOA" = "xyes" ; then
+      GNUSTEP_CFLAGS="`$GNUSTEP_CONFIG --objc-flags`"
+      GNUSTEP_LIBS="`$GNUSTEP_CONFIG --gui-libs`"
+      GL_LIBS="$GL_LIBS $GNUSTEP_LIBS -lgnustep-gui -lgnustep-base"
+      OBJCFLAGS="$OBJCFLAGS $GNUSTEP_CFLAGS"
+
+      AC_DEFINE(HAVE_COCOA, [1], [Have Cocoa OpenGL libraries])
+      AC_DEFINE(HAVE_WINDOW_COCOA, [1], [Have Cocoa window libraries])
+      USE_COCOA=yes
+      HAVE_WINDOW_COCOA=yes
+    fi
     ;;
   *-darwin*)
+    if test "x$NEED_WGL" = "xyes"; then
+      AC_MSG_ERROR([WGL is not available on Mac OS X])
+    fi
+    if test "x$NEED_EGL" = "xyes"; then
+      AC_MSG_ERROR([EGL is not available on Mac OS X])
+    fi
+    if test "x$NEED_GLES2" = "xyes"; then
+      AC_MSG_ERROR([OpenGL|ES 2.0 is not supported on your platform yet])
+    fi
+
     if test "x$HAVE_GLEW" = "xno"; then
       AC_MSG_ERROR([GLEW is required])
     fi
+
     GL_LIBS="$LIBS -framework OpenGL -framework Cocoa"
     CPPFLAGS="$CPPFLAGS -framework OpenGL"
+    USE_COCOA=yes
     HAVE_WINDOW_COCOA=yes
-    AC_DEFINE(HAVE_WINDOW_COCOA, [], [Have Cocoa window libraries])
+    AC_DEFINE(HAVE_COCOA, [1], [Have Cocoa OpenGL libraries])
+    AC_DEFINE(HAVE_WINDOW_COCOA, [1], [Have Cocoa window libraries])
     USE_GL=yes
-    USE_CGL=yes
     ;;
   *-mingw32*)
+    if test "x$NEED_GLX" = "xyes"; then
+      AC_MSG_ERROR([GLX is not available on Windows])
+    fi
+    if test "x$NEED_GLES2" = "xyes"; then
+      AC_MSG_ERROR([OpenGL|ES 2.0 is not supported on your platform yet])
+    fi
+
     GL_LIBS="$LIBS -lgdi32 -lopengl32 -lglu32 -lglew32"
     HAVE_WINDOW_WIN32=yes
-    AC_DEFINE(HAVE_WINDOW_WIN32, [], [Have Win32 window libraries])
+    AC_DEFINE(HAVE_WINDOW_WIN32, [1], [Have Win32 window libraries])
+    AC_DEFINE(HAVE_WGL, [1], [Have WGL])
     USE_GL=yes
     USE_WGL=yes
+
+    dnl GNUstep provides the Cocoa API on win32
+    if test "x$HAVE_GNUSTEP_COCOA" = "xyes" ; then
+      GNUSTEP_CFLAGS="`$GNUSTEP_CONFIG --objc-flags`"
+      GNUSTEP_LIBS="`$GNUSTEP_CONFIG --gui-libs`"
+      GL_LIBS="$GL_LIBS $GNUSTEP_LIBS -lgnustep-gui -lgnustep-base"
+      OBJCFLAGS="$OBJCFLAGS $GNUSTEP_CFLAGS"
+
+      AC_DEFINE(HAVE_COCOA, [1], [Have Cocoa OpenGL libraries])
+      AC_DEFINE(HAVE_WINDOW_COCOA, [1], [Have Cocoa window libraries])
+      USE_COCOA=yes
+      HAVE_WINDOW_COCOA=yes
+    fi
     ;;
   *)
     AC_MSG_ERROR([Don't know how to check for OpenGL on your platform.])
     exit 1
     ;;
 esac
+
+GL_PLATFORMS=
+GL_WINDOWS=
+GL_APIS=
+
+dnl API's
+if test "x$USE_GL" = "xyes"; then
+  GL_APIS="gl $GL_APIS"
+fi
 if test "x$USE_GLES2" = "xyes"; then
+  GL_APIS="gles2 $GL_APIS"
+fi
+
+dnl WINDOW's
+if test "x$HAVE_WINDOW_X11" = "xyes"; then
+  GL_WINDOWS="x11 $GL_WINDOWS"
+fi
+if test "x$HAVE_WINDOW_COCOA" = "xyes"; then
+  GL_WINDOWS="cocoa $GL_WINDOWS"
+fi
+if test "x$HAVE_WINDOW_WIN32" = "xyes"; then
+  GL_WINDOWS="win32 $GL_WINDOWS"
+fi
+
+dnl PLATFORM's
+if test "x$USE_EGL" = "xyes"; then
+  GL_PLATFORMS="egl $GL_PLATFORMS"
+fi
+if test "x$USE_GLX" = "xyes"; then
+  GL_PLATFORMS="glx $GL_PLATFORMS"
+fi
+if test "x$USE_WGL" = "xyes"; then
+  GL_PLATFORMS="wgl $GL_PLATFORMS"
+fi
+if test "x$USE_COCOA" = "xyes"; then
+  GL_PLATFORMS="cocoa $GL_PLATFORMS"
+fi
+
+dnl Check for no platforms/window systems
+if test "x$GL_PLATFORMS" = "x"; then
+  AC_MSG_ERROR([Could not find any OpenGL platforms to use such as Cocoa, WGL or GLX])
+fi
+if test "x$GL_WINDOWS" = "x"; then
+  AC_MSG_ERROR([Could not find any window systems to use such as Cocoa, Win32API or X11])
+fi
+
+dnl FIXME remove this
+if test "x$USE_GLES2" = "xno"; then
   AC_DEFINE(OPENGL_ES2, [1] , [Use OpenGLES2])
 fi
 AC_SUBST(GL_LIBS)
@@ -361,7 +520,9 @@ AM_CONDITIONAL(USE_GLES2, test "x$USE_GLES2" = "xyes")
 AM_CONDITIONAL(USE_EGL, test "x$USE_EGL" = "xyes")
 AM_CONDITIONAL(USE_GLX, test "x$USE_GLX" = "xyes")
 AM_CONDITIONAL(USE_WGL, test "x$USE_WGL" = "xyes")
+AM_CONDITIONAL(USE_COCOA, test "x$USE_COCOA" = "xyes")
 
+dnl FIXME remove this
 AM_CONDITIONAL(GL_IS_OPENGL, test "x$USE_GL" = "xyes")
 
 dnl checks for gstreamer
@@ -595,11 +756,9 @@ fi
 AC_SUBST(DEPRECATED_CFLAGS)
 
 dnl every flag in GST_OPTION_CFLAGS can be overridden at make time
-GST_OPTION_CFLAGS="\$(WARNING_CFLAGS) \$(ERROR_CFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
-GST_OPTION_CXXFLAGS="\$(WARNING_CXXFLAGS) \$(ERROR_CXXFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
-GST_OPTION_OBJCFLAGS="\$(WARNING_OBJCFLAGS) \$(ERROR_OBJCFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
-GST_OPTION_CFLAGS="$GST_OPTION_CFLAGS"
-GST_OPTION_CXXFLAGS="$GST_OPTION_CXXFLAGS"
+GST_OPTION_CFLAGS=" \$(WARNING_CFLAGS) \$(ERROR_CFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
+GST_OPTION_CXXFLAGS=" \$(WARNING_CXXFLAGS) \$(ERROR_CXXFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
+GST_OPTION_OBJCFLAGS=" \$(WARNING_OBJCFLAGS) \$(ERROR_OBJCFLAGS) \$(DEBUG_CFLAGS) \$(PROFILE_CFLAGS) \$(GCOV_CFLAGS) \$(OPT_CFLAGS) \$(DEPRECATED_CFLAGS)"
 AC_SUBST(GST_OPTION_CFLAGS)
 AC_SUBST(GST_OPTION_CXXFLAGS)
 AC_SUBST(GST_OPTION_OBJCFLAGS)
@@ -610,14 +769,14 @@ AC_SUBST(GST_LT_LDFLAGS)
 dnl GST_PLUGINS_GL_CFLAGS
 dnl prefer internal headers to already installed ones
 dnl also add builddir include for enumtypes and marshal
-GST_PLUGINS_GL_CFLAGS="-I\$(top_srcdir)/gst-libs -I\$(top_builddir)/gst-libs"
+GST_PLUGINS_GL_CFLAGS=" -I\$(top_srcdir)/gst-libs -I\$(top_builddir)/gst-libs"
 AC_SUBST(GST_PLUGINS_GL_CFLAGS)
 
 dnl FIXME: do we want to rename to GST_ALL_* ?
 dnl add GST_OPTION_CFLAGS, but overridable
-GST_OBJCFLAGS="-I\$(top_srcdir)/gst-libs $GST_CFLAGS $GLIB_EXTRA_CFLAGS \$(GST_OPTION_OBJCFLAGS)"
-GST_CXXFLAGS="-I\$(top_srcdir)/gst-libs -I\$(top_builddir)/gst-libs $GST_CFLAGS $GST_CXXFLAGS $GLIB_EXTRA_CFLAGS \$(GST_OPTION_CXXFLAGS)"
-GST_CFLAGS="-I\$(top_srcdir)/gst-libs -I\$(top_builddir)/gst-libs $GST_CFLAGS $GLIB_EXTRA_CFLAGS \$(GST_OPTION_CFLAGS)"
+GST_OBJCFLAGS=" -I\$(top_srcdir)/gst-libs $GST_CFLAGS $GLIB_EXTRA_CFLAGS \$(GST_OPTION_OBJCFLAGS)"
+GST_CXXFLAGS=" -I\$(top_srcdir)/gst-libs -I\$(top_builddir)/gst-libs $GST_CFLAGS $GST_CXXFLAGS $GLIB_EXTRA_CFLAGS \$(GST_OPTION_CXXFLAGS)"
+GST_CFLAGS=" -I\$(top_srcdir)/gst-libs -I\$(top_builddir)/gst-libs $GST_CFLAGS $GLIB_EXTRA_CFLAGS \$(GST_OPTION_CFLAGS)"
 AC_SUBST(GST_CFLAGS)
 AC_SUBST(GST_CXXFLAGS)
 AC_SUBST(GST_OBJCFLAGS)
@@ -690,3 +849,11 @@ m4/Makefile
 AC_OUTPUT
 
 AG_GST_OUTPUT_PLUGINS
+
+cat << EOF
+
+        OpenGL API's: ${GL_APIS}
+    OpenGL Platforms: ${GL_PLATFORMS}
+      Window Systems: ${GL_WINDOWS}
+
+EOF
