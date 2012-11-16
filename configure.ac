@@ -166,52 +166,58 @@ dnl GLib is required
 AG_GST_GLIB_CHECK([2.22])
 
 AC_ARG_ENABLE([gl],
-     [  --enable-gl    Enable Desktop OpenGL support],
+     [  --enable-opengl         Enable Desktop OpenGL support @<:@default=auto@:>@],
      [case "${enableval}" in
-       yes) NEED_GL=yes ;;
-       no)  NEED_GL=no ;;
+       yes)  NEED_GL=yes ;;
+       no)   NEED_GL=no ;;
+       auto) NEED_GL=auto ;;
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-gl]) ;;
-     esac],[NEED_GL=maybe])
+     esac],[NEED_GL=auto])
 
 AC_ARG_ENABLE([gles2],
-     [  --enable-gles2    Enable OpenGL|ES 2.0 support],
+     [  --enable-gles2          Enable OpenGL|ES 2.0 support @<:@default=auto@:>@],
      [case "${enableval}" in
-       yes) NEED_GLES2=yes ;;
-       no)  NEED_GLES2=no ;;
+       yes)  NEED_GLES2=yes ;;
+       no)   NEED_GLES2=no ;;
+       auto) NEED_GLES2=auto ;;
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-gles2]) ;;
-     esac],[NEED_GLES2=maybe])
+     esac],[NEED_GLES2=auto])
 
 AC_ARG_ENABLE([egl],
-     [  --enable-egl    Enable EGL support],
+     [  --enable-egl            Enable EGL support @<:@default=auto@:>@],
      [case "${enableval}" in
-       yes) NEED_EGL=yes ;;
-       no)  NEED_EGL=no ;;
+       yes)  NEED_EGL=yes ;;
+       no)   NEED_EGL=no ;;
+       auto) NEED_EGL=maybe ;;
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-egl]) ;;
      esac],[NEED_EGL=maybe])
 
 AC_ARG_ENABLE([wgl],
-     [  --enable-wgl    Enable WGL support],
+     [  --enable-wgl            Enable WGL support @<:@default=auto@:>@],
      [case "${enableval}" in
-       yes) NEED_WGL=yes ;;
-       no)  NEED_WGL=no ;;
+       yes)  NEED_WGL=yes ;;
+       no)   NEED_WGL=no ;;
+       auto) NEED_WGL=auto ;;
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-wgl]) ;;
-     esac],[NEED_WGL=maybe])
+     esac],[NEED_WGL=auto])
 
 AC_ARG_ENABLE([glx],
-     [  --enable-glx    Enable GLX support],
+     [  --enable-glx            Enable GLX support @<:@default=auto@:>@],
      [case "${enableval}" in
-       yes) NEED_GLX=yes ;;
-       no)  NEED_GLX=no ;;
+       yes)  NEED_GLX=yes ;;
+       no)   NEED_GLX=no ;;
+       auto) NEED_GLX=auto ;;
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-glx]) ;;
-     esac],[NEED_GLX=maybe])
+     esac],[NEED_GLX=auto])
 
 AC_ARG_ENABLE([cocoa],
-     [  --enable-cocoa    Enable Cocoa support (using GNUstep on non OS X platforms)],
+     [  --enable-cocoa          Enable Cocoa support (using GNUstep on non OS X platforms) @<:@default=auto@:>@],
      [case "${enableval}" in
-       yes) NEED_COCOA=yes ;;
-       no)  NEED_COCOA=no ;;
+       yes)  NEED_COCOA=yes ;;
+       no)   NEED_COCOA=no ;;
+       auto) NEED_COCOA=auto ;;
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-cocoa]) ;;
-     esac],[NEED_COCOA=maybe])
+     esac],[NEED_COCOA=auto])
 
 AG_GST_CHECK_X
 save_CPPFLAGS="$CPPFLAGS"
@@ -289,6 +295,12 @@ fi
 if test "x$HAVE_GL" = "xno"; then
   if test "x$NEED_GL" = "xyes"; then
     AC_MSG_ERROR([Could not find the required OpenGL libraries])
+  fi
+fi
+
+if test "x$NEED_GLES2" = "xno"; then
+  if test "x$NEED_GL" = "xno"; then
+    AC_MSG_ERROR([Either OpenGL or OpenGL|ES is required])
   fi
 fi
 
