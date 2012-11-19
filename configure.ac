@@ -828,6 +828,9 @@ gst/gl/Makefile
 gst-libs/Makefile
 gst-libs/gst/Makefile
 gst-libs/gst/gl/Makefile
+gst-libs/gst/gl/x11/Makefile
+gst-libs/gst/gl/win32/Makefile
+gst-libs/gst/gl/cocoa/Makefile
 ext/Makefile
 ext/libvisual/Makefile
 win32/common/config.h
