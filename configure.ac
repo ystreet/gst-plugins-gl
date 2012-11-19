@@ -252,12 +252,23 @@ case $host in
 esac
 
 case $host in
-  *-darwin* )
-  ;;
+  *-darwin* ) ;;
   *)
     AC_PATH_PROG([GNUSTEP_CONFIG],[gnustep-config])
     if test "x$GNUSTEP_CONFIG" != "x"; then
-      HAVE_GNUSTEP_COCOA=yes
+      GNUSTEP_HOST="`$GNUSTEP_CONFIG --variable=GNUSTEP_HOST`"
+      case $host in
+        *-mingw* )
+          case $GNUSTEP_HOST in
+            *-mingw* )
+              HAVE_GNUSTEP_COCOA=yes
+            ;;
+          esac
+          ;;
+        * )
+          HAVE_GNUSTEP_COCOA=yes
+        ;;
+      esac
     fi
   ;;
 esac
@@ -367,10 +378,6 @@ case $host in
       if test "x$NEED_GL" != "xno"; then
         GL_LIBS="$GL_LIBS -lGL -lGLU -lGLEW"
       fi
-    else dnl no Desktop OpenGL
-      if test "x$NEED_GLX" = "xyes"; then
-        AC_MSG_ERROR([Building the GLX backend without the OpenGL backend is unsupported])
-      fi
     fi
 
     dnl OpenGL|ES 2.0
@@ -384,9 +391,6 @@ case $host in
 
     dnl EGL
     if test "x$HAVE_EGL" = "xno"; then
-      if test "x$NEED_EGL" = "xyes"; then
-        AC_MSG_ERROR([Could not find the required EGL libraries])
-      fi
       if test "x$HAVE_GL" = "xno"; then
         AC_MSG_ERROR([Building requires either EGL or GLX])
       fi
@@ -397,16 +401,16 @@ case $host in
         USE_EGL=yes
       fi
     fi
-    
+
     HAVE_WINDOW_X11=yes
     AC_DEFINE(HAVE_WINDOW_X11, [1], [Have X11 window libraries])
 
     dnl GNUstep provides the Cocoa API on unix
     if test "x$HAVE_GNUSTEP_COCOA" = "xyes" ; then
-      GNUSTEP_CFLAGS="`$GNUSTEP_CONFIG --objc-flags`"
+      GNUSTEP_OBJCFLAGS="`$GNUSTEP_CONFIG --objc-flags`"
       GNUSTEP_LIBS="`$GNUSTEP_CONFIG --gui-libs`"
       GL_LIBS="$GL_LIBS $GNUSTEP_LIBS -lgnustep-gui -lgnustep-base"
-      OBJCFLAGS="$OBJCFLAGS $GNUSTEP_CFLAGS"
+      OBJCFLAGS="$OBJCFLAGS $GNUSTEP_OBJCFLAGS"
 
       AC_DEFINE(HAVE_COCOA, [1], [Have Cocoa OpenGL libraries])
       AC_DEFINE(HAVE_WINDOW_COCOA, [1], [Have Cocoa window libraries])
