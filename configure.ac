@@ -219,13 +219,13 @@ AC_ARG_ENABLE([cocoa],
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-cocoa]) ;;
      esac],[NEED_COCOA=auto])
 
-AC_ARG_ENABLE([wayland-egl],
-     [  --enable-wayland-egl    Enable Wayland EGL support @<:@default=auto@:>@],
+AC_ARG_ENABLE([wayland],
+     [  --enable-wayland        Enable Wayland support (requires EGL) @<:@default=auto@:>@],
      [case "${enableval}" in
        yes)  NEED_WAYLAND_EGL=yes ;;
        no)   NEED_WAYLAND_EGL=no ;;
        auto) NEED_WAYLAND_EGL=auto ;;
-       *) AC_MSG_ERROR([bad value ${enableval} for --enable-wayland-egl]) ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-wayland]) ;;
      esac],[NEED_WAYLAND_EGL=auto])
 
 AG_GST_CHECK_X
@@ -256,11 +256,7 @@ case $host in
     AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h)
     AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h)
     AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h)
-    PKG_CHECK_MODULES(WAYLAND_CLIENT, wayland-client >= 1.0, HAVE_WAYLAND_CLIENT=yes, HAVE_WAYLAND_CLIENT=no)
-    PKG_CHECK_MODULES(WAYLAND_CURSOR, wayland-cursor >= 1.0, HAVE_WAYLAND_CURSOR=yes, HAVE_WAYLAND_CURSOR=no)
-    if test "x$HAVE_WAYLAND_CLIENT" = "xyes" -a "x$HAVE_WAYLAND_CURSOR" = "xyes"; then
-      PKG_CHECK_MODULES(WAYLAND_EGL, wayland-egl >= 9.0, HAVE_WAYLAND_EGL=yes, HAVE_WAYLAND_EGL=no)
-    fi
+    PKG_CHECK_MODULES(WAYLAND_EGL, wayland-client >= 1.0 wayland-cursor >= 1.0 wayland-egl >= 9.0, HAVE_WAYLAND_EGL=yes, HAVE_WAYLAND_EGL=no)
   ;;
 esac
 
@@ -369,7 +365,9 @@ else
           AC_DEFINE(HAVE_GL, [1], [Have Desktop OpenGL libraries])
           AC_DEFINE(HAVE_GLX, [1], [Have GLX])
           USE_GL=yes
-          USE_GLX=yes
+          if test "x$NEED_GLX" != "xno"; then
+            USE_GLX=yes
+          fi
         fi
       fi
     fi
@@ -406,6 +404,30 @@ case $host in
       fi
     fi
 
+    if test "x$HAVE_X" = "xyes"; then
+      if test "x$NEED_GL" != "xno"; then
+        if test "x$NEED_GLX" != "xno"; then
+          GL_LIBS="$GL_LIBS $X_LIBS"
+          GL_CFLAGS="$GL_CFLAGS $X_CFLAGS"
+          HAVE_WINDOW_X11=yes
+          AC_DEFINE(HAVE_WINDOW_X11, [1], [Have X11 window libraries])
+        fi
+      fi
+    fi
+
+    if test "x$HAVE_WAYLAND_EGL" = "xyes"; then
+      if test "x$NEED_EGL" = "xno" -o "x$HAVE_EGL" = "xno"; then
+        AC_MSG_WARN([EGL is required by the Wayland backend])
+      else
+        if test "x$NEED_WAYLAND_EGL" != "xno"; then
+          HAVE_WINDOW_WAYLAND=yes
+          AC_DEFINE(HAVE_WINDOW_WAYLAND, [1], [Have Wayland])
+          GL_LIBS="$GL_LIBS $WAYLAND_EGL_LIBS"
+          GL_CFLAGS="$GL_CFLAGS $WAYLAND_EGL_CFLAGS"
+        fi
+      fi
+    fi
+
     dnl EGL
     if test "x$HAVE_EGL" = "xno"; then
       if test "x$HAVE_GL" = "xno"; then
@@ -413,33 +435,11 @@ case $host in
       fi
     else
       if test "x$NEED_EGL" != "xno"; then
-        GL_LIBS="$GL_LIBS -lEGL"
-        AC_DEFINE(HAVE_EGL, [1], [Have EGL libraries])
-        USE_EGL=yes
-      fi
-    fi
-
-    if test "x$HAVE_X" = "xyes"; then
-      if test "x$NEED_GLX" != "xno"; then
-        GL_LIBS="$GL_LIBS $X_LIBS"
-        GL_CFLAGS="$GL_CFLAGS $X_CFLAGS"
-        HAVE_WINDOW_X11=yes
-        AC_DEFINE(HAVE_WINDOW_X11, [1], [Have X11 window libraries])
-      fi
-    fi
-
-    if test "x$HAVE_WAYLAND_EGL" = "xyes"; then
-      if test "x$HAVE_EGL" = "xno"; then
-        AC_MSG_ERROR([EGL is required by the Wayland backend])
-      fi
-      if test "x$NEED_EGL" = "xno"; then
-        AC_MSG_ERROR([EGL is required by the Wayland backend])
-      fi
-      if test "x$NEED_WAYLAND_EGL" != "xno"; then
-        HAVE_WINDOW_WAYLAND=yes
-        AC_DEFINE(HAVE_WINDOW_WAYLAND, [1], [Have Wayland])
-        GL_LIBS="$GL_LIBS $WAYLAND_CLIENT_LIBS $WAYLAND_CURSOR_LIBS $WAYLAND_EGL_LIBS"
-        GL_CFLAGS="$GL_CFLAGS $WAYLAND_CLIENT_CFLAGS $WAYLAND_CURSOR_CFLAGS $WAYLAND_EGL_CFLAGS"
+        if test "x$HAVE_WINDOW_WAYLAND" = "xyes" -o "x$HAVE_WINDOW_X11" = "xyes"; then
+          GL_LIBS="$GL_LIBS -lEGL"
+          AC_DEFINE(HAVE_EGL, [1], [Have EGL libraries])
+          USE_EGL=yes
+        fi
       fi
     fi
 
