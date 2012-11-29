@@ -328,9 +328,6 @@ if test "x$NEED_GLES2" = "xno"; then
 fi
 
 if test "x$HAVE_GLES2" = "xno"; then
-  if test "x$HAVE_GL" = "xno"; then
-    AC_MSG_ERROR([Either OpenGL or OpenGL|ES is required])
-  fi
   if test "x$NEED_GLES2" = "xyes"; then
     AC_MSG_ERROR([Could not find the required OpenGL|ES 2.0 libraries])
   fi
@@ -556,6 +553,9 @@ if test "x$USE_COCOA" = "xyes"; then
 fi
 
 dnl Check for no platforms/window systems
+if test "x$GL_APIS" = "x"; then
+  AC_MSG_ERROR([Either OpenGL or OpenGL|ES is required])
+fi
 if test "x$GL_PLATFORMS" = "x"; then
   AC_MSG_ERROR([Could not find any OpenGL platforms to use such as Cocoa, WGL or GLX])
 fi
