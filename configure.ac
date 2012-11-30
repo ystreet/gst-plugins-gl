@@ -219,6 +219,15 @@ AC_ARG_ENABLE([cocoa],
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-cocoa]) ;;
      esac],[NEED_COCOA=auto])
 
+AC_ARG_ENABLE([x11],
+     [  --enable-x11            Enable x11 support @<:@default=auto@:>@],
+     [case "${enableval}" in
+       yes)  NEED_X11=yes ;;
+       no)   NEED_X11=no ;;
+       auto) NEED_X11=auto ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-x11]) ;;
+     esac],[NEED_X11=auto])
+
 AC_ARG_ENABLE([wayland],
      [  --enable-wayland        Enable Wayland support (requires EGL) @<:@default=auto@:>@],
      [case "${enableval}" in
@@ -304,6 +313,7 @@ USE_EGL=no
 USE_GLX=no
 USE_COCOA=no
 USE_WGL=no
+USE_X11=no
 GL_LIBS=
 GL_CFLAGS=
 GL_OBJCFLAGS=
@@ -337,6 +347,9 @@ dnl X, GLX and OpenGL
 if test "x$HAVE_X" = "xno"; then
   if test "x$NEED_GLX" = "xyes"; then
     AC_MSG_ERROR([Building the GLX backend without X11 is unsupported])
+  fi
+  if test "x$NEED_X11" = "xyes"; then
+    AC_MSG_ERROR([Could not find X11 development libraries])
   fi
 else
   if test "x$NEED_GL" != "xno"; then
@@ -381,7 +394,7 @@ case $host in
 
     if test "x$HAVE_X" = "xno"; then
       if test "x$HAVE_WAYLAND_EGL" = "xno"; then
-        AC_MSG_ERROR([X or Wayland-EGL is required])
+        AC_MSG_ERROR([X or Wayland is required])
       fi
     fi
 
@@ -402,13 +415,11 @@ case $host in
     fi
 
     if test "x$HAVE_X" = "xyes"; then
-      if test "x$NEED_GL" != "xno"; then
-        if test "x$NEED_GLX" != "xno"; then
-          GL_LIBS="$GL_LIBS $X_LIBS"
-          GL_CFLAGS="$GL_CFLAGS $X_CFLAGS"
-          HAVE_WINDOW_X11=yes
-          AC_DEFINE(HAVE_WINDOW_X11, [1], [Have X11 window libraries])
-        fi
+      if test "x$NEED_X11" != "xno"; then
+        GL_LIBS="$GL_LIBS $X_LIBS"
+        GL_CFLAGS="$GL_CFLAGS $X_CFLAGS"
+        HAVE_WINDOW_X11=yes
+        AC_DEFINE(HAVE_WINDOW_X11, [1], [Have X11 window libraries])
       fi
     fi
 
@@ -564,7 +575,7 @@ if test "x$GL_WINDOWS" = "x"; then
 fi
 
 dnl FIXME remove this
-if test "x$USE_GLES2" = "xno"; then
+if test "x$USE_GLES2" = "xyes"; then
   AC_DEFINE(OPENGL_ES2, [1] , [Use OpenGLES2])
 fi
 AC_SUBST(GL_LIBS)
