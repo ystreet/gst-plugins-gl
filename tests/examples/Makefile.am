@@ -1,7 +1,7 @@
 
 SUBDIRS =
 
-if USE_GL
+if USE_OPENGL
 
 if HAVE_WINDOW_COCOA
 SUBDIRS += cocoa
