@@ -307,7 +307,7 @@ AC_SUBST(HAVE_GLEW)
 AC_SUBST(HAVE_EGL)
 AC_SUBST(HAVE_GLES2)
 
-USE_GL=no
+USE_OPENGL=no
 USE_GLES2=no
 USE_EGL=no
 USE_GLX=no
@@ -372,9 +372,7 @@ else
             AC_MSG_WARN([GLEW is required with OpenGL support])
           fi
         else dnl HAVE_GLEW=yes
-          AC_DEFINE(HAVE_GL, [1], [Have Desktop OpenGL libraries])
-          AC_DEFINE(HAVE_GLX, [1], [Have GLX])
-          USE_GL=yes
+          USE_OPENGL=yes
           if test "x$NEED_GLX" != "xno"; then
             USE_GLX=yes
           fi
@@ -409,7 +407,6 @@ case $host in
     if test "x$HAVE_GLES2" = "xyes"; then
       if test "x$NEED_GLES2" != "xno"; then
         GL_LIBS="$GL_LIBS -lGLESv2"
-        AC_DEFINE(HAVE_GLES2, [1], [Have OpenGL|ES 2.0 libraries])
         USE_GLES2=yes
       fi
     fi
@@ -419,7 +416,6 @@ case $host in
         GL_LIBS="$GL_LIBS $X_LIBS"
         GL_CFLAGS="$GL_CFLAGS $X_CFLAGS"
         HAVE_WINDOW_X11=yes
-        AC_DEFINE(HAVE_WINDOW_X11, [1], [Have X11 window libraries])
       fi
     fi
 
@@ -429,7 +425,6 @@ case $host in
       else
         if test "x$NEED_WAYLAND_EGL" != "xno"; then
           HAVE_WINDOW_WAYLAND=yes
-          AC_DEFINE(HAVE_WINDOW_WAYLAND, [1], [Have Wayland])
           GL_LIBS="$GL_LIBS $WAYLAND_EGL_LIBS"
           GL_CFLAGS="$GL_CFLAGS $WAYLAND_EGL_CFLAGS"
         fi
@@ -445,7 +440,6 @@ case $host in
       if test "x$NEED_EGL" != "xno"; then
         if test "x$HAVE_WINDOW_WAYLAND" = "xyes" -o "x$HAVE_WINDOW_X11" = "xyes"; then
           GL_LIBS="$GL_LIBS -lEGL"
-          AC_DEFINE(HAVE_EGL, [1], [Have EGL libraries])
           USE_EGL=yes
         fi
       fi
@@ -459,8 +453,6 @@ case $host in
         GL_LIBS="$GL_LIBS $GNUSTEP_LIBS -lgnustep-gui -lgnustep-base"
         GL_OBJCFLAGS="$GL_OBJCFLAGS $GNUSTEP_OBJCFLAGS"
 
-        AC_DEFINE(HAVE_COCOA, [1], [Have Cocoa OpenGL libraries])
-        AC_DEFINE(HAVE_WINDOW_COCOA, [1], [Have Cocoa window libraries])
         USE_COCOA=yes
         HAVE_WINDOW_COCOA=yes
       fi
@@ -485,8 +477,6 @@ case $host in
     GL_CFLAGS="$GL_CFLAGS -framework OpenGL"
     USE_COCOA=yes
     HAVE_WINDOW_COCOA=yes
-    AC_DEFINE(HAVE_COCOA, [1], [Have Cocoa OpenGL libraries])
-    AC_DEFINE(HAVE_WINDOW_COCOA, [1], [Have Cocoa window libraries])
     USE_GL=yes
     ;;
   *-mingw32*)
@@ -499,9 +489,7 @@ case $host in
 
     GL_LIBS="$GL_LIBS -lgdi32 -lopengl32 -lglu32 -lglew32"
     HAVE_WINDOW_WIN32=yes
-    AC_DEFINE(HAVE_WINDOW_WIN32, [1], [Have Win32 window libraries])
-    AC_DEFINE(HAVE_WGL, [1], [Have WGL])
-    USE_GL=yes
+    USE_OPENGL=yes
     USE_WGL=yes
 
     dnl GNUstep provides the Cocoa API on win32
@@ -511,8 +499,6 @@ case $host in
       GL_LIBS="$GL_LIBS $GNUSTEP_LIBS -lgnustep-gui -lgnustep-base"
       GL_OBJCFLAGS="$OBJCFLAGS $GNUSTEP_CFLAGS"
 
-      AC_DEFINE(HAVE_COCOA, [1], [Have Cocoa OpenGL libraries])
-      AC_DEFINE(HAVE_WINDOW_COCOA, [1], [Have Cocoa window libraries])
       USE_COCOA=yes
       HAVE_WINDOW_COCOA=yes
     fi
@@ -528,39 +514,49 @@ GL_WINDOWS=
 GL_APIS=
 
 dnl API's
-if test "x$USE_GL" = "xyes"; then
+if test "x$USE_OPENGL" = "xyes"; then
   GL_APIS="gl $GL_APIS"
+  AC_DEFINE(HAVE_OPENGL, [1] , [Use Desktop OpenGL])
 fi
 if test "x$USE_GLES2" = "xyes"; then
   GL_APIS="gles2 $GL_APIS"
+  AC_DEFINE(HAVE_GLES2, [1] , [Use OpenGL|ES 2.0])
 fi
 
 dnl WINDOW's
 if test "x$HAVE_WINDOW_X11" = "xyes"; then
   GL_WINDOWS="x11 $GL_WINDOWS"
+  AC_DEFINE(HAVE_WINDOW_X11, [1], [Have X11 window libraries])
 fi
 if test "x$HAVE_WINDOW_COCOA" = "xyes"; then
   GL_WINDOWS="cocoa $GL_WINDOWS"
+  AC_DEFINE(HAVE_WINDOW_COCOA, [1], [Have Cocoa window libraries])
 fi
 if test "x$HAVE_WINDOW_WIN32" = "xyes"; then
   GL_WINDOWS="win32 $GL_WINDOWS"
+  AC_DEFINE(HAVE_WINDOW_WIN32, [1], [Have Win32 window libraries])
 fi
 if test "x$HAVE_WINDOW_WAYLAND" = "xyes"; then
   GL_WINDOWS="wayland $GL_WINDOWS"
+  AC_DEFINE(HAVE_WINDOW_WAYLAND, [1], [Have Wayland window libraries])
 fi
 
 dnl PLATFORM's
 if test "x$USE_EGL" = "xyes"; then
   GL_PLATFORMS="egl $GL_PLATFORMS"
+  AC_DEFINE(HAVE_EGL, [1], [Have EGL])
 fi
 if test "x$USE_GLX" = "xyes"; then
   GL_PLATFORMS="glx $GL_PLATFORMS"
+  AC_DEFINE(HAVE_GLX, [1], [Have GLX])
 fi
 if test "x$USE_WGL" = "xyes"; then
   GL_PLATFORMS="wgl $GL_PLATFORMS"
+  AC_DEFINE(HAVE_WGL, [1], [Have WGL])
 fi
 if test "x$USE_COCOA" = "xyes"; then
   GL_PLATFORMS="cocoa $GL_PLATFORMS"
+  AC_DEFINE(HAVE_COCOA, [1], [Have Cocoa])
 fi
 
 dnl Check for no platforms/window systems
@@ -574,10 +570,6 @@ if test "x$GL_WINDOWS" = "x"; then
   AC_MSG_ERROR([Could not find any window systems to use such as Cocoa, Win32API or X11])
 fi
 
-dnl FIXME remove this
-if test "x$USE_GLES2" = "xyes"; then
-  AC_DEFINE(OPENGL_ES2, [1] , [Use OpenGLES2])
-fi
 AC_SUBST(GL_LIBS)
 AC_SUBST(GL_CFLAGS)
 AC_SUBST(GL_OBJCFLAGS)
@@ -588,15 +580,12 @@ AM_CONDITIONAL(HAVE_WINDOW_COCOA, test "x$HAVE_WINDOW_COCOA" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_WIN32, test "x$HAVE_WINDOW_WIN32" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_WAYLAND, test "x$HAVE_WINDOW_WAYLAND" = "xyes")
 
-AM_CONDITIONAL(USE_GL, test "x$USE_GL" = "xyes")
+AM_CONDITIONAL(USE_OPENGL, test "x$USE_OPENGL" = "xyes")
 AM_CONDITIONAL(USE_GLES2, test "x$USE_GLES2" = "xyes")
 AM_CONDITIONAL(USE_EGL, test "x$USE_EGL" = "xyes")
 AM_CONDITIONAL(USE_GLX, test "x$USE_GLX" = "xyes")
 AM_CONDITIONAL(USE_WGL, test "x$USE_WGL" = "xyes")
 AM_CONDITIONAL(USE_COCOA, test "x$USE_COCOA" = "xyes")
-
-dnl FIXME remove this
-AM_CONDITIONAL(GL_IS_OPENGL, test "x$USE_GL" = "xyes")
 
 dnl checks for gstreamer
 dnl uninstalled is selected preferentially -- see pkg-config(1)
