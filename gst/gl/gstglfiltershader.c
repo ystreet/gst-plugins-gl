@@ -293,6 +293,9 @@ gst_gl_filtershader_load_file (char *filename, char **storage)
 static void
 gst_gl_filtershader_load_shader (char *filename, char **storage)
 {
+  g_return_if_fail (filename != NULL);
+  g_return_if_fail (storage != NULL);
+
   if (gst_gl_filtershader_load_file (filename, storage)) {
     exit (1);
   }
