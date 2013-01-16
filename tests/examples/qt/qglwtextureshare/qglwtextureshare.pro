@@ -25,8 +25,7 @@ LIBS += -L"C:/gstreamer/lib" \
     -lgthread-2.0 \
     -lgstvideo-1.0 \
     -lopengl32 \
-    -lglu32 \
-    -lglew32
+    -lglu32
 }
 unix:!mac {
     DEFINES += UNIX
@@ -42,8 +41,7 @@ unix:!mac {
         -lgobject-2.0 \
         -lgthread-2.0 \
         -lGLU \
-        -lGL \
-        -lGLEW
+        -lGL
 }
 mac {
     DEFINES += MACOSX
@@ -53,7 +51,6 @@ mac {
         /opt/local/lib/glib-2.0/include \
         /opt/local/include/libxml2
     LIBS += -L/opt/local/lib \
-        -lGLEW \
         -lgstreamer-1.0 \
         -lgstapp-1.0 \
         -lgstvideo-1.0 \
