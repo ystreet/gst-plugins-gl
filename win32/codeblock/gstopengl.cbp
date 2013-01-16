@@ -65,7 +65,6 @@
 			<Add library="gstvideo-0.10" />
 			<Add library="gstinterfaces-0.10" />
 			<Add library="gstcontroller-0.10" />
-			<Add library="glew32" />
 			<Add library="glu32" />
 			<Add library="opengl32" />
 			<Add library="gdi32" />

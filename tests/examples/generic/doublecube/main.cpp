@@ -18,7 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include <gst/gst.h>
 
 #include <iostream>
