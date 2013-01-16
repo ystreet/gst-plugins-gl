@@ -19,7 +19,7 @@
  */
 
 #include <gst/video/videooverlay.h>
-#include <GL/glew.h>
+#include <GL/gl.h>
 #include "pipeline.h"
 
 Pipeline::Pipeline(const WId id, const QString videoLocation):

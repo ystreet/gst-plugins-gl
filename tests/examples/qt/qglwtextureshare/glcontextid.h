@@ -27,14 +27,12 @@
     #define WIN32_LEAN_AND_MEAN
     #include <windows.h>
     #include <Wingdi.h>
-    #include <GL/glew.h>
     #include <GL/gl.h>
 #elif defined (Q_OS_MAC)
     #include <OpenGL/OpenGL.h>
     class NSOpenGLContext;
 #else
     #include <X11/Xlib.h>
-    //#include <GL/glxew.h>
     #include <GL/gl.h>
     #include <GL/glx.h>
 #endif

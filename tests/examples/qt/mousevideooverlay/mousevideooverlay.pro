@@ -22,8 +22,7 @@ LIBS += -L"C:/gstreamer/lib" \
     -lgobject-2.0 \
     -lgthread-2.0 \
     -lopengl32 \
-    -lglu32 \
-    -lglew32
+    -lglu32
 }
 
 unix {
@@ -42,8 +41,7 @@ LIBS += -lgstreamer-video \
 	-lgobject-2.0 \
 	-lgthread-2.0 \
 	-lGLU \
-	-lGL \
-	-lGLEW
+	-lGL
 }    
     
 DEPENDPATH += .

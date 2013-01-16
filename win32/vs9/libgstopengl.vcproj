@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png14.lib z.lib jpeg.lib opengl32.lib glu32.lib glew32.lib winmm.lib"
+				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png14.lib z.lib jpeg.lib opengl32.lib glu32.lib winmm.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\lib&quot;"
 				GenerateDebugInformation="true"
@@ -138,7 +138,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png14.lib z.lib jpeg.lib opengl32.lib glu32.lib glew32.lib winmm.lib"
+				AdditionalDependencies="gstreamer-0.10.lib gstbase-0.10.lib gstinterfaces-0.10.lib gstvideo-0.10.lib gstcontroller-0.10.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib png14.lib z.lib jpeg.lib opengl32.lib glu32.lib winmm.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(OSSBUILD_GSTREAMER_SDK_DIR)\lib&quot;"
 				GenerateDebugInformation="true"
