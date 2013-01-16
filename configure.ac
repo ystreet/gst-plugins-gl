@@ -245,7 +245,6 @@ HAVE_GL=no
 HAVE_GLES2=no
 HAVE_EGL=no
 HAVE_GLU=no
-HAVE_GLEW=no
 HAVE_GNUSTEP_COCOA=no
 HAVE_WAYLAND_EGL=no
 
@@ -254,15 +253,12 @@ case $host in
     LIBS="$LIBS -lgdi32"
     AG_GST_CHECK_LIBHEADER(GL, opengl32, glTexImage2D,, GL/gl.h)
     AG_GST_CHECK_LIBHEADER(GLU, glu32, gluSphere,, GL/glu.h)
-    AG_GST_CHECK_LIBHEADER(GLEW, glew32, glewInit,, GL/glew.h)
     HAVE_GL=yes
     HAVE_GLU=yes
-    HAVE_GLEW=yes
   ;;
   *)
     AG_GST_CHECK_LIBHEADER(GL, GL, glTexImage2D,, GL/gl.h)
     AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h)
-    AG_GST_CHECK_LIBHEADER(GLEW, GLEW, glewInit,, GL/glew.h)
     AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h)
     AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h)
     PKG_CHECK_MODULES(WAYLAND_EGL, wayland-client >= 1.0 wayland-cursor >= 1.0 wayland-egl >= 9.0, HAVE_WAYLAND_EGL=yes, HAVE_WAYLAND_EGL=no)
@@ -303,7 +299,6 @@ LIBS="$save_LIBS"
 
 AC_SUBST(HAVE_GL)
 AC_SUBST(HAVE_GLU)
-AC_SUBST(HAVE_GLEW)
 AC_SUBST(HAVE_EGL)
 AC_SUBST(HAVE_GLES2)
 
@@ -365,24 +360,16 @@ else
           AC_MSG_WARN([GLU is required with OpenGL support])
         fi
       else dnl HAVE_GLU=yes
-        if test "x$HAVE_GLEW" = "xno"; then
-          if test "x$NEED_GL" = "xyes"; then
-            AC_MSG_ERROR([GLEW is required with OpenGL support])
-          else
-            AC_MSG_WARN([GLEW is required with OpenGL support])
-          fi
-        else dnl HAVE_GLEW=yes
-          USE_OPENGL=yes
-          if test "x$NEED_GLX" != "xno"; then
-            USE_GLX=yes
-          fi
+        USE_OPENGL=yes
+        if test "x$NEED_GLX" != "xno"; then
+          USE_GLX=yes
         fi
       fi
     fi
   fi
 fi
 
-#dnl Check for OpenGL, GLU and GLEW
+#dnl Check for OpenGL, GLU
 echo host is $host
 case $host in
   *-linux* | *-cygwin* | *-solaris* | *-netbsd* | *-freebsd* | *-openbsd* | *-kfreebsd* | *-dragonflybsd* | *-gnu* )
@@ -399,7 +386,7 @@ case $host in
     dnl check Desktop OpenGL
     if test "x$HAVE_GL" = "xyes"; then
       if test "x$NEED_GL" != "xno"; then
-        GL_LIBS="$GL_LIBS -lGL -lGLU -lGLEW"
+        GL_LIBS="$GL_LIBS -lGL -lGLU"
       fi
     fi
 
@@ -469,10 +456,6 @@ case $host in
       AC_MSG_ERROR([OpenGL|ES 2.0 is not supported on your platform yet])
     fi
 
-    if test "x$HAVE_GLEW" = "xno"; then
-      AC_MSG_ERROR([GLEW is required])
-    fi
-
     GL_LIBS="$LIBS -framework OpenGL -framework Cocoa"
     GL_CFLAGS="$GL_CFLAGS -framework OpenGL"
     USE_COCOA=yes
@@ -487,7 +470,7 @@ case $host in
       AC_MSG_ERROR([OpenGL|ES 2.0 is not supported on your platform yet])
     fi
 
-    GL_LIBS="$GL_LIBS -lgdi32 -lopengl32 -lglu32 -lglew32"
+    GL_LIBS="$GL_LIBS -lgdi32 -lopengl32 -lglu32"
     HAVE_WINDOW_WIN32=yes
     USE_OPENGL=yes
     USE_WGL=yes
