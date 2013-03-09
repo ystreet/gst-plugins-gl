@@ -164,6 +164,7 @@ dnl *** checks for dependency libraries ***
 
 dnl GLib is required
 AG_GST_GLIB_CHECK([2.22])
+AG_GST_PKG_CHECK_MODULES(GMODULE, gmodule-no-export-2.0 >= 2.22)
 
 AC_ARG_ENABLE([opengl],
      [  --enable-opengl         Enable Desktop OpenGL support @<:@default=auto@:>@],
@@ -877,7 +878,7 @@ AC_SUBST(GST_CXXFLAGS)
 AC_SUBST(GST_OBJCFLAGS)
 
 dnl add GCOV libs because libtool strips -fprofile-arcs -ftest-coverage
-GST_LIBS="$GST_LIBS \$(GCOV_LIBS)"
+GST_LIBS="$GST_LIBS $GMODULE_LIBS \$(GCOV_LIBS)"
 AC_SUBST(GST_LIBS)
 
 dnl LDFLAGS really should only contain flags, not libs - they get added before
