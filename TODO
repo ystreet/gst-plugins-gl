@@ -1,36 +1,20 @@
 
-- 1: replace the use of GST_QUERY_CUSTOM by registering a specific query,
-		 gst_query_type_register ("gstgldisplay", "gstgldisplay of gl chain");
+- 1: Thin out GstGLDisplay for basis in a GstContext
 
-- 2: test new gstglwindow_cocoa.m implementation with a GNU step environnement
+- 2: test all the backends properly
 
 - 3: finalize glmosaic element
 
 - 4: write a GstGLFrameBuffer gobject. Would be usefull to factorize a lot of code in gstgldisplay.c
 
-- 7: put the pipelines listed in tests/pipelines to an automated test that attempts to reach some states.
-	 Use tests/check/generic/states.c and tests/check/pipelines/simple-launch-lines.c
+- 5: work out how a pipeline like this will work (currently only one sink displays a picture):
+     videotestsrc ! glfilter ! tee name=t ! queue ! glimagesink  t. ! queue ! glimagesink
 
-- 8: make two elements named "gltee" (attach as much texture (to its fbo) as tee src pads) and "glqueue".
-     In order to have something like that:
-     videotestsrc ! glupload ! glfilterA ! gltee name=t \
-     t. ! glqueue ! glfilterB ! glimagesink \
-     t. ! glqueue ! glfilterC ! glimagesink
-     Assuming glfilterA is GPU consumming and so do not need to duplicate it.
-
-- 10: make colorspace conversion through ColorMatrix when GLSL (and mesa YCbCr) is not available and when imaging extension
-      is available. (I think it has no future now, see OpenGL 3.0)
-
-- 11: make a test to estimate how much is a colorspace conversion. I mean compare an output frame
+- 6: make a test to estimate how accurate colorspace conversion is. Compare an output frame
       to reference frame and estimate the differences. (usefull to compare several implementations)
 
-- 13: test colorspace conversion with Apple YCbCr extension.
+- 7: test colorspace conversion with Apple YCbCr extension.
 
-- 14: test again the plugin on MAC.
+- 8: lift as much code as we can from eglglessink (shaders, VideoCropMeta's, VideoGLTextureUploadMeta, etc)
 
-- 15: test the plugin on WIN CE and some other embedded operating system.
-
-- 16: If it exists a tool that can automatically convert fragment_shader code to fragment_program code
-      then we would be able to do some basic stuffs as colorspace conversion even if GLSL is not available.
-      (And so have some more cool stuffs work on Intel card for example)
-      cg can convert GLSL code to ARB_fp/ARB_vp. (no future too, a lot of improvements have been done in mesa etc...)
+- 9: merge into gst-plugins-bad
