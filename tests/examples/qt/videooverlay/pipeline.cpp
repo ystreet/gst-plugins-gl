@@ -208,7 +208,7 @@ void Pipeline::cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, Gs
     //only link once 
     if (GST_PAD_IS_LINKED (glpad)) 
     {
-        g_object_unref (glpad);
+        gst_object_unref (glpad);
         return;
     }
 
