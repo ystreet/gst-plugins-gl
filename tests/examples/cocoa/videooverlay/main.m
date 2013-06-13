@@ -106,7 +106,7 @@ static void end_stream_cb(GstBus* bus, GstMessage* message, MainWindow* window)
   g_print ("end of stream\n");
 
   gst_element_set_state ([window pipeline], GST_STATE_NULL);
-  g_object_unref ([window pipeline]);
+  gst_object_unref ([window pipeline]);
   g_main_loop_quit ([window loop]);
 
   [window performSelectorOnMainThread:@selector(customClose) withObject:nil waitUntilDone:YES];

@@ -83,7 +83,7 @@ Pipeline::configure()
     }
     g_object_set(G_OBJECT (gl_element), "external-opengl-context",
                this->glctx.contextId, NULL);
-    g_object_unref(gl_element);
+    gst_object_unref(gl_element);
 
     gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_PAUSED);
     GstState state = GST_STATE_PAUSED;
@@ -104,7 +104,7 @@ Pipeline::start()
         "fakesink0");
     g_object_set(G_OBJECT (fakesink), "signal-handoffs", TRUE, NULL);
     g_signal_connect(fakesink, "handoff", G_CALLBACK (on_gst_buffer), this);
-    g_object_unref(fakesink);
+    gst_object_unref(fakesink);
 
     GstStateChangeReturn ret =
     gst_element_set_state(GST_ELEMENT(this->m_pipeline), GST_STATE_PLAYING);

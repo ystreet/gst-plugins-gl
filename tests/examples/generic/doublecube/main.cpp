@@ -192,7 +192,7 @@ static void cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, GstEl
     //only link once 
     if (GST_PAD_IS_LINKED (identity_pad)) 
     {
-        g_object_unref (identity_pad);
+        gst_object_unref (identity_pad);
         return;
     }
 
