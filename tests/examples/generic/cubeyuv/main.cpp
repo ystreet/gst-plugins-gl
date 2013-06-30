@@ -20,6 +20,9 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
+#if __WIN32__ || _WIN32
+# include <GL/glext.h>
+#endif
 #include <gst/gst.h>
 
 #include <iostream>
