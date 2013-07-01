@@ -20,13 +20,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -41,13 +41,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -62,13 +62,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -83,13 +83,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -104,13 +104,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -125,13 +125,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -146,13 +146,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -167,13 +167,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -188,13 +188,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -209,13 +209,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -230,13 +230,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -251,13 +251,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -272,7 +272,7 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -287,13 +287,13 @@
           <name>sink_%d</name>
           <direction>sink</direction>
           <presence>request</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -308,13 +308,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -329,13 +329,13 @@
           <name>sink</name>
           <direction>sink</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
         <caps>
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
@@ -350,7 +350,7 @@
           <name>src</name>
           <direction>source</direction>
           <presence>always</presence>
-          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, BGR, BGRx, BGRA, xRGB, xBGR, ARGB, ABGR, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
+          <details>video/x-raw, format=(string){ RGB, RGBx, RGBA, I420, YV12, YUY2, UYVY, AYUV }, width=(int)[ 1, 2147483647 ], height=(int)[ 1, 2147483647 ], framerate=(fraction)[ 0/1, 2147483647/1 ]</details>
         </caps>
       </pads>
     </element>
