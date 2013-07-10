@@ -152,7 +152,10 @@ int main(int argc, char **argv)
   NSAutoreleasePool *pool=nil;
   NSRect rect;
   MainWindow *window=nil;
+  
+#ifdef GNUSTEP
   GstState state;
+#endif
 
   g_print("app created\n");
 
