@@ -395,6 +395,49 @@ fi
 #dnl Check for OpenGL, GLU
 echo host is $host
 case $host in
+  *-android*)
+    if test "x$NEED_WGL" = "xyes"; then
+      AC_MSG_ERROR([WGL is not available on Android])
+    fi
+    if test "x$NEED_GLX" = "xyes"; then
+      AC_MSG_ERROR([GLX is not available on Android])
+    fi
+    if test "x$NEED_GL" = "xyes"; then
+      AC_MSG_ERROR([GL is not available on Android])
+    fi
+    if test "x$NEED_X11" = "xyes"; then
+      AC_MSG_ERROR([X11 is not available on Android])
+    fi
+    if test "x$NEED_COCOA" = "xyes"; then
+      AC_MSG_ERROR([Cocoa is not available on Android])
+    fi
+
+    dnl OpenGL|ES 2.0
+    if test "x$HAVE_GLES2" = "xyes"; then
+      if test "x$NEED_GLES2" != "xno"; then
+        GL_LIBS="$GL_LIBS -lGLESv2"
+        USE_GLES2=yes
+      fi
+    fi
+
+    dnl EGL
+    if test "x$HAVE_EGL" = "xyes"; then
+      if test "x$NEED_EGL" != "xno"; then
+        GL_LIBS="$GL_LIBS -lEGL"
+        USE_EGL=yes
+      fi
+    fi
+
+    if test "x$USE_EGL" != "xyes"; then
+      AC_MSG_ERROR([Need EGL on Android])
+    fi
+
+    if test "x$USE_GLES2" != "xyes"; then
+      AC_MSG_ERROR([Need OpenGL|ES 2.0 on Android])
+    fi
+
+    HAVE_WINDOW_ANDROID=yes
+    ;;
   *-linux* | *-cygwin* | *-solaris* | *-netbsd* | *-freebsd* | *-openbsd* | *-kfreebsd* | *-dragonflybsd* | *-gnu* )
     if test "x$NEED_WGL" = "xyes"; then
       AC_MSG_ERROR([WGL is not available on unix])
@@ -553,6 +596,11 @@ if test "x$HAVE_WINDOW_WAYLAND" = "xyes"; then
   GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
 #define GST_GL_HAVE_WINDOW_WAYLAND 1"
 fi
+if test "x$HAVE_WINDOW_ANDROID" = "xyes"; then
+  GL_WINDOWS="android $GL_WINDOWS"
+  GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+#define GST_GL_HAVE_WINDOW_ANDROID 1"
+fi
 
 dnl PLATFORM's
 if test "x$USE_EGL" = "xyes"; then
@@ -596,6 +644,7 @@ AM_CONDITIONAL(HAVE_WINDOW_X11ES2, test "x$HAVE_WINDOW_X11ES2" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_COCOA, test "x$HAVE_WINDOW_COCOA" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_WIN32, test "x$HAVE_WINDOW_WIN32" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_WAYLAND, test "x$HAVE_WINDOW_WAYLAND" = "xyes")
+AM_CONDITIONAL(HAVE_WINDOW_ANDROID, test "x$HAVE_WINDOW_ANDROID" = "xyes")
 
 AM_CONDITIONAL(USE_OPENGL, test "x$USE_OPENGL" = "xyes")
 AM_CONDITIONAL(USE_GLES2, test "x$USE_GLES2" = "xyes")
@@ -931,6 +980,7 @@ gst-libs/Makefile
 gst-libs/gst/Makefile
 gst-libs/gst/gl/Makefile
 gst-libs/gst/gl/x11/Makefile
+gst-libs/gst/gl/android/Makefile
 gst-libs/gst/gl/win32/Makefile
 gst-libs/gst/gl/cocoa/Makefile
 gst-libs/gst/gl/wayland/Makefile
