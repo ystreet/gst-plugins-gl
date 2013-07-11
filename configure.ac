@@ -604,35 +604,6 @@ AM_CONDITIONAL(USE_GLX, test "x$USE_GLX" = "xyes")
 AM_CONDITIONAL(USE_WGL, test "x$USE_WGL" = "xyes")
 AM_CONDITIONAL(USE_COCOA, test "x$USE_COCOA" = "xyes")
 
-dnl Check for some types that are not always present
-GL_INCLUDES=""
-if test "x$USE_GLES2" = "xyes"; then
-  GL_INCLUDES="$GL_INCLUDES
-# include <GLES2/gl2.h>
-# include <GLES2/gl2ext.h>
-"
-fi
-
-if test "x$USE_OPENGL" = "xyes"; then
-  GL_INCLUDES="$GL_INCLUDES
-# if __APPLE__
-#  include <OpenGL/OpenGL.h>
-#  include <OpenGL/gl.h>
-# else
-#  include <GL/glu.h>
-#  include <GL/gl.h>
-#  if __WIN32__ || _WIN32
-#   include <GL/glext.h>
-#  endif
-# endif
-"
-fi
-
-AC_CHECK_TYPES(GLeglImageOES, [], [], [[$GL_INCLUDES]])
-AC_CHECK_TYPES(GLchar, [], [], [[$GL_INCLUDES]])
-AC_CHECK_TYPES(GLsizeiptr, [], [], [[$GL_INCLUDES]])
-AC_CHECK_TYPES(GLintptr, [], [], [[$GL_INCLUDES]])
-
 AC_CONFIG_COMMANDS([gst-libs/gst/gl/gstglconfig.h], [
 	outfile=gstglconfig.h-tmp
 	cat > $outfile <<\_______EOF
@@ -963,6 +934,7 @@ gst-libs/gst/gl/x11/Makefile
 gst-libs/gst/gl/win32/Makefile
 gst-libs/gst/gl/cocoa/Makefile
 gst-libs/gst/gl/wayland/Makefile
+gst-libs/gst/gl/glprototypes/Makefile
 ext/Makefile
 ext/libvisual/Makefile
 win32/common/config.h
