@@ -198,7 +198,6 @@ gint main (gint argc, gchar *argv[])
     g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(destroy_cb), pipeline);
 
     GstElement* videosrc = gst_element_factory_make ("videotestsrc", "videotestsrc");
-    GstElement* glupload = gst_element_factory_make ("glupload", "glupload");
     GstElement* glfiltercube = gst_element_factory_make ("glfiltercube", "glfiltercube");
     GstElement* glfilterlaplacian = gst_element_factory_make ("glfilterlaplacian", "glfilterlaplacian");
     GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
@@ -210,25 +209,27 @@ gint main (gint argc, gchar *argv[])
                                         "format", G_TYPE_STRING, "AYUV",
                                         NULL) ;
 
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glfiltercube, glfilterlaplacian, videosink, NULL);
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, glfiltercube, glfilterlaplacian, videosink, NULL);
 
-    gboolean link_ok = gst_element_link_filtered(videosrc, glupload, caps) ;
+    gboolean link_ok = gst_element_link_filtered(videosrc, glfiltercube, caps) ;
     gst_caps_unref(caps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link videosrc to glupload!\n") ;
+        g_warning("Failed to link videosrc to glfiltercube!\n") ;
         return -1;
     }
 
-    if(!gst_element_link_many(glupload, glfiltercube, glfilterlaplacian, videosink, NULL))
+    if(!gst_element_link_many(glfiltercube, glfilterlaplacian, videosink, NULL))
     {
-        g_warning("Failed to link glupload to videosink!\n") ;
+        g_warning("Failed to link glfiltercube to videosink!\n") ;
         return -1;
     }
 
     //area where the video is drawn
     GtkWidget* area = gtk_drawing_area_new();
     gtk_container_add (GTK_CONTAINER (window), area);
+
+    gtk_widget_realize(area);
 
     //set window id on this event
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
