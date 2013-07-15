@@ -161,7 +161,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height, gpointer dat
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *glupload, *glimagesink;
+    GstElement *pipeline, *videosrc, *glimagesink;
 
     GMainLoop *loop;
     GstBus *bus;
@@ -181,11 +181,10 @@ gint main (gint argc, gchar *argv[])
 
     /* create elements */
     videosrc = gst_element_factory_make ("videotestsrc", "videotestsrc0");
-    glupload  = gst_element_factory_make ("glupload", "glupload0");
     glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
-    if (!videosrc || !glupload || !glimagesink)
+    if (!videosrc || !glimagesink)
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -199,12 +198,6 @@ gint main (gint argc, gchar *argv[])
                                         "framerate", GST_TYPE_FRACTION, 25, 1,
                                         NULL) ;
 
-
-    GstCaps *outcaps = gst_caps_new_simple("video/x-raw",
-                                        "width", G_TYPE_INT, 800,
-                                        "height", G_TYPE_INT, 600,
-                                        NULL) ;
-
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 400, NULL);
     g_object_set(G_OBJECT(glimagesink), "client-reshape-callback", reshapeCallback, NULL);
@@ -212,24 +205,16 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(glimagesink), "client-data", NULL, NULL);
 
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glimagesink, NULL);
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, glimagesink, NULL);
 
     /* link elements */
-    gboolean link_ok = gst_element_link_filtered(videosrc, glupload, caps) ;
+    gboolean link_ok = gst_element_link_filtered(videosrc, glimagesink, caps) ;
     gst_caps_unref(caps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link videosrc to glupload!\n") ;
+        g_warning("Failed to link videosrc to glimagesink!\n") ;
         return -1 ;
     }
-    link_ok = gst_element_link_filtered(glupload, glimagesink, outcaps) ;
-    gst_caps_unref(outcaps) ;
-    if(!link_ok)
-    {
-        g_warning("Failed to link glupload to glimagesink!\n") ;
-        return -1 ;
-    }
-
 
     /* run */
     ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);
