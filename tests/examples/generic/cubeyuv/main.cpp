@@ -189,7 +189,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 }
 
 
-static void cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, GstElement* identity)
+static void cb_new_pad (GstElement* decodebin, GstPad* pad, GstElement* identity)
 {
     GstPad* identity_pad = gst_element_get_static_pad (identity, "sink");
     
@@ -244,12 +244,11 @@ gint main (gint argc, gchar *argv[])
     GstElement* decodebin = gst_element_factory_make ("decodebin", "decodebin");
     GstElement* identity  = gst_element_factory_make ("identity", "identity0");
     GstElement* textoverlay = gst_element_factory_make ("textoverlay", "textoverlay0");
-    GstElement* glupload  = gst_element_factory_make ("glupload", "glupload0");
     GstElement* glimagesink  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
 
     if (!videosrc || !decodebin || !identity || !textoverlay ||
-        !glupload || !glimagesink)
+        !glimagesink)
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -270,29 +269,24 @@ gint main (gint argc, gchar *argv[])
     
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, decodebin, identity,
-        textoverlay, glupload, glimagesink, NULL);
+        textoverlay, glimagesink, NULL);
 
     /* link elements */
 	gst_element_link_pads (videosrc, "src", decodebin, "sink");
 
-    g_signal_connect (decodebin, "new-decoded-pad", G_CALLBACK (cb_new_pad), identity);
+    g_signal_connect (decodebin, "pad-added", G_CALLBACK (cb_new_pad), identity);
 
     if (!gst_element_link_pads(identity, "src", textoverlay, "video_sink")) 
     {
         g_print ("Failed to link identity to textoverlay!\n");
         return -1;
     }
-    if (!gst_element_link(textoverlay, glupload)) 
-    {
-        g_print ("Failed to link textoverlay to glupload!\n");
-        return -1;
-    }
 
-    gboolean link_ok = gst_element_link_filtered(glupload, glimagesink, outcaps) ;
+    gboolean link_ok = gst_element_link_filtered(textoverlay, glimagesink, outcaps) ;
     gst_caps_unref(outcaps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link glupload to glimagesink!\n") ;
+        g_warning("Failed to link textoverlay to glimagesink!\n") ;
         return -1 ;
     }
     

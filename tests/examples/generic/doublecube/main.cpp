@@ -188,7 +188,7 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 }
 
 
-static void cb_new_pad (GstElement* decodebin, GstPad* pad, gboolean last, GstElement* identity)
+static void cb_new_pad (GstElement* decodebin, GstPad* pad, GstElement* identity)
 {
     GstPad* identity_pad = gst_element_get_static_pad (identity, "sink");
     
@@ -247,11 +247,9 @@ gint main (gint argc, gchar *argv[])
     GstElement* tee = gst_element_factory_make ("tee", "tee0");
 
     GstElement* queue0 = gst_element_factory_make ("queue", "queue0");
-    GstElement* glupload0  = gst_element_factory_make ("glupload", "glupload0");
     GstElement* glimagesink0  = gst_element_factory_make ("glimagesink", "glimagesink0");
 
     GstElement* queue1 = gst_element_factory_make ("queue", "queue1");
-    GstElement* glupload1  = gst_element_factory_make ("glupload", "glupload1");
     GstElement* glfiltercube  = gst_element_factory_make ("glfiltercube", "glfiltercube");
     GstElement* glimagesink1  = gst_element_factory_make ("glimagesink", "glimagesink1");
 
@@ -260,8 +258,8 @@ gint main (gint argc, gchar *argv[])
 
 
     if (!videosrc || !decodebin || !identity || !textoverlay || !tee ||
-        !queue0 || !glupload0 || !glimagesink0 ||
-        !queue1 || !glupload1 || !glfiltercube || !glimagesink1 ||
+        !queue0 || !glimagesink0 ||
+        !queue1 || !glfiltercube || !glimagesink1 ||
         !queue2 || !glimagesink2) 
     {
         g_warning ("one element could not be found \n");
@@ -283,14 +281,14 @@ gint main (gint argc, gchar *argv[])
     
     /* add elements */
     gst_bin_add_many (GST_BIN (pipeline), videosrc, decodebin, identity, textoverlay, tee, 
-                                          queue0, glupload0, glimagesink0,
-                                          queue1, glupload1, glfiltercube, glimagesink1, 
+                                          queue0, glimagesink0,
+                                          queue1, glfiltercube, glimagesink1, 
                                           queue2, glimagesink2, NULL);
     
 
     gst_element_link_pads (videosrc, "src", decodebin, "sink");
 
-    g_signal_connect (decodebin, "new-decoded-pad", G_CALLBACK (cb_new_pad), identity);
+    g_signal_connect (decodebin, "pad-added", G_CALLBACK (cb_new_pad), identity);
 
     if (!gst_element_link_pads(identity, "src", textoverlay, "video_sink")) 
     {
@@ -298,21 +296,21 @@ gint main (gint argc, gchar *argv[])
         return -1;
     }
     
-    if (!gst_element_link_many(textoverlay, tee, queue0, glupload0, NULL)) 
+    if (!gst_element_link_many(textoverlay, tee, queue0, NULL)) 
     {
-        g_warning ("Failed to link one or more elements bettween textoverlay and glupload0!\n");
+        g_warning ("Failed to link one or more elements bettween textoverlay and queue0!\n");
         return -1;
     }
 
-    gboolean link_ok = gst_element_link_filtered(glupload0, glimagesink0, cubecaps) ;
+    gboolean link_ok = gst_element_link_filtered(queue0, glimagesink0, cubecaps) ;
     gst_caps_unref(cubecaps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link glupload0 to glimagesink0!\n") ;
+        g_warning("Failed to link queue0 to glimagesink0!\n") ;
         return -1 ;
     }
 
-    if (!gst_element_link_many(tee, queue1, glupload1, glfiltercube, glimagesink1, NULL)) 
+    if (!gst_element_link_many(tee, queue1, glfiltercube, glimagesink1, NULL)) 
     {
         g_warning ("Failed to link one or more elements bettween tee and glimagesink1!\n");
         return -1;
