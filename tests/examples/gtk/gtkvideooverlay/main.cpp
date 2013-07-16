@@ -36,9 +36,6 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, GtkWidge
 
     g_print ("setting window handle\n");
 
-    //at this point we are sure that gdk_window_ensure_native has been already
-    //called (see area_realize_cb)
-
     //do not call gdk_window_ensure_native for the first time here because
     //we are in a different thread than the main thread
     //(and the main thread the onne)
@@ -60,32 +57,9 @@ static void end_stream_cb(GstBus* bus, GstMessage* message, GstElement* pipeline
     gtk_main_quit();
 }
 
-
-static void area_realize_cb(GtkWidget* widget, GstElement* pipeline)
-{
-    g_print ("drawing area realized\n");
-
-#if GTK_CHECK_VERSION(2,18,0)
-    //Tries to ensure that there is a native window
-    //Call it in the same thread as the one who created this widget
-    if (!gdk_window_ensure_native (widget->window))
-        g_error ("Failed to create native window!");
-#endif
-
-    //avoid flickering when resizing or obscuring the main window
-    gdk_window_set_back_pixmap(widget->window, NULL, FALSE);
-    gtk_widget_set_app_paintable(widget,TRUE);
-    gtk_widget_set_double_buffered(widget, FALSE);
-
-    //now we have a native window we can play the pipeline
-    gst_element_set_state (pipeline, GST_STATE_PLAYING);
-}
-
-
 static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* videosink)
 {
     g_print ("expose_cb\n");
-    //expose callback is garanted to be called after realized callback
     gst_video_overlay_expose (GST_VIDEO_OVERLAY (videosink));
     return FALSE;
 }
@@ -212,11 +186,10 @@ gint main (gint argc, gchar *argv[])
 
     GstElement* videosrc  = gst_element_factory_make ("videotestsrc", "videotestsrc");
     GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
-    GstElement* upload = gst_element_factory_make ("glupload", "glupload");
 
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, upload, videosink, NULL);
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, videosink, NULL);
 
-    gboolean link_ok = gst_element_link_many(videosrc, upload, videosink, NULL) ;
+    gboolean link_ok = gst_element_link_many(videosrc, videosink, NULL) ;
     if(!link_ok)
     {
         g_warning("Failed to link an element!\n") ;
@@ -226,8 +199,8 @@ gint main (gint argc, gchar *argv[])
     //area where the video is drawn
     GtkWidget* area = gtk_drawing_area_new();
     gtk_container_add (GTK_CONTAINER (window), area);
-    g_signal_connect (area, "realize",
-        G_CALLBACK (area_realize_cb), pipeline);
+
+    gtk_widget_realize(area);
 
     //set window id on this event
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
@@ -243,6 +216,8 @@ gint main (gint argc, gchar *argv[])
     g_signal_connect(area, "expose-event", G_CALLBACK(expose_cb), videosink);
 
     gtk_widget_show_all (window);
+
+    gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
     gtk_main();
 

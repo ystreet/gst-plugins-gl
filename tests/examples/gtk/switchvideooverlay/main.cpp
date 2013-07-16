@@ -61,22 +61,6 @@ static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* 
     return FALSE;
 }
 
-
-static void area_realize_cb(GtkWidget* widget, GstElement* pipeline)
-{
-#if GTK_CHECK_VERSION(2,18,0)
-    if (!gdk_window_ensure_native (widget->window))
-        g_error ("Failed to create native window!");
-#endif
-
-    //avoid flickering when resizing or obscuring the main window
-    gdk_window_set_back_pixmap(widget->window, NULL, FALSE);
-    gtk_widget_set_app_paintable(widget,TRUE);
-
-    gst_element_set_state (pipeline, GST_STATE_PLAYING);
-}
-
-
 static gboolean on_click_drawing_area(GtkWidget* widget, GdkEventButton* event, GstElement* videosink)
 {
     g_print ("switch the drawing area\n");
@@ -192,11 +176,10 @@ gint main (gint argc, gchar *argv[])
 
     GstElement* videosrc  = gst_element_factory_make ("videotestsrc", "videotestsrc");
     GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
-    GstElement* upload = gst_element_factory_make ("glupload", "glupload");
 
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, upload, videosink, NULL);
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, videosink, NULL);
 
-    gboolean link_ok = gst_element_link_many(videosrc, upload, videosink, NULL);
+    gboolean link_ok = gst_element_link_many(videosrc, videosink, NULL);
     if(!link_ok)
     {
         g_warning("Failed to link videosrc to videosink!\n") ;
@@ -214,6 +197,10 @@ gint main (gint argc, gchar *argv[])
     gtk_table_attach_defaults (GTK_TABLE (table_areas), area_top_right, 1, 2, 0, 1);
 
     //set window id on this event
+
+    gtk_widget_realize(area_top_left);
+    gtk_widget_realize(area_top_right);
+
     GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
     gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area_top_right, NULL);
     gst_bus_add_signal_watch (bus);
@@ -231,10 +218,9 @@ gint main (gint argc, gchar *argv[])
     g_signal_connect(area_top_left, "button-press-event", G_CALLBACK(on_click_drawing_area), videosink);
     g_signal_connect(area_top_right, "button-press-event", G_CALLBACK(on_click_drawing_area), videosink);
 
-    g_signal_connect (area_top_left, "realize", G_CALLBACK (area_realize_cb), pipeline);
-    g_signal_connect (area_top_right, "realize", G_CALLBACK (area_realize_cb), pipeline);
-
     gtk_widget_show_all (window);
+
+    gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
     gtk_main();
 
