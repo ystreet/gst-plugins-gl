@@ -326,7 +326,7 @@ GstBusSyncReply Pipeline::create_window (GstBus* bus, GstMessage* message, const
 
     //Passing 0 as the window_handle will tell the overlay to stop using that window and create an internal one.
     //In the directdrawsink's gst_video_overlay_set_window_handle implementation, window_handle (parameter 2) is casted to HWND before it used.
-    gst_video_overlay_set_window_handle (GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message)), (ulong)p->winId());
+    gst_video_overlay_set_window_handle (GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message)), (guintptr)p->winId());
 
     gst_message_unref (message);
 
