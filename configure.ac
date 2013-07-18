@@ -526,7 +526,7 @@ case $host in
     GL_CFLAGS="$GL_CFLAGS -framework OpenGL"
     USE_COCOA=yes
     HAVE_WINDOW_COCOA=yes
-    USE_GL=yes
+    USE_OPENGL=yes
     ;;
   *-mingw32*)
     if test "x$NEED_GLX" = "xyes"; then
