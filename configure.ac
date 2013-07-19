@@ -653,6 +653,54 @@ AM_CONDITIONAL(USE_GLX, test "x$USE_GLX" = "xyes")
 AM_CONDITIONAL(USE_WGL, test "x$USE_WGL" = "xyes")
 AM_CONDITIONAL(USE_COCOA, test "x$USE_COCOA" = "xyes")
 
+dnl Check for some types that are not always present
+GL_INCLUDES=""
+if test "x$USE_GLES2" = "xyes"; then
+  GL_INCLUDES="$GL_INCLUDES
+# include <GLES2/gl2.h>
+# include <GLES2/gl2ext.h>
+"
+fi
+
+if test "x$USE_OPENGL" = "xyes"; then
+  GL_INCLUDES="$GL_INCLUDES
+# if __APPLE__
+#  include <OpenGL/OpenGL.h>
+#  include <OpenGL/gl.h>
+# else
+#  include <GL/glu.h>
+#  include <GL/gl.h>
+#  if __WIN32__ || _WIN32
+#   include <GL/glext.h>
+#  endif
+# endif
+"
+fi
+
+AC_CHECK_TYPES(GLeglImageOES, [], [], [[$GL_INCLUDES]])
+if test "x$ac_cv_type_GLeglImageOES" = "xyes"; then
+  GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+#define GST_GL_HAVE_GLEGLIMAGEOES 1"
+fi
+
+AC_CHECK_TYPES(GLchar, [], [], [[$GL_INCLUDES]])
+if test "x$ac_cv_type_GLchar" = "xyes"; then
+  GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+#define GST_GL_HAVE_GLCHAR 1"
+fi
+
+AC_CHECK_TYPES(GLsizeiptr, [], [], [[$GL_INCLUDES]])
+if test "x$ac_cv_type_GLsizeiptr" = "xyes"; then
+  GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+#define GST_GL_HAVE_GLSIZEIPTR 1"
+fi
+
+AC_CHECK_TYPES(GLintptr, [], [], [[$GL_INCLUDES]])
+if test "x$ac_cv_type_GLintptr" = "xyes"; then
+  GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+#define GST_GL_HAVE_GLINTPTR 1"
+fi
+
 AC_CONFIG_COMMANDS([gst-libs/gst/gl/gstglconfig.h], [
 	outfile=gstglconfig.h-tmp
 	cat > $outfile <<\_______EOF
