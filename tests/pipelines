@@ -1,5 +1,5 @@
-//list of pipelines that show the gst-plugins-gl capabilities
-//(can use gst-launch-1.0 --gst-debug=gldisplay:3 pipeline)
+#list of pipelines that show the gst-plugins-gl capabilities
+#(can use gst-launch-1.0 --gst-debug=gldisplay:3 pipeline)
 
 gst-launch-1.0 videotestsrc ! glimagesink
 gst-launch-1.0 videotestsrc num_buffers = 200 ! glimagesink
@@ -10,70 +10,69 @@ gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)YV12" ! glimagesink
 gst-launch-1.0 gltestsrc ! glimagesink
 gst-launch-1.0 gltestsrc ! "video/x-raw, width=720, height=576" ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! "video/x-raw, width=720, height=576" ! glimagesink
-gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)AYUV, width=380, height=288" ! glupload ! "video/x-raw, width=720, height=576" ! glimagesink
-gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)I420, width=720,height=576" ! glupload ! "video/x-raw, width=240, height=320" ! glimagesink
+gst-launch-1.0 videotestsrc ! gleffects effect=0 ! "video/x-raw, width=720, height=576" ! glimagesink
+gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)AYUV, width=380, height=288" ! gleffects effect=0 ! "video/x-raw, width=720, height=576" ! glimagesink
+gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)I420, width=720,height=576" ! gleffects effect=0 ! "video/x-raw, width=240, height=320" ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! glfiltercube ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! glfiltercube ! glfiltercube ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! glfiltercube ! glimagesink force-aspect-ratio=1
-gst-launch-1.0 videotestsrc ! glupload ! glfiltercube red=1.0 green=0.5 blue=0.1 ! glfiltercube red=0.6 green=0.9 blue=1.0 ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! glfiltercube red=0.6 green=0.2 blue=1.0 ! glfiltercube fovy=50.0 znear=0.2 zfar=1000.0 ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! "video/x-raw, width=720, height=576" ! glfiltercube ! "video/x-raw, width=320, height=240" ! glimagesink
-gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)AYUV, width=320, height=240" ! glupload ! "video/x-raw, width=720, height=576" ! glfiltercube ! "video/x-raw, width=320, height=240" ! glimagesink
-gst-launch-1.0 videotestsrc ! "video/x-raw, width=320, height=240" ! glupload ! "video/x-raw, width=800, height=600" ! glimagesink
-gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)YUY2, width=320, height=240" ! glupload ! "video/x-raw, width=800, height=600" ! glimagesink
-gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)I420, width=320, height=240" ! glupload ! "video/x-raw, width=800, height=600" ! glimagesink
+gst-launch-1.0 videotestsrc ! glfiltercube ! glimagesink
+gst-launch-1.0 videotestsrc ! glfiltercube ! glfiltercube ! glimagesink
+gst-launch-1.0 videotestsrc ! glfiltercube ! glimagesink force-aspect-ratio=1
+gst-launch-1.0 videotestsrc ! glfiltercube red=1.0 green=0.5 blue=0.1 ! glfiltercube red=0.6 green=0.9 blue=1.0 ! glimagesink
+gst-launch-1.0 videotestsrc ! glfiltercube red=0.6 green=0.2 blue=1.0 ! glfiltercube fovy=50.0 znear=0.2 zfar=1000.0 ! glimagesink
+gst-launch-1.0 videotestsrc ! gleffects effect=0 ! "video/x-raw, width=720, height=576" ! glfiltercube ! "video/x-raw, width=320, height=240" ! glimagesink
+gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)AYUV, width=320, height=240" ! gleffects effect=0 ! "video/x-raw, width=720, height=576" ! glfiltercube ! "video/x-raw, width=320, height=240" ! glimagesink
+gst-launch-1.0 videotestsrc ! "video/x-raw, width=320, height=240" ! gleffects effect=0 ! "video/x-raw, width=800, height=600" ! glimagesink
+gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)YUY2, width=320, height=240" ! gleffects effect=0 ! "video/x-raw, width=800, height=600" ! glimagesink
+gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)I420, width=320, height=240" ! gleffects effect=0 ! "video/x-raw, width=800, height=600" ! glimagesink
 gst-launch-1.0 gltestsrc ! glfiltercube ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! glfilterapp ! glimagesink
+gst-launch-1.0 videotestsrc ! glfilterapp ! glimagesink
 gst-launch-1.0 gltestsrc ! glfilterapp ! glimagesink
 
 gst-launch-1.0 videotestsrc ! glcolorscale ! ximagesink
 gst-launch-1.0 videotestsrc ! glcolorscale ! glimagesink
 gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)YV12, width=640, height=480" ! glcolorscale ! "video/x-raw, width=320, height=240" ! ximagesink
-gst-launch-1.0 gltestsrc ! gldownload ! glcolorscale ! glimagesink
+gst-launch-1.0 gltestsrc ! videoconvert ! glcolorscale ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! gldownload ! ximagesink
-gst-launch-1.0 videotestsrc ! glupload ! gldownload ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! gldownload ! "video/x-raw, format=(string)UYVY" ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! gldownload ! "video/x-raw, format=(string)AYUV" ! glimagesink
+gst-launch-1.0 videotestsrc ! gleffects effect=0 ! ximagesink
+gst-launch-1.0 videotestsrc ! gleffects effect=0 ! glimagesink
+gst-launch-1.0 videotestsrc ! gleffects effect=0 ! "video/x-raw, format=(string)UYVY" ! glimagesink
+gst-launch-1.0 videotestsrc ! gleffects effect=0 ! "video/x-raw, format=(string)AYUV" ! glimagesink
 
-gst-launch-1.0 videotestsrc num_buffers=200 ! glupload !  video/x-raw, width=720, height=576 ! glfiltercube ! video/x-raw, width=320, height=240 ! gldownload ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
-gst-launch-1.0 gltestsrc ! glfiltercube ! gldownload ! ximagesink
-gst-launch-1.0 videotestsrc ! glupload ! gldownload ! glupload ! gldownload ! glupload ! glimagesink
+gst-launch-1.0 videotestsrc num_buffers=200 ! gleffects effect=0 !  video/x-raw, width=720, height=576 ! glfiltercube ! video/x-raw, width=320, height=240 ! gleffects effect=0 ! avenc_mpeg4 ! avimux ! filesink location="record.avi"
+gst-launch-1.0 gltestsrc ! glfiltercube ! ximagesink
+gst-launch-1.0 videotestsrc ! gleffects effect=0 ! videoconvert ! gleffects effect=0 ! videoconvert ! glimagesink
 
 gst-launch-1.0 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glimagesink t. ! queue ! glimagesink
-gst-launch-1.0 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glupload ! glfiltercube ! glimagesink
-gst-launch-1.0 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glupload ! glfiltercube ! glimagesink t. ! queue ! glcolorscale ! glimagesink
+gst-launch-1.0 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glfiltercube ! glimagesink
+gst-launch-1.0 videotestsrc ! tee name=t t. ! queue ! glimagesink t. ! queue ! glfiltercube ! glimagesink t. ! queue ! glcolorscale ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! glfiltercube ! glfilterlaplacian ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! glfilterlaplacian ! glfiltercube ! glimagesink
+gst-launch-1.0 videotestsrc ! glfiltercube ! glfilterlaplacian ! glimagesink
+gst-launch-1.0 videotestsrc ! glfilterlaplacian ! glfiltercube ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! glfilterblur ! glimagesink
+gst-launch-1.0 videotestsrc ! glfilterblur ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! glfiltercube ! gleffects effect=3 ! glimagesink
+gst-launch-1.0 videotestsrc ! glfiltercube ! gleffects effect=3 ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! glbumper location=normalmap.png ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! glbumper location=bumpwall.png ! "video/x-raw, width=1200, height=800" ! glimagesink
+gst-launch-1.0 videotestsrc ! glbumper location=normalmap.png ! glimagesink
+gst-launch-1.0 videotestsrc ! glbumper location=bumpwall.png ! "video/x-raw, width=1200, height=800" ! glimagesink
 
-gst-launch-1.0 videotestsrc ! glupload ! glfilterglass ! glimagesink
-gst-launch-1.0 videotestsrc ! glupload ! "video/x-raw, width=640, height=480" ! glfilterglass ! glimagesink
+gst-launch-1.0 videotestsrc ! glfilterglass ! glimagesink
+gst-launch-1.0 videotestsrc ! gleffects effect=0 ! "video/x-raw, width=640, height=480" ! glfilterglass ! glimagesink
 
-gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)YUY2" ! glupload ! queue ! glmosaic name=m ! glimagesink videotestsrc pattern=12 ! "video/x-raw, format=(string)I420, framerate=(fraction)5/1, width=100, height=200" ! glupload ! queue ! m. videotestsrc ! "video/x-raw, framerate=(fraction)15/1, width=1500, height=1500" ! glupload ! gleffects effect=3 ! queue ! m. videotestsrc ! glupload ! gleffects effect=2 ! queue ! m.  videotestsrc ! glupload ! glfiltercube ! queue ! m. videotestsrc ! glupload ! gleffects effect=6 ! queue ! m.
+gst-launch-1.0 videotestsrc ! "video/x-raw, format=(string)YUY2" ! gleffects effect=0 ! queue ! glmosaic name=m ! glimagesink videotestsrc pattern=12 ! "video/x-raw, format=(string)I420, framerate=(fraction)5/1, width=100, height=200" ! gleffects effect=0 ! queue ! m. videotestsrc ! "video/x-raw, framerate=(fraction)15/1, width=1500, height=1500" ! gleffects effect=3 ! queue ! m. videotestsrc ! gleffects effect=2 ! queue ! m.  videotestsrc ! glfiltercube ! queue ! m. videotestsrc ! gleffects effect=6 ! queue ! m.
 
-gst-launch-1.0 -v videotestsrc ! glupload ! gloverlay location=image.png proportion-png=40 proportion-video=40 xpos-png=75 ypos-png=50 xpos-video=30 ypos-video=50 rotate-png=2 rotate-video=2 angle-png=-15 angle-video=15 ! glimagesink
+gst-launch-1.0 -v videotestsrc ! gloverlay location=image.png proportion-png=40 proportion-video=40 xpos-png=75 ypos-png=50 xpos-video=30 ypos-video=50 rotate-png=2 rotate-video=2 angle-png=-15 angle-video=15 ! glimagesink
 
 gst-launch-1.0 videotestsrc ! "video/x-raw, pixel-aspect-ratio=(fraction)5/2" ! glimagesink
 
-gst-launch-1.0 videotestsrc ! "video/x-raw,format=(string)I420,width=720,height=576,pixel-aspect-ratio=(fraction)64/45" ! glupload ! glimagesink
+gst-launch-1.0 videotestsrc ! "video/x-raw,format=(string)I420,width=720,height=576,pixel-aspect-ratio=(fraction)64/45" ! gleffects effect=0 ! glimagesink
 
 gst-launch-1.0 audiotestsrc ! libvisual_gl_projectM ! "video/x-raw,width=800, height=600" ! gleffects effect=tunnel ! glimagesink
 
-gst-launch-1.0  audiotestsrc ! libvisual_gl_lv_gltest ! gldownload ! glimagesink
+gst-launch-1.0 audiotestsrc ! libvisual_gl_lv_gltest ! videoconvert ! glimagesink
 
-gst-launch-1.0 audiotestsrc ! libvisual_gl_lv_gltest ! gldownload ! ximagesink
+gst-launch-1.0 audiotestsrc ! libvisual_gl_lv_gltest ! ximagesink
 
 // OPENGL ES 2.0
-LD_LIBRARY_PATH=/home/julien/dev/SDKPackage_OGLES2/Builds/OGLES2/LinuxX86/Lib/:/usr/lib/nvidia-current-updates/  gst-launch-1.0 videotestsrc ! glupload ! gleffects effect=2 ! glimagesink
+LD_LIBRARY_PATH=/home/julien/dev/SDKPackage_OGLES2/Builds/OGLES2/LinuxX86/Lib/:/usr/lib/nvidia-current-updates/  gst-launch-1.0 videotestsrc ! gleffects effect=2 ! glimagesink

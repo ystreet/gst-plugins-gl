@@ -51,7 +51,7 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 
               if (debug) 
               {
-                  g_print ("Debug deails: %s\n", debug);
+                  g_print ("Debug details: %s\n", debug);
                   g_free (debug);
               }
 
@@ -67,22 +67,24 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 
 
 //display video framerate
-static void identityCallback (GstElement *src, GstBuffer  *buffer, GstElement* textoverlay)
+static GstPadProbeReturn textoverlay_sink_pad_probe_cb (GstPad *pad, GstPadProbeInfo *info, GstElement* textoverlay)
 {
   static GstClockTime last_timestamp = 0;
   static gint nbFrames = 0 ;
 
   //display estimated video FPS 
   nbFrames++ ;
-  if (GST_BUFFER_TIMESTAMP(buffer) - last_timestamp >= 1000000000)
+  if (GST_BUFFER_TIMESTAMP(info->data) - last_timestamp >= 1000000000)
   {
     std::ostringstream oss ;
     oss << "video framerate = " << nbFrames ;
     std::string s(oss.str()) ;    
     g_object_set(G_OBJECT(textoverlay), "text", s.c_str(), NULL);
-    last_timestamp = GST_BUFFER_TIMESTAMP(buffer) ;
+    last_timestamp = GST_BUFFER_TIMESTAMP(info->data) ;
     nbFrames = 0 ; 
   }
+
+  return GST_PAD_PROBE_OK;
 }
 
 
@@ -188,30 +190,35 @@ gboolean drawCallback (GLuint texture, GLuint width, GLuint height)
 }
 
 
-static void cb_new_pad (GstElement* decodebin, GstPad* pad, GstElement* identity)
+static void cb_new_pad (GstElement* decodebin, GstPad* pad, GstElement* element)
 {
-    GstPad* identity_pad = gst_element_get_static_pad (identity, "sink");
+    GstPad* element_pad = gst_element_get_static_pad (element, "sink");
     
     //only link once 
-    if (GST_PAD_IS_LINKED (identity_pad)) 
+    if (!element_pad || GST_PAD_IS_LINKED (element_pad)) 
     {
-        gst_object_unref (identity_pad);
+        gst_object_unref (element_pad);
         return;
     }
 
     GstCaps* caps = gst_pad_get_current_caps (pad);
     GstStructure* str = gst_caps_get_structure (caps, 0);
+    
+    GstCaps* caps2 = gst_pad_query_caps (element_pad, NULL);
+    gst_caps_unref (caps2);
+    
     if (!g_strrstr (gst_structure_get_name (str), "video")) 
     {
         gst_caps_unref (caps);
-        gst_object_unref (identity_pad);
+        gst_object_unref (element_pad);
         return;
     }
     gst_caps_unref (caps);
 
-    GstPadLinkReturn ret = gst_pad_link (pad, identity_pad);
+    GstPadLinkReturn ret = gst_pad_link (pad, element_pad);
     if (ret != GST_PAD_LINK_OK) 
-        g_warning ("Failed to link with decodebin!\n");   
+        g_warning ("Failed to link with decodebin %d!\n", ret);
+    gst_object_unref (element_pad);
 }
 
 
@@ -242,7 +249,7 @@ gint main (gint argc, gchar *argv[])
     /* create elements */
     GstElement* videosrc = gst_element_factory_make ("filesrc", "filesrc0");
     GstElement* decodebin = gst_element_factory_make ("decodebin", "decodebin0");
-    GstElement* identity  = gst_element_factory_make ("identity", "identity0");
+    GstElement* videoconvert = gst_element_factory_make ("videoscale", "videoconvert0");
     GstElement* textoverlay = gst_element_factory_make ("textoverlay", "textoverlay0"); //textoverlay required I420
     GstElement* tee = gst_element_factory_make ("tee", "tee0");
 
@@ -257,7 +264,7 @@ gint main (gint argc, gchar *argv[])
     GstElement* glimagesink2  = gst_element_factory_make ("glimagesink", "glimagesink2");
 
 
-    if (!videosrc || !decodebin || !identity || !textoverlay || !tee ||
+    if (!videosrc || !decodebin || !videoconvert || !textoverlay || !tee ||
         !queue0 || !glimagesink0 ||
         !queue1 || !glfiltercube || !glimagesink1 ||
         !queue2 || !glimagesink2) 
@@ -274,31 +281,38 @@ gint main (gint argc, gchar *argv[])
     /* configure elements */
     g_object_set(G_OBJECT(videosrc), "num-buffers", 1000, NULL);
     g_object_set(G_OBJECT(videosrc), "location", video_location.c_str(), NULL);
-    g_signal_connect(identity, "handoff", G_CALLBACK(identityCallback), textoverlay) ;
     g_object_set(G_OBJECT(textoverlay), "font_desc", "Ahafoni CLM Bold 30", NULL);
     g_object_set(G_OBJECT(glimagesink0), "client-reshape-callback", reshapeCallback, NULL);
     g_object_set(G_OBJECT(glimagesink0), "client-draw-callback", drawCallback, NULL);
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, decodebin, identity, textoverlay, tee, 
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, decodebin, videoconvert, textoverlay, tee, 
                                           queue0, glimagesink0,
                                           queue1, glfiltercube, glimagesink1, 
                                           queue2, glimagesink2, NULL);
     
+    GstPad* textoverlay_sink_pad = gst_element_get_static_pad (textoverlay, "video_sink");
+    gst_pad_add_probe (textoverlay_sink_pad, GST_PAD_PROBE_TYPE_BUFFER, 
+                       (GstPadProbeCallback) textoverlay_sink_pad_probe_cb, (gpointer)textoverlay, NULL);
+    gst_object_unref (textoverlay_sink_pad);
 
-    gst_element_link_pads (videosrc, "src", decodebin, "sink");
-
-    g_signal_connect (decodebin, "pad-added", G_CALLBACK (cb_new_pad), identity);
-
-    if (!gst_element_link_pads(identity, "src", textoverlay, "video_sink")) 
+    if (!gst_element_link_many(videoconvert, textoverlay, tee, NULL)) 
     {
-        g_print ("Failed to link identity to textoverlay!\n");
+        g_print ("Failed to link videoconvert to tee!\n");
         return -1;
     }
-    
-    if (!gst_element_link_many(textoverlay, tee, queue0, NULL)) 
+
+    if (!gst_element_link(videosrc, decodebin)) 
     {
-        g_warning ("Failed to link one or more elements bettween textoverlay and queue0!\n");
+        g_print ("Failed to link videosrc to decodebin!\n");
+        return -1;
+    }
+
+    g_signal_connect (decodebin, "pad-added", G_CALLBACK (cb_new_pad), videoconvert);
+    
+    if (!gst_element_link_many(tee, queue0, NULL)) 
+    {
+        g_warning ("Failed to link one or more elements bettween tee and queue0!\n");
         return -1;
     }
 

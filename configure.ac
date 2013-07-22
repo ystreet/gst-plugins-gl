@@ -1048,6 +1048,7 @@ tests/examples/generic/Makefile
 tests/examples/generic/cube/Makefile
 tests/examples/generic/cubeyuv/Makefile
 tests/examples/generic/doublecube/Makefile
+tests/examples/generic/recordgraphic/Makefile
 tests/examples/clutter/Makefile
 tests/examples/gtk/Makefile
 tests/examples/gtk/gtkvideooverlay/Makefile

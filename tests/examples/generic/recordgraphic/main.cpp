@@ -19,6 +19,10 @@
  */
 
 #include <GL/gl.h>
+#include <GL/glu.h>
+#if __WIN32__ || _WIN32
+# include <GL/glext.h>
+#endif
 #include <gst/gst.h>
 #include <gst/video/video.h>
 
@@ -47,7 +51,7 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 
               if (debug) 
               {
-                  g_print ("Debug deails: %s\n", debug);
+                  g_print ("Debug details: %s\n", debug);
                   g_free (debug);
               }
 
@@ -156,15 +160,15 @@ gboolean drawCallback (GLuint width, GLuint height, GLuint texture, gpointer dat
 
 
 //equivalent command line: 
-//gst-launch-1.0 videotestsrc num_buffers=400 ! glupload ! gldownload ! 
-//ffenc_mpeg4 ! avimux ! filesink location="record.avi"
+//gst-launch-1.0 videotestsrc num_buffers=400 ! gleffects effect=0 ! 
+//avenc_mpeg4 ! avimux ! filesink location="record.avi"
 // or
-//gst-launch-1.0 videotestsrc num_buffers=400 ! glupload ! "video/x-raw, width=320, height=240" ! glfiltercube ! "video/x-raw, width=720, height=576" ! 
-//gldownload ! ffenc_mpeg4 ! avimux ! filesink location="record.avi"
+//gst-launch-1.0 videotestsrc num_buffers=400 ! gleffects effect=0 ! "video/x-raw, width=320, height=240" ! glfiltercube ! "video/x-raw, width=720, height=576" ! 
+//avenc_mpeg4 ! avimux ! filesink location="record.avi"
 gint main (gint argc, gchar *argv[])
 {
     GstStateChangeReturn ret;
-    GstElement *pipeline, *videosrc, *glupload, *glfilterapp, *gldownload, *ffenc_mpeg4, *avimux, *filesink;
+    GstElement *pipeline, *videosrc, *glfilterapp, *avenc_mpeg4, *avimux, *filesink;
     GMainLoop *loop;
     GstBus *bus;
 
@@ -183,15 +187,13 @@ gint main (gint argc, gchar *argv[])
 
     /* create elements */
     videosrc = gst_element_factory_make ("videotestsrc", "videotestsrc0");
-    glupload  = gst_element_factory_make ("glupload", "glupload0");
     glfilterapp = gst_element_factory_make ("glfilterapp", "glfilterapp0");
-    gldownload  = gst_element_factory_make ("gldownload", "gldownload0");
-    ffenc_mpeg4  = gst_element_factory_make ("ffenc_mpeg4", "ffenc_mpeg40");
+    avenc_mpeg4  = gst_element_factory_make ("avenc_mpeg4", "avenc_mpeg40");
     avimux  = gst_element_factory_make ("avimux", "avimux0");
     filesink  = gst_element_factory_make ("filesink", "filesink0");
 
 
-    if (!videosrc || !glupload || !glfilterapp || !gldownload || !ffenc_mpeg4 || !avimux || !filesink) 
+    if (!videosrc || !glfilterapp || !avenc_mpeg4 || !avimux || !filesink) 
     {
         g_print ("one element could not be found \n");
         return -1;
@@ -219,30 +221,26 @@ gint main (gint argc, gchar *argv[])
     g_object_set(G_OBJECT(filesink), "location", "record.avi", NULL);
     
     /* add elements */
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, glupload, glfilterapp, gldownload, 
-        ffenc_mpeg4, avimux, filesink, NULL);
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, glfilterapp, 
+        avenc_mpeg4, avimux, filesink, NULL);
     
     /* link elements */
-    gboolean link_ok = gst_element_link_filtered(videosrc, glupload, caps) ;
+    gboolean link_ok = gst_element_link_filtered(videosrc, glfilterapp, caps) ;
     gst_caps_unref(caps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link videosrc to glupload!\n") ;
+        g_warning("Failed to link videosrc to glfilterapp!\n") ;
         return -1 ;
     }
-    if (!gst_element_link_many(glupload, glfilterapp, gldownload, NULL)) 
-    {
-        g_print ("Failed to link one or more elements!\n");
-        return -1;
-    }
-    link_ok = gst_element_link_filtered(gldownload, ffenc_mpeg4, outcaps) ;
+
+    link_ok = gst_element_link_filtered(glfilterapp, avenc_mpeg4, outcaps) ;
     gst_caps_unref(outcaps) ;
     if(!link_ok)
     {
-        g_warning("Failed to link glvideomaker to ffenc_mpeg4!\n") ;
+        g_warning("Failed to link glfilterapp to avenc_mpeg4!\n") ;
         return -1 ;
     }
-    if (!gst_element_link_many(ffenc_mpeg4, avimux, filesink, NULL)) 
+    if (!gst_element_link_many(avenc_mpeg4, avimux, filesink, NULL)) 
     {
         g_print ("Failed to link one or more elements!\n");
         return -1;
