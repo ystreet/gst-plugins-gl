@@ -47,11 +47,11 @@ SUPPRESSIONS = $(top_srcdir)/common/gst.supp
 
 libs_gstglmemory_CFLAGS = \
 	$(GST_PLUGINS_GL_CFLAGS) \
-	$(GST_BASE_CFLAGS) \
+	$(GST_PLUGINS_BASE_CFLAGS) \
 	$(AM_CFLAGS)
 
 libs_gstglmemory_LDADD = \
 	$(top_builddir)/gst-libs/gst/gl/libgstgl-@GST_API_VERSION@.la \
-	$(GST_BASE_LIBS) -lgstvideo-$(GST_API_VERSION)\
+	$(GST_PLUGINS_BASE_LIBS) -lgstvideo-$(GST_API_VERSION)\
 	$(LDADD)
 
