@@ -1,4 +1,5 @@
 generic/states
 libs/gstglmemory
+libs/gstglcontext
 pipelines/simple-launch-lines
 test-registry.reg

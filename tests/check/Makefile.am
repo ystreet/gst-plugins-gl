@@ -21,7 +21,8 @@ clean-local: clean-local-check
 check_PROGRAMS = \
 	generic/states \
 	pipelines/simple-launch-lines \
-	libs/gstglmemory
+	libs/gstglmemory \
+	libs/gstglcontext
 
 VALGRIND_TO_FIX = 
 
@@ -55,3 +56,12 @@ libs_gstglmemory_LDADD = \
 	$(GST_PLUGINS_BASE_LIBS) -lgstvideo-$(GST_API_VERSION)\
 	$(LDADD)
 
+libs_gstglcontext_CFLAGS = \
+	$(GST_PLUGINS_GL_CFLAGS) \
+	$(GST_PLUGINS_BASE_CFLAGS) \
+	$(AM_CFLAGS)
+
+libs_gstglcontext_LDADD = \
+	$(top_builddir)/gst-libs/gst/gl/libgstgl-@GST_API_VERSION@.la \
+	$(GST_PLUGINS_BASE_LIBS) -lgstvideo-$(GST_API_VERSION)\
+	$(LDADD)
