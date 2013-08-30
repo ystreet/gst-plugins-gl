@@ -501,7 +501,10 @@ case $host in
     dnl check Desktop OpenGL
     if test "x$HAVE_GL" = "xyes"; then
       if test "x$NEED_GL" != "xno"; then
-        GL_LIBS="$GL_LIBS -lGL -lGLU"
+        GL_LIBS="$GL_LIBS -lGL"
+      fi
+      if test "x$HAVE_GLU" = "xyes"; then
+        GL_LIBS="$GL_LIBS -lGLU"
       fi
     fi
 
