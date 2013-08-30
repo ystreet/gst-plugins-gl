@@ -260,6 +260,15 @@ AC_ARG_ENABLE([wayland],
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-wayland]) ;;
      esac],[NEED_WAYLAND_EGL=auto])
 
+AC_ARG_ENABLE([dispmanx],
+     [  --enable-dispmanx        Enable Dispmanx support (requires EGL) @<:@default=auto@:>@],
+     [case "${enableval}" in
+       yes)  NEED_DISPMANX=yes ;;
+       no)   NEED_DISPMANX=no ;;
+       auto) NEED_DISPMANX=auto ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-dispmanx]) ;;
+     esac],[NEED_DISPMANX=auto])
+
 AG_GST_CHECK_X
 save_CPPFLAGS="$CPPFLAGS"
 save_LIBS="$LIBS"
@@ -284,6 +293,46 @@ case $host in
     AG_GST_CHECK_LIBHEADER(GLU, GLU, gluSphere,, GL/glu.h)
     AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h)
     AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h)
+
+    old_LIBS=$LIBS
+    old_CFLAGS=$CFLAGS
+
+    dnl FIXME: SHOULD CHECK FOR bcm-videocore-pkgconfig, glesv2.pc, egl.pc, bcm_host.pc
+
+    dnl FIXME: EGL of RPi depends on GLESv1 or GLESv2
+    dnl FIXME: GLESv2 of RPi depends on EGL... WTF!
+    LIBS="$LIBS -lvcos -lvchiq_arm"
+    AC_CHECK_LIB([bcm_host], [bcm_host_init],
+      [
+        LIBS="$LIBS -lbcm_host"
+        AC_CHECK_HEADER(bcm_host.h,
+          [
+            LIBS="$LIBS -lGLESv2"
+            AC_CHECK_LIB([EGL], [eglGetProcAddress],
+              [
+                LIBS="$LIBS -lEGL"
+                AC_CHECK_HEADER([EGL/egl.h],
+                  [
+                    AC_CHECK_LIB([GLESv2], [glEnable],
+                      [
+                        AC_CHECK_HEADER([GLES2/gl2.h],
+                          [
+                            HAVE_EGL=yes
+                            HAVE_GLES2=yes
+                            HAVE_EGL_RPI=yes
+                            EGL_LIBS="-lGLESv2 -lEGL -lbcm_host -lvcos -lvchiq_arm"
+                            EGL_CFLAGS=""
+                            AC_DEFINE(USE_EGL_RPI, [1], [Use RPi platform])
+                        ])
+                    ])
+                ])
+            ])
+        ])
+    ])
+
+    LIBS=$old_LIBS
+    CFLAGS=$old_CFLAGS
+
     PKG_CHECK_MODULES(WAYLAND_EGL, wayland-client >= 1.0 wayland-cursor >= 1.0 wayland-egl >= 9.0, HAVE_WAYLAND_EGL=yes, HAVE_WAYLAND_EGL=no)
   ;;
 esac
@@ -484,6 +533,13 @@ case $host in
       fi
     fi
 
+    if test "x$HAVE_EGL_RPI" = "xyes"; then
+      if test "x$NEED_DISPMANX" != "xno"; then
+        HAVE_WINDOW_DISPMANX=yes
+        USE_EGL=yes
+      fi
+    fi
+
     dnl EGL
     if test "x$HAVE_EGL" = "xno"; then
       if test "x$HAVE_GL" = "xno"; then
@@ -601,6 +657,11 @@ if test "x$HAVE_WINDOW_ANDROID" = "xyes"; then
   GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
 #define GST_GL_HAVE_WINDOW_ANDROID 1"
 fi
+if test "x$HAVE_WINDOW_DISPMANX" = "xyes"; then
+  GL_WINDOWS="dispmanx $GL_WINDOWS"
+  GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+#define GST_GL_HAVE_WINDOW_DISPMANX 1"
+fi
 
 dnl PLATFORM's
 if test "x$USE_EGL" = "xyes"; then
@@ -643,6 +704,7 @@ AM_CONDITIONAL(HAVE_WINDOW_X11, test "x$HAVE_WINDOW_X11" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_X11ES2, test "x$HAVE_WINDOW_X11ES2" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_COCOA, test "x$HAVE_WINDOW_COCOA" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_WIN32, test "x$HAVE_WINDOW_WIN32" = "xyes")
+AM_CONDITIONAL(HAVE_WINDOW_DISPMANX, test "x$HAVE_WINDOW_DISPMANX" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_WAYLAND, test "x$HAVE_WINDOW_WAYLAND" = "xyes")
 AM_CONDITIONAL(HAVE_WINDOW_ANDROID, test "x$HAVE_WINDOW_ANDROID" = "xyes")
 
@@ -652,6 +714,7 @@ AM_CONDITIONAL(USE_EGL, test "x$USE_EGL" = "xyes")
 AM_CONDITIONAL(USE_GLX, test "x$USE_GLX" = "xyes")
 AM_CONDITIONAL(USE_WGL, test "x$USE_WGL" = "xyes")
 AM_CONDITIONAL(USE_COCOA, test "x$USE_COCOA" = "xyes")
+AM_CONDITIONAL(USE_EGL_PRI, test "x$USE_EGL_RPI" = "xyes")
 
 dnl Check for some types that are not always present
 GL_INCLUDES=""
@@ -1031,6 +1094,7 @@ gst-libs/gst/gl/x11/Makefile
 gst-libs/gst/gl/android/Makefile
 gst-libs/gst/gl/win32/Makefile
 gst-libs/gst/gl/cocoa/Makefile
+gst-libs/gst/gl/dispmanx/Makefile
 gst-libs/gst/gl/wayland/Makefile
 gst-libs/gst/gl/glprototypes/Makefile
 ext/Makefile
