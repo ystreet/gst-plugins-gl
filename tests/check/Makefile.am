@@ -47,6 +47,7 @@ SUPPRESSIONS = $(top_srcdir)/common/gst.supp
 
 
 libs_gstglmemory_CFLAGS = \
+	$(GL_CFLAGS) \
 	$(GST_PLUGINS_GL_CFLAGS) \
 	$(GST_PLUGINS_BASE_CFLAGS) \
 	$(AM_CFLAGS)
@@ -57,6 +58,7 @@ libs_gstglmemory_LDADD = \
 	$(LDADD)
 
 libs_gstglcontext_CFLAGS = \
+	$(GL_CFLAGS) \
 	$(GST_PLUGINS_GL_CFLAGS) \
 	$(GST_PLUGINS_BASE_CFLAGS) \
 	$(AM_CFLAGS)
