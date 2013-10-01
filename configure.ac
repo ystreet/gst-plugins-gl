@@ -318,7 +318,7 @@ case $host in
                             HAVE_EGL=yes
                             HAVE_GLES2=yes
                             HAVE_EGL_RPI=yes
-                            EGL_LIBS="-lEGL -lbcm_host -lvcos -lvchiq_arm"
+                            EGL_LIBS="-lbcm_host -lvcos -lvchiq_arm"
                             EGL_CFLAGS=""
                             AC_DEFINE(USE_EGL_RPI, [1], [Use RPi platform])
                         ])
@@ -548,7 +548,7 @@ case $host in
       fi
     else
       if test "x$NEED_EGL" != "xno"; then
-        if test "x$HAVE_WINDOW_WAYLAND" = "xyes" -o "x$HAVE_WINDOW_X11" = "xyes"; then
+        if test "x$HAVE_WINDOW_WAYLAND" = "xyes" -o "x$HAVE_WINDOW_X11" = "xyes" -o "x$HAVE_WINDOW_DISPMANX" = "xyes"; then
           GL_LIBS="$GL_LIBS -lEGL"
           USE_EGL=yes
         fi
