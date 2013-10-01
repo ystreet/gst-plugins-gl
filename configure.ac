@@ -514,7 +514,7 @@ case $host in
       fi
     fi
 
-    if test "x$HAVE_X" = "xyes"; then
+    if test "x$HAVE_X" = "xyes" -a "x$HAVE_EGL_RPI" = "xno"; then
       if test "x$NEED_X11" != "xno"; then
         GL_LIBS="$GL_LIBS $X_LIBS"
         GL_CFLAGS="$GL_CFLAGS $X_CFLAGS"
