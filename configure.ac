@@ -294,60 +294,46 @@ case $host in
     AG_GST_CHECK_LIBHEADER(EGL, EGL, eglGetError,, EGL/egl.h)
     AG_GST_CHECK_LIBHEADER(GLES2, GLESv2, glTexImage2D,, GLES2/gl2.h)
 
-    PKG_CHECK_MODULES(BCM_HOST, bcm_host, [HAVE_BCM_HOST="yes"], [HAVE_BCM_HOST="no"])
-    AC_SUBST(BCM_HOST_LIBS)
-    AC_SUBST(BCM_HOST_CFLAGS)
+    old_LIBS=$LIBS
+    old_CFLAGS=$CFLAGS
 
-    PKG_CHECK_MODULES(EGL, egl, [HAVE_EGL="yes"], [HAVE_EGL="no"])
-    AC_SUBST(EGL_LIBS)
-    AC_SUBST(EGL_CFLAGS)
+    dnl FIXME: SHOULD CHECK FOR bcm-videocore-pkgconfig, glesv2.pc, egl.pc, bcm_host.pc
 
-    PKG_CHECK_MODULES(GLES2, glesv2, [HAVE_GLES2="yes"], [HAVE_GLES2="no"])
-    AC_SUBST(GLES2_LIBS)
-    AC_SUBST(GLES2_CFLAGS)
+    dnl FIXME: EGL of RPi depends on GLESv1 or GLESv2
+    dnl FIXME: GLESv2 of RPi depends on EGL... WTF!
+    LIBS="$LIBS -lvcos -lvchiq_arm"
+    AC_CHECK_LIB([bcm_host], [bcm_host_init],
+      [
+        LIBS="$LIBS -lbcm_host"
+        AC_CHECK_HEADER(bcm_host.h,
+          [
+            LIBS="$LIBS -lGLESv2"
+            AC_CHECK_LIB([EGL], [eglGetProcAddress],
+              [
+                LIBS="$LIBS -lEGL"
+                AC_CHECK_HEADER([EGL/egl.h],
+                  [
+                    AC_CHECK_LIB([GLESv2], [glEnable],
+                      [
+                        AC_CHECK_HEADER([GLES2/gl2.h],
+                          [
+                            HAVE_EGL=yes
+                            HAVE_GLES2=yes
+                            HAVE_EGL_RPI=yes
+                            EGL_LIBS="-lGLESv2 -lEGL -lbcm_host -lvcos -lvchiq_arm"
+                            EGL_CFLAGS=""
+                            AC_DEFINE(USE_EGL_RPI, [1], [Use RPi platform])
+                        ])
+                    ])
+                ])
+            ])
+        ])
+    ])
 
-    if test x"$HAVE_BCM_HOST" = x"yes"; then
-      AC_DEFINE(USE_EGL_RPI, [1], [Use RPi platform])
-    else
-      old_LIBS=$LIBS
-      old_CFLAGS=$CFLAGS
+    LIBS=$old_LIBS
+    CFLAGS=$old_CFLAGS
 
-      dnl FIXME: EGL of RPi depends on GLESv1 or GLESv2
-      dnl FIXME: GLESv2 of RPi depends on EGL... WTF!
-      LIBS="$LIBS -lvcos -lvchiq_arm"
-      AC_CHECK_LIB([bcm_host], [bcm_host_init],
-        [
-          LIBS="$LIBS -lbcm_host"
-          AC_CHECK_HEADER(bcm_host.h,
-            [
-              LIBS="$LIBS -lGLESv2"
-              AC_CHECK_LIB([EGL], [eglGetProcAddress],
-                [
-                  LIBS="$LIBS -lEGL"
-                  AC_CHECK_HEADER([EGL/egl.h],
-                    [
-                      AC_CHECK_LIB([GLESv2], [glEnable],
-                        [
-                          AC_CHECK_HEADER([GLES2/gl2.h],
-                            [
-                              HAVE_EGL=yes
-                              HAVE_GLES2=yes
-                              HAVE_EGL_RPI=yes
-                              EGL_LIBS="-lGLESv2 -lEGL -lbcm_host -lvcos -lvchiq_arm"
-                              EGL_CFLAGS=""
-                              AC_DEFINE(USE_EGL_RPI, [1], [Use RPi platform])
-                          ])
-                      ])
-                  ])
-              ])
-          ])
-      ])
-
-      LIBS=$old_LIBS
-      CFLAGS=$old_CFLAGS
-    fi
-
-    PKG_CHECK_MODULES(WAYLAND_EGL, wayland-client >= 1.0 wayland-cursor >= 1.0 wayland-egl, HAVE_WAYLAND_EGL=yes, HAVE_WAYLAND_EGL=no)
+    PKG_CHECK_MODULES(WAYLAND_EGL, wayland-client >= 1.0 wayland-cursor >= 1.0 wayland-egl >= 9.0, HAVE_WAYLAND_EGL=yes, HAVE_WAYLAND_EGL=no)
   ;;
 esac
 
@@ -543,7 +529,6 @@ case $host in
         AC_MSG_WARN([EGL is required by the Wayland backend])
       else
         if test "x$NEED_WAYLAND_EGL" != "xno"; then
-          HAVE_WINDOW_X11=no
           HAVE_WINDOW_WAYLAND=yes
           GL_LIBS="$GL_LIBS $WAYLAND_EGL_LIBS"
           GL_CFLAGS="$GL_CFLAGS $WAYLAND_EGL_CFLAGS"
@@ -551,13 +536,10 @@ case $host in
       fi
     fi
 
-    if test "x$HAVE_BCM_HOST" = "xyes"; then
-      GL_LIBS="$GL_LIBS $BCM_HOST_LIBS"
-      GL_CFLAGS="$GL_CFLAGS $BCM_HOST_CFLAGS"
-      if test "x$NEED_DISPMANX" = "xyes"; then
-        HAVE_WINDOW_X11=no
-        HAVE_WINDOW_WAYLAND=no
+    if test "x$HAVE_EGL_RPI" = "xyes"; then
+      if test "x$NEED_DISPMANX" != "xno"; then
         HAVE_WINDOW_DISPMANX=yes
+        USE_EGL=yes
       fi
     fi
 
@@ -568,7 +550,7 @@ case $host in
       fi
     else
       if test "x$NEED_EGL" != "xno"; then
-        if test "x$HAVE_WINDOW_WAYLAND" = "xyes" -o "x$HAVE_WINDOW_X11" = "xyes" -o "x$HAVE_WINDOW_DISPMANX"; then
+        if test "x$HAVE_WINDOW_WAYLAND" = "xyes" -o "x$HAVE_WINDOW_X11" = "xyes"; then
           GL_LIBS="$GL_LIBS -lEGL"
           USE_EGL=yes
         fi
@@ -735,7 +717,7 @@ AM_CONDITIONAL(USE_EGL, test "x$USE_EGL" = "xyes")
 AM_CONDITIONAL(USE_GLX, test "x$USE_GLX" = "xyes")
 AM_CONDITIONAL(USE_WGL, test "x$USE_WGL" = "xyes")
 AM_CONDITIONAL(USE_COCOA, test "x$USE_COCOA" = "xyes")
-AM_CONDITIONAL(USE_EGL_RPI, test "x$USE_EGL_RPI" = "xyes")
+AM_CONDITIONAL(USE_EGL_PRI, test "x$USE_EGL_RPI" = "xyes")
 
 dnl Check for some types that are not always present
 GL_INCLUDES=""
@@ -761,9 +743,6 @@ if test "x$USE_OPENGL" = "xyes"; then
 "
 fi
 
-CFLAGS_hold=$CFLAGS
-CFLAGS=$GL_CFLAGS
-
 AC_CHECK_TYPES(GLeglImageOES, [], [], [[$GL_INCLUDES]])
 if test "x$ac_cv_type_GLeglImageOES" = "xyes"; then
   GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
@@ -787,8 +766,6 @@ if test "x$ac_cv_type_GLintptr" = "xyes"; then
   GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
 #define GST_GL_HAVE_GLINTPTR 1"
 fi
-
-CFLAGS=$CFLAGS_hold
 
 AC_CONFIG_COMMANDS([gst-libs/gst/gl/gstglconfig.h], [
 	outfile=gstglconfig.h-tmp
