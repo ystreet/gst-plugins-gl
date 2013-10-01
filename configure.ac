@@ -279,6 +279,7 @@ HAVE_EGL=no
 HAVE_GLU=no
 HAVE_GNUSTEP_COCOA=no
 HAVE_WAYLAND_EGL=no
+HAVE_EGL_RPI=no
 
 case $host in
   *-mingw32* )
