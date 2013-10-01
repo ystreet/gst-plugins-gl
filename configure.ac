@@ -297,8 +297,6 @@ case $host in
     old_LIBS=$LIBS
     old_CFLAGS=$CFLAGS
 
-    dnl FIXME: SHOULD CHECK FOR bcm-videocore-pkgconfig, glesv2.pc, egl.pc, bcm_host.pc
-
     dnl FIXME: EGL of RPi depends on GLESv1 or GLESv2
     dnl FIXME: GLESv2 of RPi depends on EGL... WTF!
     LIBS="$LIBS -lvcos -lvchiq_arm"
@@ -320,7 +318,7 @@ case $host in
                             HAVE_EGL=yes
                             HAVE_GLES2=yes
                             HAVE_EGL_RPI=yes
-                            EGL_LIBS="-lGLESv2 -lEGL -lbcm_host -lvcos -lvchiq_arm"
+                            EGL_LIBS="-lEGL -lbcm_host -lvcos -lvchiq_arm"
                             EGL_CFLAGS=""
                             AC_DEFINE(USE_EGL_RPI, [1], [Use RPi platform])
                         ])
