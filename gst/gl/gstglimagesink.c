@@ -442,8 +442,6 @@ gst_glimage_sink_change_state (GstElement * element, GstStateChange transition)
         GST_INFO ("Creating GstGLDisplay");
         glimage_sink->display = gst_gl_display_new ();
         glimage_sink->context = gst_gl_context_new (glimage_sink->display);
-        gst_gl_display_set_context (glimage_sink->display,
-            glimage_sink->context);
         window = gst_gl_context_get_window (glimage_sink->context);
 
         if (!glimage_sink->window_id && !glimage_sink->new_window_id)
