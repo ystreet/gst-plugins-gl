@@ -581,7 +581,7 @@ case $host in
     fi
 
     GL_LIBS="$LIBS -framework OpenGL -framework Cocoa"
-    GL_CFLAGS="$GL_CFLAGS -framework OpenGL"
+    GL_CFLAGS="$GL_CFLAGS"
     USE_COCOA=yes
     HAVE_WINDOW_COCOA=yes
     USE_OPENGL=yes
