@@ -28,6 +28,7 @@
 #include "gl.h"
 #include "gstgldisplay.h"
 
+GST_DEBUG_CATEGORY_STATIC (gst_context);
 GST_DEBUG_CATEGORY_STATIC (gst_gl_display_debug);
 #define GST_CAT_DEFAULT gst_gl_display_debug
 
@@ -66,6 +67,8 @@ gst_gl_display_init (GstGLDisplay * display)
 
   display->gl_api = GST_GL_API_NONE;
 
+  GST_TRACE ("init %p", display);
+
   gst_gl_memory_init ();
 }
 
@@ -78,6 +81,8 @@ gst_gl_display_finalize (GObject * object)
     gst_object_unref (display->context);
     display->context = NULL;
   }
+
+  GST_TRACE ("finalize %p", object);
 
   G_OBJECT_CLASS (gst_gl_display_parent_class)->finalize (object);
 }
@@ -102,6 +107,12 @@ gst_context_set_gl_display (GstContext * context, GstGLDisplay * display)
 {
   GstStructure *s;
 
+  g_return_if_fail (context != NULL);
+
+  GST_DEBUG_CATEGORY_GET (gst_context, "GST_CONTEXT");
+  GST_CAT_LOG (gst_context, "setting GstGLDisplay(%p) on context(%p)", display,
+      context);
+
   s = gst_context_writable_structure (context);
   gst_structure_set (s, GST_GL_DISPLAY_CONTEXT_TYPE, GST_TYPE_GL_DISPLAY,
       display, NULL);
@@ -111,8 +122,19 @@ gboolean
 gst_context_get_gl_display (GstContext * context, GstGLDisplay ** display)
 {
   const GstStructure *s;
+  gboolean ret;
+
+  g_return_val_if_fail (display != NULL, FALSE);
+  g_return_val_if_fail (context != NULL, FALSE);
+
+  GST_DEBUG_CATEGORY_GET (gst_context, "GST_CONTEXT");
 
   s = gst_context_get_structure (context);
-  return gst_structure_get (s, GST_GL_DISPLAY_CONTEXT_TYPE,
+  ret = gst_structure_get (s, GST_GL_DISPLAY_CONTEXT_TYPE,
       GST_TYPE_GL_DISPLAY, display, NULL);
+
+  GST_CAT_LOG (gst_context, "got GstGLDisplay(%p) from context(%p)", *display,
+      context);
+
+  return ret;
 }
