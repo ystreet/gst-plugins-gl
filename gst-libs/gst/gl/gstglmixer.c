@@ -1580,6 +1580,7 @@ gst_gl_mixer_process_textures (GstGLMixer * mix, GstBuffer * outbuf)
   guint out_tex;
   guint array_index = 0;
   guint i;
+  gboolean res;
 
   GST_TRACE ("Processing buffers");
 
@@ -1604,7 +1605,8 @@ gst_gl_mixer_process_textures (GstGLMixer * mix, GstBuffer * outbuf)
               GST_VIDEO_FRAME_HEIGHT (&out_frame))) {
         GST_ELEMENT_ERROR (mix, RESOURCE, NOT_FOUND,
             ("%s", "Failed to init upload format"), (NULL));
-        return FALSE;
+        res = FALSE;
+        goto out;
       }
     }
 
@@ -1640,8 +1642,10 @@ gst_gl_mixer_process_textures (GstGLMixer * mix, GstBuffer * outbuf)
       if (!gst_video_frame_map (in_frame, &pad->in_info, mixcol->buffer,
               GST_MAP_READ | GST_MAP_GL)) {
         ++array_index;
+        pad->mapped = FALSE;
         continue;
       }
+      pad->mapped = TRUE;
 
       if (gst_is_gl_memory (in_frame->map[0].memory)) {
         in_tex = *(guint *) in_frame->data[0];
@@ -1665,7 +1669,8 @@ gst_gl_mixer_process_textures (GstGLMixer * mix, GstBuffer * outbuf)
                   in_width, in_height, in_width, in_height)) {
             GST_ELEMENT_ERROR (mix, RESOURCE, NOT_FOUND,
                 ("%s", "Failed to init upload format"), (NULL));
-            return FALSE;
+            res = FALSE;
+            goto out;
           }
 
           if (!pad->in_tex_id)
@@ -1677,11 +1682,11 @@ gst_gl_mixer_process_textures (GstGLMixer * mix, GstBuffer * outbuf)
                 in_frame->data)) {
           GST_ELEMENT_ERROR (mix, RESOURCE, NOT_FOUND,
               ("%s", "Failed to upload video frame"), (NULL));
-          return FALSE;
+          res = FALSE;
+          goto out;
         }
 
         in_tex = pad->in_tex_id;
-        pad->mapped = TRUE;
       }
 
       g_array_index (mix->array_textures, guint, array_index) = in_tex;
@@ -1697,10 +1702,12 @@ gst_gl_mixer_process_textures (GstGLMixer * mix, GstBuffer * outbuf)
             out_frame.data)) {
       GST_ELEMENT_ERROR (mix, RESOURCE, NOT_FOUND, ("%s",
               "Failed to download video frame"), (NULL));
-      return FALSE;
+      res = FALSE;
+      goto out;
     }
   }
 
+out:
   i = 0;
   walk = mix->sinkpads;
   while (walk) {
@@ -1717,7 +1724,7 @@ gst_gl_mixer_process_textures (GstGLMixer * mix, GstBuffer * outbuf)
 
   gst_video_frame_unmap (&out_frame);
 
-  return TRUE;
+  return res;
 }
 
 static void
