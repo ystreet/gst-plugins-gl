@@ -588,7 +588,7 @@ gst_gl_handle_context_query (GstElement * element, GstQuery * query,
     gst_query_set_context (query, context);
     gst_context_unref (context);
 
-    res = TRUE;
+    res = *display != NULL;
   }
 
   return res;
