@@ -1,7 +1,7 @@
 noinst_PROGRAMS = ##
 
 #works on win32 and X
-if HAVE_CLUTTER_WITH_TEXTURE_RECTANGLE
+if HAVE_CLUTTER
 
 noinst_PROGRAMS += cluttershare
 
