@@ -84,7 +84,7 @@ QGLRenderer::initializeGL()
     //glShadeModel(GL_FLAT);
     //glEnable(GL_DEPTH_TEST);
     //glEnable(GL_CULL_FACE);
-    glEnable(GL_TEXTURE_RECTANGLE_ARB); // Enable Texture Mapping
+    glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
 
     this->gst_thread->start();
 }
@@ -134,8 +134,8 @@ QGLRenderer::paintGL()
 
         glEnable(GL_DEPTH_TEST);
 
-        glEnable(GL_TEXTURE_RECTANGLE_ARB);
-        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, this->frame->texture);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, this->frame->texture);
         if(glGetError () != GL_NO_ERROR)
         {
           qDebug ("failed to bind texture that comes from gst-gl");
@@ -143,11 +143,11 @@ QGLRenderer::paintGL()
           return;
         }
 
-        glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S,
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
                       GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T,
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,
                       GL_CLAMP_TO_EDGE);
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
@@ -198,7 +198,7 @@ QGLRenderer::paintGL()
         yrot+=0.2f;
         zrot+=0.4f;
 
-        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 }
 
