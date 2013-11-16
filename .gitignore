@@ -65,3 +65,5 @@ docs/plugins/xml
 docs/plugins/*bak
 
 lcov/
+
+test-driver
