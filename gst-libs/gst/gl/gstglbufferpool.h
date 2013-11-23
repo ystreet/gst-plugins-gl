@@ -47,6 +47,7 @@ GType gst_gl_buffer_pool_get_type (void);
  */
 struct _GstGLBufferPool
 {
+  /* <private> */
   GstBufferPool bufferpool;
 
   GstGLContext *context;
@@ -61,6 +62,7 @@ struct _GstGLBufferPool
  */
 struct _GstGLBufferPoolClass
 {
+  /* <private> */
   GstBufferPoolClass parent_class;
 };
 

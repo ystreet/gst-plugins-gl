@@ -221,10 +221,23 @@ gst_gl_video_mixer_callback (gpointer stuff)
 
   while (count < video_mixer->input_frames->len) {
     GstGLMixerFrameData *frame;
-    GLfloat *v_vertices;
     guint in_tex;
     guint in_width, in_height;
     gfloat w, h;
+
+    /* *INDENT-OFF* */
+    GLfloat v_vertices[] = {
+      /* front face */
+      -1.0, -1.0, -1.0f,
+      0.0f, 0.0f,
+      1.0, -1.0, -1.0f,
+      1.0, 0.0f,
+      1.0, 1.0, -1.0f,
+      1.0, 1.0,
+      -1.0, 1.0, -1.0f,
+      0.0f, 1.0
+    };
+    /* *INDENT-ON* */
 
     frame = g_ptr_array_index (video_mixer->input_frames, count);
     in_tex = frame->texture;
@@ -246,19 +259,6 @@ gst_gl_video_mixer_callback (gpointer stuff)
     GST_TRACE ("processing texture:%u dimensions:%ux%u, %fx%f", in_tex,
         in_width, in_height, w, h);
 
-    /* *INDENT-OFF* */
-    v_vertices = (GLfloat[]) {
-      /* front face */
-      -1.0, -1.0, -1.0f,
-      0.0f, 0.0f,
-      1.0, -1.0, -1.0f,
-      in_width, 0.0f,
-      1.0, 1.0, -1.0f,
-      in_width, in_height,
-      -1.0, 1.0, -1.0f,
-      0.0f, in_height,
-    };
-    /* *INDENT-ON* */
 
     gl->VertexAttribPointer (attr_position_loc, 3, GL_FLOAT,
         GL_FALSE, 5 * sizeof (GLfloat), &v_vertices[0]);
