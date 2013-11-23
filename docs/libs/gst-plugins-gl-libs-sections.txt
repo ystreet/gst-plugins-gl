@@ -1,4 +1,20 @@
 <SECTION>
+<FILE>gstglapi</FILE>
+<TITLE>GstGLAPI</TITLE>
+GstGLAPI
+gst_gl_api_string
+gst_gl_check_extension
+GST_GL_CHECK_GL_VERSION
+<SUBSECTION Private>
+GSTGLAPI
+GST_GL_EXT_BEGIN
+GST_GL_EXT_END
+GST_GL_EXT_FUNCTION
+GstGLFeatureData
+GstGLFeatureFunction
+</SECTION>
+
+<SECTION>
 <FILE>gstglbufferpool</FILE>
 <TITLE>GstGLBufferPool</TITLE>
 GstGLBufferPool
@@ -14,52 +30,121 @@ GST_TYPE_GL_BUFFER_POOL
 </SECTION>
 
 <SECTION>
+<FILE>gstglcontext</FILE>
+<TITLE>GstGLContext</TITLE>
+GST_GL_CONTEXT_ERROR
+gst_gl_context_error_quark
+GstGLContextError
+GstGLContextThreadFunc
+GstGLContext
+gst_gl_context_new
+gst_gl_context_create
+gst_gl_context_activate
+gst_gl_context_default_get_proc_address
+gst_gl_context_get_proc_address
+gst_gl_context_get_window
+gst_gl_context_set_window
+gst_gl_context_thread_add
+gst_gl_context_get_display
+gst_gl_context_get_gl_api
+gst_gl_context_get_gl_context
+gst_gl_context_get_platform
+<SUBSECTION Standard>
+GST_GL_CONTEXT
+GST_GL_IS_CONTEXT
+GST_GL_TYPE_CONTEXT
+GST_GL_CONTEXT_CLASS
+GST_GL_CONTEXT_GET_CLASS
+GST_GL_IS_CONTEXT_CLASS
+GST_GL_CONTEXT_CAST
+GstGLContextPrivate
+gst_gl_context_get_type
+</SECTION>
+
+<SECTION>
+<FILE>gstglcontextcocoa</FILE>
+<TITLE>GstGLContextCocoa</TITLE>
+GstGLContextCocoa
+gst_gl_context_cocoa_new
+<SUBSECTION Standard>
+GST_GL_CONTEXT_COCOA
+GST_GL_IS_CONTEXT_COCOA
+GST_GL_TYPE_CONTEXT_COCOA
+GST_GL_CONTEXT_COCOA_CLASS
+GST_GL_CONTEXT_COCOA_GET_CLASS
+GST_GL_IS_CONTEXT_COCOA_CLASS
+GST_GL_CONTEXT_COCOA_CAST
+GstGLContextCocoaPrivate
+gst_gl_context_cocoa_get_type
+</SECTION>
+
+<SECTION>
+<FILE>gstglcontextegl</FILE>
+<TITLE>GstGLContextEGL</TITLE>
+GstGLContextEGL
+gst_gl_context_egl_new
+<SUBSECTION Standard>
+GST_GL_CONTEXT_EGL
+GST_GL_IS_CONTEXT_EGL
+GST_GL_TYPE_CONTEXT_EGL
+GST_GL_CONTEXT_EGL_CLASS
+GST_GL_CONTEXT_EGL_GET_CLASS
+GST_GL_IS_CONTEXT_EGL_CLASS
+GST_GL_CONTEXT_EGL_CAST
+GstGLContextEGLPrivate
+gst_gl_context_egl_get_type
+</SECTION>
+
+<SECTION>
+<FILE>gstglcontextglx</FILE>
+<TITLE>GstGLContextGLX</TITLE>
+GstGLContextGLX
+gst_gl_context_glx_new
+<SUBSECTION Standard>
+GST_GL_CONTEXT_GLX
+GST_GL_IS_CONTEXT_GLX
+GST_GL_TYPE_CONTEXT_GLX
+GST_GL_CONTEXT_GLX_CLASS
+GST_GL_CONTEXT_GLX_GET_CLASS
+GST_GL_IS_CONTEXT_GLX_CLASS
+GST_GL_CONTEXT_GLX_CAST
+GstGLContextGLXPrivate
+gst_gl_context_glx_get_type
+</SECTION>
+
+<SECTION>
+<FILE>gstglcontextwgl</FILE>
+<TITLE>GstGLContextWGL</TITLE>
+GstGLContextWGL
+gst_gl_context_wgl_new
+<SUBSECTION Standard>
+GST_GL_CONTEXT_WGL
+GST_GL_IS_CONTEXT_WGL
+GST_GL_TYPE_CONTEXT_WGL
+GST_GL_CONTEXT_WGL_CLASS
+GST_GL_CONTEXT_WGL_GET_CLASS
+GST_GL_IS_CONTEXT_WGL_CLASS
+GST_GL_CONTEXT_WGL_CAST
+GstGLContextWGLPrivate
+gst_gl_context_wgl_get_type
+</SECTION>
+
+<SECTION>
 <FILE>gstgldisplay</FILE>
-GstGLDisplayConversion
-GstGLDisplayProjection
-CRCB
-CDCB
-GstGLDisplayThreadFunc
-GLCB
-GLCB_V2
-GST_GL_DISPLAY_ERR_MSG
 <TITLE>GstGLDisplay</TITLE>
 GstGLDisplay
 gst_gl_display_new
-gst_gl_display_lock
-gst_gl_display_unlock
-gst_gl_display_create_context
-gst_gl_display_redisplay
-gst_gl_display_thread_add
-gst_gl_display_gen_texture
-gst_gl_display_gen_texture_thread
-gst_gl_display_del_texture
-gst_gl_display_gen_fbo
-gst_gl_display_use_fbo
-gst_gl_display_del_fbo
-gst_gl_display_gen_shader
-gst_gl_display_del_shader
-gst_gl_display_set_window_id
-gst_gl_display_set_client_reshape_callback
-gst_gl_display_set_client_draw_callback
-gst_gl_display_activate_gl_context
-gst_gl_display_get_internal_gl_context
-gst_gl_display_set_client_data
-gst_gl_display_set_error
-gst_gl_display_use_fbo_v2
-gst_gl_display_find_download
-gst_gl_display_find_download_unlocked
-gst_gl_display_find_upload
-gst_gl_display_find_upload_unlocked
-gst_gl_display_check_framebuffer_status
+gst_context_get_gl_display
+gst_context_set_gl_display
 <SUBSECTION Standard>
 GST_GL_DISPLAY
 GST_IS_GL_DISPLAY
 GST_TYPE_GL_DISPLAY
-gst_gl_display_get_type
 GST_GL_DISPLAY_CLASS
 GST_IS_GL_DISPLAY_CLASS
 GST_GL_DISPLAY_CAST
+GstGLDisplayPrivate
+gst_gl_display_get_type
 </SECTION>
 
 <SECTION>
@@ -70,11 +155,8 @@ GST_GL_DOWNLOAD_VIDEO_CAPS
 GstGLDownload
 gst_gl_download_new
 gst_gl_download_init_format
-gst_gl_download_init_format_thread
 gst_gl_download_perform_with_data
-gst_gl_download_perform_with_data_thread
 gst_gl_download_perform_with_memory
-gst_gl_download_perform_with_memory_thread
 <SUBSECTION Standard>
 GST_GL_DOWNLOAD
 GST_GL_DOWNLOAD_CAST
@@ -84,6 +166,7 @@ gst_gl_download_get_type
 GST_IS_GL_DOWNLOAD
 GST_IS_GL_DOWNLOAD_CLASS
 GST_TYPE_GL_DOWNLOAD
+GstGLDownloadPrivate
 </SECTION>
 
 <SECTION>
@@ -121,6 +204,7 @@ GstGLMemory
 gst_gl_memory_init
 gst_gl_memory_alloc
 gst_gl_memory_wrapped
+gst_gl_memory_copy_into_texture
 gst_is_gl_memory
 <SUBSECTION Standard>
 GST_GL_ALLOCATOR
@@ -145,6 +229,7 @@ GstGLMixerProcessFunc
 GstGLMixerSetCaps
 GstGLMixerReset
 GstGLMixerProcessTextures
+GstGLMixerFrameData
 gst_gl_mixer_process_textures
 <SUBSECTION Standard>
 GstGLMixerPrivate
@@ -165,6 +250,7 @@ GST_TYPE_GL_MIXER_PAD
 
 <SECTION>
 <FILE>gstglshader</FILE>
+gst_gl_shader_error_quark
 GST_GL_SHADER_ERROR
 GstGLShaderError
 GstGLShaderSourceType
@@ -173,7 +259,6 @@ gst_gl_shadervariable_set
 gst_gl_shadervariables_parse
 <TITLE>GstGLShader</TITLE>
 GstGLShader
-gst_gl_shader_error_quark
 gst_gl_shader_new
 gst_gl_shader_set_vertex_source
 gst_gl_shader_set_fragment_source
@@ -231,11 +316,12 @@ GST_GL_UPLOAD_VIDEO_CAPS
 GstGLUpload
 gst_gl_upload_new
 gst_gl_upload_init_format
-gst_gl_upload_init_format_thread
+gst_gl_upload_add_video_gl_texture_upload_meta
 gst_gl_upload_perform_with_data
-gst_gl_upload_perform_with_data_thread
 gst_gl_upload_perform_with_memory
-gst_gl_upload_perform_with_memory_thread
+gst_gl_upload_perform_with_gl_texture_upload_meta
+gst_gl_upload_perform_with_buffer
+gst_gl_upload_release_buffer
 <SUBSECTION Standard>
 GST_GL_UPLOAD
 GST_GL_UPLOAD_CAST
@@ -245,20 +331,61 @@ gst_gl_upload_get_type
 GST_IS_GL_UPLOAD
 GST_IS_GL_UPLOAD_CLASS
 GST_TYPE_GL_UPLOAD
+GstGLUploadPrivate
+</SECTION>
+
+<SECTION>
+<FILE>gstglutils</FILE>
+<TITLE>Utilities</TITLE>
+GLCB
+GLCB_V2
+CRCB
+CDCB
+GstGLDisplayProjection
+gst_gl_ensure_display
+gst_gl_handle_set_context
+gst_gl_handle_context_query
+gst_gl_context_gen_texture
+gst_gl_context_del_texture
+gst_gl_context_gen_fbo
+gst_gl_context_del_fbo
+gst_gl_context_use_fbo
+gst_gl_context_use_fbo_v2
+gst_gl_context_gen_shader
+gst_gl_context_del_shader
+gst_gl_context_check_framebuffer_status
+gst_gl_context_set_error
+gst_gl_context_get_error
+gst_gl_context_clear_shader
 </SECTION>
 
 <SECTION>
 <FILE>gstglwindow</FILE>
-GstGLWindowCB
-GstGLWindowCB2
-GST_GL_WINDOW_CB
-GST_GL_WINDOW_CB2
-GST_GL_WINDOW_ERROR
-GstGLWindowPrivate
 <TITLE>GstGLWindow</TITLE>
+GstGLWindowError
+gst_gl_window_error_quark
+GST_GL_WINDOW_ERROR
+GstGLWindowResizeCB
+GST_GL_WINDOW_RESIZE_CB
+GstGLWindowCB
+GST_GL_WINDOW_CB
 GstGLWindow
 GstGLWindowClass
 gst_gl_window_new
+gst_gl_window_draw
+gst_gl_window_draw_unlocked
+gst_gl_window_is_running
+gst_gl_window_quit
+gst_gl_window_run
+gst_gl_window_get_context
+gst_gl_window_get_display
+gst_gl_window_send_message
+gst_gl_window_send_message_async
+gst_gl_window_set_close_callback
+gst_gl_window_set_draw_callback
+gst_gl_window_set_resize_callback
+gst_gl_window_set_window_handle
+gst_gl_window_get_window_handle
 <SUBSECTION Standard>
 GST_GL_IS_WINDOW
 GST_GL_IS_WINDOW_CLASS
@@ -266,27 +393,120 @@ GST_GL_TYPE_WINDOW
 GST_GL_WINDOW
 GST_GL_WINDOW_CLASS
 GST_GL_WINDOW_GET_CLASS
-<SUBSECTION Private>
-gst_gl_window_activate_gl_context
-gst_gl_window_draw
-gst_gl_window_draw_unlocked
-gst_gl_window_error_quark
-gst_gl_window_get_internal_gl_context
 gst_gl_window_get_type
-gst_gl_window_init_platform
-gst_gl_window_quit_loop
-gst_gl_window_run_loop
-gst_gl_window_send_message
-gst_gl_window_set_close_callback
-gst_gl_window_set_draw_callback
-gst_gl_window_set_external_window_id
-gst_gl_window_set_resize_callback
+GstGLWindowPrivate
 </SECTION>
 
-
-#Workaround external symbols being placed in -unused
 <SECTION>
-<SUBSECTION Private>
+<FILE>gstglwindowandroid</FILE>
+<TITLE>GstGLWindowAndroid</TITLE>
+GstGLWindowAndroidEGL
+GstGLWindowAndroidEGLClass
+gst_gl_window_android_egl_new
+<SUBSECTION Standard>
+GST_GL_IS_WINDOW_ANDROID_EGL
+GST_GL_IS_WINDOW_ANDROID_EGL_CLASS
+GST_GL_TYPE_WINDOW_ANDROID_EGL
+GST_GL_WINDOW_ANDROID_EGL
+GST_GL_WINDOW_ANDROID_EGL_CLASS
+GST_GL_WINDOW_ANDROID_EGL_GET_CLASS
+gst_gl_window_android_egl_get_type
+</SECTION>
+
+<SECTION>
+<FILE>gstglwindowcocoa</FILE>
+<TITLE>GstGLWindowCocoa</TITLE>
+GstGLWindowCocoa
+GstGLWindowCocoaClass
+gst_gl_window_cocoa_new
+gst_gl_window_cocoa_create_window
+<SUBSECTION Standard>
+GST_GL_IS_WINDOW_COCOA
+GST_GL_IS_WINDOW_COCOA_CLASS
+GST_GL_TYPE_WINDOW_COCOA
+GST_GL_WINDOW_COCOA
+GST_GL_WINDOW_COCOA_CLASS
+GST_GL_WINDOW_COCOA_GET_CLASS
+gst_gl_window_cocoa_get_type
+GstGLWindowCocoaPrivate
+</SECTION>
+
+<SECTION>
+<FILE>gstglwindowdispmanx</FILE>
+<TITLE>GstGLWindowDispmanx</TITLE>
+GstGLWindowDispmanxEGL
+GstGLWindowDispmanxEGLClass
+gst_gl_window_dispmanx_egl_new
+<SUBSECTION Standard>
+GST_GL_IS_WINDOW_DISPMANX_EGL
+GST_GL_IS_WINDOW_DISPMANX_EGL_CLASS
+GST_GL_TYPE_WINDOW_DISPMANX_EGL
+GST_GL_WINDOW_DISPMANX_EGL
+GST_GL_WINDOW_DISPMANX_EGL_CLASS
+GST_GL_WINDOW_DISPMANX_EGL_GET_CLASS
+gst_gl_window_dispmanx_egl_get_type
+</SECTION>
+
+<SECTION>
+<FILE>gstglwindowwayland</FILE>
+<TITLE>GstGLWindowWayland</TITLE>
+GstGLWindowWaylandEGL
+GstGLWindowWaylandEGLClass
+gst_gl_window_wayland_egl_new
+<SUBSECTION Standard>
+GST_GL_IS_WINDOW_WAYLAND_EGL
+GST_GL_IS_WINDOW_WAYLAND_EGL_CLASS
+GST_GL_TYPE_WINDOW_WAYLAND_EGL
+GST_GL_WINDOW_WAYLAND_EGL
+GST_GL_WINDOW_WAYLAND_EGL_CLASS
+GST_GL_WINDOW_WAYLAND_EGL_GET_CLASS
+gst_gl_window_wayland_egl_get_type
+wayland_event_source_new
+</SECTION>
+
+<SECTION>
+<FILE>gstglwindowwin32</FILE>
+<TITLE>GstGLWindowWin32</TITLE>
+GstGLWindowWin32
+GstGLWindowWin32Class
+gst_gl_window_win32_new
+gst_gl_window_win32_create_window
+<SUBSECTION Standard>
+GST_GL_IS_WINDOW_WIN32
+GST_GL_IS_WINDOW_WIN32_CLASS
+GST_GL_TYPE_WINDOW_WIN32
+GST_GL_WINDOW_WIN32
+GST_GL_WINDOW_WIN32_CLASS
+GST_GL_WINDOW_WIN32_GET_CLASS
+gst_gl_window_win32_get_type
+GstGLWindowWin32Private
+</SECTION>
+
+<SECTION>
+<FILE>gstglwindowx11</FILE>
+<TITLE>GstGLWindowX11</TITLE>
+GstGLWindowX11
+GstGLWindowX11Class
+gst_gl_window_x11_new
+gst_gl_window_x11_create_window
+gst_gl_window_x11_trap_x_errors
+gst_gl_window_x11_untrap_x_errors
+<SUBSECTION Standard>
+GST_GL_IS_WINDOW_X11
+GST_GL_IS_WINDOW_X11_CLASS
+GST_GL_TYPE_WINDOW_X11
+GST_GL_WINDOW_X11
+GST_GL_WINDOW_X11_CLASS
+GST_GL_WINDOW_X11_GET_CLASS
+gst_gl_window_x11_get_type
+GstGLWindowX11Private
+x11_event_source_new
+</SECTION>
+
+<SECTION>
+<FILE>ignore_me</FILE>
+#Workaround external symbols being placed in -unused
+<SUBSECTION Standard>
 # -------
 # gettext
 # -------
@@ -305,16 +525,13 @@ N_
 # ------------
 # Opengl funcs
 # ------------
-GLEW_ARB_fragment_shader
-GLEW_ARB_imaging
-GLEW_EXT_framebuffer_object
-GLEW_MESA_ycbcr_texture
-GLEW_NO_ERROR
-GLEW_OK
-GLEW_VERSION
-GLEW_VERSION_MAJOR
-GLEW_VERSION_MICRO
-GLEW_VERSION_MINOR
+GL_COLOR_ATTACHMENT1
+GL_COLOR_ATTACHMENT2
+GL_DEPTH24_STENCIL8
+GLchar
+GLeglImageOES
+GLintptr
+GLsizeiptr
 GL_BGR
 GL_BGRA
 GL_COLOR_ATTACHMENT0_EXT

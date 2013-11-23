@@ -1,15 +1,6 @@
 #include "../../config.h"
-#include "gstgl_fwd.h"
-#include "gstgldisplay.h"
-#include "gstglcontext.h"
-#include "gstglfilter.h"
-#include "gstglshader.h"
-#include "gstglmixer.h"
-#include "gstglbufferpool.h"
-#include "gstglmemory.h"
-#include "gstglwindow.h"
-#include "gstglupload.h"
-#include "gstgldownload.h"
+#include <gst/gl/gstgl_fwd.h>
+#include <gst/gl/gl.h>
 
 
 gst_gl_upload_get_type
