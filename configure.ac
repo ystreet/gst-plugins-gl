@@ -585,6 +585,25 @@ case $host in
     USE_COCOA=yes
     HAVE_WINDOW_COCOA=yes
     USE_OPENGL=yes
+    
+    if test "x$USE_GLX" = "xyes"; then
+      if test "x$HAVE_X" = "xyes"; then
+        if test "x$NEED_X11" != "xno"; then
+          GL_LIBS="$GL_LIBS $X_LIBS"
+          GL_CFLAGS="$GL_CFLAGS $X_CFLAGS"
+          HAVE_WINDOW_X11=yes
+        fi
+      fi
+      
+      if test "x$HAVE_GL" = "xyes"; then
+        if test "x$NEED_GL" != "xno"; then
+          GL_LIBS="$GL_LIBS -lGL"
+        fi
+        if test "x$HAVE_GLU" = "xyes"; then
+          GL_LIBS="$GL_LIBS -lGLU"
+        fi
+      fi
+    fi
     ;;
   *-mingw32*)
     if test "x$NEED_GLX" = "xyes"; then
