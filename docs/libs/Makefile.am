@@ -51,10 +51,12 @@ extra_files =
 # contains GtkObjects/GObjects and you want to document signals and properties.
 GTKDOC_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) \
 	-I$(top_srcdir)/gst-libs \
-	-I$(top_srcdir)/gst-libs/gst/gl
+	-I$(top_srcdir)/gst-libs/gst/gl \
+	-I$(top_builddir)/gst-libs \
+	-I$(top_builddir)/gst-libs/gst/gl
 GTKDOC_LIBS = \
 	$(top_builddir)/gst-libs/gst/gl/libgstgl-@GST_API_VERSION@.la \
-  $(GST_BASE_LIBS)
+	$(GST_BASE_LIBS)
 
 GTKDOC_CC=$(LIBTOOL) --tag=CC --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --tag=CC --mode=link $(CC)
