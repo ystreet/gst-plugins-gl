@@ -40,6 +40,8 @@ gst*.pc
 .dirstamp
 /m4/*.m4
 
+/gst-plugins-gl-*.tar.*
+
 *-decl.txt
 *-decl-list.txt
 *-undeclared.txt
@@ -65,3 +67,8 @@ docs/plugins/xml
 docs/plugins/*bak
 
 lcov/
+
+/test-driver
+/tests/check/test-suite.log
+/tests/check/*/*.log
+/tests/check/*/*.trs
