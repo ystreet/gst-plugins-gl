@@ -862,12 +862,18 @@ AC_CHECK_LIB(jpeg-mmx, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
 JPEG_LIBS="$LIBS -ljpeg-mmx"
 LIBS="$OLD_LIBS"
 if test x$HAVE_JPEG != xyes; then
-  AC_CHECK_LIB(jpeg, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
   JPEG_LIBS="-ljpeg"
-  AC_DEFINE(HAVE_JPEG, [1] , [Use libjpeg])
+  AC_CHECK_LIB(jpeg, jpeg_set_defaults, HAVE_JPEG="yes", HAVE_JPEG="no")
 fi
-AC_SUBST(HAVE_JPEG)
+
+if test x$HAVE_JPEG = xyes; then
+  AC_DEFINE(HAVE_JPEG, [1], [Use libjpeg])
+else
+  AC_DEFINE(HAVE_JPEG, [0], [Use libjpeg])
+  JPEG_LIBS=
+fi
 AC_SUBST(JPEG_LIBS)
+AC_SUBST(HAVE_JPEG)
 AM_CONDITIONAL(HAVE_JPEG, test "x$HAVE_JPEG" = "xyes")
 
 
