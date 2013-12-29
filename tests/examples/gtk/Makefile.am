@@ -5,7 +5,7 @@ SUBDIRS = . gtkvideooverlay filternovideooverlay filtervideooverlay fxtest switc
 noinst_LTLIBRARIES = libgstgtkhelper.la
 
 libgstgtkhelper_la_SOURCES = gstgtk.c gstgtk.h
-libgstgtkhelper_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS) $(GTK_CFLAGS) \
+libgstgtkhelper_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS) $(GTK3_CFLAGS) \
     -lgstvideo-$(GST_API_VERSION)
 
 if HAVE_WINDOW_COCOA

@@ -34,7 +34,7 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, GtkWidge
     if (!gst_is_video_overlay_prepare_window_handle_message (message))
         return GST_BUS_PASS;
 
-    g_print ("setting window handle\n");
+    g_print ("setting window handle %p\n", widget);
 
     gst_video_overlay_set_gtk_window (GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message)), widget);
 
@@ -55,15 +55,17 @@ static void end_stream_cb(GstBus* bus, GstMessage* message, GstElement* pipeline
 }
 
 
-static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* videosink)
+static gboolean expose_cb(GtkWidget* widget, cairo_t *cr, GstElement* videosink)
 {
+    g_print ("expose %p\n", widget);
+    g_print ("event mask: 0x%x, button_press 0x%x\n", gtk_widget_get_events (widget), GDK_BUTTON_PRESS_MASK);
     gst_video_overlay_expose (GST_VIDEO_OVERLAY (videosink));
     return FALSE;
 }
 
 static gboolean on_click_drawing_area(GtkWidget* widget, GdkEventButton* event, GstElement* videosink)
 {
-    g_print ("switch the drawing area\n");
+    g_print ("switch the drawing area %p\n", widget);
     gst_video_overlay_set_gtk_window (GST_VIDEO_OVERLAY (videosink), widget);
     gst_video_overlay_expose (GST_VIDEO_OVERLAY (videosink));
     return FALSE;
@@ -108,6 +110,17 @@ static void button_state_playing_cb(GtkWidget* widget, GstElement* pipeline)
     g_print ("GST_STATE_PLAYING\n");
 }
 
+static void area_realize_cb(GtkWidget* widget, gpointer data)
+{
+    g_print ("realize %p\n", widget);
+    if (!gdk_window_ensure_native (gtk_widget_get_window (widget)))
+        g_error ("Failed to create native window!");
+
+    //avoid flickering when resizing or obscuring the main window
+    gtk_widget_set_app_paintable(widget, TRUE);
+    gtk_widget_set_double_buffered(widget, FALSE);
+}
+
 
 gint main (gint argc, gchar *argv[])
 {
@@ -137,35 +150,35 @@ gint main (gint argc, gchar *argv[])
     gtk_window_set_geometry_hints (GTK_WINDOW (window_control), window_control, &geometry, GDK_HINT_MIN_SIZE);
     gtk_window_set_resizable (GTK_WINDOW (window_control), FALSE);
     gtk_window_move (GTK_WINDOW (window_control), 10, 10);
-    GtkWidget* table = gtk_table_new (4, 1, TRUE);
+    GtkWidget* table = gtk_grid_new ();
     gtk_container_add (GTK_CONTAINER (window_control), table);
 
     //control state null
     GtkWidget* button_state_null = gtk_button_new_with_label ("GST_STATE_NULL");
     g_signal_connect (G_OBJECT (button_state_null), "clicked",
         G_CALLBACK (button_state_null_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_null, 0, 1, 0, 1);
+    gtk_grid_attach (GTK_GRID (table), button_state_null, 0, 0, 1, 1);
     gtk_widget_show (button_state_null);
 
     //control state ready
     GtkWidget* button_state_ready = gtk_button_new_with_label ("GST_STATE_READY");
     g_signal_connect (G_OBJECT (button_state_ready), "clicked",
         G_CALLBACK (button_state_ready_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_ready, 0, 1, 1, 2);
+    gtk_grid_attach (GTK_GRID (table), button_state_ready, 0, 1, 1, 1);
     gtk_widget_show (button_state_ready);
 
     //control state paused
     GtkWidget* button_state_paused = gtk_button_new_with_label ("GST_STATE_PAUSED");
     g_signal_connect (G_OBJECT (button_state_paused), "clicked",
         G_CALLBACK (button_state_paused_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_paused, 0, 1, 2, 3);
+    gtk_grid_attach (GTK_GRID (table), button_state_paused, 0, 2, 1, 1);
     gtk_widget_show (button_state_paused);
 
     //control state playing
     GtkWidget* button_state_playing = gtk_button_new_with_label ("GST_STATE_PLAYING");
     g_signal_connect (G_OBJECT (button_state_playing), "clicked",
         G_CALLBACK (button_state_playing_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_playing, 0, 1, 3, 4);
+    gtk_grid_attach (GTK_GRID (table), button_state_playing, 0, 3, 1, 1);
     gtk_widget_show (button_state_playing);
 
     gtk_widget_show (table);
@@ -187,16 +200,20 @@ gint main (gint argc, gchar *argv[])
     }
 
     //areas where the video is drawn
-    GtkWidget* table_areas = gtk_table_new (1, 2, TRUE);
+    GtkWidget* table_areas = gtk_grid_new ();
     gtk_container_add (GTK_CONTAINER (window), table_areas);
     GtkWidget* area_top_left = gtk_drawing_area_new();
-    gtk_widget_set_events(area_top_left, GDK_BUTTON_PRESS_MASK);
-    gtk_table_attach_defaults (GTK_TABLE (table_areas), area_top_left, 0, 1, 0, 1);
+    gtk_widget_add_events(area_top_left, GDK_BUTTON_PRESS_MASK);
+    gtk_widget_set_size_request (area_top_left, 320, 240);
+    gtk_grid_attach (GTK_GRID (table_areas), area_top_left, 0, 0, 1, 1);
     GtkWidget* area_top_right = gtk_drawing_area_new();
-    gtk_widget_set_events(area_top_right, GDK_BUTTON_PRESS_MASK);
-    gtk_table_attach_defaults (GTK_TABLE (table_areas), area_top_right, 1, 2, 0, 1);
+    gtk_widget_add_events(area_top_right, GDK_BUTTON_PRESS_MASK);
+    gtk_widget_set_size_request (area_top_right, 320, 240);
+    gtk_grid_attach (GTK_GRID (table_areas), area_top_right, 1, 0, 1, 1);
 
     //set window id on this event
+    g_signal_connect(area_top_left, "realize", G_CALLBACK(area_realize_cb), NULL);
+    g_signal_connect(area_top_right, "realize", G_CALLBACK(area_realize_cb), NULL);
 
     gtk_widget_realize(area_top_left);
     gtk_widget_realize(area_top_right);
@@ -211,8 +228,8 @@ gint main (gint argc, gchar *argv[])
 
     //needed when being in GST_STATE_READY, GST_STATE_PAUSED
     //or resizing/obscuring the window
-    g_signal_connect(area_top_left, "expose-event", G_CALLBACK(expose_cb), videosink);
-    g_signal_connect(area_top_right, "expose-event", G_CALLBACK(expose_cb), videosink);
+    g_signal_connect(area_top_left, "draw", G_CALLBACK(expose_cb), videosink);
+    g_signal_connect(area_top_right, "draw", G_CALLBACK(expose_cb), videosink);
 
     //switch the drawing area
     g_signal_connect(area_top_left, "button-press-event", G_CALLBACK(on_click_drawing_area), videosink);

@@ -34,7 +34,7 @@ static GstBusSyncReply create_window (GstBus* bus, GstMessage* message, GtkWidge
     if (!gst_is_video_overlay_prepare_window_handle_message (message))
         return GST_BUS_PASS;
 
-    g_print ("setting window handle\n");
+    g_print ("setting window handle %p\n", widget);
 
     gst_video_overlay_set_gtk_window (GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message)), widget);
 
@@ -55,23 +55,7 @@ static void end_stream_cb(GstBus* bus, GstMessage* message, GstElement* pipeline
 }
 
 
-static void area_realize_cb(GtkWidget* widget, GstElement* pipeline)
-{
-#if GTK_CHECK_VERSION(2,18,0)
-    if (!gdk_window_ensure_native (widget->window))
-        g_error ("Failed to create native window!");
-#endif
-
-    //avoid flickering when resizing or obscuring the main window
-    gdk_window_set_back_pixmap(widget->window, NULL, FALSE);
-    gtk_widget_set_app_paintable(widget,TRUE);
-    gtk_widget_set_double_buffered(widget, FALSE);
-
-    gst_element_set_state (pipeline, GST_STATE_PLAYING);
-}
-
-
-static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* videosink)
+static gboolean expose_cb(GtkWidget* widget, cairo_t *cr, GstElement* videosink)
 {
     gst_video_overlay_expose (GST_VIDEO_OVERLAY (videosink));
     return FALSE;
@@ -153,45 +137,45 @@ gint main (gint argc, gchar *argv[])
     gtk_window_set_geometry_hints (GTK_WINDOW (window_control), window_control, &geometry, GDK_HINT_MIN_SIZE);
     gtk_window_set_resizable (GTK_WINDOW (window_control), FALSE);
     gtk_window_move (GTK_WINDOW (window_control), 10, 10);
-    GtkWidget* table = gtk_table_new (2, 1, TRUE);
-    gtk_container_add (GTK_CONTAINER (window_control), table);
+    GtkWidget* grid = gtk_grid_new ();
+    gtk_container_add (GTK_CONTAINER (window_control), grid);
 
     //control state null
     GtkWidget* button_state_null = gtk_button_new_with_label ("GST_STATE_NULL");
     g_signal_connect (G_OBJECT (button_state_null), "clicked",
         G_CALLBACK (button_state_null_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_null, 0, 1, 0, 1);
+    gtk_grid_attach (GTK_GRID (grid), button_state_null, 0, 1, 1, 1);
     gtk_widget_show (button_state_null);
 
     //control state ready
     GtkWidget* button_state_ready = gtk_button_new_with_label ("GST_STATE_READY");
     g_signal_connect (G_OBJECT (button_state_ready), "clicked",
         G_CALLBACK (button_state_ready_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_ready, 0, 1, 1, 2);
+    gtk_grid_attach (GTK_GRID (grid), button_state_ready, 0, 2, 1, 1);
     gtk_widget_show (button_state_ready);
 
     //control state paused
     GtkWidget* button_state_paused = gtk_button_new_with_label ("GST_STATE_PAUSED");
     g_signal_connect (G_OBJECT (button_state_paused), "clicked",
         G_CALLBACK (button_state_paused_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_paused, 0, 1, 2, 3);
+    gtk_grid_attach (GTK_GRID (grid), button_state_paused, 0, 3, 1, 1);
     gtk_widget_show (button_state_paused);
 
     //control state playing
     GtkWidget* button_state_playing = gtk_button_new_with_label ("GST_STATE_PLAYING");
     g_signal_connect (G_OBJECT (button_state_playing), "clicked",
         G_CALLBACK (button_state_playing_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_playing, 0, 1, 3, 4);
+    gtk_grid_attach (GTK_GRID (grid), button_state_playing, 0, 4, 1, 1);
     gtk_widget_show (button_state_playing);
 
     //change framerate
-    GtkWidget* slider_fps = gtk_vscale_new_with_range (1, 30, 2);
+    GtkWidget* slider_fps = gtk_scale_new_with_range (GTK_ORIENTATION_VERTICAL, 1, 30, 2);
     g_signal_connect (G_OBJECT (slider_fps), "format-value",
         G_CALLBACK (slider_fps_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), slider_fps, 1, 2, 0, 4);
+    gtk_grid_attach (GTK_GRID (grid), slider_fps, 1, 0, 1, 5);
     gtk_widget_show (slider_fps);
 
-    gtk_widget_show (table);
+    gtk_widget_show (grid);
     gtk_widget_show (window_control);
 
     //configure the pipeline
@@ -242,9 +226,7 @@ gint main (gint argc, gchar *argv[])
 
     //needed when being in GST_STATE_READY, GST_STATE_PAUSED
     //or resizing/obscuring the window
-    g_signal_connect(area, "expose-event", G_CALLBACK(expose_cb), videosink);
-
-    g_signal_connect (area, "realize", G_CALLBACK (area_realize_cb), pipeline);
+    g_signal_connect(area, "draw", G_CALLBACK(expose_cb), videosink);
 
     //start
     GstStateChangeReturn ret = gst_element_set_state (pipeline, GST_STATE_PLAYING);

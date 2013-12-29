@@ -17,7 +17,7 @@ if HAVE_SDL
 SUBDIRS += sdl
 endif
 
-if HAVE_GTK
+if HAVE_GTK3
 SUBDIRS += gtk
 endif
 

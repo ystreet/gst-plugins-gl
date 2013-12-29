@@ -57,9 +57,9 @@ static void end_stream_cb(GstBus* bus, GstMessage* message, GstElement* pipeline
     gtk_main_quit();
 }
 
-static gboolean expose_cb(GtkWidget* widget, GdkEventExpose* event, GstElement* videosink)
+static gboolean draw_cb(GtkWidget* widget, cairo_t *cr, GstElement* videosink)
 {
-    g_print ("expose_cb\n");
+    g_print ("draw_cb\n");
     gst_video_overlay_expose (GST_VIDEO_OVERLAY (videosink));
     return FALSE;
 }
@@ -114,10 +114,35 @@ static gchar* slider_fps_cb (GtkScale* scale, gdouble value, GstElement* pipelin
 
 gint main (gint argc, gchar *argv[])
 {
-    gtk_init (&argc, &argv);
+    GtkWidget *area;
     gst_init (&argc, &argv);
+    gtk_init (&argc, &argv);
 
     GstElement* pipeline = gst_pipeline_new ("pipeline");
+    GstElement* videosrc  = gst_element_factory_make ("videotestsrc", "videotestsrc");
+    GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
+
+    gst_bin_add_many (GST_BIN (pipeline), videosrc, videosink, NULL);
+
+    gboolean link_ok = gst_element_link_many(videosrc, videosink, NULL) ;
+    if(!link_ok)
+    {
+        g_warning("Failed to link an element!\n") ;
+        return -1;
+    }
+
+    //set window id on this event
+    GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
+    gst_bus_add_signal_watch (bus);
+    g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), pipeline);
+    g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), pipeline);
+    g_signal_connect(bus, "message::eos", G_CALLBACK(end_stream_cb), pipeline);
+
+    gst_element_set_state(pipeline, GST_STATE_READY);
+
+    area = gtk_drawing_area_new();
+    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area, NULL);
+    gst_object_unref (bus);
 
     //window that contains an area where the video is drawn
     GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -140,42 +165,43 @@ gint main (gint argc, gchar *argv[])
     gtk_window_set_geometry_hints (GTK_WINDOW (window_control), window_control, &geometry, GDK_HINT_MIN_SIZE);
     gtk_window_set_resizable (GTK_WINDOW (window_control), FALSE);
     gtk_window_move (GTK_WINDOW (window_control), 10, 10);
-    GtkWidget* table = gtk_table_new (2, 1, TRUE);
+    GtkWidget* table = gtk_grid_new ();
     gtk_container_add (GTK_CONTAINER (window_control), table);
 
     //control state null
     GtkWidget* button_state_null = gtk_button_new_with_label ("GST_STATE_NULL");
     g_signal_connect (G_OBJECT (button_state_null), "clicked",
         G_CALLBACK (button_state_null_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_null, 0, 1, 0, 1);
+    gtk_grid_attach (GTK_GRID (table), button_state_null, 0, 0, 1, 1);
     gtk_widget_show (button_state_null);
 
     //control state ready
     GtkWidget* button_state_ready = gtk_button_new_with_label ("GST_STATE_READY");
     g_signal_connect (G_OBJECT (button_state_ready), "clicked",
         G_CALLBACK (button_state_ready_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_ready, 0, 1, 1, 2);
+    gtk_grid_attach (GTK_GRID (table), button_state_ready, 0, 1, 1, 1);
     gtk_widget_show (button_state_ready);
 
     //control state paused
     GtkWidget* button_state_paused = gtk_button_new_with_label ("GST_STATE_PAUSED");
     g_signal_connect (G_OBJECT (button_state_paused), "clicked",
         G_CALLBACK (button_state_paused_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_paused, 0, 1, 2, 3);
+    gtk_grid_attach (GTK_GRID (table), button_state_paused, 0, 2, 1, 1);
     gtk_widget_show (button_state_paused);
 
     //control state playing
     GtkWidget* button_state_playing = gtk_button_new_with_label ("GST_STATE_PLAYING");
     g_signal_connect (G_OBJECT (button_state_playing), "clicked",
         G_CALLBACK (button_state_playing_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), button_state_playing, 0, 1, 3, 4);
+    gtk_grid_attach (GTK_GRID (table), button_state_playing, 0, 3, 1, 1);
     gtk_widget_show (button_state_playing);
 
     //change framerate
-    GtkWidget* slider_fps = gtk_vscale_new_with_range (1, 30, 2);
+    GtkWidget* slider_fps = gtk_scale_new_with_range (GTK_ORIENTATION_VERTICAL,
+        1, 30, 2);
     g_signal_connect (G_OBJECT (slider_fps), "format-value",
         G_CALLBACK (slider_fps_cb), pipeline);
-    gtk_table_attach_defaults (GTK_TABLE (table), slider_fps, 1, 2, 0, 4);
+    gtk_grid_attach (GTK_GRID (table), slider_fps, 1, 0, 1, 4);
     gtk_widget_show (slider_fps);
 
     gtk_widget_show (table);
@@ -184,36 +210,14 @@ gint main (gint argc, gchar *argv[])
     //configure the pipeline
     g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(destroy_cb), pipeline);
 
-    GstElement* videosrc  = gst_element_factory_make ("videotestsrc", "videotestsrc");
-    GstElement* videosink = gst_element_factory_make ("glimagesink", "glimagesink");
-
-    gst_bin_add_many (GST_BIN (pipeline), videosrc, videosink, NULL);
-
-    gboolean link_ok = gst_element_link_many(videosrc, videosink, NULL) ;
-    if(!link_ok)
-    {
-        g_warning("Failed to link an element!\n") ;
-        return -1;
-    }
-
     //area where the video is drawn
-    GtkWidget* area = gtk_drawing_area_new();
     gtk_container_add (GTK_CONTAINER (window), area);
 
     gtk_widget_realize(area);
 
-    //set window id on this event
-    GstBus* bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
-    gst_bus_set_sync_handler (bus, (GstBusSyncHandler) create_window, area, NULL);
-    gst_bus_add_signal_watch (bus);
-    g_signal_connect(bus, "message::error", G_CALLBACK(end_stream_cb), pipeline);
-    g_signal_connect(bus, "message::warning", G_CALLBACK(end_stream_cb), pipeline);
-    g_signal_connect(bus, "message::eos", G_CALLBACK(end_stream_cb), pipeline);
-    gst_object_unref (bus);
-
     //needed when being in GST_STATE_READY, GST_STATE_PAUSED
     //or resizing/obscuring the window
-    g_signal_connect(area, "expose-event", G_CALLBACK(expose_cb), videosink);
+    g_signal_connect(area, "draw", G_CALLBACK(draw_cb), videosink);
 
     gtk_widget_show_all (window);
 
