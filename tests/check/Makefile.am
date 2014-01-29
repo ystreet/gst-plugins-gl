@@ -22,7 +22,8 @@ check_PROGRAMS = \
 	generic/states \
 	pipelines/simple-launch-lines \
 	libs/gstglmemory \
-	libs/gstglcontext
+	libs/gstglcontext \
+	libs/gstglupload
 
 VALGRIND_TO_FIX = 
 
@@ -64,6 +65,17 @@ libs_gstglcontext_CFLAGS = \
 	$(AM_CFLAGS)
 
 libs_gstglcontext_LDADD = \
+	$(top_builddir)/gst-libs/gst/gl/libgstgl-@GST_API_VERSION@.la \
+	$(GST_PLUGINS_BASE_LIBS) -lgstvideo-$(GST_API_VERSION)\
+	$(LDADD)
+
+libs_gstglupload_CFLAGS = \
+	$(GL_CFLAGS) \
+	$(GST_PLUGINS_GL_CFLAGS) \
+	$(GST_PLUGINS_BASE_CFLAGS) \
+	$(AM_CFLAGS)
+
+libs_gstglupload_LDADD = \
 	$(top_builddir)/gst-libs/gst/gl/libgstgl-@GST_API_VERSION@.la \
 	$(GST_PLUGINS_BASE_LIBS) -lgstvideo-$(GST_API_VERSION)\
 	$(LDADD)
