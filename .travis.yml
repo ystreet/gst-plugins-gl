@@ -2,7 +2,7 @@ language: c
 compiler:
   - gcc
   - clang
-script: ./autogen.sh && make && make check
+script: ./autogen.sh && make
 branches:
   only:
     - ci
