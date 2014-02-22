@@ -10,8 +10,6 @@ before_install:
   - sudo add-apt-repository ppa:gstreamer-developers/ppa -y
   - sudo apt-get update
   - sudo apt-get install autotools-dev automake autoconf libtool gtk-doc-tools python2.7-dev gstreamer1.0-plugins-base-dbg libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgstreamer1.0-0-dbg libegl1-mesa-dev libegl1-mesa-drivers libgles2-mesa-dev mesa-utils-extra
-  - export DISPLAY=:99.0
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x24"
 env:
   - USE_GLX= USE_OPENGL=
   - USE_EGL= USE_GLES2=
