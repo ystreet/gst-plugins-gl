@@ -9,4 +9,4 @@ branches:
 before_install:
   - sudo add-apt-repository ppa:gstreamer-developers/ppa -y
   - sudo apt-get update
-  - sudo apt-get install autotools-dev automake autoconf libtool gtk-doc-tools python2.7-dev gstreamer1.0-plugins-base-dbg libgstreamer1.0-dev libgstreamer1.0-0-dbg
+  - sudo apt-get install autotools-dev automake autoconf libtool gtk-doc-tools python2.7-dev gstreamer1.0-plugins-base-dbg libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgstreamer1.0-0-dbg
