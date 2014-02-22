@@ -15,6 +15,6 @@ if test "x$DISABLE_GLES2" != "x"; then
   FLAGS="$FLAGS --disable-gles2"
 fi
 
-echo "Running ./auogen.sh $FLAGS"
+echo "Running ./autogen.sh $FLAGS"
 
-#./autogen.sh $FLAGS
+./autogen.sh $FLAGS
