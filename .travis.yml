@@ -2,7 +2,7 @@ language: c
 compiler:
   - gcc
   - clang
-script: ./autogen.sh && make && make check
+script: ./autogen.sh ${USE_GLES2---disable-gles2} ${USE_OPENGL---disable-opengl} ${USE_EGL---disable-egl} ${USE_GLX---disable-glx} && make
 branches:
   only:
     - ci
@@ -13,6 +13,7 @@ before_install:
   - export DISPLAY=:99.0
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x24"
 env:
-  - GST_GL_PLATFORM=glx GST_GL_API=opengl
-  - GST_GL_PLATFORM=egl GST_GL_API=opengl
-  - GST_GL_PLATFORM=egl GST_GL_API=gles2
+  - USE_GLX= USE_OPENGL=
+  - USE_EGL= USE_GLES2=
+  - USE_EGL= USE_OPENGL= USE_GLES2=
+  - USE_EGL= USE_GLX= USE_OPENGL= USE_GLES2=
