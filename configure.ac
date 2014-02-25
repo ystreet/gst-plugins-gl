@@ -640,7 +640,7 @@ GL_WINDOWS=
 GL_APIS=
 GL_CONFIG_DEFINES=
 
-dnl API's
+dnl APIs
 if test "x$USE_OPENGL" = "xyes"; then
   GL_APIS="gl $GL_APIS"
   GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
@@ -1153,7 +1153,7 @@ AG_GST_OUTPUT_PLUGINS
 
 cat << EOF
 
-        OpenGL API's: ${GL_APIS}
+         OpenGL APIs: ${GL_APIS}
     OpenGL Platforms: ${GL_PLATFORMS}
       Window Systems: ${GL_WINDOWS}
 
